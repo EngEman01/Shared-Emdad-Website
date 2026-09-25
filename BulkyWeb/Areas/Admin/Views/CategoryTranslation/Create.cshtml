@@ -1,0 +1,62 @@
+﻿@using System.Globalization
+@model CategoryTranslationVM
+
+@{
+	IEnumerable<CultureInfo> supportedCultures = ViewBag.SupportedCultures;
+}
+
+<!-- Model for Add Category  Translation-->
+<div class="container allPage mt-5 p-4 wow fadeInRight">
+	<h2 class="text-center">Add New Category Translation</h2>
+	<div class="modal-body">
+		<form asp-area="Admin" asp-controller="CategoryTranslation" asp-action="Create" method="post" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly"></div>
+
+			<input asp-for="@Model.CategoryTranslation.CategoryId" value="@Model.CategoryId" hidden />
+
+			<div class="mb-3">
+				<select asp-for="CategoryTranslation.Language" class="form-control" style="height:50px;">
+					<option value="" selected disabled>Select a language</option>
+
+					@if (supportedCultures != null && supportedCultures.Any())
+					{
+						@foreach (var culture in supportedCultures)
+						{
+							<option value="@culture.Name.ToString().ToLower()">@culture.NativeName (@culture.Name)</option>
+						}
+					}
+
+				</select>
+				<span asp-validation-for="CategoryTranslation.Language" class="text-danger"></span>
+			</div>
+
+
+			<div class="mb-3">
+				<label asp-for="CategoryTranslation.Name" for="categoryName" class="form-label"></label>
+				<input asp-for="CategoryTranslation.Name" type="text" class="form-control" required>
+				<span asp-validation-for="CategoryTranslation.Name" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="CategoryTranslation.Description" for="categoryDescription" class="form-label"></label>
+				<textarea asp-for="CategoryTranslation.Description" class="form-control" rows="3" required></textarea>
+				<span asp-validation-for="CategoryTranslation.Description" class="text-danger"></span>
+
+			</div>
+
+
+
+
+			<button type="submit" class="btn btn-primary">Create</button>
+		</form>
+	</div>
+</div>
+
+
+
+
+@section Scripts {
+
+	<partial name="_ValidationScriptsPartial" />
+
+}
+

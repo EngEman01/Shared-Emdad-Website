@@ -1,0 +1,63 @@
+﻿@using System.Globalization
+@model EventTranslation
+
+@{
+	IEnumerable<CultureInfo> supportedCultures = ViewBag.SupportedCultures;
+	int EventId = ViewBag.EventId;
+}
+
+<!-- Model for Add Event  Translation-->
+<div class="container allPage mt-5 p-4 wow fadeInRight">
+	<h2 class="text-center">Add New Event Translation</h2>
+	<div class="modal-body">
+		<form asp-area="Admin" asp-controller="EventTranslation" asp-action="Create" method="post" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly"></div>
+
+			<input asp-for="EventId" value="@EventId" hidden />
+
+			<div class="mb-3">
+				<select asp-for="Language" class="form-control" style="height:50px;">
+					<option value="" selected disabled>Select a language</option>
+
+					@if (supportedCultures != null && supportedCultures.Any())
+					{
+						@foreach (var culture in supportedCultures)
+						{
+							<option value="@culture.Name.ToString().ToLower()">@culture.NativeName (@culture.Name)</option>
+						}
+					}
+
+				</select>
+				<span asp-validation-for="Language" class="text-danger"></span>
+			</div>
+
+
+			<div class="mb-3">
+				<label asp-for="Name" for="EventName" class="form-label"></label>
+				<input asp-for="Name" type="text" class="form-control" required>
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Description" for="EventDescription" class="form-label"></label>
+				<textarea asp-for="Description" class="form-control" rows="3" required></textarea>
+				<span asp-validation-for="Description" class="text-danger"></span>
+
+			</div>
+
+
+
+
+			<button type="submit" class="btn btn-primary">Create</button>
+		</form>
+	</div>
+</div>
+
+
+
+
+@section Scripts {
+
+	<partial name="_ValidationScriptsPartial" />
+
+}
+

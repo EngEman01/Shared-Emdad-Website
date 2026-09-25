@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+	<!-- الصفحة الرئيسية -->
+	<url>
+		<loc>https://www.emdadglobal.org/</loc>
+		<lastmod>2025-11-11</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+
+	<!-- صفحة عن الشركة -->
+	<url>
+		<loc>https://www.emdadglobal.org/Customer/Home/AboutUs</loc>
+		<lastmod>2025-11-11</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.9</priority>
+	</url>
+
+	<!-- صفحة الأهداف -->
+	<url>
+		<loc>https://www.emdadglobal.org/Customer/Home/Goals</loc>
+		<lastmod>2025-11-11</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.9</priority>
+	</url>
+
+	<!-- صفحة الشركاء -->
+	<url>
+		<loc>https://www.emdadglobal.org/Customer/Home/Partners</loc>
+		<lastmod>2025-11-11</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.9</priority>
+	</url>
+
+	<!-- صفحة الأقسام -->
+	<url>
+		<loc>https://www.emdadglobal.org/Customer/Category/Categories</loc>
+		<lastmod>2025-11-11</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+
+	<!-- صفحة الأحداث -->
+	<url>
+		<loc>https://www.emdadglobal.org/Customer/Event</loc>
+		<lastmod>2025-11-11</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+
+	<!-- صفحة تواصل معنا -->
+	<url>
+		<loc>https://www.emdadglobal.org/Customer/Home/ContactUs</loc>
+		<lastmod>2025-11-11</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+
+</urlset>

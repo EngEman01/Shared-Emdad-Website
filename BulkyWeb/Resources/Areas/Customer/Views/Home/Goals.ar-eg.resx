@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CivilianIndustries" xml:space="preserve">
+    <value>المواد البترولية و الخدمات اللوجيستية</value>
+  </data>
+  <data name="CivilianIndustriesContent" xml:space="preserve">
+    <value>شركة "إمداد" تقدم حلولًا مبتكرة في المواد البترولية و الخدمات اللوجيستية، بما في ذلك تكنولوجيا النقل المستدامة عالية الجودة، و تعمل علي توفير و توريد مستلزمات واحتياجات شركات البترول من طرمبات بنزين و مهمات السلامه والصحه المهنية و سيارات الإطفاء وجميع مهمات مكافحة الحرائق و وحدات معالجة تنقية المياة ومعالجة الصرف الصناعي و السيارات الصهريجية اللازمة لنقل المواد البترولية و كل ما تحتاجه شركات البترول</value>
+  </data>
+  <data name="CivilianIndustriesContentNew" xml:space="preserve">
+    <value>نركز على دعم عمليات النفط والغاز من خلال تقديم حلول متكاملة تساهم في تحسين الأداء وضمان السلامة واستمرارية العمليات.</value>
+  </data>
+  <data name="Company'sObjective" xml:space="preserve">
+    <value>الهدف من الشركة
+</value>
+  </data>
+  <data name="Company'sObjectiveContent" xml:space="preserve">
+    <value>التسويق المحلى والعالمي لمنتجات شركائنا من المصانع المحلية والعالمية من خلال توقيع وكالات وتفويضات معتمدة من هذه الشركات والتي تشمل منتجاتها</value>
+  </data>
+  <data name="Construction" xml:space="preserve">
+    <value>المنتجات والمواد الإنشائية:</value>
+  </data>
+  <data name="ConstructionContent" xml:space="preserve">
+    <value>المنتجات الخشبية
+الأنابيب والخزانات
+</value>
+  </data>
+  <data name="CrudeOilEnergy" xml:space="preserve">
+    <value>النفط الخام والطاقة</value>
+  </data>
+  <data name="CrudeOilEnergyContent" xml:space="preserve">
+    <value>نقدم حلولاً ومنتجات متخصصة لقطاعات النفط الخام والطاقة الشمسية، بما يدعم كفاءة العمليات، ويعزز الاستدامة، ويساهم في تلبية متطلبات مشروعات الطاقة الحديثة.</value>
+  </data>
+  <data name="DefenseIndustries" xml:space="preserve">
+    <value>الصناعات الدفاعية</value>
+  </data>
+  <data name="DefenseIndustriesContent" xml:space="preserve">
+    <value>في مجال الصناعات الدفاعية، تسوق شركة "إمداد" مجموعة من المعدات العسكرية المتطورة التي تشمل مجموعة متنوعة من الأسلحة، هذه المنتجات تلبي احتياجات القوات المسلحة والجهات الحكومية في مختلف الظروف والبيئات. 
+</value>
+  </data>
+  <data name="DefenseIndustriesContentNew" xml:space="preserve">
+    <value>نسعى إلى دعم القدرات الدفاعية من خلال المساهمة في تطوير وتوفير حلول موثوقة وعالية الجودة تعزز الجاهزية والكفاءة التشغيلية.</value>
+  </data>
+  <data name="DefenseIndustriesContentNew1" xml:space="preserve">
+    <value>نسعى إلى دعم وتطوير القدرات الدفاعية من خلال توفير منتجات وأنظمة متقدمة وحلول موثوقة تلبي أعلى معايير الجودة والأداء، بما يعزز الجاهزية التشغيلية ويدعم متطلبات القطاعات العسكرية والأمنية.</value>
+  </data>
+  <data name="EmdaadAims" xml:space="preserve">
+    <value>تهدف شركة إمداد دائما للتقدم</value>
+  </data>
+  <data name="EmdaadAimsContent" xml:space="preserve">
+    <value>شركة إمداد تهدف إلى تحقيق الريادة في تقديم الحلول المتكاملة في مجالات متعددة تتراوح بين مجال الصناعات الدفاعية،
+     والصناعات المدنية. نحن نركز على توفير أحدث المنتجات والتقنيات التي تواكب التطور التكنولوجي
+     وتلبي احتياجات السوق العالمي والمحلي، مع الحفاظ على معايير الجودة والابتكار في جميع مراحل
+     الإنتاج والتوزيع.
+                  
+
+                    يتمتع فريق "إمداد" بخبرة واسعة في الصناعة الدفاعية، مع شراكات مع أبرز الشركات العالمية والمحلية،
+                    وهو ما يتيح لنا تقديم أحدث الحلول وأكثرها تطورًا. كما نحرص على تطبيق أعلى معايير الجودة والسلامة
+                 في جميع مراحل الإنتاج والتوريد
+</value>
+  </data>
+  <data name="EmdadAimsFirstChoice" xml:space="preserve">
+    <value>تسعي شركة امداد الي أن تكون الخيار الأول في السوق لتوريد المعدات و المنتجات الدفاعية و المواد البترولية و الخدمات اللوجيستية و تقدم مجموعة واسعة من الخدمات تشمل</value>
+  </data>
+  <data name="EmdadAimsFirstChoiceNew" xml:space="preserve">
+    <value>تلتزم إمداد بتوسيع نطاق أعمالها من خلال بناء شراكات قوية مع جهات محلية ودولية، مع التركيز على دعم القطاعات الحيوية من خلال تقديم حلول موثوقة تلبي الاحتياجات التشغيلية والصناعية المتطورة.</value>
+  </data>
+  <data name="Equipment" xml:space="preserve">
+    <value>  المعدات والأجهزة:</value>
+  </data>
+  <data name="EquipmentContent" xml:space="preserve">
+    <value>توفير المعدات المتخصصة، والأجهزة البصرية، وأنظمة التسليح الإلكترونية الحديثة لدعم العمليات المختلفة بكفاءة عالية.</value>
+  </data>
+  <data name="EquipmentContentNew" xml:space="preserve">
+    <value>تعزيز قدرات التصنيع المحلي وسلاسل التوريد لدعم قطاعي الدفاع والبترول.</value>
+  </data>
+  <data name="EquipmentContentNew1" xml:space="preserve">
+    <value>المساهمة في تطوير القدرات الصناعية من خلال دعم التصنيع المتقدم وتوفير أحدث التقنيات والحلول الهندسية في مجالات الدفاع والفضاء والطاقة والصناعات الثقيلة.</value>
+  </data>
+  <data name="EquipmentNew" xml:space="preserve">
+    <value> تطوير القدرات الصناعية  </value>
+  </data>
+  <data name="EvaluationContent1" xml:space="preserve">
+    <value>العمل علي زيادة الشراكات و برتوكولات التعاون والاتحادات مع الكيانات والمؤسسات و الشركات المحلية و الدولية للعمل علي توفير وتوريد الاحتياجات المطلوبة من شركة امداد والتي تحتاجها الوزارات و الهيئات و الشركات الحكومية داخل جمهورية مصر العربية من شركه امداد في القطاعين العسكري و البترولي التي هما مجال عمل شركة امداد</value>
+  </data>
+  <data name="EvaluationContent2" xml:space="preserve">
+    <value>تسعى شركة إمداد إلى توسيع شبكة شراكاتها الاستراتيجية وبروتوكولات التعاون والتحالفات مع المؤسسات والهيئات والشركات المحلية والإقليمية والدولية، بهدف توفير أحدث المنتجات والتقنيات والحلول المتخصصة في مجالات الدفاع، وتقنيات الفضاء، والطاقة، والنفط الخام، والمعدات الميكانيكية الثقيلة، وماكينات CNC</value>
+  </data>
+  <data name="EvaluationContentNew1" xml:space="preserve">
+    <value>نسعى لتحقيق نمو مستدام من خلال الشراكات الاستراتيجية والابتكار والتميز في مجالي الدفاع والبترول.</value>
+  </data>
+  <data name="GeneralContracting" xml:space="preserve">
+    <value>المقاولات العامة والتوكيلات النجاريه طبقا بأحكام القانون رقم ١٢٠ لسنه ١٩٨٢
+</value>
+  </data>
+  <data name="HeavyEquipment" xml:space="preserve">
+    <value>تجارة المعدات الثقيلة والمعدات الميكانيكنه وتجارة المواد البتروليه
+</value>
+  </data>
+  <data name="HeavyMechanical" xml:space="preserve">
+    <value>المعدات الميكانيكية الثقيلة وماكينات CNC</value>
+  </data>
+  <data name="HeavyMechanicalContent" xml:space="preserve">
+    <value>نوفر معدات صناعية متطورة وماكينات CNC عالية الأداء لدعم عمليات التصنيع والإنتاج، وتعزيز الكفاءة التشغيلية، والمساهمة في تطوير البنية الصناعية للمشروعات الكبرى.</value>
+  </data>
+  <data name="IndustrialMachinery" xml:space="preserve">
+    <value>الآلات والمعدات الصناعية:</value>
+  </data>
+  <data name="IndustrialMachineryContent" xml:space="preserve">
+    <value>الآلات الزراعية
+الأجهزة الكهربائية
+</value>
+  </data>
+  <data name="MainGoals" xml:space="preserve">
+    <value>هدفنا الرئيسي</value>
+  </data>
+  <data name="MainGoalsContentNew1" xml:space="preserve">
+    <value>تسعى إمداد إلى ترسيخ مكانتها كشريك صناعي واستراتيجي رائد في مجالات الدفاع، وتقنيات الفضاء، والطاقة، والصناعات الثقيلة، من خلال تقديم حلول ومعدات متقدمة، وتوسيع نطاق أعمالها في الأسواق المحلية والإقليمية والدولية، وبناء نموذج أعمال مستدام قائم على الابتكار والجودة والشراكات طويلة الأمد.</value>
+  </data>
+  <data name="MainGoalsContent" xml:space="preserve">
+    <value>تسعى الشركة إلى توفير الاحتياجات المطلوبة للجهات الحكومية المصرية، وتوريدها لها، بالإضافة إلى بيع المنتجات التي تقوم هذه الجهات بتصنيعها. كما تهدف إلى بناء علامة تجارية قوية ومستدامة، من خلال التوسع في عدة مجالات، من بينها المجال العسكري عبر إنشاء خطوط إنتاج للصناعات العسكرية بالشراكة مع الحكومة المصرية والجهات المعنية، وكذلك في مجال البترول من خلال تنفيذ مشروعات دولية مشتركة بالتعاون مع وزارة البترول المصرية والشركات التابعة لها.</value>
+  </data>
+  <data name="MainGoalsContentNew" xml:space="preserve">
+    <value>تسعى إمداد إلى أن تصبح شريكًا صناعيًا رائدًا في مجالي الدفاع والبترول، من خلال التوسع في أعمالها وتعزيز حضورها في الأسواق وبناء نموذج أعمال مستدام ومتنوع يخدم الأسواق المحلية والدولية.</value>
+  </data>
+  <data name="MainGoalsNew" xml:space="preserve">
+    <value>رؤيتنا المستقبلية</value>
+  </data>
+  <data name="Manufacturing" xml:space="preserve">
+    <value>تصنيع وتجميع المعدات الثقيلة والمعدات الميكانيله لدى الغير
+</value>
+  </data>
+  <data name="NationalProjects" xml:space="preserve">
+    <value>مستلزمات المشاريع القومية في المجالات الزراعية والإيواء وتحلية المياه
+</value>
+  </data>
+  <data name="Petroleum" xml:space="preserve">
+    <value>تسويق وتوزيع منتجات ومشتقات البترول</value>
+  </data>
+  <data name="Petroleum products" xml:space="preserve">
+    <value>المنتجات البترولية</value>
+  </data>
+  <data name="PetroleumLogisticsServices" xml:space="preserve">
+    <value>الخدمات اللوجيستية البترولية</value>
+  </data>
+  <data name="PetroleumLogisticsServicesContent" xml:space="preserve">
+    <value>طرمبات بنزين و مهمات السلامه والصحه المهنية و سيارات الإطفاء وجميع مهمات مكافحة الحرائق و وحدات معالجة تنقية المياة ومعالجة الصرف الصناعي و السيارات الصهريجية اللازمة لنقل المواد البترولية</value>
+  </data>
+  <data name="PetroleumProductsContent" xml:space="preserve">
+    <value>النفط الخام و البنزين و السولار البحري ....... الي اخره</value>
+  </data>
+  <data name="Raw Materials and Spare Parts" xml:space="preserve">
+    <value>الخامات وقطع الغيار</value>
+  </data>
+  <data name="Raw Materials and Spare Parts content" xml:space="preserve">
+    <value>المستخدمة في التصنيع العسكري مثل بطاريات القواذف و صمامات اجهزة الرؤية و العدسات و التليسكوبات و النحاس العسكري و الالومنيوم العسكري و الخامات الكيميائية و الجليسرن و الصاج و الصلب المكسي تومباك .......الي اخره</value>
+  </data>
+  <data name="RenewableEnergy" xml:space="preserve">
+    <value>الطاقة المتجددة:</value>
+  </data>
+  <data name="RenewableEnergyContent" xml:space="preserve">
+    <value>توفير حلول الطاقة النظيفة، بما في ذلك ألواح الطاقة الشمسية، لدعم الاستدامة وتقليل الاعتماد على مصادر الطاقة التقليدية.</value>
+  </data>
+  <data name="RenewableEnergyContentNew" xml:space="preserve">
+    <value>المساهمة في تنفيذ المشروعات الوطنية من خلال تقديم دعم صناعي ولوجستي متطور.</value>
+  </data>
+  <data name="RenewableEnergyContentNew1" xml:space="preserve">
+    <value>المساهمة في تنفيذ المشروعات الوطنية والإقليمية من خلال تقديم معدات وتقنيات متقدمة وخدمات متخصصة تدعم التنمية الصناعية والاستدامة والنمو الاقتصادي.</value>
+  </data>
+  <data name="RenewableEnergyNew" xml:space="preserve">
+    <value>دعم المشروعات القومية</value>
+  </data>
+  <data name="SafariDevelopment" xml:space="preserve">
+    <value>التطوير السفارى - الاستثمار العقاري إستصلاح وتجهيز</value>
+  </data>
+  <data name="SecurityEquipment" xml:space="preserve">
+    <value>المعدات الأمنية والإضاءة:</value>
+  </data>
+  <data name="SecurityEquipmentContent" xml:space="preserve">
+    <value>كاميرات المراقبة
+أعمدة الإنارة والمصابيح
+</value>
+  </data>
+  <data name="SpaceTechnologies" xml:space="preserve">
+    <value>تقنيات الفضاء والصناعات المتقدمة</value>
+  </data>
+  <data name="SpaceTechnologiesContent" xml:space="preserve">
+    <value>نعمل على توفير المعدات والتقنيات المتخصصة المستخدمة في برامج ووكالات الفضاء، بما يساهم في دعم الابتكار ونقل التكنولوجيا وتعزيز القدرات التقنية للمشروعات المتقدمة.</value>
+  </data>
+  <data name="TechnicalSupport" xml:space="preserve">
+    <value>الدعم الفني والإنتاج:</value>
+  </data>
+  <data name="TechnicalSupportContent" xml:space="preserve">
+    <value>تقديم حلول متكاملة تشمل خطوط الإنتاج، التدريب، الدعم الفني، وتوفير قطع الغيار والخامات لضمان استمرارية التشغيل بأفضل أداء.</value>
+  </data>
+  <data name="TechnicalSupportContentNew" xml:space="preserve">
+    <value>توفير حلول موثوقة وفعالة وعالية الجودة تلبي المتطلبات التشغيلية.</value>
+  </data>
+  <data name="TechnicalSupportContentNew1" xml:space="preserve">
+    <value>توفير منتجات ومعدات وحلول عالية الجودة تلبي المتطلبات التشغيلية والفنية للمشروعات الصناعية والاستراتيجية وفق أعلى المعايير العالمية.</value>
+  </data>
+  <data name="TechnicalSupportNew" xml:space="preserve">
+    <value>تقديم حلول متكاملة </value>
+  </data>
+  <data name="Transportation" xml:space="preserve">
+    <value>وسائل النقل والمركبات:
+</value>
+  </data>
+  <data name="TransportationContent" xml:space="preserve">
+    <value>العربات والعربات المصفحة (نقل الأموال)
+عربات القطارات ومكوناتها
+</value>
+  </data>
+  <data name="WeaponSystems" xml:space="preserve">
+    <value>المنتجات العسكرية ونظم التسليح:</value>
+  </data>
+  <data name="WeaponSystemsContent" xml:space="preserve">
+    <value>توريد وتطوير الطائرات، صيانة وعمرة المحركات، بالإضافة إلى الأسلحة والذخائر والصواريخ والمركبات المصفحة وفق أعلى معايير الجودة.</value>
+  </data>
+  <data name="WeaponSystemsContentNew" xml:space="preserve">
+    <value>بناء علاقات تعاون طويلة الأمد مع الجهات الحكومية والشركاء الدوليين لدعم المشروعات الكبرى.</value>
+  </data>
+  <data name="WeaponSystemsContentNew1" xml:space="preserve">
+    <value>بناء شراكات وتحالفات طويلة الأمد مع المؤسسات والهيئات والشركات المحلية والدولية لدعم المشروعات الاستراتيجية وتبادل الخبرات والتقنيات المتقدمة.</value>
+  </data>
+  <data name="WeaponSystemsNew" xml:space="preserve">
+    <value> تعزيز الشراكات الاستراتيجية  </value>
+  </data>
+  <data name="WhatWeDeliver" xml:space="preserve">
+    <value>ما نقدمه</value>
+  </data>
+  <data name="EmdadCompanyName" xml:space="preserve">
+    <value>شركة إمداد للصناعات الدفاعية والميكانيكية والبترولية والطاقة</value>
+  </data>
+  <data name="SectorsBadge" xml:space="preserve">
+    <value>القدرات الصناعية والتنفيذية</value>
+  </data>
+  <data name="SectorsMainTitle" xml:space="preserve">
+    <value>قطاعات الأعمال الرئيسية لإمداد</value>
+  </data>
+  <data name="SectorsMainSubtitle" xml:space="preserve">
+    <value>منظومة متكاملة تدعم التنمية الاستراتيجية والمشروعات القومية عبر أربع ركائز كبرى</value>
+  </data>
+  <data name="MilitaryIndustriesTitle" xml:space="preserve">
+    <value>الصناعات العسكرية</value>
+  </data>
+  <data name="DefenseHeroTitle" xml:space="preserve">
+    <value>الصناعات الدفاعية والتجهيزات العسكرية</value>
+  </data>
+  <data name="Pillar1Desc" xml:space="preserve">
+    <value>تشارك إمداد في التصنيع العسكري عبر خطوط إنتاج متطورة داخل الهيئة العربية للتصنيع، وتتولى تسويق وتوريد المنتجات العسكرية والمدرعات والأسلحة والذخائر والخامات الخاصة لتلبية متطلبات القوات المسلحة والتصدير الدولي.</value>
+  </data>
+  <data name="MilItem1" xml:space="preserve">
+    <value>المركبات المدرعة</value>
+  </data>
+  <data name="MilItem2" xml:space="preserve">
+    <value>الأسلحة والذخيرة</value>
+  </data>
+  <data name="MilItem3" xml:space="preserve">
+    <value>الطائرات العسكرية والأنظمة البحرية</value>
+  </data>
+  <data name="MilItem4" xml:space="preserve">
+    <value>الاتصالات والمراقبة</value>
+  </data>
+  <data name="MilItem5" xml:space="preserve">
+    <value>إلكترونيات وأنظمة الدفاع</value>
+  </data>
+  <data name="MilItem6" xml:space="preserve">
+    <value>الصيانة والتحديث والتطوير</value>
+  </data>
+  <data name="ExploreDefense" xml:space="preserve">
+    <value>استكشف المنتجات الدفاعية</value>
+  </data>
+  <data name="PetroleumIndustriesTitle" xml:space="preserve">
+    <value>الصناعات البترولية</value>
+  </data>
+  <data name="PetroleumHeroTitle" xml:space="preserve">
+    <value>النفط الخام و مشتقاته</value>
+  </data>
+  <data name="PetroleumHeroDesc" xml:space="preserve">
+    <value>توريد وتوفير النفط الخام، الغاز، والسولار البحري لشركات قطاع البترول المصري، وتجهيز المشروعات البترولية بطرمبات الوقود، سيارات الإطفاء، ولاعات الأفران، ومنظومات السلامة والصحة المهنية.</value>
+  </data>
+  <data name="PetItem1" xml:space="preserve">
+    <value>معدات الحفر والإنتاج</value>
+  </data>
+  <data name="PetItem2" xml:space="preserve">
+    <value>حلول معالجة النفط والغاز</value>
+  </data>
+  <data name="PetItem3" xml:space="preserve">
+    <value>أنظمة التكرير والتخزين</value>
+  </data>
+  <data name="PetItem4" xml:space="preserve">
+    <value>حلول خطوط الأنابيب والتوزيع</value>
+  </data>
+  <data name="PetItem5" xml:space="preserve">
+    <value>خدمات الصيانة والدعم الفني</value>
+  </data>
+  <data name="ExplorePetroleum" xml:space="preserve">
+    <value>استكشف قطاع البترول</value>
+  </data>
+  <data name="EnergySolutionsTitle" xml:space="preserve">
+    <value>حلول الطاقة</value>
+  </data>
+  <data name="SolarHeroTitle" xml:space="preserve">
+    <value>الطاقة الشمسية والحلول الخضراء</value>
+  </data>
+  <data name="SolarHeroDesc" xml:space="preserve">
+    <value>بناء وتجهيز محطات الطاقة الشمسية الكهروضوئية للمنشآت والمشروعات الصناعية الكبرى، وتوفير أنظمة تخزين وتوليد الطاقة النظيفة لتقليل الانبعاثات وتحقيق الكفاءة التشغيلية القصوى.</value>
+  </data>
+  <data name="EngItem1" xml:space="preserve">
+    <value>أنظمة الطاقة الشمسية</value>
+  </data>
+  <data name="EngItem2" xml:space="preserve">
+    <value>تخزين الطاقة</value>
+  </data>
+  <data name="EngItem3" xml:space="preserve">
+    <value>توليد الطاقة</value>
+  </data>
+  <data name="EngItem4" xml:space="preserve">
+    <value>حلول الطاقة المتجددة</value>
+  </data>
+  <data name="EngItem5" xml:space="preserve">
+    <value>أنظمة إدارة الطاقة</value>
+  </data>
+  <data name="ExploreSolar" xml:space="preserve">
+    <value>استكشف حلول الطاقة الشمسية</value>
+  </data>
+  <data name="HeavyEquipmentTitle" xml:space="preserve">
+    <value>المعدات الثقيلة والحلول الصناعية</value>
+  </data>
+  <data name="HeavyMechHeroTitle" xml:space="preserve">
+    <value>المعدات الميكانيكية الثقيلة وأنظمة الـ CNC</value>
+  </data>
+  <data name="HeavyMechHeroDesc" xml:space="preserve">
+    <value>حلول هندسية متكاملة تشمل ماكينات الخراطة والتفريز CNC خماسية المحاور، تصنيع قطع الغيار الدقيقة بالرسومات والهندسة العكسية، وتوريد معدات الخدمة الثقيلة وخطوط الإنتاج الصناعي.</value>
+  </data>
+  <data name="HvyItem1" xml:space="preserve">
+    <value>المعدات الثقيلة</value>
+  </data>
+  <data name="HvyItem2" xml:space="preserve">
+    <value>المعدات الصناعية</value>
+  </data>
+  <data name="HvyItem3" xml:space="preserve">
+    <value>التصنيع واللحام</value>
+  </data>
+  <data name="HvyItem4" xml:space="preserve">
+    <value>تركيب المصانع والمنشآت</value>
+  </data>
+  <data name="HvyItem5" xml:space="preserve">
+    <value>خدمات ما بعد البيع والدعم الفني</value>
+  </data>
+  <data name="ExploreHeavyMech" xml:space="preserve">
+    <value>استكشف المعدات و CNC</value>
+  </data>
+  <data name="TechInnovationTitle" xml:space="preserve">
+    <value>التقنيات والابتكار</value>
+  </data>
+  <data name="TechItem1" xml:space="preserve">
+    <value>تقنيات الدفاع</value>
+  </data>
+  <data name="TechItem2" xml:space="preserve">
+    <value>أنظمة الذكاء الاصطناعي والمراقبة</value>
+  </data>
+  <data name="TechItem3" xml:space="preserve">
+    <value>حلول الأمن السيبراني</value>
+  </data>
+  <data name="TechItem4" xml:space="preserve">
+    <value>أنظمة القيادة والتحكم</value>
+  </data>
+  <data name="TechItem5" xml:space="preserve">
+    <value>البحث والتطوير</value>
+  </data>
+  <data name="LocalMfgPowerDesc" xml:space="preserve">
+    <value>امتلاك خطوط إنتاج متقدمة ومراكز تصنيع رقمي DMC قادرة على تلبية أدق المواصفات الهندسية والصناعية وتطبيق الهندسة العكسية.</value>
+  </data>
+  <data name="OurServices" xml:space="preserve">
+    <value>خدماتنا</value>
+  </data>
+</root>

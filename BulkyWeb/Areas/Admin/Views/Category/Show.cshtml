@@ -1,0 +1,113 @@
+﻿@model CategoryShowVM
+@{
+	var defaultCulture = localizationOptions.Value.DefaultRequestCulture.Culture.Name;
+
+}
+
+<div class="container mt-4 wow fadeInRight" style="background-color:transparent; width:550px; padding:0px">
+	<div class="card " style=" width:100%; padding: 0;">
+		<img src="~/@Model.Category.ImageUrl" alt="" class="card-img-top">
+		<div class="col-12 col-lg-8 wow fadeInRight" data-wow-delay=".001s" style="padding:20px;">
+
+			<h2 class="font-23 semi-font my-3">
+				<a class="fables-main-text-color fables-second-hover-color">@Model.CategoryTranslations.FirstOrDefault(t => t.Language.ToLower() == defaultCulture.ToLower())?.Name</a>
+			</h2>
+			<div class="fables-forth-text-color fables-blog-date">
+			</div>
+			<p class="fables-forth-text-color fables-single-blog font-14 my-3 wow fadeIn">
+				@Html.Raw(@Model.CategoryTranslations.FirstOrDefault(t => t.Language.ToLower() == defaultCulture.ToLower())?.Description)
+			</p>
+
+		</div>
+	</div>
+</div>
+
+<div class="container mt-5 wow fadeInLeft" style="width:1000px;">
+	<h2 class="text-center">SubCategories</h2>
+	<a asp-area="admin" asp-controller="Category" asp-action="Create" asp-route-parentCategoryId="@Model.Category.Id" class="btn btn-primary my-3">Add New SubCategory</a>
+
+	<!-- SubCategories Table -->
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Image</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@if (Model.SubCategories != null && Model.SubCategories.Count() > 0)
+			{
+
+				var counter = 1;
+
+				@foreach (var subCategory in Model.SubCategories)
+				{
+					<tr>
+						<td data-label="id">@(counter++)</td>
+						<td data-label="name">@subCategory.CategoryTranslations?.FirstOrDefault(t => t.Language.ToLower() == defaultCulture.ToLower())?.Name</td>
+						<td data-label="description" width="380px">@Html.Raw(@subCategory.CategoryTranslations?.FirstOrDefault(t => t.Language.ToLower() == defaultCulture.ToLower())?.Description)</td>
+						<td data-label="image"><img class="category-image img-fluid" style="max-width: 120px; height: auto;" src="~/@subCategory.ImageUrl" alt="Category Image"></td>
+						<td data-label="actions">
+							<a asp-area="Admin" asp-controller="Category" asp-action="Show" asp-route-id="@subCategory.Id" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+							<a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@subCategory.Id" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+							<a onclick="confirmDelete('Admin/Category/Delete', @subCategory.Id)" class="btn btn-danger btn-sm text-white"><i class="fas fa-trash"></i></a>
+						</td>
+					</tr>
+				}
+			}
+			else
+			{
+				<h2>No Subcategories yet</h2>
+			}
+
+		</tbody>
+	</table>
+
+</div>
+
+
+<div class="container mt-5 wow fadeInLeft" style="width:1000px;">
+	<h2 class="text-center">Category Translations</h2>
+	<a asp-area="admin" asp-controller="CategoryTranslation" asp-action="Create" asp-route-categoryId="@Model.Category.Id" class="btn btn-primary my-3">Add New Translation</a>
+
+	<!-- Categories Translations Table -->
+	<table class="table table-striped index">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>language</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@if(Model.CategoryTranslations != null && Model.CategoryTranslations.Count() > 0){
+				var counterTranslation = 1;
+				@foreach (var categoryTranslation in Model.CategoryTranslations)
+				{
+					<tr>
+						<td>@(counterTranslation++)</td>
+						<td>@categoryTranslation.Name</td>
+						<td width ="380px">@Html.Raw(categoryTranslation.Description) </td>
+						<td>@categoryTranslation.Language</td>
+						<td>
+							<a asp-area="Admin" asp-controller="CategoryTranslation" asp-action="Show" asp-route-id="@categoryTranslation.Id" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+							<a asp-area="Admin" asp-controller="CategoryTranslation" asp-action="Edit" asp-route-id="@categoryTranslation.Id" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+							<a asp-area="Admin" asp-controller="CategoryTranslation" asp-action="Delete" asp-route-id="@categoryTranslation.Id" class="btn btn-danger btn-sm text-white"><i class="fas fa-trash"></i></a>
+						</td>
+					</tr>
+				}
+			}
+			else {
+				<h2>No Category Translations Yet.</h2>
+			}
+				
+		</tbody>
+	</table>
+
+</div>
+

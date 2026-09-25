@@ -1,0 +1,173 @@
+﻿@model HomeVM
+
+@{
+	ViewData["Title"] = "Home Page";
+	IEnumerable<Category> mainCategories = ViewBag.MainCategories;
+}
+
+
+<div class="emdad-header emdad-after-overlay overlay-lighter bg-rules"
+	 style="background-image: url('/assets/custom/Board Of Directors/Board Of Directors.jpg'); direction:ltr; background-attachment: fixed;">
+	<div class="container overflow-hidden">
+		<div class="owl-carousel  default-carousel emdad-sqr-nav dots-0 wow fadeInUpBig" style="text-align: center;"
+			 data-wow-duration="2s">
+			<div>
+				<h1 class="white-color bold-font mt-lg-5 mb-4">
+					<span class="text-white">
+						@localizer["WelcomeNewsRoom"]
+						<br />
+					</span>
+				</h1>
+				<p class="text-white font-20">
+					@localizer["WelcomeNewsRoomContent"]
+				</p>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row mt-4 mt-lg-5">
+
+		<div style="display:flex; justify-content:center;">
+			<div class="col-12 col-sm-6 col-md-8 mb-4 mb-lg-5">
+				<div class="image-container">
+					<img src="~/assets/custom/NewsRoom/زيارة سفارة دوله سيراليون.jpeg" alt="" class="w-100">
+				</div>
+
+				<h2 class="font-18 semi-font mt-3 mb-2 text-center">
+					<span 
+						  class="emdad-main-text-color emdad-second-hover-color font-22 font-weight-bold" style="cursor:pointer;">@localizer["SierraLeone"] </span>
+				</h2>
+				<div class="emdad-forth-text-color font-18 mb-2">
+					<span class="emdad-icondata emdad-second-text-color mr-1"></span>
+					<span class="emdad-iconcomment emdad-second-text-color mr-1"></span>
+				</div>
+				<p class="emdad-forth-text-color font-20 mb-3">
+					@localizer["SierraLeoneContent"]
+				</p>
+
+
+			</div>
+		</div>
+
+
+		<div class="col-12 col-sm-6  mb-4 mb-lg-5">
+			<div class="image-container  ">
+
+				<img src="~/assets/custom/NewsRoom/زيارة سفارة جيبوتي.jpeg" alt="image alt text"
+					 class="w-100" style="height:300px;">
+
+			</div>
+			<h2 class="font-18 semi-font mt-3 mb-2 text-center">
+				<span 
+					  class="emdad-main-text-color emdad-second-hover-color font-22 font-weight-bold" style="cursor:pointer;">
+					@localizer["Djibouti"]
+				</span>
+			</h2>
+			<div class="emdad-forth-text-color font-18 mb-2">
+				<span class="emdad-icondata emdad-second-text-color mr-1"></span>
+				<span class="emdad-iconcomment emdad-second-text-color mr-1"></span>
+			</div>
+			<p class="emdad-forth-text-color font-20 mb-3">
+				@localizer["DjiboutiContent"]
+			</p>
+
+		</div>
+
+		<div class="col-12 col-sm-6 mb-4 mb-lg-5">
+			<div class="image-container">
+				<img src="~/assets/custom/NewsRoom/زياره سفارة دولة موريتانيا.jpeg" alt="" class="w-100" style="height:300px;">
+			</div>
+
+			<h2 class="font-18 semi-font mt-3 mb-2 text-center">
+				<span 
+					  class="emdad-main-text-color emdad-second-hover-color font-22 font-weight-bold" style="cursor:pointer;">@localizer["Oman"]</span>
+			</h2>
+			<div class="emdad-forth-text-color font-18 mb-2">
+				<span class="emdad-icondata emdad-second-text-color mr-1"></span>
+				<span class="emdad-iconcomment emdad-second-text-color mr-1"></span>
+			</div>
+			<p class="emdad-forth-text-color font-20 mb-3">
+				@localizer["OmanContent"]
+
+			</p>
+
+
+		</div>
+
+		<div style="display:flex; justify-content:center;">
+			<div class="col-12 col-sm-6 col-md-8 mb-4 mb-lg-5">
+				<div class="image-container">
+					<img src="~/assets/custom/NewsRoom/زيارة سفارة دوله سيراليون.jpeg" alt="" class="w-100">
+				</div>
+
+				<h2 class="font-18 semi-font mt-3 mb-2 text-center">
+					<span 
+						  class="emdad-main-text-color emdad-second-hover-color font-22 font-weight-bold" style="cursor:pointer;">@localizer["QualitySystemAccreditation"] </span>
+				</h2>
+				<div class="emdad-forth-text-color font-18 mb-2">
+					<span class="emdad-icondata emdad-second-text-color mr-1"></span>
+					<span class="emdad-iconcomment emdad-second-text-color mr-1"></span>
+				</div>
+				<p class="emdad-forth-text-color font-20 mb-3">
+					@localizer["QualitySystemAccreditationContent"]
+				</p>
+
+
+			</div>
+		</div>
+
+		
+
+		<div class="col-12 col-sm-6 mb-4 mb-lg-5">
+			<div class="image-container  ">
+				<img src="~/assets/custom/NewsRoom/زياره سفارة دولة موريتانيا.jpeg" alt="" class="w-100" style="height:300px;">
+			</div>
+
+			<h2 class="font-18 semi-font mt-3 mb-2 text-center">
+				<span 
+					  class="emdad-main-text-color emdad-second-hover-color font-22 font-weight-bold" style="cursor:pointer;">@localizer["Mauritania"]</span>
+			</h2>
+			<div class="emdad-forth-text-color font-18 mb-2">
+				<span class="emdad-icondata emdad-second-text-color mr-1"></span>
+				<span class="emdad-iconcomment emdad-second-text-color mr-1"></span>
+			</div>
+			<p class="emdad-forth-text-color font-20 mb-3">
+				@localizer["MauritaniaContent"]
+
+			</p>
+
+
+		</div>
+
+		<div class="col-12 col-sm-6  mb-4 mb-lg-5">
+			<div class="image-container ">
+
+				<img src="~/assets/custom/NewsRoom/زيارة شركة أليكس ويتك.jpeg" alt="image alt text"
+					 class="w-100" style="height:300px;">
+
+			</div>
+			<h2 class="font-18 semi-font mt-3 mb-2 text-center">
+				<span 
+					  class="emdad-main-text-color emdad-second-hover-color font-22 font-weight-bold" style="cursor:pointer;">
+					@localizer["AlexWitekCompany"]
+				</span>
+			</h2>
+			<div class="emdad-forth-text-color font-18 mb-2">
+				<span class="emdad-icondata emdad-second-text-color mr-1"></span>
+			</div>
+			<p class="emdad-forth-text-color font-20 mb-3">
+				@localizer["AlexWitekCompanyContent"]
+			</p>
+
+		</div>
+
+	</div>
+</div>
+
+
+
+

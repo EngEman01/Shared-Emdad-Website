@@ -1,0 +1,27 @@
+﻿@model Advertisement
+
+<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+	<div class="row justify-content-center">
+		<!-- Set the width to 50vw -->
+		<div class="col-12" style="background-color:#e6eaed; border-radius:20px; padding:30px; width: 50vw;">
+			<div class="row pt-5">
+				<div class="col text-center">
+					<h2>Delete Advertisement</h2>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					<form asp-area="Admin" asp-controller="Advertisement" asp-action="Delete" method="post">
+						<div class="form-group">
+							<label for="Name" class="form-label mt-4">Advertisement Name</label>
+							<input class="form-control" id="Name" value="@(Model.Translations.FirstOrDefault().Name ?? "Advertisement Name")" disabled>
+						</div>
+						<br/>
+						<button type="submit" class="btn btn-outline-danger btn-block">Delete</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

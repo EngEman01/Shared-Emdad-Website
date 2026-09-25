@@ -1,0 +1,64 @@
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Products";
+    var defaultCulture = localizationOptions.Value.DefaultRequestCulture.Culture.Name;
+}
+<div class="container mt-5" style="width:1200px;">
+    <h2 class="text-center mb-4">Product Management</h2>
+
+    <!-- Add Product Button -->
+    <div class="text-center mb-3">
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="Product" asp-action="Upsert">Add New Product</a>
+    </div>
+
+    <!-- Categories Table (Responsive) -->
+    <div class="table-responsive index">
+        <table class="table table-striped" id="ProductTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="ProductTableBody">
+
+                @if(Model != null && Model.Any()){
+                    var counter = 1;
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td>@(counter++)</td>
+                            <td>@(product.ProductTranslations?.FirstOrDefault(t => t.Language.ToLower() == defaultCulture.ToLower())?.Name ?? "No Product Name")</td>
+                            <td width="380px">Product Default Description</td>
+                           @*  <td width="380px">@Html.Raw((product.ProductTranslations?.FirstOrDefault(t => t.Language.ToLower() == defaultCulture.ToLower())?.Description ?? "No Product Descriptoin"))</td> *@
+                            <td>@(product.Category.CategoryTranslations?.FirstOrDefault(t => t.Language.ToLower() == defaultCulture.ToLower())?.Name ?? "No Category Name")</td>
+                            <td>
+                                <a asp-area="Admin" asp-controller="Product" asp-action="Show" asp-route-id="@product.Id" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+                                <a asp-area="Admin" asp-controller="Product" asp-action="Upsert" asp-route-id="@product.Id" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                                <a asp-area="Admin" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger xbtn-sm"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else {
+                    <tr>
+                        <td colspan="10" class="text-center">No products yet</td>
+                    </tr>
+                }
+                
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/js/products.js"></script>
+}

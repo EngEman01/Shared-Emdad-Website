@@ -1,0 +1,468 @@
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    var isRtl = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
+    ViewData["Title"] = isRtl ? "شركاؤنا الاستراتيجيون | شركة إمداد" : "Strategic Partners | EMDAD";
+}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   EMDAD STRATEGIC PARTNERS - 100% MATCH TO IMAGE 2
+   Bilingual (AR / EN) - High-End Luxury Royal Navy & Gold Theme
+   ============================================================ */
+
+:root {
+    --gold-primary: #d4af37;
+    --gold-bright: #f7d57f;
+    --gold-dark: #9e7415;
+    --gold-gradient: linear-gradient(135deg, #fae29c 0%, #d4af37 50%, #9e7314 100%);
+    --gold-border: rgba(212, 175, 55, 0.7);
+    --gold-glow: rgba(212, 175, 55, 0.35);
+    
+    --navy-deep: #030d1b;
+    --navy-card: rgba(8, 25, 48, 0.88);
+    --navy-card-hover: rgba(12, 34, 64, 0.94);
+    
+    --text-gold: #f5d378;
+    --text-white: #ffffff;
+    --text-muted: #9bb0c8;
+}
+
+.partners-page-wrapper {
+    position: relative;
+    min-height: 100vh;
+    background: #030a16 url('/assets/custom/home-images/project-petroleum.jpg') center center / cover no-repeat;
+    background-attachment: fixed;
+    color: #ffffff;
+    font-family: @(isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif");
+    direction: @(isRtl ? "rtl" : "ltr");
+    padding: 80px 20px 90px 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Atmospheric Overlay matching Image 2 */
+.partners-page-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at center 40%,
+        rgba(4, 18, 36, 0.85) 0%,
+        rgba(3, 12, 26, 0.93) 55%,
+        rgba(2, 8, 18, 0.98) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Golden Corner Arabesques (4 Corners) */
+.corner-ornament {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.65;
+    transition: opacity 0.3s ease;
+}
+
+.corner-top-left {
+    top: 25px;
+    left: 25px;
+    border-top: 2px solid var(--gold-primary);
+    border-left: 2px solid var(--gold-primary);
+}
+
+.corner-top-right {
+    top: 25px;
+    right: 25px;
+    border-top: 2px solid var(--gold-primary);
+    border-right: 2px solid var(--gold-primary);
+}
+
+.corner-bottom-left {
+    bottom: 25px;
+    left: 25px;
+    border-bottom: 2px solid var(--gold-primary);
+    border-left: 2px solid var(--gold-primary);
+}
+
+.corner-bottom-right {
+    bottom: 25px;
+    right: 25px;
+    border-bottom: 2px solid var(--gold-primary);
+    border-right: 2px solid var(--gold-primary);
+}
+
+.corner-ornament::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: var(--gold-primary);
+    transform: rotate(45deg);
+}
+
+.corner-top-left::after { top: -8px; left: -8px; }
+.corner-top-right::after { top: -8px; right: -8px; }
+.corner-bottom-left::after { bottom: -8px; left: -8px; }
+.corner-bottom-right::after { bottom: -8px; right: -8px; }
+
+/* Main Container */
+.partners-container {
+    position: relative;
+    z-index: 3;
+    max-width: 1180px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ============================================================
+   HEADER SECTION - 100% MATCH TO IMAGE 2
+   ============================================================ */
+.partners-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.partners-main-title {
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    letter-spacing: @(isRtl ? "1px" : "3px");
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.35);
+    font-family: @(isRtl ? "'Cairo', sans-serif" : "'Cinzel', 'Montserrat', serif");
+}
+
+.partners-title-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 0 auto 16px auto;
+    max-width: 380px;
+}
+
+.divider-line {
+    flex: 1;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+}
+
+.divider-diamond {
+    width: 9px;
+    height: 9px;
+    background: var(--gold-bright);
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px var(--gold-primary);
+}
+
+.partners-sub-title {
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    font-weight: 700;
+    color: #dce7f3;
+    letter-spacing: @(isRtl ? "0.5px" : "1.5px");
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* ============================================================
+   PARTNERS 2X2 CARDS GRID - 100% MATCH TO IMAGE 2
+   ============================================================ */
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-bottom: 45px;
+}
+
+.partner-card {
+    position: relative;
+    background: linear-gradient(145deg, rgba(8, 25, 48, 0.92) 0%, rgba(4, 16, 32, 0.96) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 18px;
+    padding: 34px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 220px;
+    
+    /* Double Golden Border & Luxury Glow matching Image 2 */
+    border: 2px solid var(--gold-primary);
+    box-shadow: 
+        0 14px 35px rgba(0, 0, 0, 0.65),
+        inset 0 0 20px rgba(212, 175, 55, 0.12),
+        0 0 15px rgba(212, 175, 55, 0.2);
+    
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.partner-card::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border-radius: 13px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    pointer-events: none;
+    transition: border-color 0.4s ease;
+}
+
+.partner-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--gold-bright);
+    box-shadow: 
+        0 22px 50px rgba(0, 0, 0, 0.85),
+        inset 0 0 28px rgba(212, 175, 55, 0.25),
+        0 0 35px rgba(212, 175, 55, 0.45);
+}
+
+.partner-card:hover::before {
+    border-color: rgba(247, 213, 127, 0.65);
+}
+
+/* Logo Box */
+.partner-logo-wrap {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    padding: 8px;
+    border: 2px solid var(--gold-primary);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), 0 0 14px rgba(212, 175, 55, 0.3);
+    transition: all 0.35s ease;
+    flex-shrink: 0;
+}
+
+.partner-card:hover .partner-logo-wrap {
+    transform: scale(1.08);
+    border-color: var(--gold-bright);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 24px rgba(212, 175, 55, 0.5);
+}
+
+.partner-logo-wrap img {
+    max-height: 100px;
+    max-width: 142px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+    transition: filter 0.35s ease;
+}
+
+.partner-card:hover .partner-logo-wrap img {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+/* Titles */
+.partner-card-title {
+    font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+    line-height: 1.35;
+    letter-spacing: 0.5px;
+    font-family: @(isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif");
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.partner-card-sub {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #a5b9ce;
+    margin: 0;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.partner-card:hover .partner-card-sub {
+    color: var(--gold-bright);
+}
+
+/* ============================================================
+   BOTTOM STATEMENT - 100% MATCH TO IMAGE 2
+   ============================================================ */
+.partners-footer-statement {
+    text-align: center;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 22px 30px;
+    background: rgba(4, 15, 28, 0.72);
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    backdrop-filter: blur(8px);
+}
+
+.partners-footer-statement p {
+    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    font-weight: 600;
+    color: #d2e1f0;
+    line-height: 1.8;
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN
+   ============================================================ */
+@@media (max-width: 860px) {
+    .partners-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .partners-page-wrapper {
+        padding: 60px 15px 70px 15px;
+    }
+    
+    .corner-ornament {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@@media (max-width: 480px) {
+    .partner-card {
+        padding: 26px 18px;
+        min-height: 190px;
+    }
+    .partner-logo-wrap {
+        height: 70px;
+        margin-bottom: 15px;
+    }
+    .partner-logo-wrap img {
+        max-height: 65px;
+        max-width: 140px;
+    }
+}
+</style>
+
+<div class="partners-page-wrapper">
+    <!-- Atmospheric Background Overlay -->
+    <div class="partners-page-overlay"></div>
+
+    <!-- 4 Golden Decorative Corner Ornaments -->
+    <div class="corner-ornament corner-top-left"></div>
+    <div class="corner-ornament corner-top-right"></div>
+    <div class="corner-ornament corner-bottom-left"></div>
+    <div class="corner-ornament corner-bottom-right"></div>
+
+    <div class="partners-container">
+
+        <!-- ============================================================
+             HEADER SECTION
+             ============================================================ -->
+        <header class="partners-header">
+            <h1 class="partners-main-title">
+                @(isRtl ? "شركاؤنا الاستراتيجيون" : "OUR STRATEGIC PARTNERS")
+            </h1>
+
+            <div class="partners-title-divider">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+
+            <p class="partners-sub-title">
+                @* @(isRtl ? "رؤية وطنية لدعم الاقتصاد الوطني" : "A National Strategic Vision Driving Industrial & Economic Growth") *@
+                @localizer["Partners"]
+            </p>
+        </header>
+
+        <!-- ============================================================
+             2X2 PARTNER CARDS GRID (100% Match to Image 2)
+             ============================================================ -->
+        <div class="partners-grid">
+
+            <!-- CARD 1: National Authority for Military Production (Eagle Logo) -->
+            <div class="partner-card">
+                <div class="partner-logo-wrap">
+                    <img src="/assets/custom/partners_2026/logo_military_official.webp?v=2026" alt="National Authority for Military Production" loading="lazy" />
+                </div>
+                <h3 class="partner-card-title">
+                    @(isRtl ? "الهيئة القومية للإنتاج الحربي" : "National Authority for Military Production")
+                </h3>
+                <p class="partner-card-sub">
+                    @(isRtl ? "وزارة الإنتاج الحربي - جمهورية مصر العربية" : "National Authority for Military Production")
+                </p>
+            </div>
+
+            <!-- CARD 2: Arab Organization for Industrialization (AOI Logo) -->
+            <div class="partner-card">
+                <div class="partner-logo-wrap">
+                    <img src="/assets/custom/partners_2026/logo_aoi_official.png?v=2026" alt="Arab Organization for Industrialization" loading="lazy" />
+                </div>
+                <h3 class="partner-card-title">
+                    @(isRtl ? "الهيئة العربية للتصنيع" : "Arab Organization for Industrialization")
+                </h3>
+                <p class="partner-card-sub">
+                    @(isRtl ? "الصرح الصناعي العربي الأكبر للتقنيات المتقدمة" : "Arab Organization for Industrialization (AOI)")
+                </p>
+            </div>
+
+            <!-- CARD 3: Arab International Optronics (AIO Logo) -->
+            <div class="partner-card">
+                <div class="partner-logo-wrap">
+                    <img src="/assets/custom/partners_2026/logo_aio_official.png?v=2026" alt="Arab International Optronics" loading="lazy" />
+                </div>
+                <h3 class="partner-card-title">
+                    @(isRtl ? "الشركة العربية العالمية للبصريات" : "Arab International Optronics (AIO)")
+                </h3>
+                <p class="partner-card-sub">
+                    @(isRtl ? "ريادة الأنظمة البصرية والإلكترونية المتقدمة" : "Projects Organization & Electro-Optics")
+                </p>
+            </div>
+
+            <!-- CARD 4: East & West International Trade (ewt Logo) -->
+            <div class="partner-card">
+                <div class="partner-logo-wrap">
+                    <img src="/assets/custom/partners_2026/logo_ewt_official.webp?v=2026" alt="East & West International Trade" loading="lazy" />
+                </div>
+                <h3 class="partner-card-title">
+                    @(isRtl ? "شركة الشرق والغرب للتجارة الدولية" : "East & West International Trade")
+                </h3>
+                <p class="partner-card-sub">
+                    @(isRtl ? "حلول التوريدات التجارية والتوكيلات الدولية المتخصصة" : "East & West International Trade Co.")
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ============================================================
+             BOTTOM FOOTER STATEMENT
+             ============================================================ -->
+        <footer class="partners-footer-statement">
+            <p>
+                @if (isRtl)
+                {
+                    <span>نحن نفخر بشراكاتنا مع كبرى الهيئات والمؤسسات الوطنية والمصانع العسكرية لتلبية احتياجات المشروعات القومية والتنموية بأعلى معايير الجودة والاعتمادية.</span>
+                }
+                else
+                {
+                    <span>We take immense pride in our strategic alliances with leading national authorities and defense industries, fulfilling the requirements of critical national development projects with superior quality and reliability.</span>
+                }
+            </p>
+        </footer>
+
+    </div>
+</div>

@@ -1,0 +1,130 @@
+﻿ @model Product
+
+<div class="container mt-5 p-4">
+    <h2 class="text-center">Add New Product</h2>
+    <div class="modal-body">
+        <form asp-area="Admin" asp-controller="Product" asp-action="Create" id="ProductForm" method="post" enctype="multipart/form-data">
+			@*<div class="mb-3">
+                 <label asp-for="@Model.DefaultName" for="ProductName" class="form-label">Product Name</label>
+                <input asp-for ="@Model.DefaultName" type="text" class="form-control" id="ProductName" name="DefaultName" required>
+             </div>*@
+
+			@*<div class="mb-3">
+                <label asp-for="@Model.DefaultDescription" for="ProductDescription" class="form-label">Product Description</label>
+                <textarea asp-for="@Model.DefaultDescription" class="form-control" id="ProductDescription" name="DefaultDescription" rows="3" required></textarea> 
+            </div>*@
+
+            <div class="mb-3">
+                <label asp-for="Category" for="ProductCategory" class="form-label">Category</label>
+                <select  class="form-select" id="ProductCategory" name="CategoryId" required>
+                    <option value="" disabled selected>Select a Category</option>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category.Id">@category.DefaultName</option>
+                    }
+                    
+                </select>
+            </div>
+            <div class="mb-3">
+                <label  for="ProductSubCategory" class="form-label">SubCategory</label>
+                <select class="form-select" id="ProductCategory" name="CategoryId" required>
+                    <option value="" disabled selected>Select a Category</option>
+                    @foreach (var category in ViewBag.SubCategories)
+                    {
+                        <option value="@category.Id">@category.DefaultName</option>
+                    }
+
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="ProductImages" class="form-label">Product Images</label>
+                <input type="file" class="form-control" id="ProductImages" name="ProductImages" accept="image/*" multiple>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+
+@*<h2> @(Model.Product.Id == 0 ? "Create" : "Update") Product</h2>
+
+<form asp-area="Admin" asp-controller="Product" asp-action="Upsert" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All"></div>
+    <input asp-for="Product.Id" class="form-control" hidden>
+
+    <div class="form-group">
+        <label asp-for="Product.DefaultName" class="form-label mt-4"></label>
+        <input asp-for="Product.DefaultName" class="form-control" placeholder="Enter Product Name">
+        <span asp-validation-for="Product.DefaultName" class="text-danger"></span>
+    </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Product.Price" class="form-label mt-4"></label>
+                    <input asp-for="Product.Price" class="form-control">
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Product.Stock" class="form-label mt-4"></label>
+                    <input asp-for="Product.Stock" class="form-control">
+                    <span asp-validation-for="Product.Stock" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+    <div class="form-group">
+        <label class="form-label mt-4">Product Category</label>
+        <select asp-for="Product.CategoryId" asp-items="@(new SelectList(Model.Categories,"Id","Name"))" class="form-select">
+            <option disabled selected> --- Select Category --- </option>
+        </select>
+        <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.DefaultDescription" class="form-label mt-4"></label>
+        <textarea asp-for="Product.DefaultDescription" class="form-control" placeholder="Add Product Description"></textarea>
+        <span asp-validation-for="Product.DefaultDescription" class="text-danger"></span>
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Images" class="form-label mt-4">Choose image</label>
+        <input asp-for="Product.Images" class="form-control" type="file" name="files" multiple >
+        <span asp-validation-for="Product.Images" class="text-danger"></span>
+
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-outline-primary">@(Model.Product.Id == 0 ? "Create" : "Update")</button>
+    <a class="btn btn-primary" asp-controller="Product" asp-action="Index">
+        Back to List
+    </a>
+
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        });
+    </script>
+}
+ *@

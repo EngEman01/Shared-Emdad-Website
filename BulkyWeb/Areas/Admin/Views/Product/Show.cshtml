@@ -1,0 +1,131 @@
+@model Product
+
+@{
+	var defaultCulture = localizationOptions.Value.DefaultRequestCulture.Culture.Name;
+}
+
+
+<div class="container mt-4 wow fadeInRight" style="background-color:rgb(255, 255, 255,0.7); width:700px; padding:0px">
+	<div class="row ">
+
+
+		<div class="col-md-12">
+			<!-- Image Slider -->
+
+			<div class="owl-carousel owl-theme default-carousel nav-0 single-blog" dir="ltr">
+				@if (Model.Images != null && Model.Images.Any())
+				{
+					var firstImage = true;  // This will help us set the first image as active
+					foreach (var image in Model.Images)
+					{
+						var activeClass = firstImage ? "active" : "";  // Set the first image as active
+						firstImage = false;  // After the first image, set to false
+
+						<div>
+							<img src="~/@image.ImageURL" class="d-block w-100 slider" alt="Product Image" style="height: 400px; object-fit: cover;">
+						</div>
+					}
+				}
+			</div>
+@* 
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button> *@
+			
+		</div>
+
+		<!-- Image Gallery (bottom images) -->
+		<div class="m-3">
+			<div class="row">
+				@if (Model.Images != null && Model.Images.Any())
+				{
+					@foreach (var image in Model.Images)
+					{
+						<div class="col-2 mb-2">
+							<img src="~/@image.ImageURL" class="img-fluid rounded" alt="Product Image" style="cursor: pointer; height: 100px; width:100px; object-fit: cover;">
+						</div>
+
+					}
+				}
+
+			</div>
+		</div>
+
+	</div>
+	<div class="col-12 col-lg-8 wow fadeInRight m-3 mb-5" data-wow-delay=".001s">
+
+		<h2 class="font-23 semi-font my-3">
+
+			<a class="emdad-main-text-color emdad-second-hover-color">@Model.ProductTranslations.FirstOrDefault(t => t.Language.ToLower() == defaultCulture.ToLower())?.Name</a>
+
+
+		</h2>
+		<div class="emdad-forth-text-color emdad-blog-date">
+		</div>
+
+		<p class="emdad-forth-text-color emdad-single-blog font-14 my-3 wow fadeIn">
+			@Html.Raw(@Model.ProductTranslations.FirstOrDefault(t => t.Language.ToLower() == defaultCulture.ToLower())?.Description)
+
+
+		</p>
+
+	</div>
+</div>
+
+
+
+<div class="container mt-5 wow fadeInLeft" style="width:1200px;">
+	<h2 class="text-center">Product Translations</h2>
+	<a asp-area="Admin" asp-controller="ProductTranslation" asp-action="Create" asp-route-productId="@Model.Id" class="btn btn-primary my-3">Add New Translation</a>
+
+	<!-- Categories Translations Table -->
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>language</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@if (Model.ProductTranslations != null && Model.ProductTranslations.Count() > 0)
+			{
+				var counterTranslation = 1;
+				@foreach (var productTranslation in Model.ProductTranslations)
+				{
+					<tr>
+						<td>@(counterTranslation++)</td>
+						<td>@productTranslation.Name</td>
+						<td width="380px">@Html.Raw(productTranslation.Description) </td>
+						<td>@productTranslation.Language</td>
+						<td>
+							<a asp-area="Admin" asp-controller="ProductTranslation" asp-action="Show" asp-route-id="@productTranslation.Id" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+							<a asp-area="Admin" asp-controller="ProductTranslation" asp-action="Edit" asp-route-id="@productTranslation.Id" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+							<a asp-area="Admin" asp-controller="ProductTranslation" asp-action="Delete" asp-route-id="@productTranslation.Id" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+						</td>
+					</tr>
+				}
+			}
+			else
+			{
+				<h2>No Product Translations Yet.</h2>
+			}
+
+		</tbody>
+	</table>
+
+</div>
+
+@section Scripts {
+	<script>
+
+	</script>
+
+}

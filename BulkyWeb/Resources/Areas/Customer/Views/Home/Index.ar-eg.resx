@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EmdadBrief" xml:space="preserve">
+    <value>رؤية شركة إمداد للصناعات والمعدات الميكانيكية الثقيلة والتوكيلات التجارية للخطوات المنهجية التى تتناسب مع طبيعة منتجات الهيئة العربية للتصنيع والسوق المستهدف، لتعزيز نجاح المنتجات في السوق المحلي والدولي.</value>
+  </data>
+  <data name="EmdadCompanyName" xml:space="preserve">
+    <value>شركة إمداد للصناعات الدفاعية والميكانيكية والبترولية والطاقة</value>
+  </data>
+  <data name="EmdadCompanyVision" xml:space="preserve">
+    <value>رؤية شركة إمداد للصناعات والمعدات الميكانيكية الثقيلة والتوكيلات التجارية للخطوات المنهجية التى تتناسب مع طبيعة منتجات الهيئة العربية للتصنيع والسوق المستهدف</value>
+  </data>
+  <data name="Goal" xml:space="preserve">
+    <value>تحديد الأهداف</value>
+  </data>
+  <data name="OurServices" xml:space="preserve">
+    <value>خدماتنا</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>اعرف المزيد</value>
+  </data>
+  <data name="WhatMakesUsStandOut" xml:space="preserve">
+    <value>ما يميزنا</value>
+  </data>
+  <data name="CompanyOffers" xml:space="preserve">
+    <value>قطاعات أعمالنا الرئيسية</value>
+  </data>
+  <data name="BoardOfDirectors" xml:space="preserve">
+    <value>مجلس الإدارة</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>بحث...</value>
+  </data>
+  <data name="CompanyVision" xml:space="preserve">
+    <value>رؤية الشركة</value>
+  </data>
+  <data name="EmdadCompanyName1" xml:space="preserve">
+    <value>امداد متخصصون في الصناعات العسكرية و المنتجات العسكرية و المعدات العسكرية و الخامات العسكرية</value>
+  </data>
+  <data name="LatestNews" xml:space="preserve">
+    <value>آخر الأخبار</value>
+  </data>
+  <data name="ViewMore" xml:space="preserve">
+    <value>عرض المزيد</value>
+  </data>
+  <data name="Why1Desc" xml:space="preserve">
+    <value>تمثل الهيئة العربية للتصنيع والعربية العالمية للبصريات لتسويق منتجاتهم</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="EmdadCompanyName1New2" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="DefenseProducts" xml:space="preserve">
+    <value>١- المنتجات الدفاعية</value>
+  </data>
+  <data name="HeavyMechanicalEquipment" xml:space="preserve">
+    <value>٢- المعدات الميكانيكية الثقيلة</value>
+  </data>
+  <data name="CNCMachinery" xml:space="preserve">
+    <value>١- ماكينات CNC المتقدمة</value>
+  </data>
+  <data name="SolarEnergy" xml:space="preserve">
+    <value>١- محطات الطاقة الشمسية</value>
+  </data>
+  <data name="SpecializedProducts" xml:space="preserve">
+    <value>٢- المنتجات المتخصصة</value>
+  </data>
+  <data name="AdvancedEquipment" xml:space="preserve">
+    <value>٣- المعدات المتقدمة</value>
+  </data>
+  <data name="ModernIndustrialTechnologies" xml:space="preserve">
+    <value>٤- التقنيات الصناعية الحديثة</value>
+  </data>
+  <data name="CrudeOil" xml:space="preserve">
+    <value>١- النفط الخام والغاز</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value>عن الشركة</value>
+  </data>
+  <data name="WhatIsEmdadCompany" xml:space="preserve">
+    <value>من هي شركة إمداد</value>
+  </data>
+  <data name="WhatCompanyOffersAndGoal" xml:space="preserve">
+    <value>أهداف وخدمات الشركة</value>
+  </data>
+  <data name="Partners" xml:space="preserve">
+    <value>الشركاء</value>
+  </data>
+  <data name="NewsRoom" xml:space="preserve">
+    <value>غرفة الأخبار</value>
+  </data>
+  <data name="Advertisements" xml:space="preserve">
+    <value>الإعلانات</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>المنتجات</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>تواصل معنا</value>
+  </data>
+  <data name="FollowUs" xml:space="preserve">
+    <value>تابعنا</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="SpecificAddress" xml:space="preserve">
+    <value>الجيزة - الدقي 6 شارع بن الوليد أمام بوابة (1) نادي الصيد بجوار سفارة سنغافورة</value>
+  </data>
+  <data name="CallUs" xml:space="preserve">
+    <value>اتصل بنا</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="PillarDefense" xml:space="preserve">
+    <value>الصناعات الدفاعية</value>
+  </data>
+  <data name="PillarHeavyMech" xml:space="preserve">
+    <value>المعدات الثقيلة و CNC</value>
+  </data>
+  <data name="PillarPetroleum" xml:space="preserve">
+    <value>النفط الخام والبترول</value>
+  </data>
+  <data name="PillarSolar" xml:space="preserve">
+    <value>الطاقة الشمسية</value>
+  </data>
+  <data name="OfficialRepresentationBadge" xml:space="preserve">
+    <value>التمثيل الرسمي السيادي للهيئة العربية للتصنيع والعربية للبصريات</value>
+  </data>
+  <data name="DefenseHeroTitle" xml:space="preserve">
+    <value>الصناعات الدفاعية والتجهيزات العسكرية</value>
+  </data>
+  <data name="DefenseHeroDesc" xml:space="preserve">
+    <value>نمتلك أكبر خط إنتاج للتصنيع العسكري داخل الهيئة العربية للتصنيع والعربية العالمية للبصريات التابعة لوزارة الدفاع، لتوريد وتصنيع وتصدير أحدث المنظومات والأسلحة والذخائر محلياً ودولياً.</value>
+  </data>
+  <data name="ExploreDefense" xml:space="preserve">
+    <value>استكشف المنتجات الدفاعية</value>
+  </data>
+  <data name="HeavyMechHeroBadge" xml:space="preserve">
+    <value>مركز التصنيع الرقمي DMC والهندسة العكسية</value>
+  </data>
+  <data name="HeavyMechHeroTitle" xml:space="preserve">
+    <value>المعدات الميكانيكية الثقيلة وأنظمة الـ CNC</value>
+  </data>
+  <data name="HeavyMechHeroDesc" xml:space="preserve">
+    <value>حلول هندسية متكاملة تشمل ماكينات الخراطة والتفريز CNC خماسية المحاور، تصنيع قطع الغيار الدقيقة بالرسومات والهندسة العكسية، وتوريد معدات الخدمة الثقيلة وخطوط الإنتاج الصناعي.</value>
+  </data>
+  <data name="ExploreHeavyMech" xml:space="preserve">
+    <value>استكشف المعدات و CNC</value>
+  </data>
+  <data name="RequestConsultation" xml:space="preserve">
+    <value>طلب استشارة هندسية</value>
+  </data>
+  <data name="PetroleumHeroBadge" xml:space="preserve">
+    <value>توريد النفط الخام والمشروعات البترولية الكبرى</value>
+  </data>
+  <data name="PetroleumHeroTitle" xml:space="preserve">
+    <value>النفط الخام و مشتقاته</value>
+  </data>
+  <data name="PetroleumHeroDesc" xml:space="preserve">
+    <value>توريد وتوفير النفط الخام، الغاز، والسولار البحري لشركات قطاع البترول المصري، وتجهيز المشروعات البترولية بطرمبات الوقود، سيارات الإطفاء، ولاعات الأفران، ومنظومات السلامة والصحة المهنية.</value>
+  </data>
+  <data name="ExplorePetroleum" xml:space="preserve">
+    <value>استكشف قطاع البترول</value>
+  </data>
+  <data name="PetroleumPartnerships" xml:space="preserve">
+    <value>شراكات وزارة البترول</value>
+  </data>
+  <data name="SolarHeroBadge" xml:space="preserve">
+    <value>محطات الطاقة المتجددة وحلول الاستدامة</value>
+  </data>
+  <data name="SolarHeroTitle" xml:space="preserve">
+    <value>الطاقة الشمسية والحلول الخضراء</value>
+  </data>
+  <data name="SolarHeroDesc" xml:space="preserve">
+    <value>بناء وتجهيز محطات الطاقة الشمسية الكهروضوئية للمنشآت والمشروعات الصناعية الكبرى، وتوفير أنظمة تخزين وتوليد الطاقة النظيفة لتقليل الانبعاثات وتحقيق الكفاءة التشغيلية القصوى.</value>
+  </data>
+  <data name="ExploreSolar" xml:space="preserve">
+    <value>استكشف حلول الطاقة الشمسية</value>
+  </data>
+  <data name="RequestFeasibility" xml:space="preserve">
+    <value>طلب دراسة جدوى</value>
+  </data>
+  <data name="HudActiveAsset" xml:space="preserve">
+    <value>أصل استراتيجي نشط // إمداد</value>
+  </data>
+  <data name="HudStatusOperational" xml:space="preserve">
+    <value>الحالة: جاهزية تشغيلية كاملة</value>
+  </data>
+  <data name="HudSecCode" xml:space="preserve">
+    <value>كود الاعتماد: EG-EMDAD-2026</value>
+  </data>
+  <data name="OfficialRepMetric" xml:space="preserve">
+    <value>تمثيل رسمي معتمد</value>
+  </data>
+  <data name="OfficialRepMetricDesc" xml:space="preserve">
+    <value>من الهيئة العربية للتصنيع ووزارة الدفاع</value>
+  </data>
+  <data name="ProductsMetric" xml:space="preserve">
+    <value>منتج ومعدة استراتيجية</value>
+  </data>
+  <data name="ProductsMetricDesc" xml:space="preserve">
+    <value>تغطية دفاعية وميكانيكية وبترولية</value>
+  </data>
+  <data name="StandardsMetric" xml:space="preserve">
+    <value>مطابقة للمعايير العسكرية</value>
+  </data>
+  <data name="StandardsMetricDesc" xml:space="preserve">
+    <value>أعلى مستويات الجودة والاعتمادية</value>
+  </data>
+  <data name="SectorsMetric" xml:space="preserve">
+    <value>قطاعات سيادية متكاملة</value>
+  </data>
+  <data name="SectorsMetricDesc" xml:space="preserve">
+    <value>دفاع، ميكانيكا، نفط، وطاقة شمسية</value>
+  </data>
+  <data name="SectorsBadge" xml:space="preserve">
+    <value>القدرات الصناعية والتنفيذية</value>
+  </data>
+  <data name="SectorsMainTitle" xml:space="preserve">
+    <value>قطاعات الأعمال الرئيسية لإمداد</value>
+  </data>
+  <data name="SectorsMainSubtitle" xml:space="preserve">
+    <value>منظومة متكاملة تدعم التنمية الاستراتيجية والمشروعات القومية عبر أربع ركائز كبرى</value>
+  </data>
+  <data name="Pillar1Badge" xml:space="preserve">
+    <value>القطاع الأول // الدفاع والتسليح</value>
+  </data>
+  <data name="Pillar1Desc" xml:space="preserve">
+    <value>تشارك إمداد في التصنيع العسكري عبر خطوط إنتاج متطورة داخل الهيئة العربية للتصنيع، وتتولى تسويق وتوريد المنتجات العسكرية والمدرعات والأسلحة والذخائر والخامات الخاصة لتلبية متطلبات القوات المسلحة والتصدير الدولي.</value>
+  </data>
+  <data name="Pillar2Badge" xml:space="preserve">
+    <value>القطاع الثاني // الميكانيكا المتقدمة</value>
+  </data>
+  <data name="Pillar2Desc" xml:space="preserve">
+    <value>من خلال مركز التصنيع الرقمي DMC، نقدم خدمات الهندسة العكسية وتصنيع كافة قطع الغيار الميكانيكية المعقدة بالرسومات الهندسية، مع توفير أحدث ماكينات الـ CNC ومعدات الخدمات والمرافق الثقيلة.</value>
+  </data>
+  <data name="Pillar3Badge" xml:space="preserve">
+    <value>القطاع الثالث // النفط والطاقة</value>
+  </data>
+  <data name="Pillar3Desc" xml:space="preserve">
+    <value>نوفر المواد البترولية الاستراتيجية (النفط الخام، الغاز، السولار البحري) لشركات وزارة البترول، بالإضافة إلى التجهيزات اللوجستية ومهمات السلامة والصحة المهنية ومعدات الإطفاء ومحطات معالجة الصرف الصناعي.</value>
+  </data>
+  <data name="Pillar4Badge" xml:space="preserve">
+    <value>القطاع الرابع // الطاقة المتجددة</value>
+  </data>
+  <data name="Pillar4Desc" xml:space="preserve">
+    <value>تطوير وتنفيذ مشروعات الطاقة الشمسية للمجمعات الصناعية والمنشآت الاستراتيجية بأحدث الألواح الكهروضوئية وأنظمة الإنفرتر والبطاريات، لضمان استمرارية الطاقة وخفض التكاليف التشغيلية.</value>
+  </data>
+  <data name="WhyChooseBadge" xml:space="preserve">
+    <value>الهندسة والقوة الصناعية الوطنية</value>
+  </data>
+  <data name="WhyChooseTitle" xml:space="preserve">
+    <value>لماذا يختار الشركاء شركة إمداد؟</value>
+  </data>
+  <data name="WhyChooseSubtitle" xml:space="preserve">
+    <value>نجمع بين عمق التمثيل السيادي والقدرة التصنيعية الفائقة وشبكات التوريد الاستراتيجية</value>
+  </data>
+  <data name="HighLevelRep" xml:space="preserve">
+    <value>تمثيل رسمي رفيع المستوى</value>
+  </data>
+  <data name="HighLevelRepDesc" xml:space="preserve">
+    <value>تمثيل رسمي للهيئة العربية للتصنيع والعربية العالمية للبصريات التابعة لجهاز مشروعات الخدمة الوطنية لتسويق وتوريد المنتجات داخل وخارج مصر.</value>
+  </data>
+  <data name="LocalMfgPower" xml:space="preserve">
+    <value>قوة التصنيع المحلي</value>
+  </data>
+  <data name="LocalMfgPowerDesc" xml:space="preserve">
+    <value>امتلاك خطوط إنتاج متقدمة ومراكز تصنيع رقمي DMC قادرة على تلبية أدق المواصفات الهندسية والصناعية وتطبيق الهندسة العكسية.</value>
+  </data>
+  <data name="FastSupplyChain" xml:space="preserve">
+    <value>سلاسل إمداد لوجستية سريعة</value>
+  </data>
+  <data name="FastSupplyChainDesc" xml:space="preserve">
+    <value>شبكة توريد وتوزيع متقدمة تغطي القطاعات الدفاعية، البترولية، والمشروعات القومية بكفاءة وموثوقية وجاهزية تشغيلية كاملة.</value>
+  </data>
+  <data name="NewsRoomBadge" xml:space="preserve">
+    <value>غرفة الأخبار والفعاليات</value>
+  </data>
+  <data name="LatestNewsTitle" xml:space="preserve">
+    <value>أحدث أخبار ومشاريع إمداد</value>
+  </data>
+  <data name="AllNews" xml:space="preserve">
+    <value>جميع الأخبار والفعاليات</value>
+  </data>
+  <data name="ReadFullDetails" xml:space="preserve">
+    <value>اقرأ التفاصيل الكاملة</value>
+  </data>
+  <data name="CTABadge" xml:space="preserve">
+    <value>التعاقدات الحكومية والتوريدات الكبرى</value>
+  </data>
+  <data name="CTATitle" xml:space="preserve">
+    <value>هل تبحث عن شريك صناعي واستراتيجي موثوق؟</value>
+  </data>
+  <data name="CTADesc" xml:space="preserve">
+    <value>فريقنا الهندسي والتجاري جاهز لتوفير كافة متطلبات القطاعات الدفاعية، البترولية، الميكانيكية، والطاقة الشمسية بأعلى معايير الجودة والالتزام.</value>
+  </data>
+  <data name="ContactExecutive" xml:space="preserve">
+    <value>تواصل مع الإدارة التنفيذية</value>
+  </data>
+  <data name="EmdadSlogan" xml:space="preserve">
+    <value>نبني اليوم... لنمكّن الغد</value>
+  </data>
+  <data name="EmdadFullTagline" xml:space="preserve">
+    <value>للصناعات، والمعدات الميكانيكية الثقيلة والشركات والمؤسسات التجارية</value>
+  </data>
+  <data name="EmdadIntegratedSubtitle" xml:space="preserve">
+    <value>حلول متكاملة ... مستقبل مستدام</value>
+  </data>
+  <data name="PillarDefenseTitle" xml:space="preserve">
+    <value>الصناعات الدفاعية</value>
+  </data>
+  <data name="PillarHeavyMechTitle" xml:space="preserve">
+    <value>المعدات الميكانيكية الثقيلة</value>
+  </data>
+  <data name="PillarIndustrialSolutionsTitle" xml:space="preserve">
+    <value>حلول صناعية متكاملة</value>
+  </data>
+  <data name="PillarCommercialCorpTitle" xml:space="preserve">
+    <value>الشركات والمؤسسات التجارية</value>
+  </data>
+  <data name="PillarStrategicPartnershipsTitle" xml:space="preserve">
+    <value>شراكات استراتيجية من أجل مستقبل مستدام</value>
+  </data>
+  <data name="FastNavTitle" xml:space="preserve">
+    <value>منظومة الوصول السريع لخدمات وقطاعات إمداد</value>
+  </data>
+  <data name="FastNavProducts" xml:space="preserve">
+    <value>كتالوج المنتجات والقطاعات</value>
+  </data>
+  <data name="FastNavAbout" xml:space="preserve">
+    <value>من هي إمداد وتاريخنا</value>
+  </data>
+  <data name="FastNavGoals" xml:space="preserve">
+    <value>أهدافنا وخدماتنا</value>
+  </data>
+  <data name="FastNavBoard" xml:space="preserve">
+    <value>مجلس الإدارة والقيادة</value>
+  </data>
+  <data name="FastNavPartners" xml:space="preserve">
+    <value>الشركاء والتوكيلات السيادية</value>
+  </data>
+  <data name="FastNavNews" xml:space="preserve">
+    <value>غرفة الأخبار والفعاليات</value>
+  </data>
+  <data name="FastNavContact" xml:space="preserve">
+    <value>طلب توريد وتواصل مباشر</value>
+  </data>
+  <data name="VisionTitle" xml:space="preserve">
+    <value>الرؤية</value>
+  </data>
+  <data name="VisionDesc" xml:space="preserve">
+    <value>أن نكون من الرواد في تقديم الحلول الصناعية والهندسية في الشرق الأوسط وأفريقيا، ودعم التنمية المستدامة من خلال الابتكار والتكنولوجيا والشراكات الاستراتيجية.</value>
+  </data>
+  <data name="MissionTitle" xml:space="preserve">
+    <value>الرسالة</value>
+  </data>
+  <data name="MissionDesc" xml:space="preserve">
+    <value>تقديم حلول هندسية متكاملة وتقنيات متقدمة وخدمات احترافية تمكن الصناعات والحكومات من تعزيز الكفاءة وبناء القدرات وتحقيق نمو مستدام.</value>
+  </data>
+  <data name="MilitaryIndustriesTitle" xml:space="preserve">
+    <value>الصناعات العسكرية</value>
+  </data>
+  <data name="MilItem1" xml:space="preserve">
+    <value>المركبات المدرعة</value>
+  </data>
+  <data name="MilItem2" xml:space="preserve">
+    <value>الأسلحة والذخيرة</value>
+  </data>
+  <data name="MilItem3" xml:space="preserve">
+    <value>الطائرات العسكرية والأنظمة البحرية</value>
+  </data>
+  <data name="MilItem4" xml:space="preserve">
+    <value>الاتصالات والمراقبة</value>
+  </data>
+  <data name="MilItem5" xml:space="preserve">
+    <value>إلكترونيات وأنظمة الدفاع</value>
+  </data>
+  <data name="MilItem6" xml:space="preserve">
+    <value>الصيانة والتحديث والتطوير</value>
+  </data>
+  <data name="PetroleumIndustriesTitle" xml:space="preserve">
+    <value>الصناعات البترولية</value>
+  </data>
+  <data name="PetItem1" xml:space="preserve">
+    <value>معدات الحفر والإنتاج</value>
+  </data>
+  <data name="PetItem2" xml:space="preserve">
+    <value>حلول معالجة النفط والغاز</value>
+  </data>
+  <data name="PetItem3" xml:space="preserve">
+    <value>أنظمة التكرير والتخزين</value>
+  </data>
+  <data name="PetItem4" xml:space="preserve">
+    <value>حلول خطوط الأنابيب والتوزيع</value>
+  </data>
+  <data name="PetItem5" xml:space="preserve">
+    <value>خدمات الصيانة والدعم الفني</value>
+  </data>
+  <data name="EnergySolutionsTitle" xml:space="preserve">
+    <value>حلول الطاقة</value>
+  </data>
+  <data name="EngItem1" xml:space="preserve">
+    <value>أنظمة الطاقة الشمسية</value>
+  </data>
+  <data name="EngItem2" xml:space="preserve">
+    <value>تخزين الطاقة</value>
+  </data>
+  <data name="EngItem3" xml:space="preserve">
+    <value>توليد الطاقة</value>
+  </data>
+  <data name="EngItem4" xml:space="preserve">
+    <value>حلول الطاقة المتجددة</value>
+  </data>
+  <data name="EngItem5" xml:space="preserve">
+    <value>أنظمة إدارة الطاقة</value>
+  </data>
+  <data name="HeavyEquipmentTitle" xml:space="preserve">
+    <value>المعدات الثقيلة والحلول الصناعية</value>
+  </data>
+  <data name="HvyItem1" xml:space="preserve">
+    <value>المعدات الثقيلة</value>
+  </data>
+  <data name="HvyItem2" xml:space="preserve">
+    <value>المعدات الصناعية</value>
+  </data>
+  <data name="HvyItem3" xml:space="preserve">
+    <value>التصنيع واللحام</value>
+  </data>
+  <data name="HvyItem4" xml:space="preserve">
+    <value>تركيب المصانع والمنشآت</value>
+  </data>
+  <data name="HvyItem5" xml:space="preserve">
+    <value>خدمات ما بعد البيع والدعم الفني</value>
+  </data>
+  <data name="TechInnovationTitle" xml:space="preserve">
+    <value>التقنيات والابتكار</value>
+  </data>
+  <data name="TechItem1" xml:space="preserve">
+    <value>تقنيات الدفاع</value>
+  </data>
+  <data name="TechItem2" xml:space="preserve">
+    <value>أنظمة الذكاء الاصطناعي والمراقبة</value>
+  </data>
+  <data name="TechItem3" xml:space="preserve">
+    <value>حلول الأمن السيبراني</value>
+  </data>
+  <data name="TechItem4" xml:space="preserve">
+    <value>أنظمة القيادة والتحكم</value>
+  </data>
+  <data name="TechItem5" xml:space="preserve">
+    <value>البحث والتطوير</value>
+  </data>
+  <data name="TacticalDefenseTitle" xml:space="preserve">
+    <value>منظومة الدفاع والتسليح والتصنيع</value>
+  </data>
+  <data name="TacticalDefenseItem1" xml:space="preserve">
+    <value>حلول دفاعية متكاملة</value>
+  </data>
+  <data name="TacticalDefenseItem2" xml:space="preserve">
+    <value>تصنيع ومعدات عسكرية</value>
+  </data>
+  <data name="TacticalDefenseItem3" xml:space="preserve">
+    <value>ذخائر وأنظمة تسليح</value>
+  </data>
+  <data name="TacticalDefenseItem4" xml:space="preserve">
+    <value>صيانة ودعم فني</value>
+  </data>
+  <data name="TacticalDefenseItem5" xml:space="preserve">
+    <value>خدمات لوجستية متكاملة</value>
+  </data>
+  <data name="TacticalPetroleumTitle" xml:space="preserve">
+    <value>منظومة البترول والمنشآت والطاقة النظيفة</value>
+  </data>
+  <data name="TacticalPetItem1" xml:space="preserve">
+    <value>البترول ومنتجاته</value>
+  </data>
+  <data name="TacticalPetItem2" xml:space="preserve">
+    <value>خزانات ومنشآت نفطية</value>
+  </data>
+  <data name="TacticalPetItem3" xml:space="preserve">
+    <value>استكشاف وإنتاج</value>
+  </data>
+  <data name="TacticalPetItem4" xml:space="preserve">
+    <value>الطاقة الشمسية</value>
+  </data>
+  <data name="TacticalPetItem5" xml:space="preserve">
+    <value>طاقة نظيفة لمستقبل أفضل</value>
+  </data>
+  <data name="ValInnovation" xml:space="preserve">
+    <value>الابتكار</value>
+  </data>
+  <data name="ValQuality" xml:space="preserve">
+    <value>الجودة</value>
+  </data>
+  <data name="ValPartnership" xml:space="preserve">
+    <value>الشراكة</value>
+  </data>
+  <data name="ValReliability" xml:space="preserve">
+    <value>الموثوقية</value>
+  </data>
+  <data name="ValSustainability" xml:space="preserve">
+    <value>الاستدامة</value>
+  </data>
+  <data name="ValExperience" xml:space="preserve">
+    <value>خبرة وكفاءة</value>
+  </data>
+  <data name="ValContinuousDev" xml:space="preserve">
+    <value>ابتكار وتطوير مستمر</value>
+  </data>
+  <data name="ValStrategicPartnerships" xml:space="preserve">
+    <value>شراكات استراتيجية</value>
+  </data>
+  <data name="ValGlobalLocal" xml:space="preserve">
+    <value>حلول عالمية برؤية محلية</value>
+  </data>
+  <data name="HeroTabAbout" xml:space="preserve">
+    <value>عن شركة إمداد</value>
+  </data>
+  <data name="HeroTabVision" xml:space="preserve">
+    <value>رؤيتنا</value>
+  </data>
+  <data name="HeroTabMission" xml:space="preserve">
+    <value>رسالتنا</value>
+  </data>
+  <data name="HeroTabGoals" xml:space="preserve">
+    <value>أهدافنا</value>
+  </data>
+  <data name="HeroSlide1Badge" xml:space="preserve">
+    <value>صرح صناعي وهندسي رائد</value>
+  </data>
+  <data name="HeroSlide1Title" xml:space="preserve">
+    <value>شركة إمداد للصناعات والمعدات الثقيلة</value>
+  </data>
+  <data name="HeroSlide1Tagline" xml:space="preserve">
+    <value>نبني اليوم... لنمكّن الغد | حلول متكاملة ومستقبل مستدام</value>
+  </data>
+  <data name="HeroSlide1Desc" xml:space="preserve">
+    <value>صرح صناعي متقدم رائد في توطين الصناعات الدفاعية والميكانيكية والتوريدات البترولية والمعدات الثقيلة، والتمثيل الاستراتيجي لكبرى الهيئات الصناعية لتعزيز قدرات الإنتاج والتصدير محلياً ودولياً.</value>
+  </data>
+  <data name="HeroSlide1Point1" xml:space="preserve">
+    <value>توطين الصناعات الدفاعية والميكانيكية</value>
+  </data>
+  <data name="HeroSlide1Point2" xml:space="preserve">
+    <value>توريدات بترولية وحلول الطاقة المتجددة</value>
+  </data>
+  <data name="HeroSlide1Point3" xml:space="preserve">
+    <value>شراكات استراتيجية وتوكيلات معتمدة</value>
+  </data>
+  <data name="HeroSlide2Badge" xml:space="preserve">
+    <value>رؤيتنا الاستراتيجية</value>
+  </data>
+  <data name="HeroSlide2Title" xml:space="preserve">
+    <value>الريادة الإقليمية في الحلول الهندسية والصناعية</value>
+  </data>
+  <data name="HeroSlide2Tagline" xml:space="preserve">
+    <value>الابتكار والتكنولوجيا والتنمية المستدامة</value>
+  </data>
+  <data name="HeroSlide2Desc" xml:space="preserve">
+    <value>أن نكون من الرواد في تقديم الحلول الصناعية والهندسية في الشرق الأوسط وأفريقيا، ودعم التنمية المستدامة من خلال الابتكار والتكنولوجيا والشراكات الاستراتيجية.</value>
+  </data>
+  <data name="HeroSlide2Point1" xml:space="preserve">
+    <value>ريادة إقليمية في الشرق الأوسط وأفريقيا</value>
+  </data>
+  <data name="HeroSlide2Point2" xml:space="preserve">
+    <value>نقل وتوطين أحدث التكنولوجيات الصناعية</value>
+  </data>
+  <data name="HeroSlide2Point3" xml:space="preserve">
+    <value>حلول مستدامة تعزز البنية التحتية</value>
+  </data>
+  <data name="HeroSlide3Badge" xml:space="preserve">
+    <value>رسالتنا المؤسسية</value>
+  </data>
+  <data name="HeroSlide3Title" xml:space="preserve">
+    <value>تمكين الصناعات والحكومات بأعلى معايير الكفاءة</value>
+  </data>
+  <data name="HeroSlide3Tagline" xml:space="preserve">
+    <value>حلول متكاملة وتقنيات متقدمة</value>
+  </data>
+  <data name="HeroSlide3Desc" xml:space="preserve">
+    <value>تقديم حلول هندسية متكاملة وتقنيات متقدمة وخدمات احترافية تمكن الصناعات والحكومات من تعزيز الكفاءة وبناء القدرات وتحقيق نمو مستدام.</value>
+  </data>
+  <data name="HeroSlide3Point1" xml:space="preserve">
+    <value>بناء وتطوير القدرات الإنتاجية والصناعية</value>
+  </data>
+  <data name="HeroSlide3Point2" xml:space="preserve">
+    <value>معايير جودة فائقة وهندسة دقيقة</value>
+  </data>
+  <data name="HeroSlide3Point3" xml:space="preserve">
+    <value>دعم تشغيلي متواصل وخدمات ما بعد البيع</value>
+  </data>
+  <data name="HeroSlide4Badge" xml:space="preserve">
+    <value>أهدافنا الاستراتيجية</value>
+  </data>
+  <data name="HeroSlide4Title" xml:space="preserve">
+    <value>توطين التكنولوجيا وتوسيع قاعدة التصدير والإنتاج</value>
+  </data>
+  <data name="HeroSlide4Tagline" xml:space="preserve">
+    <value>خطوات منهجية تعزز نجاح المنتجات محلياً ودولياً</value>
+  </data>
+  <data name="HeroSlide4Desc" xml:space="preserve">
+    <value>تحقيق التميز التشغيلي، توطين التقنيات الدفاعية والميكانيكية والبترولية، بناء شراكات استراتيجية مستدامة مع كبرى الكيانات الصناعية، وتوسيع قاعدة التصدير والانتشار الإقليمي والدولي.</value>
+  </data>
+  <data name="HeroSlide4Point1" xml:space="preserve">
+    <value>توطين التقنيات الصناعية المتقدمة</value>
+  </data>
+  <data name="HeroSlide4Point2" xml:space="preserve">
+    <value>تلبية احتياجات السوق المحلي والدولي</value>
+  </data>
+  <data name="HeroSlide4Point3" xml:space="preserve">
+    <value>تعزيز التنافسية وبناء شراكات سيادية</value>
+  </data>
+  <data name="ValLeadership" xml:space="preserve">
+    <value>الريادة الإقليمية</value>
+  </data>
+  <data name="ValRegionalExcellence" xml:space="preserve">
+    <value>تميز مستدام في الشرق الأوسط وأفريقيا</value>
+  </data>
+  <data name="MiddleEastAfrica" xml:space="preserve">
+    <value>الشرق الأوسط وأفريقيا</value>
+  </data>
+  <data name="PrecisionQuality" xml:space="preserve">
+    <value>هندسة دقيقة ومعايير دولية</value>
+  </data>
+  <data name="ValEfficiency" xml:space="preserve">
+    <value>كفاءة تشغيلية فائقة</value>
+  </data>
+  <data name="HighPerformance" xml:space="preserve">
+    <value>أداء صناعي متطور</value>
+  </data>
+  <data name="MarketLeadership" xml:space="preserve">
+    <value>ريادة الأسواق</value>
+  </data>
+  <data name="IndustrialExpansion" xml:space="preserve">
+    <value>توسع صناعي وتصديري</value>
+  </data>
+  <data name="SovereignAlliances" xml:space="preserve">
+    <value>تحالفات سيادية</value>
+  </data>
+  <data name="ArabOrgIndustrialization" xml:space="preserve">
+    <value>الهيئة العربية للتصنيع والعربية للبصريات</value>
+  </data>
+  <data name="PartnerAOI" xml:space="preserve">
+    <value>الهيئة العربية للتصنيع</value>
+  </data>
+  <data name="PartnerAIO" xml:space="preserve">
+    <value>الشركة العربية العالمية للبصريات</value>
+  </data>
+  <data name="PartnerEastWest" xml:space="preserve">
+    <value>الشرق و الغرب للتجارة الدولية</value>
+  </data>
+  <data name="PartnerMilitaryProd" xml:space="preserve">
+    <value>مسجلة في وزارة الانتاج الحربي</value>
+  </data>
+  <data name="PartnerPetroleum" xml:space="preserve">
+    <value>وزارة البترول</value>
+  </data>
+  <data name="SectorsEyebrow" xml:space="preserve">
+    <value>مجالات أعمالنا</value>
+  </data>
+  <data name="SectorsMainHeading" xml:space="preserve">
+    <value>قطاعاتنا الاستراتيجية</value>
+  </data>
+  <data name="SectorsSubHeading" xml:space="preserve">
+    <value>قدرات متكاملة تلبي المتطلبات الوطنية والصناعية والبنية التحتية.</value>
+  </data>
+  <data name="SectionVisionTitle" xml:space="preserve">
+    <value>الرؤية</value>
+  </data>
+  <data name="SectionVisionText" xml:space="preserve">
+    <value>أن نكون من الرواد في تقديم الحلول الصناعية والهندسية في الشرق الأوسط وأفريقيا، ودعم التنمية المستدامة من خلال الابتكار والتكنولوجيا والشراكات الاستراتيجية.</value>
+  </data>
+  <data name="SectionMissionTitle" xml:space="preserve">
+    <value>الرسالة</value>
+  </data>
+  <data name="SectionMissionText" xml:space="preserve">
+    <value>نقدم حلول هندسية متكاملة وتقنيات متقدمة وخدمات احترافية تمكن الصناعات والحكومات من تعزيز الكفاءة وبناء القدرات وتحقيق نمو مستدام.</value>
+  </data>
+  <data name="SectionValuesTitle" xml:space="preserve">
+    <value>القيم</value>
+  </data>
+  <data name="ValExcellenceTitle" xml:space="preserve">
+    <value>التميز</value>
+  </data>
+  <data name="ValIntegrityTitle" xml:space="preserve">
+    <value>النزاهة</value>
+  </data>
+  <data name="ValInnovationTitle" xml:space="preserve">
+    <value>الابتكار</value>
+  </data>
+  <data name="ValPartnershipTitle" xml:space="preserve">
+    <value>الشراكة</value>
+  </data>
+  <data name="ValAccountabilityTitle" xml:space="preserve">
+    <value>المسؤولية</value>
+  </data>
+  <data name="ValSustainabilityTitle" xml:space="preserve">
+    <value>الاستدامة</value>
+  </data>
+  <data name="SectionQualityTitle" xml:space="preserve">
+    <value>الالتزام بالجودة</value>
+  </data>
+  <data name="SectionQualityText" xml:space="preserve">
+    <value>نلتزم بالمعايير الدولية (ISO) وأفضل الممارسات لضمان الجودة والسلامة والموثوقية ورضا العملاء في جميع مشاريعنا.</value>
+  </data>
+  <data name="AchievementsHeading" xml:space="preserve">
+    <value>مشاريعنا وإنجازاتنا</value>
+  </data>
+  <data name="AchievementsSubHeading" xml:space="preserve">
+    <value>حلول إمداد الدفاعية والصناعية</value>
+  </data>
+  <data name="Achieve1Text" xml:space="preserve">
+    <value>توريد وتركيب المعدات الميكانيكية الثقيلة للمشاريع الصناعية</value>
+  </data>
+  <data name="Achieve2Text" xml:space="preserve">
+    <value>دعم الصناعات الدفاعية بحلول هندسية وأنظمة صيانة متكاملة</value>
+  </data>
+  <data name="Achieve3Text" xml:space="preserve">
+    <value>تنفيذ مشاريع الطاقة الشمسية للقطاعات الصناعية والتجارية</value>
+  </data>
+  <data name="Achieve4Text" xml:space="preserve">
+    <value>تقديم برامج تدريب فنية للمهندسين والفنيين</value>
+  </data>
+  <data name="Achieve5Text" xml:space="preserve">
+    <value>شراكات ناجحة مع الجهات الحكومية والقطاع الخاص</value>
+  </data>
+  <data name="Achieve6Text" xml:space="preserve">
+    <value>المساهمة في التصنيع المحلي وتطوير التكنولوجيا</value>
+  </data>
+  <data name="WatchVideoBtn" xml:space="preserve">
+    <value>شاهد الفيديو التعريفي</value>
+  </data>
+</root>

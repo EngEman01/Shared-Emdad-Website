@@ -1,0 +1,70 @@
+@model IEnumerable<Advertisement>
+
+@{
+    ViewData["Title"] = "Advertisements";
+    var defaultCulture = localizationOptions.Value.DefaultRequestCulture.Culture.Name;
+}
+<div class="container mt-5" style="width:1200px;">
+    <h2 class="text-center mb-4">Advertisement Management</h2>
+
+    <!-- Add Advertisement Button -->
+    <div class="text-center mb-3">
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="Advertisement" asp-action="Upsert">Add New Advertisement</a>
+    </div>
+
+    <!-- Categories Table (Responsive) -->
+    <div class="table-responsive index">
+        <table class="table table-striped" id="AdvertisementTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Start </th>
+                    <th>End</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="AdvertisementTableBody">
+
+                @if(Model != null && Model.Any()){
+                    var counter = 1;
+                    @foreach (var Advertisement in Model)
+                    {
+                        <tr>
+                            <td>@(counter++)</td>
+                            <td>@(Advertisement.Translations?.FirstOrDefault(t => t.Language.ToLower() == defaultCulture.ToLower())?.Name ?? "No Advertisement Name")</td>
+                            <td>
+                                @(Advertisement.StartDateTime.ToString("MMMM dd, yyyy hh:mm tt"))
+                            </td>
+                            <td >
+                                @(Advertisement.EndDateTime.HasValue
+                                    ? Advertisement.EndDateTime.Value.ToString("MMMM dd, yyyy hh:mm tt")
+                                    : "Unspecified")
+                            </td>
+
+                            <td>
+                                <a asp-area="Admin" asp-controller="Advertisement" asp-action="Show" asp-route-id="@Advertisement.Id" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+                                <a asp-area="Admin" asp-controller="Advertisement" asp-action="Upsert" asp-route-id="@Advertisement.Id" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                                <a asp-area="Admin" asp-controller="Advertisement" asp-action="Delete" asp-route-id="@Advertisement.Id" class="btn btn-danger xbtn-sm"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else {
+                    <tr>
+                        <td colspan="10" class="text-center">No Advertisements yet</td>
+                    </tr>
+                }
+                
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/js/Advertisements.js"></script>
+}

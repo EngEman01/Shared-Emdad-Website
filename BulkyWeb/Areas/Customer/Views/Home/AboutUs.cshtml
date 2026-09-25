@@ -1,0 +1,2927 @@
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    var isRtl = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
+    var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name.ToLower();
+    ViewData["Title"] = isRtl ? "من نحن | شركة إمداد" : "About Us | EMDAD";
+}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   EMDAD ABOUT PAGE - 100% MATCH TO REFERENCE DESIGN
+   Bilingual (AR / EN) - High-End Luxury Industrial Theme
+   ============================================================ */
+
+:root {
+    --em-gold: #d4af37;
+    --em-gold-light: #f5d77f;
+    --em-gold-dark: #a67c1e;
+    --em-gold-glow: rgba(212, 175, 55, 0.4);
+    --em-gold-gradient: linear-gradient(135deg, #fae29c 0%, #d4af37 50%, #9e7314 100%);
+    --em-gold-metallic: linear-gradient(180deg, #fff2c6 0%, #e6be57 30%, #b88d22 70%, #f6da86 100%);
+    
+    --em-navy-deep: #030d1a;
+    --em-navy-dark: #07172b;
+    --em-navy-card: #0b1f38;
+    --em-navy-border: rgba(212, 175, 55, 0.35);
+    
+    --em-text-white: #ffffff;
+    --em-text-light: #e0e6ed;
+    --em-text-muted: #8b9bb0;
+    --em-text-dark: #1e293b;
+    --em-text-navy: #09203a;
+    
+    --font-ar: 'Cairo', sans-serif;
+    --font-en: 'Inter', sans-serif;
+    --font-brand: 'Cinzel', 'Montserrat', serif;
+}
+
+.emdad-about-wrapper {
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #040c17;
+    color: var(--em-text-light);
+    font-family: @(isRtl ? "var(--font-ar)" : "var(--font-en)");
+    direction: @(isRtl ? "rtl" : "ltr");
+    line-height: 1.6;
+}
+
+/* Typography Helpers */
+.gold-text {
+    background: var(--em-gold-metallic);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.gold-gradient-text {
+    background: var(--em-gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================
+   1. HERO SECTION
+   ============================================================ */
+.about-hero-section {
+    position: relative;
+    min-height: 520px;
+    height: 70vh;
+    max-height: 640px;
+    background: url('/assets/custom/about_2026/hero_hd.jpg') center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.about-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(3, 13, 26, 0.92) 0%,
+        rgba(4, 18, 36, 0.72) 45%,
+        rgba(6, 25, 48, 0.25) 100%
+    );
+    z-index: 1;
+}
+
+@(isRtl ? @"
+.about-hero-overlay {
+    background: linear-gradient(
+        to left,
+        rgba(3, 13, 26, 0.92) 0%,
+        rgba(4, 18, 36, 0.72) 45%,
+        rgba(6, 25, 48, 0.25) 100%
+    );
+}
+" : "")
+
+.about-hero-bottom-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to top, rgba(3, 13, 26, 0.95), transparent);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.about-hero-container {
+    position: relative;
+    z-index: 3;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+    width: 100%;
+}
+
+.about-hero-eyebrow {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: @(isRtl ? "0.5px" : "1.5px");
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.about-hero-subtag {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: @(isRtl ? "1px" : "3px");
+    color: #f1cb70;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.about-hero-title {
+    font-family: @(isRtl ? "var(--font-ar)" : "var(--font-brand)");
+    font-size: clamp(3.2rem, 7vw, 5.8rem);
+    font-weight: 900;
+    line-height: 1.05;
+    margin: 0 0 12px 0;
+    letter-spacing: @(isRtl ? "1px" : "4px");
+    background: var(--em-gold-metallic);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.8));
+    text-transform: uppercase;
+}
+
+.about-hero-tagline {
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+    font-weight: 700;
+    letter-spacing: @(isRtl ? "0.5px" : "2px");
+    color: #ffffff;
+    text-transform: uppercase;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.about-hero-tagline::after {
+    content: "";
+    display: inline-block;
+    width: 60px;
+    height: 2px;
+    background: var(--em-gold);
+}
+
+/* ============================================================
+   2. "ABOUT EMDAD" SECTION (White Card Theme)
+   ============================================================ */
+.about-emdad-section {
+    background: #ffffff;
+    color: var(--em-text-dark);
+    padding: 70px 0;
+    position: relative;
+}
+
+.about-emdad-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.about-emdad-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 45px;
+    align-items: center;
+}
+
+.about-emdad-content h2 {
+    font-size: clamp(2rem, 3.2vw, 2.7rem);
+    font-weight: 800;
+    color: #072242;
+    margin-bottom: 6px;
+    font-family: @(isRtl ? "var(--font-ar)" : "var(--font-en)");
+}
+
+.about-emdad-content .emdad-subtitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a3c63;
+    margin-bottom: 22px;
+}
+
+.about-emdad-content p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #3f4e61;
+    margin-bottom: 18px;
+}
+
+.btn-learn-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #e4ba56 0%, #d4af37 100%);
+    color: #05162b;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 13px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.35);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-learn-more:hover {
+    background: linear-gradient(135deg, #f5cc6b 0%, #e5c04b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(212, 175, 55, 0.45);
+    color: #000000;
+}
+
+/* Image Mosaic (1 Large + 2 Small) */
+.about-mosaic {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 14px;
+    align-items: stretch;
+}
+
+.mosaic-large {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    height: 100%;
+    min-height: 250px;
+}
+
+.mosaic-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.mosaic-large:hover img {
+    transform: scale(1.04);
+}
+
+.mosaic-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.mosaic-small {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    height: calc(50% - 7px);
+    min-height: 118px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.mosaic-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.mosaic-small:hover img {
+    transform: scale(1.05);
+}
+
+/* ============================================================
+   3. FOUR CORE SECTORS (AREAS OF OPERATION) - LUXURY INDUSTRIAL DESIGN
+   ============================================================ */
+.about-sectors-section {
+    background: radial-gradient(circle at 50% 0%, #081930 0%, #030a14 100%);
+    padding: 85px 0 75px 0;
+    position: relative;
+    border-top: 1.5px solid rgba(212, 175, 55, 0.35);
+    border-bottom: 1.5px solid rgba(212, 175, 55, 0.35);
+}
+
+.about-sectors-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* Master Header */
+.sectors-main-header {
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto 45px auto;
+}
+
+.sectors-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    padding: 6px 18px;
+    border-radius: 30px;
+    color: #f7d57f;
+    font-size: 0.88rem;
+    font-weight: 800;
+    letter-spacing: @(isRtl ? "0.5px" : "2px");
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+.sectors-badge i {
+    color: #f7d57f;
+    font-size: 0.95rem;
+}
+
+.sectors-title {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    font-family: @(isRtl ? "var(--font-ar)" : "var(--font-brand)");
+}
+
+.sectors-title span {
+    background: linear-gradient(180deg, #fff3c9 0%, #e6be57 35%, #b88d22 75%, #f6da86 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.7));
+}
+
+.sectors-desc {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #cbd5e1;
+    margin: 0 auto;
+}
+
+/* Quick Navigator Bar */
+.sectors-nav-pills {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.sector-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(8, 24, 46, 0.85);
+    border: 1.5px solid rgba(212, 175, 55, 0.35);
+    color: #e2eaf4;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    backdrop-filter: blur(8px);
+}
+
+.sector-nav-btn i {
+    color: #d4af37;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.sector-nav-btn:hover {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(10, 31, 56, 0.95) 100%);
+    border-color: #f7d57f;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
+}
+
+.sector-nav-btn:hover i {
+    transform: scale(1.15);
+}
+
+/* Sectors Layout List */
+.sectors-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
+
+/* Master Sector Block */
+.sector-block-card {
+    position: relative;
+    background: linear-gradient(145deg, #07192f 0%, #040e1b 100%);
+    border: 1.5px solid rgba(212, 175, 55, 0.45);
+    border-radius: 16px;
+    padding: 38px 34px;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.65), inset 0 0 25px rgba(212, 175, 55, 0.06);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    overflow: hidden;
+}
+
+.sector-block-card:hover {
+    border-color: #f7d57f;
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.22);
+}
+
+/* Ambient glow accent in top corner */
+.sector-block-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Sector Top Header */
+.sector-top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1.5px solid rgba(212, 175, 55, 0.3);
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.sector-title-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.sector-icon-badge {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1b2e46 0%, #0b1523 100%);
+    border: 1.5px solid #d4af37;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f7d57f;
+    font-size: 1.5rem;
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.35);
+    flex-shrink: 0;
+}
+
+.sector-title-texts h3 {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.3vw, 1.8rem);
+    font-weight: 800;
+    color: #f7d57f;
+    line-height: 1.25;
+    font-family: @(isRtl ? "var(--font-ar)" : "var(--font-en)");
+}
+
+.sector-order-tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #e5be53;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 3px;
+}
+
+.sector-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+}
+
+.sector-status-badge i {
+    color: #55e69e;
+    font-size: 0.75rem;
+}
+
+/* Sector Overview Paragraphs */
+.sector-overview-text {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 28px;
+}
+
+.sector-overview-text p {
+    font-size: 0.98rem;
+    line-height: 1.85;
+    color: #d1dce8;
+    margin-bottom: 14px;
+}
+
+.sector-overview-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* Law / Legal Framework Highlighting Box */
+.sector-law-box {
+    background: rgba(4, 15, 29, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-left: @(isRtl ? "1px solid rgba(212, 175, 55, 0.4)" : "4px solid #d4af37");
+    border-right: @(isRtl ? "4px solid #d4af37" : "1px solid rgba(212, 175, 55, 0.4)");
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 18px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.sector-law-box i {
+    color: #f7d57f;
+    font-size: 1.3rem;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.sector-law-box-content h5 {
+    margin: 0 0 4px 0;
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #f7d57f;
+}
+
+.sector-law-box-content p {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #e2eaf4;
+}
+
+/* Subsections Title with Gold Underline */
+.sub-block-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 28px 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: @(isRtl ? "var(--font-ar)" : "var(--font-en)");
+}
+
+.sub-block-title i {
+    color: #d4af37;
+    font-size: 1.05rem;
+}
+
+/* Three Cards Grid (For Petroleum Registrations) */
+.sector-3cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.sector-feature-card {
+    background: #081a32;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 10px;
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.sector-feature-card:hover {
+    border-color: #f7d57f;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+.feature-card-num-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #d4af37 0%, #946e1a 100%);
+    color: #030d1a;
+    font-weight: 900;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.sector-feature-card h4 {
+    font-size: 0.98rem;
+    font-weight: 800;
+    color: #f7d57f;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.sector-feature-card p {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #c9d7e5;
+    margin: 0;
+    flex-grow: 1;
+}
+
+/* Entity Badges Grid */
+.entity-badges-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 16px 0 25px 0;
+}
+
+.entity-badge-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #051324;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.25s ease;
+}
+
+.entity-badge-item i {
+    color: #f7d57f;
+    font-size: 1rem;
+}
+
+.entity-badge-item:hover {
+    border-color: #f7d57f;
+    background: #09203a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.25);
+}
+
+/* Compliance & Governance Banner */
+.compliance-gold-banner {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(7, 25, 48, 0.95) 100%);
+    border: 1.5px solid rgba(212, 175, 55, 0.45);
+    border-radius: 10px;
+    padding: 22px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    margin-top: 20px;
+}
+
+.compliance-gold-banner .comp-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2b210f 0%, #0f0b04 100%);
+    border: 1.5px solid #d4af37;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f7d57f;
+    font-size: 1.35rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+}
+
+.comp-content h4 {
+    margin: 0 0 6px 0;
+    font-size: 1.08rem;
+    font-weight: 800;
+    color: #f7d57f;
+}
+
+.comp-content p {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: #e2eaf4;
+}
+
+/* 4-Pillars Grid (For Defense Sector) */
+.defense-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+}
+
+.defense-pillar-item {
+    background: #081a32;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    padding: 14px 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.defense-pillar-item:hover {
+    border-color: #f7d57f;
+    transform: translateY(-3px);
+    background: #0d2545;
+}
+
+.defense-pillar-item i {
+    color: #f7d57f;
+    font-size: 1.35rem;
+}
+
+.defense-pillar-item span {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* Grid of Mini Cards (For 8 Industrial Fields & 10 Solar Solutions) */
+.fields-8-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 25px;
+}
+
+.fields-10-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-bottom: 25px;
+}
+
+.field-item-card {
+    background: #081930;
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 10px;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    min-height: 130px;
+    justify-content: center;
+}
+
+.field-item-card:hover {
+    border-color: #f7d57f;
+    transform: translateY(-4px);
+    background: #0d2649;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5), 0 0 16px rgba(212, 175, 55, 0.25);
+}
+
+.field-item-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(5, 18, 34, 0.8) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f7d57f;
+    font-size: 1.15rem;
+    transition: transform 0.3s ease;
+}
+
+.field-item-card:hover .field-item-icon {
+    transform: scale(1.12);
+    border-color: #f7d57f;
+}
+
+.field-item-card span {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #e2eaf4;
+    line-height: 1.35;
+}
+
+/* AOI Special Badge (Arab Organization for Industrialization) */
+.aoi-special-box {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(9, 29, 54, 0.95) 100%);
+    border: 1.5px solid #d4af37;
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.aoi-special-box i {
+    font-size: 1.8rem;
+    color: #f7d57f;
+    flex-shrink: 0;
+}
+
+.aoi-special-box p {
+    margin: 0;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.aoi-special-box p span {
+    color: #f7d57f;
+}
+
+/* Responsive adjustments for Sectors */
+@@media (max-width: 1199px) {
+    .fields-10-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@@media (max-width: 991px) {
+    .sector-3cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .defense-pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .fields-8-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .fields-10-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .sector-block-card {
+        padding: 26px 20px;
+    }
+}
+
+@@media (max-width: 640px) {
+    .defense-pillars-grid {
+        grid-template-columns: 1fr;
+    }
+    .fields-8-grid {
+        grid-template-columns: 1fr;
+    }
+    .fields-10-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sectors-nav-pills {
+        flex-direction: column;
+    }
+    .sector-nav-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .compliance-gold-banner {
+        flex-direction: column;
+    }
+    .aoi-special-box {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* ============================================================
+/* ============================================================
+   4. COMMITTED TO QUALITY SECTION - 100% MATCH TO IMAGE 2
+   ============================================================ */
+/* .about-quality-section {
+    position: relative;
+    background: #081422 url('/assets/custom/about_2026/quality_clean_banner.jpg') right center / cover no-repeat;
+    padding: 75px 0 65px 0;
+    overflow: hidden;
+    min-height: 600px;
+    border-top: 2px solid rgba(212, 175, 55, 0.4);
+    border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+}
+
+.about-quality-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(5, 13, 24, 0.96) 0%,
+        rgba(5, 13, 24, 0.90) 45%,
+        rgba(5, 13, 24, 0.25) 75%,
+        transparent 100%
+    );
+    z-index: 1;
+}
+
+
+.quality-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.quality-banner-layout {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.quality-content-box {
+    max-width: 760px;
+    width: 100%;
+}
+
+.quality-header {
+    margin-bottom: 22px;
+}
+
+.quality-title {
+    font-size: clamp(2.4rem, 4.2vw, 3.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 8px;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    font-family: @(isRtl ? "var(--font-ar)" : "var(--font-en)");
+}
+
+.quality-title .gold-gradient-text {
+    background: linear-gradient(135deg, #f5d070 0%, #e5ba4e 60%, #c99c2a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.quality-subtitle {
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    font-weight: 800;
+    color: #e2eaf4;
+    margin-bottom: 12px;
+}
+
+.quality-desc {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: #cbd5e1;
+    margin-bottom: 26px;
+    max-width: 620px;
+}
+
+.quality-frames-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+    max-width: 660px;
+}
+ */
+    /* ============================================================
+       4. COMMITTED TO QUALITY SECTION (Bilingual & RTL-Ready)
+       ============================================================ */
+    .about-quality-section {
+        position: relative;
+        background: url('/assets/custom/about_2026/quality_clean_banner.jpg') center center / cover no-repeat;
+        padding: 75px 0 65px 0;
+        overflow: hidden;
+        min-height: 600px;
+        border-top: 2px solid rgba(212, 175, 55, 0.4);
+        border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .about-quality-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        /* يتكيف التدرج تلقائياً مع اتجاه الصفحة دون الحاجة لصور إضافية */
+        background: linear-gradient( to var(--em-gradient-dir, right), rgba(5, 13, 24, 0.96) 0%, rgba(5, 13, 24, 0.90) 45%, rgba(5, 13, 24, 0.25) 75%, transparent 100% );
+        z-index: 1;
+    }
+
+    .emdad-about-wrapper[dir="rtl"] .about-quality-section::before {
+        --em-gradient-dir: left;
+    }
+
+    .quality-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .quality-banner-layout {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .quality-content-box {
+        max-width: 760px;
+        width: 100%;
+    }
+
+    .quality-header {
+        margin-bottom: 22px;
+    }
+
+    .quality-title {
+        font-size: clamp(2.4rem, 4.2vw, 3.5rem);
+        font-weight: 900;
+        color: #ffffff;
+        margin-bottom: 8px;
+        line-height: 1.15;
+        letter-spacing: normal;
+        font-family: inherit;
+    }
+
+        .quality-title .gold-gradient-text {
+            background: linear-gradient(135deg, #f5d070 0%, #e5ba4e 60%, #c99c2a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+    .quality-subtitle {
+        font-size: clamp(1.15rem, 2vw, 1.4rem);
+        font-weight: 800;
+        color: #e2eaf4;
+        margin-bottom: 12px;
+    }
+
+    .quality-desc {
+        font-size: 0.98rem;
+        line-height: 1.75;
+        color: #cbd5e1;
+        margin-bottom: 26px;
+        max-width: 620px;
+    }
+
+    /* إطار الإطارات الذهبية */
+    .quality-frames-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 20px;
+        max-width: 660px;
+    }
+
+    .gold-picture-frame {
+        position: relative;
+        border-radius: 10px;
+        background: #0a1829;
+        padding: 6px;
+        border: 5px solid #d4af37;
+        outline: 2px solid #997316;
+        outline-offset: -2px;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.55), inset 0 0 12px rgba(184, 141, 34, 0.4);
+        cursor: pointer;
+        transition: all 0.35s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .gold-picture-frame:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 38px rgba(0, 0, 0, 0.65), 0 0 25px rgba(212, 175, 55, 0.55);
+            border-color: #f7d57f;
+        }
+
+    .frame-canvas {
+        position: relative;
+        background: #071322;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 6px;
+        overflow: hidden;
+        aspect-ratio: 1.25 / 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .frame-canvas img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+    .gold-picture-frame:hover .frame-canvas img {
+        transform: scale(1.06);
+    }
+
+    .frame-overlay-hint {
+        position: absolute;
+        inset: 0;
+        background: rgba(9, 32, 58, 0.85);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: #ffffff;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .gold-picture-frame:hover .frame-overlay-hint {
+        opacity: 1;
+    }
+
+    .quality-card-desc-box {
+        margin-top: 10px;
+        padding: 10px 4px 4px 4px;
+    }
+
+    .quality-card-title {
+        font-size: 0.96rem;
+        font-weight: 800;
+        color: #f7d57f;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .quality-card-text {
+        font-size: 0.82rem;
+        line-height: 1.65;
+        color: #d1dce8;
+        margin: 0 0 10px 0;
+    }
+
+    .quality-card-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+    }
+
+    .btn-cert-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #f7d57f;
+        background: rgba(212, 175, 55, 0.12);
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        padding: 5px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: all 0.25s ease;
+        cursor: pointer;
+    }
+
+        .btn-cert-link:hover {
+            background: #d4af37;
+            color: #061220;
+            border-color: #f7d57f;
+        }
+
+.gold-picture-frame {
+    position: relative;
+    border-radius: 10px;
+    background: #0a1829;
+    padding: 6px;
+    /* Rich 3D Gold Moulding matching Image 2 */
+    border: 5px solid #d4af37;
+    outline: 2px solid #997316;
+    outline-offset: -2px;
+    box-shadow: 
+        0 14px 28px rgba(0, 0, 0, 0.55),
+        inset 0 0 12px rgba(184, 141, 34, 0.4),
+        0 4px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.gold-picture-frame:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 
+        0 20px 38px rgba(0, 0, 0, 0.65),
+        0 0 25px rgba(212, 175, 55, 0.55);
+    border-color: #f7d57f;
+}
+
+.frame-canvas {
+    position: relative;
+    background: #071322;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: 1.25 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.frame-canvas img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gold-picture-frame:hover .frame-canvas img {
+    transform: scale(1.06);
+}
+
+.frame-overlay-hint {
+    position: absolute;
+    inset: 0;
+    background: rgba(9, 32, 58, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px;
+}
+
+.gold-picture-frame:hover .frame-overlay-hint {
+    opacity: 1;
+}
+
+.frame-overlay-hint i {
+    font-size: 1.6rem;
+    color: #f7d57f;
+}
+
+/* Captions & descriptions below each frame */
+.quality-card-desc-box {
+    margin-top: 10px;
+    padding: 10px 4px 4px 4px;
+}
+
+.quality-card-title {
+    font-size: 0.96rem;
+    font-weight: 800;
+    color: #f7d57f;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quality-card-title i {
+    color: #e5ba4e;
+    font-size: 0.95rem;
+}
+
+.quality-card-text {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: #d1dce8;
+    margin: 0 0 10px 0;
+}
+
+.quality-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.btn-cert-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #f7d57f;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    padding: 5px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.btn-cert-link:hover {
+    background: #d4af37;
+    color: #061220;
+    border-color: #f7d57f;
+}
+
+.btn-cert-link.download {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.btn-cert-link.download:hover {
+    background: #ffffff;
+    color: #061220;
+}
+
+/* Right Side: Engineer Showcase */
+.quality-engineer-showcase {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(212, 175, 55, 0.4);
+    background: #071526;
+}
+
+.quality-engineer-showcase img {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    max-height: 520px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.quality-engineer-showcase:hover img {
+    transform: scale(1.03);
+}
+
+.quality-engineer-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    background: rgba(5, 17, 32, 0.9);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 12px 18px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.quality-engineer-badge i {
+    font-size: 1.5rem;
+    color: #f7d57f;
+}
+
+.quality-engineer-badge .badge-txt h5 {
+    margin: 0;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.quality-engineer-badge .badge-txt p {
+    margin: 0;
+    font-size: 0.76rem;
+    color: #9cb1c9;
+}
+
+/* Bottom CTA Area */
+.quality-actions-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 18px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.btn-cta-contact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f0ca68 0%, #d4af37 100%);
+    color: #06162a;
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 12px 32px;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.38);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cta-contact:hover {
+    background: linear-gradient(135deg, #fae08f 0%, #e2be4b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.5);
+    color: #000000;
+}or: #000000;
+}
+
+.btn-cta-sectors {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #06162a;
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 14px 38px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: 1.5px solid rgba(212, 175, 55, 0.6);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-cta-sectors:hover {
+    background: #0c2647;
+    border-color: #f7d57f;
+    color: #f7d57f;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.25);
+}
+
+/* ============================================================
+   5. LIGHTBOX MODAL FOR CERTIFICATES
+   ============================================================ */
+.cert-lightbox-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(2, 8, 16, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cert-lightbox-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.cert-lightbox-dialog {
+    background: #081729;
+    border: 2px solid #d4af37;
+    border-radius: 12px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(212, 175, 55, 0.3);
+    max-width: 820px;
+    width: 100%;
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    animation: certModalPop 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@@keyframes certModalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.cert-lightbox-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: #040e1b;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.cert-lightbox-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #f7d57f;
+}
+
+.cert-lightbox-close {
+    background: transparent;
+    border: none;
+    color: #9cb1c9;
+    font-size: 1.6rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+    padding: 0 6px;
+}
+
+.cert-lightbox-close:hover {
+    color: #f7d57f;
+}
+
+.cert-lightbox-body {
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #030a13;
+}
+
+.cert-lightbox-body img {
+    max-width: 100%;
+    max-height: 68vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.cert-lightbox-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+    padding: 14px 24px;
+    background: #040e1b;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.btn-cert-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-cert-zoom {
+    background: #0d223a;
+    color: #e0eaf5;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.btn-cert-zoom:hover {
+    background: #14355b;
+    color: #ffffff;
+    border-color: #f7d57f;
+}
+
+.btn-cert-download {
+    background: linear-gradient(135deg, #f0ca68 0%, #d4af37 100%);
+    color: #06162a;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+.btn-cert-download:hover {
+    background: linear-gradient(135deg, #fae08f 0%, #e2be4b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.55);
+}
+
+/* ============================================================
+   RESPONSIVE STYLES
+   ============================================================ */
+@@media (max-width: 991px) {
+    .about-emdad-grid {
+        grid-template-columns: 1fr;
+    }
+    .vmv-grid {
+        grid-template-columns: 1fr;
+        max-width: 550px;
+        margin: 0 auto;
+    }
+    .quality-banner-layout {
+        grid-template-columns: 1fr;
+    }
+    .quality-engineer-showcase {
+        max-width: 550px;
+        margin: 25px auto 0 auto;
+    }
+}
+
+@@media (max-width: 640px) {
+    .quality-frames-row {
+        flex-direction: column;
+    }
+    .gold-picture-frame {
+        max-width: 260px;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .quality-captions-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .about-mosaic {
+        grid-template-columns: 1fr;
+    }
+    .mosaic-stack {
+        flex-direction: row;
+    }
+    .mosaic-small {
+        height: 130px;
+        width: 50%;
+    }
+}
+</style>
+
+<div class="emdad-about-wrapper">
+
+    <!-- ============================================================
+         1. HERO SECTION
+         ============================================================ -->
+    <section class="about-hero-section">
+        <div class="about-hero-overlay"></div>
+        <div class="about-hero-bottom-fade"></div>
+
+        <div class="about-hero-container">
+            <div class="about-hero-eyebrow">
+                <i class="fa-solid fa-chevron-right" style="font-size: 0.85rem; color: #d4af37;"></i>
+                <span>@(isRtl ? "من نحن" : "About Us")</span>
+            </div>
+
+            <div class="about-hero-subtag">
+                @(isRtl ? "طاقة متجددة وغد أكثر قوة" : "ENERGY & STRONGER TOMORROW")
+            </div>
+
+            <h1 class="about-hero-title">
+                @(isRtl ? "إمـــداد" : "EMDAD")
+            </h1>
+
+            <div class="about-hero-tagline">
+                <span>@(isRtl ? "لبناء مستقبل أقوى" : "BUILDING STRONGER TOMORROW")</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         2. "ABOUT EMDAD" SECTION (White/Light Theme with Mosaic)
+         ============================================================ -->
+    <section class="about-emdad-section" id="about-emdad">
+        <div class="about-emdad-container">
+            <div class="about-emdad-grid">
+                
+                <!-- Text Column -->
+                <div class="about-emdad-content">
+                    <h2>@(isRtl ? "عن شركة إمداد" : "About EMDAD")</h2>
+                    <div class="emdad-subtitle">
+                        @(isRtl ? "المعدات الثقيلة والتوكيلات التجارية" : "Heavy Equipment & Commercial Agencies")
+                    </div>
+
+                    @if (isRtl)
+                    {
+                        <p>
+                            إمداد هي شركة مصرية رائدة متخصصة في تقديم أحدث الحلول التكنولوجية والهندسية المتكاملة لقطاعات الدفاع والأمن، قطاع البترول والطاقة، وتوريد الآليات والمعدات الثقيلة وتشغيل المعادن.
+                        </p>
+                        <p>
+                            ومن خلال خبراتنا العميقة وشراكاتنا الاستراتيجية مع كبرى الصروح الصناعية الدولية، نحرص على تقديم حلول استثنائية فائقة الجودة تسهم بفاعلية في دفع عجلة التنمية والتطوير الصناعي المستدام في مصر ومنطقة الشرق الأوسط وأفريقيا.
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            EMDAD is an Egyptian company specializing in providing integrated and technological solutions to the Defense and Security Sector, Petroleum & Heavy Energy, Mechanical Equipment & Machinery.
+                        </p>
+                        <p>
+                            Through our expertise and strategic partnerships, we deliver high-quality solutions, fostering growth and development across the region.
+                        </p>
+                    }
+
+                    <a href="#sectors" class="btn-learn-more">
+                        <span>@(isRtl ? "استكشف قطاعاتنا الاستراتيجية" : "Explore Our Strategic Sectors")</span>
+                        <i class="fa-solid @(isRtl ? "fa-arrow-left" : "fa-arrow-right")"></i>
+                    </a>
+                </div>
+
+                <!-- 3-Image Mosaic Column -->
+                <div class="about-mosaic">
+                    <!-- Large Image: EMDAD Headquarters -->
+                    <div class="mosaic-large">
+                        <img src="/assets/custom/about_2026/building_hd.jpg" alt="EMDAD Headquarters" loading="lazy" />
+                    </div>
+
+                    <!-- Stack of 2 Smaller Images: Military Jet + City Skyline -->
+                    <div class="mosaic-stack">
+                        <div class="mosaic-small">
+                            <img src="/assets/custom/defence images/طائرات.jpg" alt="Defense Sector" loading="lazy" />
+                        </div>
+                        <div class="mosaic-small">
+                            <img src="/assets/custom/about_2026/about_city.jpg" alt="Energy & Petroleum" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         3. FOUR CORE SECTORS (AREAS OF OPERATION) - 100% MATCH TO 4 IMAGES
+         ============================================================ -->
+    <section class="about-sectors-section" id="sectors">
+        <div class="about-sectors-container">
+
+            <!-- Section Title & Intro -->
+            <div class="sectors-main-header">
+                <div class="sectors-badge">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>@(isRtl ? "قطاعات وأنشطة الشركة" : "Areas of Operation")</span>
+                </div>
+                <h2 class="sectors-title">
+                    <span>@(isRtl ? "مجالات العمل والقطاعات الاستراتيجية" : "Core Sectors & Strategic Operations")</span>
+                </h2>
+                <p class="sectors-desc">
+                    @(isRtl
+                        ? "تعمل شركة إمداد عبر أربعة قطاعات حيوية متكاملة لتقديم أرقى الحلول الصناعية، الهندسية، والتكنولوجية وفقاً لأعلى معايير الحوكمة والامتثال القانوني."
+                        : "EMDAD operates across four vital integrated sectors, delivering premier industrial, engineering, and technological solutions with full statutory and governance compliance.")
+                </p>
+            </div>
+
+            <!-- Quick Jump Buttons -->
+            <div class="sectors-nav-pills">
+                <a href="#sector-defense" class="sector-nav-btn">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>@(isRtl ? "المنتجات العسكرية والدفاعية" : "Military & Defense")</span>
+                </a>
+                <a href="#sector-petroleum" class="sector-nav-btn">
+                    <i class="fa-solid fa-droplet"></i>
+                    <span>@(isRtl ? "المنتجات البترولية والمواد الخام" : "Petroleum & Raw Materials")</span>
+                </a>
+                <a href="#sector-industrial" class="sector-nav-btn">
+                    <i class="fa-solid fa-gears"></i>
+                    <span>@(isRtl ? "المعدات الصناعية والآلات الثقيلة" : "Industrial Equipment")</span>
+                </a>
+                <a href="#sector-solar" class="sector-nav-btn">
+                    <i class="fa-solid fa-solar-panel"></i>
+                    <span>@(isRtl ? "حلول الطاقة الشمسية والمتجددة" : "Solar & Renewable Energy")</span>
+                </a>
+            </div>
+
+            <!-- Sectors List -->
+            <div class="sectors-list-wrapper">
+
+                <!-- ========================================================
+                     SECTOR 1: MILITARY AND DEFENSE PRODUCTS AND SYSTEMS
+                     ======================================================== -->
+                <div class="sector-block-card" id="sector-defense">
+                    <div class="sector-top-header">
+                        <div class="sector-title-group">
+                            <div class="sector-icon-badge">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div class="sector-title-texts">
+                                <span class="sector-order-tag">@(isRtl ? "أولاً" : "First")</span>
+                                <h3>@(isRtl ? "المنتجات والأنظمة والمعدات العسكرية والدفاعية" : "Military and Defense Products and Systems")</h3>
+                            </div>
+                        </div>
+                        <div class="sector-status-badge">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>@(isRtl ? "تراخيص واعتمادات رسمية" : "Official Authorizations")</span>
+                        </div>
+                    </div>
+
+                    <div class="sector-overview-text">
+                        @if (isRtl)
+                        {
+                            <p>
+                                تعمل شركة إمداد في مجال المنتجات والأنظمة والمعدات العسكرية والدفاعية من خلال الأطر الرسمية والقانونية المنظمة لهذا النشاط في جمهورية مصر العربية، وبناءً على التفويضات والتراخيص والموافقات الرسمية الصادرة من الجهات المعنية والمختصة، ووفقاً لطبيعة كل منتج أو معاملة.
+                            </p>
+                            <p>
+                                تخضع عمليات التداول، التوريد، البيع، الشراء، الاستيراد والتصدير - بحسب الأحوال - للضوابط والإجراءات والموافقات المقررة من الجهات المصرية المختصة المشرفة على هذا النشاط، ولا يتم تنفيذ أي معاملة إلا عبر القنوات الرسمية المعتمدة وبعد استيفاء التصاريح والموافقات المطلوبة.
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                EMDAD operates in the field of military and defense products, systems, and equipment through the official and legal frameworks governing this activity in the Arab Republic of Egypt, based on the official authorizations, licenses, and approvals issued by the competent authorities, and in accordance with the nature of each product or transaction.
+                            </p>
+                            <p>
+                                The handling, supply, sale, purchase, import and export operations, as the case may be, are subject to the regulations, procedures, and approvals set by the Egyptian competent authorities supervising this activity. No transaction is carried out except through the official accredited channels and after obtaining the required approvals and permits.
+                            </p>
+                        }
+                    </div>
+
+                    <!-- Law Compliance Box -->
+                    <div class="sector-law-box">
+                        <i class="fa-solid fa-gavel"></i>
+                        <div class="sector-law-box-content">
+                            <h5>@(isRtl ? "الامتثال لأحكام القانون واللوائح المنظمة" : "Statutory & Legislative Framework")</h5>
+                            <p>
+                                @(isRtl
+                                    ? "وذلك في إطار الالتزام بأحكام القانون رقم 394 لسنة 1954 بشأن الأسلحة والذخائر وتعديلاته بالقانون رقم 5 لسنة 2019، بالإضافة إلى القرارات التنفيذية واللوائح والإجراءات المنظمة ذات الصلة."
+                                    : "This is within the framework of compliance with the provisions of Law No. 394 of 1954 on Weapons and Ammunition and its amendments in Law No. 5 of 2019, in addition to the relevant executive decrees, regulations, and procedures.")
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 4 Commitment Pillars -->
+                    <div class="defense-pillars-grid">
+                        <div class="defense-pillar-item">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                            <span>@(isRtl ? "الامتثال القانوني" : "Legal Compliance")</span>
+                        </div>
+                        <div class="defense-pillar-item">
+                            <i class="fa-solid fa-building-shield"></i>
+                            <span>@(isRtl ? "الحوكمة المؤسسية" : "Corporate Governance")</span>
+                        </div>
+                        <div class="defense-pillar-item">
+                            <i class="fa-solid fa-user-shield"></i>
+                            <span>@(isRtl ? "السرية التامة" : "Confidentiality")</span>
+                        </div>
+                        <div class="defense-pillar-item">
+                            <i class="fa-solid fa-handshake"></i>
+                            <span>@(isRtl ? "التنسيق الرسمي" : "Official Coordination")</span>
+                        </div>
+                    </div>
+
+                    <!-- Relevant Authorities Sub-section -->
+                    <div class="compliance-gold-banner">
+                        <div class="comp-icon">
+                            <i class="fa-solid fa-landmark"></i>
+                        </div>
+                        <div class="comp-content">
+                            <h4>@(isRtl ? "الجهات المختصة والمعنية" : "Relevant Authorities")</h4>
+                            <p>
+                                @(isRtl
+                                    ? "تشمل الجهات المعنية بالتعامل والتعاون في هذا المجال - بحسب طبيعة المنتج والمعاملة - الجهات الحكومية والعسكرية والأمنية المصرية المختصة، والجهات المسؤولة عن إصدار التراخيص والموافقات والتفويضات اللازمة، وفقاً للاختصاصات القانونية المقررة لكل جهة."
+                                    : "The entities involved in this field, depending on the nature of the product and transaction, include the relevant Egyptian governmental, military, and security authorities, as well as the bodies responsible for issuing the necessary licenses, approvals, and authorizations, in accordance with the legal mandates of each entity.")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================
+                     SECTOR 2: PETROLEUM PRODUCTS AND RAW MATERIALS
+                     ======================================================== -->
+                <div class="sector-block-card" id="sector-petroleum">
+                    <div class="sector-top-header">
+                        <div class="sector-title-group">
+                            <div class="sector-icon-badge">
+                                <i class="fa-solid fa-droplet"></i>
+                            </div>
+                            <div class="sector-title-texts">
+                                <span class="sector-order-tag">@(isRtl ? "ثانياً" : "Second")</span>
+                                <h3>@(isRtl ? "المنتجات البترولية والمواد الخام" : "Petroleum Products and Raw Materials")</h3>
+                            </div>
+                        </div>
+                        <div class="sector-status-badge">
+                            <i class="fa-solid fa-certificate"></i>
+                            <span>@(isRtl ? "قيد وتأهيل معتمد" : "Qualified Supplier")</span>
+                        </div>
+                    </div>
+
+                    <div class="sector-overview-text">
+                        <p>
+                            @(isRtl
+                                ? "تعمل شركة إمداد في مجال تجارة وتوريد المنتجات البترولية والمواد الخام وفقاً للقوانين واللوائح والضوابط المنظمة لقطاع البترول والتجارة في جمهورية مصر العربية، ومن خلال التسجيل والتأهيل لدى الجهات المختصة، وبما يتوافق مع الاشتراطات الفنية والتجارية والتنظيمية لكل جهة."
+                                : "EMDAD operates in the field of trading and supplying petroleum products and raw materials in accordance with the laws, regulations, and controls governing the petroleum sector and trade in the Arab Republic of Egypt, through registration and qualification with the competent authorities, and in compliance with the technical, commercial, and regulatory requirements of each entity.")
+                        </p>
+                    </div>
+
+                    <!-- Registrations and Dealings Sub-section (3 Cards) -->
+                    <div class="sub-block-title">
+                        <i class="fa-solid fa-file-signature"></i>
+                        <span>@(isRtl ? "التسجيل والتعامل في قطاع البترول" : "Registrations and Dealings in the Petroleum Sector")</span>
+                    </div>
+
+                    <div class="sector-3cards-grid">
+                        <!-- Card 1 -->
+                        <div class="sector-feature-card">
+                            <div class="feature-card-num-badge">1</div>
+                            <h4>@(isRtl ? "التسجيل بغرفة البترول والتعدين" : "Registration with Petroleum & Mining Chamber")</h4>
+                            <p>
+                                @(isRtl
+                                    ? "شركة إمداد مسجلة بغرفة صناعة البترول والتعدين وفقاً لأحكام القانون رقم 70 لسنة 2019 بشأن تنظيم اتحاد الصناعات المصرية والغرف الصناعية."
+                                    : "EMDAD is registered with the Petroleum and Mining Chamber of Industry in accordance with Law No. 70 of 2019 regarding the organization of the Federation of Egyptian Industries and Industrial Chambers.")
+                            </p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="sector-feature-card">
+                            <div class="feature-card-num-badge">2</div>
+                            <h4>@(isRtl ? "التسجيل والتعامل مع شركات قطاع البترول" : "Registration with Petroleum Sector Companies")</h4>
+                            <p>
+                                @(isRtl
+                                    ? "تعمل إمداد على توسيع نطاق تعاملاتها داخل قطاع البترول المصري من خلال التسجيل والتأهيل كمورد لدى الشركات والجهات التابعة لقطاع البترول، وفقاً للإجراءات والاشتراطات الخاصة بكل شركة، واستكمال إجراءات القيد لدى شركات أخرى لتوسيع نطاق التوريد والتعاون."
+                                    : "EMDAD works on expanding the scope of its dealings within the Egyptian petroleum sector by registering and qualifying as a supplier with petroleum sector companies, and completing qualification with further entities to expand supply scopes.")
+                            </p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="sector-feature-card">
+                            <div class="feature-card-num-badge">3</div>
+                            <h4>@(isRtl ? "التعاون مع الجهات والشركات المتخصصة" : "Cooperation with Specialized Entities")</h4>
+                            <p>
+                                @(isRtl
+                                    ? "تسعى إمداد إلى تطوير شراكات واتفاقيات تعاون مع الشركات والمؤسسات المتخصصة في مجالات البترول والطاقة والمواد الخام البترولية والخدمات المرتبطة بها، عبر اتفاقيات تجارية وفنية وشراكات استراتيجية و Joint Ventures."
+                                    : "EMDAD develops partnerships and cooperation agreements with specialized institutions in petroleum, energy, and raw materials, including Joint Ventures and strategic partnerships according to project requirements.")
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Relevant Entities in Petroleum -->
+                    <div class="sub-block-title">
+                        <i class="fa-solid fa-building-columns"></i>
+                        <span>@(isRtl ? "الجهات والكيانات المعنية في قطاع البترول" : "Relevant Entities and Authorities in Petroleum Sector")</span>
+                    </div>
+
+                    <div class="entity-badges-grid">
+                        <div class="entity-badge-item">
+                            <i class="fa-solid fa-gem"></i>
+                            <span>@(isRtl ? "غرفة البترول والتعدين" : "Petroleum & Mining Chamber")</span>
+                        </div>
+                        <div class="entity-badge-item">
+                            <i class="fa-solid fa-industry"></i>
+                            <span>@(isRtl ? "الهيئة المصرية العامة للبترول (EGPC)" : "EGPC - Egyptian General Petroleum Corp.")</span>
+                        </div>
+                        <div class="entity-badge-item">
+                            <i class="fa-solid fa-landmark-flag"></i>
+                            <span>@(isRtl ? "وزارة البترول والثروة المعدنية" : "Ministry of Petroleum & Mineral Resources")</span>
+                        </div>
+                        <div class="entity-badge-item">
+                            <i class="fa-solid fa-oil-well"></i>
+                            <span>@(isRtl ? "شركات قطاع البترول" : "Petroleum Sector Companies")</span>
+                        </div>
+                        <div class="entity-badge-item">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>@(isRtl ? "الجهات المعنية الأخرى ذات الصلة" : "Other Relevant Entities")</span>
+                        </div>
+                    </div>
+
+                    <!-- Legal and Institutional Compliance -->
+                    <div class="compliance-gold-banner">
+                        <div class="comp-icon">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <div class="comp-content">
+                            <h4>@(isRtl ? "الامتثال القانوني والمؤسسي" : "Legal and Institutional Compliance")</h4>
+                            <p>
+                                @(isRtl
+                                    ? "تؤكد إمداد أن جميع أنشطتها تتم في إطار القوانين واللوائح والقرارات المنظمة للقطاعات التي تعمل بها داخل جمهورية مصر العربية، ووفقاً لطبيعة كل نشاط والجهة المختصة به. كما تحرص الشركة على أن تتم المعاملات التجارية والتوريدات عبر التراخيص والتفويضات والموافقات الرسمية اللازمة لتعزيز الثقة، الشفافية، وتوفير إطار مؤسسي سليم للتعاون مع الكيانات الحكومية والوطنية والدولية."
+                                    : "EMDAD affirms that all its activities are carried out within the framework of laws and regulations governing the sectors in which it operates in Egypt. The company ensures that supply and commercial transactions are conducted through official licenses and authorizations, enhancing trust, transparency, and sound institutional cooperation.")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================
+                     SECTOR 3: INDUSTRIAL EQUIPMENT AND HEAVY MACHINERY
+                     ======================================================== -->
+                <div class="sector-block-card" id="sector-industrial">
+                    <div class="sector-top-header">
+                        <div class="sector-title-group">
+                            <div class="sector-icon-badge">
+                                <i class="fa-solid fa-gears"></i>
+                            </div>
+                            <div class="sector-title-texts">
+                                <span class="sector-order-tag">@(isRtl ? "ثالثاً" : "Third")</span>
+                                <h3>@(isRtl ? "المعدات الصناعية والآلات الثقيلة" : "Industrial Equipment and Heavy Machinery")</h3>
+                            </div>
+                        </div>
+                        <div class="sector-status-badge">
+                            <i class="fa-solid fa-cubes"></i>
+                            <span>@(isRtl ? "توريدات وحلول متكاملة" : "Integrated Solutions")</span>
+                        </div>
+                    </div>
+
+                    <div class="sector-overview-text">
+                        @if (isRtl)
+                        {
+                            <p>
+                                تعمل شركة إمداد في مجال توفير وتوريد المعدات الصناعية والآلات الثقيلة والماكينات والمهمات الميكانيكية، بما يخدم احتياجات القطاعات الصناعية والإنشائية والطاقة والبترول وغيرها من القطاعات الاستراتيجية.
+                            </p>
+                            <p>
+                                وتشمل أنشطة الشركة توريد مجموعة واسعة من المعدات والآلات الصناعية، المعدات الميكانيكية الثقيلة، معدات المناولة والتشغيل، خطوط الإنتاج وماكينات المصانع والورش، بالإضافة إلى حلول ومعدات التصنيع والإنتاج المتخصصة عبر التعاون مع الشركات المصنعة والموردين محلياً ودولياً.
+                            </p>
+                            <p>
+                                وتركز الشركة بشكل خاص على قطاع الصناعات الثقيلة، مشروعات البترول والطاقة، المشروعات الصناعية والبنية التحتية، ومصانع الإنتاج، مع القدرة على التوريد وفقاً للمواصفات الفنية المعتمدة واشتراطات الجودة لكل مشروع.
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                EMDAD operates in the field of providing and supplying industrial equipment, heavy machinery, machines, and mechanical equipment, serving the needs of industrial, construction, energy, petroleum, and other strategic sectors.
+                            </p>
+                            <p>
+                                The company's activities include supplying a wide range of industrial equipment, heavy mechanical equipment, handling and operating machinery, factory and workshop equipment, as well as specialized manufacturing and production solutions through international and local manufacturers.
+                            </p>
+                            <p>
+                                The company places special focus on heavy industries, energy, petroleum, infrastructure projects, and manufacturing plants, ensuring all supplies strictly match approved technical specifications and quality requirements.
+                            </p>
+                        }
+                    </div>
+
+                    <!-- 8 Industrial Fields Grid -->
+                    <div class="sub-block-title">
+                        <i class="fa-solid fa-wrench"></i>
+                        <span>@(isRtl ? "مجالات العمل في قطاع المعدات الصناعية" : "Industrial Equipment Fields")</span>
+                    </div>
+
+                    <div class="fields-8-grid">
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-industry"></i></div>
+                            <span>@(isRtl ? "الماكينات والمعدات الصناعية" : "Industrial Machinery & Equipment")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-gear"></i></div>
+                            <span>@(isRtl ? "المعدات الميكانيكية وماكينات التشغيل" : "Mechanical & Operating Machinery")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-truck-front"></i></div>
+                            <span>@(isRtl ? "المعدات والآلات الصناعية الثقيلة" : "Heavy Industrial Machinery")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                            <span>@(isRtl ? "ماكينات ومعدات التصنيع والإنتاج" : "Manufacturing & Production Equipment")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-oil-well"></i></div>
+                            <span>@(isRtl ? "مهمات قطاعات البترول والصناعات الثقيلة" : "Petroleum & Heavy Industry Equipment")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-microchip"></i></div>
+                            <span>@(isRtl ? "ماكينات CNC وحلول التصنيع المتقدمة" : "CNC Machines & Advanced Solutions")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-dolly"></i></div>
+                            <span>@(isRtl ? "معدات المناولة والرفع والخدمات الصناعية" : "Handling, Lifting & Industrial Services")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                            <span>@(isRtl ? "توريد المهمات التخصصية طبقاً للمواصفات" : "Specialized Equipment by Specs")</span>
+                        </div>
+                    </div>
+
+                    <!-- Relevant Entities and Sectors -->
+                    <div class="compliance-gold-banner">
+                        <div class="comp-icon">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <div class="comp-content">
+                            <h4>@(isRtl ? "الجهات والقطاعات المستهدفة والمعنية" : "Relevant Entities and Sectors")</h4>
+                            <p>
+                                @(isRtl
+                                    ? "تستهدف إمداد التعاون والتوريد للشركات الصناعية، شركات البترول والطاقة، المصانع الإنتاجية، الجهات والمؤسسات الحكومية والشركات التابعة لها، والمشروعات القومية والاستراتيجية، مع بناء قنوات تعاون مع المصنعين الدوليين والشركات الهندسية لتوفير أحدث الحلول الفنية."
+                                    : "EMDAD targets cooperation and supply for industrial companies, petroleum and energy companies, manufacturing plants, government entities and their affiliated companies, and national strategic projects, alongside building strong channels with international manufacturers and engineering firms.")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================
+                     SECTOR 4: SOLAR ENERGY AND RENEWABLE ENERGY SOLUTIONS
+                     ======================================================== -->
+                <div class="sector-block-card" id="sector-solar">
+                    <div class="sector-top-header">
+                        <div class="sector-title-group">
+                            <div class="sector-icon-badge">
+                                <i class="fa-solid fa-solar-panel"></i>
+                            </div>
+                            <div class="sector-title-texts">
+                                <span class="sector-order-tag">@(isRtl ? "رابعاً" : "Fourth")</span>
+                                <h3>@(isRtl ? "حلول الطاقة الشمسية والطاقة المتجددة" : "Solar Energy and Renewable Energy Solutions")</h3>
+                            </div>
+                        </div>
+                        <div class="sector-status-badge">
+                            <i class="fa-solid fa-leaf"></i>
+                            <span>@(isRtl ? "طاقة نظيفة ومستدامة" : "Clean & Sustainable Energy")</span>
+                        </div>
+                    </div>
+
+                    <!-- AOI Special Representation Box -->
+                    <div class="aoi-special-box">
+                        <i class="fa-solid fa-award"></i>
+                        <p>
+                            @if (isRtl)
+                            {
+                                <span>تعمل شركة إمداد بموجب <strong>خطاب تمثيل رسمي من الهيئة العربية للتصنيع</strong> لتوفير وتوريد أحدث أنظمة وحلول وتطبيقات الطاقة الشمسية والطاقة النظيفة دعماً للتحول المستدام.</span>
+                            }
+                            else
+                            {
+                                <span>EMDAD operates under an official <strong>Letter of Representation from the Arab Organization for Industrialization (AOI)</strong> to supply premier solar energy and clean energy solutions.</span>
+                            }
+                        </p>
+                    </div>
+
+                    <div class="sector-overview-text">
+                        @if (isRtl)
+                        {
+                            <p>
+                                تقدم الشركة حلولاً متكاملة للطاقة الشمسية من خلال التعاون مع الشركات المتخصصة، بموجب خطاب تمثيل من الهيئة العربية للتصنيع والمصنعين ومقدمي الحلول الفنية، بما يشمل توريد المهمات والمكونات اللازمة لتنفيذ مشروعات الطاقة الشمسية وفقاً للاشتراطات الفنية وطبيعة كل موقع وتطبيق.
+                            </p>
+                            <p>
+                                وتستهدف إمداد تطبيق حلول الطاقة الشمسية في مختلف القطاعات، بما في ذلك المنشآت الصناعية، الكيانات التجارية، المحطات الخدمية والمرافق، قطاعات البترول والطاقة، والمشروعات الحكومية والاستراتيجية.
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                The company offers integrated solar energy solutions through cooperation with specialized companies, under a letter of representation from the Arab Organization for Industrialization, as well as manufacturers and technical solution providers, including the supply of equipment and components necessary for solar projects.
+                            </p>
+                            <p>
+                                EMDAD aims to apply solar energy solutions across various sectors, including industrial facilities, commercial establishments, service stations and utilities, the petroleum and energy sectors, government projects, and strategic projects.
+                            </p>
+                        }
+                    </div>
+
+                    <!-- 10 Solar Areas Grid -->
+                    <div class="sub-block-title">
+                        <i class="fa-solid fa-sun"></i>
+                        <span>@(isRtl ? "مجالات العمل في قطاع الطاقة الشمسية" : "Solar Energy Solutions - Areas of Work")</span>
+                    </div>
+
+                    <div class="fields-10-grid">
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-solar-panel"></i></div>
+                            <span>@(isRtl ? "أنظمة الخلايا الكهروضوئية (PV Systems)" : "Solar Photovoltaic (PV) Systems")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-table-cells"></i></div>
+                            <span>@(isRtl ? "الألواح الشمسية ومكوناتها" : "Solar Panels & Modules Components")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+                            <span>@(isRtl ? "محولات الطاقة ومغيرات التيار" : "Inverters & Power Converters")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-battery-full"></i></div>
+                            <span>@(isRtl ? "أنظمة تخزين الطاقة والبطاريات" : "Energy Storage & Batteries")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-network-wired"></i></div>
+                            <span>@(isRtl ? "هياكل وتثبيتات ودعم الألواح" : "Mounting & Support Structures")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-display"></i></div>
+                            <span>@(isRtl ? "أنظمة التحكم والمراقبة وإدارة الطاقة" : "Control & Energy Management Systems")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-city"></i></div>
+                            <span>@(isRtl ? "حلول الطاقة للمواقع والمنشآت" : "Solar for Sites & Facilities")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-industry"></i></div>
+                            <span>@(isRtl ? "حلول الطاقة للمشروعات البترولية" : "Solar for Petroleum Projects")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-arrows-split-up-and-left"></i></div>
+                            <span>@(isRtl ? "الحلول الهجينة المدمجة لمصادر الطاقة" : "Hybrid Energy Solutions")</span>
+                        </div>
+                        <div class="field-item-card">
+                            <div class="field-item-icon"><i class="fa-solid fa-gears"></i></div>
+                            <span>@(isRtl ? "توريد المهمات والمكونات الفنية" : "Renewable Equipment Supply")</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         4. COMMITTED TO QUALITY SECTION (LUXURY INDUSTRIAL THEME)
+         ============================================================ -->
+    <style>
+            /* ============================================================
+               4. COMMITTED TO QUALITY SECTION - DYNAMIC RTL/LTR & MODALS
+               ============================================================ */
+
+            /* LTR (English) - Engineer on the Right */
+            .about-quality-section {
+                position: relative;
+                background: url('/assets/custom/about_2026/quality_clean_banner.jpg') right center / cover no-repeat;
+                padding: 85px 0 80px 0;
+                overflow: hidden;
+                min-height: 580px;
+                border-top: 1.5px solid rgba(212, 175, 55, 0.4);
+                border-bottom: 1.5px solid rgba(212, 175, 55, 0.4);
+            }
+
+            .about-quality-section::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    to right,
+                    rgba(3, 11, 22, 0.98) 0%,
+                    rgba(3, 11, 22, 0.92) 42%,
+                    rgba(3, 11, 22, 0.35) 75%,
+                    transparent 100%
+                );
+                z-index: 1;
+            }
+
+            /* RTL (Arabic) - Engineer on the Left, Spacious Right Area for Text */
+            @(isRtl ? @"
+            .about-quality-section {
+                background: #040d1a url('/assets/custom/about_2026/quality_clean_banner_rtl.jpg') left center / cover no-repeat !important;
+            }
+            .about-quality-section::before {
+                background: linear-gradient(
+                    to left,
+                    rgba(3, 11, 22, 0.98) 0%,
+                    rgba(3, 11, 22, 0.92) 42%,
+                    rgba(3, 11, 22, 0.35) 75%,
+                    transparent 100%
+                ) !important;
+            }
+            " : "")
+
+            .quality-container {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 35px;
+                position: relative;
+                z-index: 2;
+            }
+
+            .quality-content-box {
+                max-width: 680px;
+                width: 100%;
+            }
+
+            /* Typography */
+            .quality-main-title {
+                font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+                font-weight: 900;
+                margin-bottom: 10px;
+                line-height: 1.15;
+                font-family: @(isRtl ? "var(--font-ar)" : "var(--font-brand)");
+            }
+
+            .quality-main-title span {
+                background: linear-gradient(180deg, #fff3c9 0%, #e0ba57 40%, #b38722 80%, #f7dc8d 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+            }
+
+            .quality-subtitle {
+                font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+                font-weight: 700;
+                color: #ffffff;
+                margin-bottom: 12px;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            }
+
+            .quality-desc-text {
+                font-size: 0.96rem;
+                line-height: 1.75;
+                color: #cbd5e1;
+                margin-bottom: 30px;
+                max-width: 620px;
+                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+            }
+
+            /* 2 Golden Picture Frames Grid */
+            .quality-frames-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 22px;
+                max-width: 640px;
+                margin-bottom: 22px;
+            }
+
+            .gold-cert-frame {
+                position: relative;
+                background: linear-gradient(145deg, #ffe494 0%, #d4af37 25%, #8c6717 50%, #f5d57a 75%, #aa7c1e 100%);
+                padding: 6px;
+                border-radius: 14px;
+                box-shadow: 0 14px 35px rgba(0, 0, 0, 0.75), inset 0 0 8px rgba(255, 255, 255, 0.55), 0 0 18px rgba(212, 175, 55, 0.25);
+                transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+                cursor: pointer;
+                overflow: hidden;
+            }
+
+            .gold-cert-frame:hover {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 22px 48px rgba(0, 0, 0, 0.88), 0 0 32px rgba(212, 175, 55, 0.5);
+            }
+
+            /* Golden Shimmer Wave */
+            .gold-cert-frame::after {
+                content: "";
+                position: absolute;
+                top: -50%;
+                left: -60%;
+                width: 40%;
+                height: 200%;
+                background: linear-gradient(
+                    to right,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.35) 50%,
+                    rgba(255, 255, 255, 0) 100%
+                );
+                transform: rotate(25deg);
+                pointer-events: none;
+                transition: left 0.75s ease;
+            }
+
+            .gold-cert-frame:hover::after {
+                left: 140%;
+            }
+
+            .gold-cert-inner {
+                background: linear-gradient(180deg, #ffffff 0%, #faf8f2 100%);
+                border: 2px solid #d4af37;
+                border-radius: 8px;
+                padding: 18px 14px 14px 14px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                min-height: 180px;
+                position: relative;
+                box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.12);
+            }
+
+            /* Guilloche security border inside certificate */
+            .gold-cert-inner::before {
+                content: "";
+                position: absolute;
+                inset: 5px;
+                border: 1px dashed rgba(184, 134, 11, 0.35);
+                border-radius: 5px;
+                pointer-events: none;
+            }
+
+            .cert-emblem-badge {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                background: linear-gradient(135deg, #091e38 0%, #040e1b 100%);
+                color: #f7d57f;
+                padding: 4px 12px;
+                border-radius: 20px;
+                border: 1px solid rgba(212, 175, 55, 0.45);
+                margin-bottom: 6px;
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .cert-emblem-badge svg {
+                width: 16px;
+                height: 16px;
+                fill: #f7d57f;
+            }
+
+            .cert-emblem-badge span {
+                font-size: 0.8rem;
+                font-weight: 800;
+                letter-spacing: 1.2px;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            .cert-number {
+                font-size: 2.3rem;
+                font-weight: 900;
+                color: #051426;
+                line-height: 1.05;
+                margin: 2px 0 5px 0;
+                font-family: 'Montserrat', sans-serif;
+                letter-spacing: 0.5px;
+            }
+
+            .cert-label {
+                font-size: 0.85rem;
+                font-weight: 800;
+                color: #1a2b42;
+                margin-bottom: 12px;
+                line-height: 1.3;
+            }
+
+            /* Explicit Action Button on Card */
+            .cert-card-cta-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 7px;
+                background: linear-gradient(135deg, #f7dc8d 0%, #d4af37 60%, #b38722 100%);
+                color: #030d1a;
+                font-weight: 800;
+                font-size: 0.8rem;
+                padding: 6px 14px;
+                border-radius: 6px;
+                box-shadow: 0 3px 10px rgba(184, 134, 11, 0.3);
+                transition: all 0.25s ease;
+                width: 100%;
+                border: none;
+                cursor: pointer;
+            }
+
+            .gold-cert-frame:hover .cert-card-cta-btn {
+                background: linear-gradient(135deg, #fff0b8 0%, #e2bc48 60%, #c49629 100%);
+                box-shadow: 0 5px 15px rgba(184, 134, 11, 0.5);
+                transform: translateY(-1px);
+                color: #000000;
+            }
+
+            /* Captions Footer */
+            .quality-captions-footer {
+                display: flex;
+                justify-content: space-between;
+                gap: 14px;
+                max-width: 640px;
+                margin-top: 14px;
+                padding: 0 2px;
+            }
+
+            .cert-caption-item {
+                font-size: 0.82rem;
+                font-weight: 600;
+                color: #cbd5e1;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(3, 13, 26, 0.65);
+                padding: 6px 12px;
+                border-radius: 8px;
+                border: 1px solid rgba(212, 175, 55, 0.25);
+                backdrop-filter: blur(4px);
+            }
+
+            .cert-caption-item i {
+                color: #d4af37;
+                font-size: 0.95rem;
+            }
+
+            /* ============================================================
+               QUALITY CERTIFICATE MODALS
+               ============================================================ */
+            .quality-modal {
+                position: fixed;
+                inset: 0;
+                z-index: 99999;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                background: rgba(2, 6, 15, 0.9);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                opacity: 0;
+                transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .quality-modal.active {
+                display: flex;
+                opacity: 1;
+            }
+
+            .quality-modal-dialog {
+                background: linear-gradient(145deg, #091930 0%, #040e1b 100%);
+                border: 1.5px solid rgba(212, 175, 55, 0.5);
+                border-radius: 18px;
+                width: min(720px, 96vw);
+                max-height: 92vh;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 0 25px 65px rgba(0, 0, 0, 0.9), 0 0 35px rgba(212, 175, 55, 0.22);
+                transform: scale(0.94) translateY(15px);
+                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .quality-modal.active .quality-modal-dialog {
+                transform: scale(1) translateY(0);
+            }
+
+            .quality-modal-header {
+                padding: 18px 24px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+                background: rgba(255, 255, 255, 0.02);
+            }
+
+            .quality-modal-title {
+                color: #f7d57f;
+                font-weight: 800;
+                font-size: 1.2rem;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .quality-modal-close {
+                background: rgba(255, 255, 255, 0.06);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                color: #a0aec0;
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 1.1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.25s ease;
+            }
+
+            .quality-modal-close:hover {
+                background: #e53e3e;
+                color: #ffffff;
+                border-color: #e53e3e;
+                transform: rotate(90deg);
+            }
+
+            .quality-modal-body {
+                padding: 22px 24px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                overflow-y: auto;
+                max-height: calc(92vh - 80px);
+            }
+
+            .modal-cert-img-box {
+                background: #ffffff;
+                padding: 12px;
+                border-radius: 12px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 20px;
+                box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.1), 0 8px 25px rgba(0, 0, 0, 0.5);
+                border: 1px solid rgba(212, 175, 55, 0.3);
+            }
+
+            .modal-cert-img-box img {
+                max-height: 52vh;
+                max-width: 100%;
+                object-fit: contain;
+                border-radius: 4px;
+            }
+
+            .quality-modal-footer {
+                display: flex;
+                gap: 12px;
+                justify-content: flex-end;
+                align-items: center;
+                width: 100%;
+                flex-wrap: wrap;
+                padding-top: 12px;
+                border-top: 1px solid rgba(212, 175, 55, 0.15);
+            }
+
+            .btn-modal-action {
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-weight: 700;
+                font-size: 0.9rem;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                transition: all 0.25s ease;
+                text-decoration: none;
+                border: none;
+                font-family: inherit;
+            }
+
+            .btn-modal-download {
+                background: linear-gradient(135deg, #f7dc8d 0%, #d4af37 50%, #b38722 100%);
+                color: #030d1a;
+                box-shadow: 0 4px 15px rgba(212, 163, 89, 0.35);
+            }
+
+            .btn-modal-download:hover {
+                background: linear-gradient(135deg, #fff0b8 0%, #e2bc48 50%, #c49629 100%);
+                color: #000000;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(212, 163, 89, 0.5);
+            }
+
+            .btn-modal-view {
+                background: rgba(212, 175, 55, 0.12);
+                color: #f7d57f;
+                border: 1px solid rgba(212, 175, 55, 0.4);
+            }
+
+            .btn-modal-view:hover {
+                background: rgba(212, 175, 55, 0.22);
+                color: #ffffff;
+                border-color: #f7d57f;
+                transform: translateY(-2px);
+            }
+
+            .btn-modal-close {
+                background: transparent;
+                color: #cbd5e1;
+                border: 1px solid rgba(203, 213, 225, 0.3);
+            }
+
+            .btn-modal-close:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: #ffffff;
+            }
+
+            /* Responsive Adjustments */
+            @@media (max-width: 768px) {
+                .about-quality-section {
+                    padding: 60px 0;
+                    min-height: auto;
+                }
+                .quality-frames-grid {
+                    grid-template-columns: 1fr;
+                    max-width: 320px;
+                    margin: 0 auto 20px auto;
+                }
+                .quality-captions-footer {
+                    flex-direction: column;
+                    gap: 10px;
+                    text-align: center;
+                }
+                .quality-modal-footer {
+                    flex-direction: column;
+                }
+                .btn-modal-action {
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
+    </style>
+
+    <!-- ============================================================
+     4. COMMITTED TO QUALITY SECTION
+     ============================================================ -->
+    <section class="about-quality-section" id="quality">
+        <div class="quality-container">
+            <div class="quality-content-box">
+
+                <!-- Headers -->
+                <div class="quality-main-title">
+                    <span>@(isRtl ? "التزامنا بالجودة" : "Committed to Quality")</span>
+                </div>
+
+                <div class="quality-subtitle">
+                    @(isRtl ? "تميز معتمد في الجودة والصحة والسلامة" : "Certified Excellence in Quality, Health & Safety")
+                </div>
+
+                <div class="quality-desc-text">
+                    @(isRtl
+                        ? "نلتزم بتطبيق أعلى معايير الجودة والسلامة والصحة المهنية في كافة مشروعاتنا وخدماتنا لضمان تقديم أفضل النتائج لشركائنا."
+                        : "We adhere to the highest standards in quality, health and safety across all operations and project executions.")
+                </div>
+
+                <!-- 2 Golden Picture Frames -->
+                <div class="quality-frames-grid">
+
+                    <!-- Frame 1: ISO 9001 -->
+                    <div class="gold-cert-frame" onclick="openCertModal('iso9001Modal')" role="button" tabindex="0" aria-label="ISO 9001 Certificate">
+                        <div class="gold-cert-inner">
+                            <div class="cert-emblem-badge">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" stroke="#f7d57f" stroke-width="1.8" fill="none" />
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="#f7d57f" stroke-width="1.5" fill="none" />
+                                    <line x1="2" y1="12" x2="22" y2="12" stroke="#f7d57f" stroke-width="1.5" />
+                                </svg>
+                                <span>ISO</span>
+                            </div>
+                            <div class="cert-number">9001</div>
+                            <div class="cert-label">@(isRtl ? "نظام إدارة الجودة" : "Quality Management System")</div>
+                            <button type="button" class="cert-card-cta-btn" onclick="event.stopPropagation(); openCertModal('iso9001Modal')">
+                                <i class="fa-solid fa-expand"></i>
+                                <span>@(isRtl ? "معاينة وتحميل الشهادة" : "View & Download")</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Frame 2: ISO 45001 -->
+                    <div class="gold-cert-frame" onclick="openCertModal('iso45001Modal')" role="button" tabindex="0" aria-label="ISO 45001 Certificate">
+                        <div class="gold-cert-inner">
+                            <div class="cert-emblem-badge">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" stroke="#f7d57f" stroke-width="1.8" fill="none" />
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="#f7d57f" stroke-width="1.5" fill="none" />
+                                    <line x1="2" y1="12" x2="22" y2="12" stroke="#f7d57f" stroke-width="1.5" />
+                                </svg>
+                                <span>ISO</span>
+                            </div>
+                            <div class="cert-number">45001</div>
+                            <div class="cert-label">@(isRtl ? "السلامة والصحة المهنية" : "Occupational Health & Safety")</div>
+                            <button type="button" class="cert-card-cta-btn" onclick="event.stopPropagation(); openCertModal('iso45001Modal')">
+                                <i class="fa-solid fa-expand"></i>
+                                <span>@(isRtl ? "معاينة وتحميل الشهادة" : "View & Download")</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Captions Text Under Frames -->
+                <div class="quality-captions-footer">
+                    <div class="cert-caption-item">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>@(isRtl ? "شهادة ISO 9001:2015 المعتمدة دولياً لإدارة الجودة" : "ISO 9001:2015 Internationally Certified Quality Management")</span>
+                    </div>
+                    <div class="cert-caption-item">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>@(isRtl ? "شهادة ISO 45001:2018 المعتمدة دولياً للسلامة والصحة" : "ISO 45001:2018 Internationally Certified Health & Safety")</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     MODAL 1: ISO 9001 CERTIFICATE PREVIEW
+     ============================================================ -->
+    <div class="quality-modal" id="iso9001Modal" onclick="closeCertModalOnOutside(event, 'iso9001Modal')" role="dialog" aria-modal="true" aria-labelledby="modal9001Title">
+        <div class="quality-modal-dialog">
+            <div class="quality-modal-header">
+                <div class="quality-modal-title" id="modal9001Title">
+                    <i class="fa-solid fa-award"></i>
+                    <span>@(isRtl ? "شهادة ISO 9001:2015 - نظام إدارة الجودة" : "ISO 9001:2015 - Quality Management System")</span>
+                </div>
+                <button type="button" class="quality-modal-close" onclick="closeCertModal('iso9001Modal')" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="quality-modal-body">
+                <div class="modal-cert-img-box">
+                    <img src="/assets/custom/about_2026/9001.jpg" alt="ISO 9001 Certificate" loading="lazy" />
+                </div>
+                <div class="quality-modal-footer">
+                    <button type="button" class="btn-modal-action btn-modal-download" onclick="downloadCertificateFile('/assets/custom/about_2026/9001.jpg', 'EMDAD_ISO_9001_Certificate.jpg')">
+                        <i class="fa-solid fa-download"></i>
+                        <span>@(isRtl ? "تحميل الشهادة مباشرة" : "Download Certificate")</span>
+                    </button>
+                    <a href="/assets/custom/about_2026/9001.jpg" target="_blank" rel="noopener noreferrer" class="btn-modal-action btn-modal-view">
+                        <i class="fa-solid fa-up-right-from-square"></i>
+                        <span>@(isRtl ? "عرض بالحجم الكامل" : "View Fullscreen")</span>
+                    </a>
+                    <button type="button" class="btn-modal-action btn-modal-close" onclick="closeCertModal('iso9001Modal')">
+                        @(isRtl ? "إغلاق" : "Close")
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+     MODAL 2: ISO 45001 CERTIFICATE PREVIEW
+     ============================================================ -->
+    <div class="quality-modal" id="iso45001Modal" onclick="closeCertModalOnOutside(event, 'iso45001Modal')" role="dialog" aria-modal="true" aria-labelledby="modal45001Title">
+        <div class="quality-modal-dialog">
+            <div class="quality-modal-header">
+                <div class="quality-modal-title" id="modal45001Title">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>@(isRtl ? "شهادة ISO 45001:2018 - نظام السلامة والصحة المهنية" : "ISO 45001:2018 - Health & Safety System")</span>
+                </div>
+                <button type="button" class="quality-modal-close" onclick="closeCertModal('iso45001Modal')" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="quality-modal-body">
+                <div class="modal-cert-img-box">
+                    <img src="/assets/custom/about_2026/45001.jpg" alt="ISO 45001 Certificate" loading="lazy" />
+                </div>
+                <div class="quality-modal-footer">
+                    <button type="button" class="btn-modal-action btn-modal-download" onclick="downloadCertificateFile('/assets/custom/about_2026/45001.jpg', 'EMDAD_ISO_45001_Certificate.jpg')">
+                        <i class="fa-solid fa-download"></i>
+                        <span>@(isRtl ? "تحميل الشهادة مباشرة" : "Download Certificate")</span>
+                    </button>
+                    <a href="/assets/custom/about_2026/45001.jpg" target="_blank" rel="noopener noreferrer" class="btn-modal-action btn-modal-view">
+                        <i class="fa-solid fa-up-right-from-square"></i>
+                        <span>@(isRtl ? "عرض بالحجم الكامل" : "View Fullscreen")</span>
+                    </a>
+                    <button type="button" class="btn-modal-action btn-modal-close" onclick="closeCertModal('iso45001Modal')">
+                        @(isRtl ? "إغلاق" : "Close")
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+<script>
+    // Certificate Modal Functions
+    function openCertModal(modalId) {
+        var modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeCertModal(modalId) {
+        var modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    function closeCertModalOnOutside(e, modalId) {
+        if (e.target && e.target.classList.contains('quality-modal')) {
+            closeCertModal(modalId);
+        }
+    }
+
+    // Direct, reliable file download helper
+    function downloadCertificateFile(url, filename) {
+        fetch(url)
+            .then(function (response) {
+                if (!response.ok) throw new Error('Download failed');
+                return response.blob();
+            })
+            .then(function (blob) {
+                var link = document.createElement('a');
+                var blobUrl = window.URL.createObjectURL(blob);
+                link.href = blobUrl;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                setTimeout(function () {
+                    window.URL.revokeObjectURL(blobUrl);
+                    document.body.removeChild(link);
+                }, 200);
+            })
+            .catch(function () {
+                var a = document.createElement('a');
+                a.href = url;
+                a.setAttribute('download', filename);
+                a.target = '_blank';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(function () {
+                    document.body.removeChild(a);
+                }, 200);
+            });
+    }
+
+    // Global ESC key and keyboard support
+    document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.quality-modal.active').forEach(function (m) {
+                    m.classList.remove('active');
+                });
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Add Enter key accessibility for frames
+        document.querySelectorAll('.gold-cert-frame').forEach(function (frame) {
+            frame.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    frame.click();
+                }
+            });
+        });
+    });
+</script>
+}

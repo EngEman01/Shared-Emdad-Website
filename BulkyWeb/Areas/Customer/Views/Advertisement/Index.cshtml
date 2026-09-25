@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Advertisement>
+
+<div style="min-height:100vh ; width:100svw; overflow-x:hidden; background: linear-gradient(rgb(2, 45, 82,0.5), #fff),url(/assets/custom/IMAGE/ألصحراء.jpg); background-size:cover; background-attachment: fixed;" class="bg-products">
+    <div class="container">
+        <div class="row mt-4 mt-lg-5">
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var advertisement in Model)
+                {
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <a asp-area="customer" asp-controller="Advertisement" asp-action="Show" asp-route-id="@advertisement.Id" style="text-decoration:none;">
+                            <div class="card shadow-sm border-0">
+                                <div class="image-container">
+                                    <img src="@(Url.Content($"~/{advertisement?.Images?.FirstOrDefault()?.ImageURL ?? "images/default_Advertisement.png"}"))" alt="Advertisement" class="card-img-top w-100">
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">
+                                        <span class="emdad-main-text-color emdad-second-hover-color font-22 font-weight-bold" style="cursor:pointer;">
+                                            @(advertisement?.Translations?.FirstOrDefault()?.Name ?? "No Advertisement Translated Name")
+                                        </span>
+
+                                    </h5>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="emdad-icondata emdad-second-text-color"></span>
+                                        <span class="emdad-iconcomment emdad-second-text-color"></span>
+                                    </div>
+
+                                    <!-- Start Date and End Date Display -->
+            @*                         <div class="advertisement-dates mt-3">
+                                        <p class="text-muted">
+                                            <strong>@localizer["StartDate"]:</strong> @advertisement.StartDateTime.ToString("MMMM dd, yyyy h:mm tt")
+                                        </p>
+
+                                        @if (advertisement.EndDateTime.HasValue)
+                                        {
+                                            <p class="text-muted">
+                                                <strong>@localizer["EndDate"]:</strong> @advertisement.EndDateTime.Value.ToString("MMMM dd, yyyy h:mm tt")
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p class="text-muted">End Date: Ongoing</p>
+                                        }
+                                    </div> *@
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h2 class="text-center text-white">@localizer["NoAdvertisements"]</h2>
+            }
+        </div>
+    </div>
+</div>

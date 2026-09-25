@@ -1,0 +1,6 @@
+﻿@media (max-width: 576px) {
+    .emdad-team-block {
+        max-width: 90%; /* أو 95% */
+        margin: auto;
+    }
+}

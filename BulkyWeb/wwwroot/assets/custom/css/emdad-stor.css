@@ -1,0 +1,354 @@
+/*.emdad-view-btn {
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 19px;
+    display: inline-table;
+    margin: 0 3px;
+    float: right;
+    width: 38px;
+    height: 38px;
+    line-height: 25px;
+}
+.store-single-slider #sync2 .owl-item img{
+        border: 2px solid transparent;
+}
+.store-single-slider #sync2 .owl-item.current img{
+    border: 2px solid #D2B387;
+    -webkit-transition: all ease-in-out.3s;
+       -moz-transition: all ease-in-out.3s;
+         -o-transition: all ease-in-out.3s;
+            transition: all ease-in-out.3s;
+}
+.emdad-view-btn.active{
+    color: #D2B387;
+    border-color: #D2B387;
+    transition: all ease-in-out .3s;
+    -webkit-transition: all ease-in-out .3s;
+    -o-transition: all ease-in-out .3s;
+    -moz-transition: all ease-in-out .3s;
+}
+.emdad-product-info {
+    text-align: center;
+}
+.list .emdad-product-info{
+    text-align: right;
+}
+.emdad-btn-rouned{
+    border-radius: 22px;
+}
+.emdad-hover-btn-color {
+    position: relative;
+}
+.emdad-hover-btn-color:hover:after{
+    right: 0;
+    opacity: 1;
+    transition: all ease-in-out .3s;
+    -webkit-transition: all ease-in-out .3s;
+    -o-transition: all ease-in-out .3s;
+    -moz-transition: all ease-in-out .3s;
+}
+.emdad-hover-btn-color:hover ,.emdad-hover-btn-color:hover span{
+    color: #fff !important;
+}
+.emdad-hover-btn-color::after {
+    content: "";
+    border-radius: 22px;
+    position: absolute;
+    left: 0; 
+    background-color: #D2B387;
+    height: 100%;
+    right: 77%;
+    top: 0;
+    z-index: 1;
+    opacity: 0;
+    transition: all ease-in-out .3s;
+    -webkit-transition: all ease-in-out .3s;
+    -o-transition: all ease-in-out .3s;
+    -moz-transition: all ease-in-out .3s;
+}
+.emdad-hover-btn-color span{
+    z-index: 2;
+    position: relative;
+}
+.emdad-img-overlay {
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    transition: all ease-in-out .3s;
+    -webkit-transition: all ease-in-out .3s;
+    -o-transition: all ease-in-out .3s;
+    -moz-transition: all ease-in-out .3s;
+    overflow: hidden;
+}
+.emdad-img-overlay:hover {
+    background-color: rgba(92,106,119,.6);    
+}
+.emdad-product-btns {
+    justify-content: center;
+    margin-top: 0;
+    opacity: 0;
+    transition: all ease-in-out .3s;
+    -webkit-transition: all ease-in-out .3s;
+    -o-transition: all ease-in-out .3s;
+    -moz-transition: all ease-in-out .3s;
+}
+.emdad-img-overlay:hover .emdad-product-btns{
+    opacity: 1;
+    margin-top: 29%;
+}
+.emdad-product-btn {
+    border: 0;
+    background-color: rgba(255,255,255,.6);
+    color: #fff;
+    border-radius: 50%;
+    margin: 0 3px;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    line-height: 43px;
+    margin: 0 7px;
+    cursor: pointer;
+    transition: all ease-in-out .3s;
+    -webkit-transition: all ease-in-out .3s;
+    -o-transition: all ease-in-out .3s;
+    -moz-transition: all ease-in-out .3s;
+}
+.emdad-product-btn:hover {
+    color: #D2B387;
+}
+.emdad-store-left-head {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px;
+}
+.emdad-store-left-list li {
+    display: block;
+    width: 100%;
+}
+.emdad-store-left-list a {
+    position: relative;
+    color: inherit; 
+    font-size: 14px;
+    background-color: inherit;
+    padding: 7px 0 0 15px;
+    display: block;
+}
+.emdad-store-left-list a::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 15px;
+    width:6px ;
+    height: 6px;
+    border-radius: 50%;
+    background-color: inherit;
+}
+.input-icon {
+    position: relative;
+}
+.emdad-input-icon {
+    position: absolute;
+    left: 15px;
+    color: #CDCDCD;
+    top: 14px; 
+}
+.emdad-store-input{
+    font-size: 14px;
+    height: 39px;
+    padding-left: 35px;
+}
+.emdad-store-sigle-head{
+    font-size: 20px;
+    font-weight: 600; 
+}
+.emdad-single-info{
+    font-size: 15px;
+    line-height: 25px;
+    color: #989898;
+}
+.emdad-single-nav { 
+    width: 100%;
+}
+.emdad-single-item.active{
+    color: #fff !important;
+}
+.emdad-single-item {
+    border-radius: 0 !important;
+    border: 0 !important;
+    padding: 10px 35px;
+    font-size: 15px;
+    font-weight: 600;
+    position: relative;
+}
+.emdad-single-item:last-child:after{
+    display: none;
+}
+.emdad-single-item::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 17px;
+    background-color: inherit;
+    top: 13px;
+    right: 12px;
+}
+.emdad-single-item.active:after {
+    display: none;
+}
+.emdad-single-slider #sync1 {
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.emdad-single-slider #sync2 .item{
+    margin: 0 2px;
+    cursor: pointer;
+}
+.emdad-single-slider #sync1 .owl-dots{
+    display: none
+}
+.emdad-single-slider #sync1 .owl-nav {
+    margin-top: 0;
+    position: absolute;
+    top: 44%;
+    width: 100%;
+}
+.emdad-single-slider #sync1 .owl-prev {
+    position: absolute;
+    left: -18px;
+    margin: 0 !important; 
+    text-align: right;
+    padding-right: 10px !important;
+}
+.emdad-single-slider #sync1 .owl-next{
+    position: absolute;
+    right: -18px;
+    text-align: left;
+    padding-left: 10px !important;
+}
+.emdad-single-slider #sync1 .owl-nav [class*=owl-] {
+    font-size: 13px;
+    margin: 0;
+    background-color: rgba(229,77,66,.6);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 34px;
+}
+.emdad-single-product-btn{
+    text-align: left;
+}
+.emdad-calc{
+    padding: 4px 9px;
+}
+
+.emdad-calc span { 
+    display: inline-block;
+    text-align: center;
+    font-size: 22px;
+    cursor: pointer;
+}
+ 
+.emdad-single-link {
+    font-size: 21px;
+    margin-top: 4px;
+    display: inline-block;
+    margin: 0 4px;
+    transition: all ease-in-out .3s;
+    -o-transition: all ease-in-out .3s;
+    -webkit-transition: all ease-in-out .3s;
+    -moz-transition: all ease-in-out .3s;
+}
+.emdad-single-link:hover {
+    transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+}
+.single-product-btns{
+    justify-content: flex-end;
+}
+.emdad-single-product-data{
+    margin-bottom: 25px;
+}
+ 
+.emdad-single-tags a {
+    color: inherit;
+    margin: 4px 3px 0; 
+    font-size: 14px;
+    text-decoration: underline;
+}
+.emdad-contact-hover-input { 
+    border-radius: 0;
+    background-color: transparent;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-width: 1px;
+    font-size: 16px;
+    font-weight: 400;
+    padding-left: 0;
+    transition: all ease-in-out .3s;
+    -o-transition: all ease-in-out .3s;
+    -webkit-transition: all ease-in-out .3s;
+    -moz-transition: all ease-in-out .3s;
+}
+.emdad-light-footer-links {
+    margin-top: 0 !important;
+    margin-bottom: 6px;
+}
+ 
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+.focus-input input:focus , .focus-input textarea{
+   box-shadow: none !important;    
+}
+
+ .focus-input-white input:focus , .focus-input-white textarea:focus
+,.focus-input-white input       , .focus-input-white textarea{
+    color: #fff;
+}
+.focus-input input:focus ~ label , .focus-input textarea:focus ~ label,
+.focus-input input:valid ~ label , .focus-input textarea:valid ~ label{
+   top: -18px;
+}
+.focus-input label {
+    position: absolute;
+    top:10px;
+    transition: all ease-in-out .3s;
+    -o-transition: all ease-in-out .3s;
+    -webkit-transition: all ease-in-out .3s;
+    -moz-transition: all ease-in-out .3s;
+    margin: 0;
+    font-size: 16px;
+    pointer-events: none;
+}
+.emdad-contact-hover-input:focus{
+    background-color: transparent;
+    border-color: inherit;
+    outline: 0;
+    box-shadow: none;
+} 
+.emdad-contact-hover-input:focus ~ label{
+    bottom: 25px;  
+    color: #D2B387; 
+}
+ 
+.blog-single-slider .owl-dots{
+    margin-top: 25px;
+}
+.form-circle-input {
+    width: 47px;
+    height: 47px;
+}
+.calc-width{
+    width: 33.3%;
+}*/

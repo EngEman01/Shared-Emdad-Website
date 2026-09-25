@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Ahmed M. Eid" xml:space="preserve">
+    <value>السيد المهندس / أحمد محمد عيد</value>
+  </data>
+  <data name="AmrEl-Mahdy" xml:space="preserve">
+    <value>السيد / عمرو رياض محمد المهدي</value>
+  </data>
+  <data name="Board Member &amp; CEO" xml:space="preserve">
+    <value>عضو مجلس الإدارة و الرئيس التنفيذي</value>
+  </data>
+  <data name="BoardOfDirectors" xml:space="preserve">
+    <value>مجلس الادارة</value>
+  </data>
+  <data name="BoardOfDirectorsContent" xml:space="preserve">
+    <value>في شركة إمداد، نحن نؤمن أن القيادة الحكيمة والتوجيه الاستراتيجي هما الأساس لنجاح الشركة
+                    واستدامتها. لذلك، يضم مجلس الإدارة مجموعة من القيادات ذات الخبرات الواسعة والمتنوعة في مجالات
+                    الدفاع، والصناعة المدنية. يضطلع المجلس بمسؤولية اتخاذ القرارات الاستراتيجية
+                    الهامة التي تضمن استمرارية النمو وتوسيع نطاق أعمالنا في الأسواق المحلية والدولية.
+</value>
+  </data>
+  <data name="BoardOfDirectorsDescription1" xml:space="preserve">
+    <value>
+        تتسم قيادة مجلس إدارة إمداد بالمسؤولية الاجتماعية، حيث يضع المجلس في اعتباره تأثير
+        الشركة على المجتمع والبيئة. يتبنى المجلس استراتيجيات تهدف إلى الحد من الأثر البيئي
+        وتعزيز الاستدامة في جميع العمليات التجارية.
+
+        من خلال التوجيه الحكيم لمجلس الإدارة، تواصل شركة إمداد النجاح والتطور في تقديم الحلول
+        المتقدمة في مختلف المجالات، مع التزامها بالشفافية، الابتكار، والجودة.
+
+        هذا القسم يوضح هيكل مجلس الإدارة الذين يسعون لتحقيق أهداف الشركة.
+        كما أنهم يعكسون مهنية الشركة ويحرصون على اتخاذ قرارات استراتيجية مدروسة تساهم في نموها
+        ونجاحها على المدى الطويل.
+</value>
+  </data>
+  <data name="BoardOfDirectorsDescription2" xml:space="preserve">
+    <value>
+                        يعمل لي تجارة و توريد و احتياجات الجهات الحكوميه و القطاع الخاص - وقطاع الاعمال برئاسة التشكيل 
+                        </value>
+  </data>
+  <data name="BuildingStrongReputation" xml:space="preserve">
+    <value>بناء سمعة قوية</value>
+  </data>
+  <data name="BuildingStrongReputationContent" xml:space="preserve">
+    <value>للعلامة التجارية وتعزيز وعي العملاء بها. واستخدام قنوات تسويق مختلفة مثل التسويق الرقمي، الإعلانات التقليدية، والشراكات الاستراتيجية.</value>
+  </data>
+  <data name="CEOCompany" xml:space="preserve">
+    <value>الرئيس التنفيذي للشركة</value>
+  </data>
+  <data name="Chairman" xml:space="preserve">
+    <value>رئيس مجلس الادارة</value>
+  </data>
+  <data name="CompanyPolicy" xml:space="preserve">
+    <value>سياسة الشركة</value>
+  </data>
+  <data name="CompanyPolicyContent" xml:space="preserve">
+    <value>تتطلع شركة إمداد أن تصبح مركزا للإمداد المحلي / الدولي / الإقليمي وفقاً لمعايير و مواصفات الجودة القومية / العالمية / التي تؤدي إلي التميز في ألأداء اللوجستي من خلال فريق عمل ذو مهارات عالية مؤهل للمنافسة في سوق المال و الاعمال العالمية و تحقيق أحتياجتهم و المحافظة علي القيم الأخلاقية .         </value>
+  </data>
+  <data name="CompanyPosts" xml:space="preserve">
+    <value> منشورات الشركة</value>
+  </data>
+  <data name="CompanyPostsContent" xml:space="preserve">
+    <value>
+تم بحمد الله وتوفقه افتتاح الشركة يوم
+الاعلان عن سياسة شركة امداد للتجارة والتوريدات للعملاء المحلية والاقلمية والدولية لتحقيق أعلي مستوي من الرضا و الثقة في خدماتنا المقدمة لهم </value>
+  </data>
+  <data name="CompanyVision" xml:space="preserve">
+    <value>رؤية الشركة</value>
+  </data>
+  <data name="CompanyVisionContent" xml:space="preserve">
+    <value>تسعي شركة إمداد للريادة و التميز في مجالات التوريدات العمومية لتصبح الشركة حرصاً في الإمداد اللوجستي المحلي / الأقليمي / الدولي</value>
+  </data>
+  <data name="Adel Abdel-Gawad" xml:space="preserve">
+    <value>السيد المستشار / عادل عبد الجواد محمد</value>
+  </data>
+  <data name="CustomerSatisfaction" xml:space="preserve">
+    <value>رضا العملاء</value>
+  </data>
+  <data name="CustomerSatisfactionContent" xml:space="preserve">
+    <value>التقرير الجربة العملاء وزيادة ولائهم وضم شركان جدد داخل و خارج ج.م.ع</value>
+  </data>
+  <data name="Development" xml:space="preserve">
+    <value>تطوير</value>
+  </data>
+  <data name="DevelopmentContent" xml:space="preserve">
+    <value>منتجات مبتكرة تلبي احتياجات السوق وتحسين جودة وكفاءة المنتجات القائمة.</value>
+  </data>
+  <data name="Expansion" xml:space="preserve">
+    <value>التوسع</value>
+  </data>
+  <data name="ExpansionContent1" xml:space="preserve">
+    <value>في مجالات الخدمات البترولية</value>
+  </data>
+  <data name="ExpansionContent2" xml:space="preserve">
+    <value> في مجال تسويق المنتجات العسكرية للهية العربية للتصنيع والشركات التابعة لها
+                        في مجال تسويق المنتجات العسكرية للشركة العربية العالمية للبصريات والشركات التابعة لها
+</value>
+  </data>
+  <data name="Growth" xml:space="preserve">
+    <value>النمو</value>
+  </data>
+  <data name="GrowthContent" xml:space="preserve">
+    <value>التوسع في الأسواق الجديدة، زيادة حصة السوق، توسيع نطاق المنتجات والخدمات.التوسع في الأسواق المستهدفة وزيادة عدد العملاء</value>
+  </data>
+  <data name="Hossam Ali" xml:space="preserve">
+    <value>السيد اللواء الدكتور المهندس / حسام علي أبو العلا</value>
+  </data>
+  <data name="Improvement" xml:space="preserve">
+    <value>تحسين</value>
+  </data>
+  <data name="ImprovementContent" xml:space="preserve">
+    <value>العمليات الداخلية لزيادة الإنتاجية وتقليل التكاليف.</value>
+  </data>
+  <data name="Innovation" xml:space="preserve">
+    <value>الابتكار</value>
+  </data>
+  <data name="InnovationContent" xml:space="preserve">
+    <value>تطوير منتجات أو خدمات جديدة ومبتكرة.</value>
+  </data>
+  <data name="KeyTasks" xml:space="preserve">
+    <value>أهم المهام التي يتطلع إليها مجلس الإدارة </value>
+  </data>
+  <data name="Managing Director" xml:space="preserve">
+    <value>العضو المنتدب و الرئيس التنفيذي</value>
+  </data>
+  <data name="Managing Director1" xml:space="preserve">
+    <value>لقطاع المنتجات البترولية والمدنية</value>
+  </data>
+  <data name="Member" xml:space="preserve">
+    <value>عضو مجلس الادارة</value>
+  </data>
+  <data name="MohamedAl-Dramelly" xml:space="preserve">
+    <value> السيد المستشار / أحمد الدرمللي الطماوي</value>
+  </data>
+  <data name="MohsenHassan" xml:space="preserve">
+    <value>محسن حسن مرسي مصطفي</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>الجودة</value>
+  </data>
+  <data name="QualityContent" xml:space="preserve">
+    <value>تحسين جودة المنتجات أو الخدمات المقدمة.</value>
+  </data>
+  <data name="Sustainability" xml:space="preserve">
+    <value>الاستدامة</value>
+  </data>
+  <data name="SustainabilityContent" xml:space="preserve">
+    <value>تحقيق ممارسات صديقة للبيئة واستدامة الأعمال.</value>
+  </data>
+  <data name="Training&amp;Development" xml:space="preserve">
+    <value>تدريب وتطوير</value>
+  </data>
+  <data name="Training&amp;DevelopmentContent" xml:space="preserve">
+    <value>فرق العمل لتعزيز مهاراتهم في التسويق والبحوث والتطوير.</value>
+  </data>
+  <data name="Financial" xml:space="preserve">
+    <value>رئيس الإدارة المالية المركزية بالشركة</value>
+  </data>
+  <data name="Ahmed Othman" xml:space="preserve">
+    <value>السيد اللواء / أحمد عثمان</value>
+  </data>
+  <data name="Contracting" xml:space="preserve">
+    <value>عضو مجلس الإدارة ورئيس إدارة التعاقدات</value>
+  </data>
+  <data name="Tarek Abdel-Meguid" xml:space="preserve">
+    <value>السيد اللواء / طارق عبد المجيد</value>
+  </data>
+  <data name="Public Relations" xml:space="preserve">
+    <value>نائب رئيس الإدارة المركزية للعلاقات العامة </value>
+  </data>
+  <data name="Appointment" xml:space="preserve">
+    <value>السيد اللواء المهندس / احمد رشاد نائب الرئيس التنفيذي للقطاع العسكري</value>
+  </data>
+  <data name="Resolutions" xml:space="preserve">
+    <value>قرارات مجلس الإدارة</value>
+  </data>
+  <data name="Military" xml:space="preserve">
+    <value>لقطاع المنتجات العسكرية</value>
+  </data>
+  <data name="Abu El-Naga" xml:space="preserve">
+    <value>السيد المستشار / ابو النجا محمود عثمان المحرزي</value>
+  </data>
+  <data name="Legal " xml:space="preserve">
+    <value>مستشار قانوني للشركة</value>
+  </data>
+  <data name="Appointment2" xml:space="preserve">
+    <value>السيد عبد الحليم محمد مستشارًا اقتصاديًا للتسويق  </value>
+  </data>
+  <data name="Appointment3" xml:space="preserve">
+    <value>السيد اللواء / نادر محمد ابو العينين مدير عام الشركة</value>
+  </data>
+  <data name="Chief Executive Officer" xml:space="preserve">
+    <value>العضو المنتدب و الرئيس التنفيذي للقطاع العسكري و التدبير</value>
+  </data>
+  <data name="Deputy Financial" xml:space="preserve">
+    <value>نائب رئيس الإدارة المالية بالشركة </value>
+  </data>
+  <data name="Ahmed El-Boulaky" xml:space="preserve">
+    <value>السيد / أحمد البولاقي</value>
+  </data>
+  <data name="Amr Hossam." xml:space="preserve">
+    <value>السيد العقيد / عمرو حسام بهجت</value>
+  </data>
+  <data name="Military Sector" xml:space="preserve">
+    <value>مدير العلاقات الخارجية للقطاع العسكري و التدبير</value>
+  </data>
+  <data name="Eman Mohamed Ragab" xml:space="preserve">
+    <value>المهندسة / إيمان محمد رجب</value>
+  </data>
+  <data name="Technical and IT" xml:space="preserve">
+    <value>نائب رئيس قسم الدعم الفني و التكنولوجي</value>
+  </data>
+  <data name="Osama Shehata" xml:space="preserve">
+    <value>السيد / أسامة شحاتة</value>
+  </data>
+  <data name="Advisor" xml:space="preserve">
+    <value>المستشار الإعلامي بالشركة</value>
+  </data>
+  <data name="Asmaa Rizk Khafaga" xml:space="preserve">
+    <value>الاستاذة / أسماء رزق خفاجة</value>
+  </data>
+  <data name="Office Manager" xml:space="preserve">
+    <value>مديرة مكتب رئيس مجلس الادارة</value>
+  </data>
+  <data name="Ashraf Nabil" xml:space="preserve">
+    <value>السيد / اشرف نبيل العجايبي</value>
+  </data>
+  <data name="AbdelNasser" xml:space="preserve">
+    <value>السيد \ عبد الناصر والي</value>
+  </data>
+  <data name="DirectorGeneral" xml:space="preserve">
+    <value>مدير عام الشئون القانونية بالشركة</value>
+  </data>
+  <data name="KarimAdel" xml:space="preserve">
+    <value>السيد \ كريم عادل </value>
+  </data>
+  <data name="FinancialAdvisor" xml:space="preserve">
+    <value>المستشار المالي للشركة</value>
+  </data>
+  <data name="MohamedAl-Dramelly2" xml:space="preserve">
+    <value> السيد \ محمد الدرمللي عبد الرزاق
+</value>
+  </data>
+  <data name="Chairman2" xml:space="preserve">
+    <value> نائب رئيس مجلس الإدارة</value>
+  </data>
+  <data name="AbdullahAl-Alabi" xml:space="preserve">
+    <value>السيد / عبدالله العلبي</value>
+  </data>
+  <data name="ChiefExecutiveOfficer" xml:space="preserve">
+    <value>الرئيس التنفيذي والعضو المنتدب لقطاع 
+العلاقات الخارجية والدوليه</value>
+  </data>
+  <data name="AhmedMostafaEl-Adly" xml:space="preserve">
+    <value>السيد المستشار النائب احمد مصطفي العدلي</value>
+  </data>
+  <data name="LegalAffairsSector" xml:space="preserve">
+    <value>رئيس قطاع الشؤون القانونية</value>
+  </data>
+  <data name="BoardOfDirectorsContentNew" xml:space="preserve">
+    <value>يضم مجلس إدارة إمداد نخبة من القيادات ذات الخبرات المتنوعة في مجالات الدفاع والبترول والصناعة، حيث يتولى توجيه الاستراتيجية العامة للشركة لضمان النمو المستدام وتعزيز الكفاءة التشغيلية وتوسيع نطاق الأعمال محليًا ودوليًا.</value>
+  </data>
+  <data name="EmadEl-Din" xml:space="preserve">
+    <value>المستشار / عماد الدين احمد إمام</value>
+  </data>
+  <data name="MajorGeneralMohamedIsmail" xml:space="preserve">
+    <value>السيد اللواء / محمد اسماعيل</value>
+  </data>
+  <data name="DirectoroftheCentral" xml:space="preserve">
+    <value>مدير ادارة العلاقات العامة المركزية للشركة داخل جمهورية مصر العربية</value>
+  </data>
+  <data name="Ms.Sama" xml:space="preserve">
+    <value>  الاستاذة / سما محمد</value>
+  </data>
+  <data name="MemberoftheCentral" xml:space="preserve">
+    <value>عضو بالادارة المركزية للعلاقات العامة بالشركة داخل جمهورية مصر العربية</value>
+  </data>
+  <data name="TechnicalOffice" xml:space="preserve">
+    <value>رئيس المكتب الفني</value>
+  </data>
+  <data name="MohamedSaad" xml:space="preserve">
+    <value>د مهندس محمد سعد السيد ايو عبده</value>
+  </data>
+  <data name="ZiadAhmed" xml:space="preserve">
+    <value>السيد / زياد احمد رشيد</value>
+  </data>
+  <data name="LegalSector" xml:space="preserve">
+    <value>نائب رئيس القطاع القانوني بالشركة</value>
+  </data>
+  <data name="EyadHussein" xml:space="preserve">
+    <value>السيد / إياد حسين حسني</value>
+  </data>
+  <data name="GamalMohamed" xml:space="preserve">
+    <value>جمال محمد محمد محمود</value>
+  </data>
+  <data name="LegalAffairs" xml:space="preserve">
+    <value>القطاع القانوني بالشركة</value>
+  </data>
+  <data name="SecretaryTechnicalOffice" xml:space="preserve">
+    <value>سكرتير رئيس المكتب الفني</value>
+  </data>
+  <data name="Ms.Nouran" xml:space="preserve">
+    <value>الأستاذة / نوران أشرف سعد</value>
+  </data>
+</root>

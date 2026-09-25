@@ -1,0 +1,42 @@
+@model Advertisement
+
+<div class="container">
+    <div class="row mt-4 mt-lg-5">
+        <div style="display:flex; justify-content:center;">
+            <div class="col-12 col-sm-6 col-md-8 mb-4 mb-lg-5">
+                <a asp-area="customer" asp-controller="Advertisement" asp-action="Show" asp-route-id="@Model.Id" style="text-decoration:none;">
+                    <div class="image-container">
+                        <img src="@(Url.Content($"~/{Model?.Images?.FirstOrDefault()?.ImageURL ?? "images/default_Advertisement.png"}"))" alt="" class="w-100">
+                    </div>
+
+                    <h2 class="font-18 semi-font mt-3 mb-2 text-center">
+                        <span class="emdad-main-text-color emdad-second-hover-color font-22 font-weight-bold" style="cursor:pointer;">@(Model?.Translations?.FirstOrDefault()?.Name ?? "No Advertisement Translated Name")</span>
+                    </h2>
+                    <div class="emdad-forth-text-color font-18 mb-2">
+                        <span class="emdad-icondata emdad-second-text-color mr-1"></span>
+                        <span class="emdad-iconcomment emdad-second-text-color mr-1"></span>
+                    </div>
+                </a>
+                <p class="emdad-forth-text-color font-20 mb-3">
+                    @Html.Raw((Model?.Translations?.FirstOrDefault()?.Description ?? "No Advertisement Translated Description"))
+                </p>
+                <div class="advertisement-dates mt-3">
+                    <p class="text-muted">
+                        <strong>@localizer["StartDate"]:</strong> @Model.StartDateTime.ToString("MMMM dd, yyyy h:mm tt")
+                    </p>
+
+                    @if (Model.EndDateTime.HasValue)
+                    {
+                        <p class="text-muted">
+                            <strong>@localizer["EndDate"]:</strong> @Model.EndDateTime.Value.ToString("MMMM dd, yyyy h:mm tt")
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="text-muted">End Date: Ongoing</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

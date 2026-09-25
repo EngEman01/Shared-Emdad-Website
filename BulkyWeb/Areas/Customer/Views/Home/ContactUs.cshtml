@@ -1,0 +1,93 @@
+﻿ @model Contact
+
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    ViewData["Title"] = "ContactUs Page";
+}
+
+<div class="container">
+	<div class="row overflow-hidden">
+        <div class="col-12 col-md-10 offset-md-1 mt-5">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-6 col-md-3 text-center mb-5 mb-md-0 wow fadeInDown" data-wow-delay=".5s" style="cursor:pointer;">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h2 class="font-16 semi-font emdad-main-text-color my-3">@localizer["Address"]</h2>
+                    <p class="font-14 emdad-forth-text-color">
+                        @localizer["SpecificAddressContact"]
+                    </p>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 text-center mb-5 mb-md-0 wow fadeInDown" data-wow-delay=".8s" style="cursor:pointer;">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h2 class="font-16 semi-font emdad-main-text-color my-3">@localizer["Email"] </h2>
+                    <p class="font-14 emdad-forth-text-color">
+                        info@eltamawiya-emdad.com
+                    </p>
+                    <p class="font-14 emdad-forth-text-color">
+                        petroleum.supply@eltamawiya-emdad.com
+                    </p>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 text-center mb-5 mb-md-0 wow fadeInDown" data-wow-delay="1.1s" style="cursor:pointer;">
+                    <i class="fa-solid fa-phone"></i>
+                    <h2 class="font-16 semi-font emdad-main-text-color my-3">  @localizer["CallUsContact"] </h2>
+                    <p class="font-14 emdad-forth-text-color">0237611422</p>
+                    <p class="font-14 emdad-forth-text-color">0237611466</p>
+                    <p class="font-14 emdad-forth-text-color">01012717715</p>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 text-center mb-5 mb-md-0 wow fadeInDown" data-wow-delay="1.1s" style="cursor:pointer;">
+                    <i class="fa-solid fa-fax"></i>
+                    <h2 class="font-16 semi-font emdad-main-text-color my-3"> @localizer["Fax"]</h2>
+                    <p class="font-14 emdad-forth-text-color">0233351070</p>
+                </div>
+            </div>
+            <div class="mt-0 mb-5 my-md-5">
+                <h3 class="font-35 font-weight-bold emdad-main-text-color text-center">@localizer["ContactUs"]</h3>
+                <p class="mt-3 emdad-forth-text-color text-center font-18">
+                    @localizer["ContactUsText"]
+                </p>
+            </div>
+        </div>
+
+	</div>
+
+    <div class="row mb-4 mb-md-5 overflow-hidden">
+        <div class="col-12 col-sm-6 wow fadeInRight d-flex align-items-stretch">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3076.040516120584!2d31.19901657555373!3d30.04259867492452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzDCsDAyJzMzLjQiTiAzMcKwMTInMDUuNyJF!5e1!3m2!1sen!2seg!4v1734253260252!5m2!1sen!2seg" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+        <div class="col-12 col-sm-6 wow fadeInLeft rtlSection d-flex align-items-stretch">
+            <form asp-area="Customer" asp-controller="Home" asp-action="ContactUs" method="post" class="emdad-contact-form w-100 d-flex flex-column">
+                <div class="form-group">
+                    <input asp-for="FirstName" type="text" class="form-control rounded-0 p-3" placeholder="@localizer["FirstName"]">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="LastName" type="text" class="form-control rounded-0 p-3" placeholder="@localizer["LastName"]">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Entity" type="text" class="form-control rounded-0 p-3" placeholder="@localizer["Entity"]">
+                    <span asp-validation-for="Entity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Email" type="email" class="form-control rounded-0 p-3" placeholder="@localizer["Email"]">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Phone" type="text" class="form-control rounded-0 p-3" placeholder="@localizer["Phone"]">
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Country" type="text" class="form-control rounded-0 p-3" placeholder="@localizer["Country"]">
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <textarea asp-for="Message" class="form-control rounded-0 p-3" placeholder="@localizer["Message"]" style="height:165px; resize: none;"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn emdad-second-background-color emdad-main-hover-background-color rounded-0 text-white btn-block p-3">
+                    @localizer["Send"]
+                </button>
+            </form>
+        </div>
+    </div>
+
+</div>

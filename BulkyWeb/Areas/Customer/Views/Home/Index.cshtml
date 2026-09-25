@@ -1,0 +1,2087 @@
+@model HomeVM
+
+@{
+    var isRtl = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
+    var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name.ToLower();
+    ViewData["Title"] = isRtl ? "الرئيسية" : "Home";
+    var returnUrl = Context.Request.Path.Value + Context.Request.QueryString.Value;
+    if (string.IsNullOrEmpty(returnUrl)) { returnUrl = "/"; }
+}
+
+<style>
+@@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap');
+
+/* ══════════════════════════════════════════════════════════
+   GLOBAL VARIABLES & RESET
+   ══════════════════════════════════════════════════════════ */
+:root {
+    --emdad-navy:        #062747;
+    --emdad-navy-deep:   #031b31;
+    --emdad-navy-mid:    #0b3a67;
+    --emdad-gold:        #d4af37;
+    --emdad-gold-light:  #f3d078;
+    --emdad-gold-dark:   #b89228;
+    --emdad-ink:         #0e2238;
+    --emdad-body:        #415366;
+    --emdad-muted:       #6b7c8f;
+    --emdad-light:       #f5f7fa;
+    --emdad-border:      #e2e7ee;
+    --emdad-white:       #ffffff;
+    --font-heading:      @(isRtl ? "'Cairo', serif" : "'Playfair Display', Georgia, serif");
+    --font-body:         @(isRtl ? "'Cairo', sans-serif" : "'Inter', -apple-system, BlinkMacSystemFont, sans-serif");
+    --ease-smooth:       cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ══════════════════════════════════════════════════════════
+   NAVBAR OVERRIDE (Match Reference Image: Dark Navy Header)
+   ══════════════════════════════════════════════════════════ */
+#emdadMainNav.emdad-navbar,
+.emdad-navbar {
+    background: #061d33 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
+    padding: 0.65rem 0 !important;
+    transition: all 0.3s ease;
+}
+
+#emdadMainNav .navbar-brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    text-decoration: none !important;
+}
+
+.brand-text-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.brand-text-logo .brand-main {
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.brand-text-logo .brand-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 8.5px;
+    font-weight: 600;
+    letter-spacing: 3.5px;
+    color: var(--emdad-gold-light);
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+#emdadMainNav .emdad-nav-link {
+    color: #ffffff !important;
+    font-family: var(--font-body) !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    padding: 0.6rem 0.85rem !important;
+    transition: color 0.2s ease !important;
+    position: relative !important;
+}
+
+#emdadMainNav .emdad-nav-link:hover,
+#emdadMainNav .emdad-nav-link.active {
+    color: var(--emdad-gold-light) !important;
+}
+
+@@media (min-width: 992px) {
+    #emdadMainNav .emdad-nav-link.active::after,
+    #emdadMainNav .emdad-nav-link:hover::after {
+        content: '' !important;
+        position: absolute !important;
+        bottom: 2px !important;
+        left: 12px !important;
+        right: 12px !important;
+        height: 2.5px !important;
+        background: var(--emdad-gold) !important;
+        border-radius: 2px !important;
+    }
+}
+
+#emdadMainNav .emdad-search {
+    display: none !important;
+}
+
+.nav-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.lang-switch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #ffffff;
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.lang-switch-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--emdad-gold-light);
+    border-color: var(--emdad-gold);
+}
+
+.lang-switch-btn i {
+    color: var(--emdad-gold-light);
+    font-size: 13px;
+}
+
+.btn-quote-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #f5d47a 0%, #d4af37 100%);
+    color: #061d33 !important;
+    font-size: 13px;
+    font-weight: 800;
+    padding: 9px 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.btn-quote-header:hover {
+    background: linear-gradient(135deg, #ffffff 0%, #f5d47a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+    color: #041424 !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   HOMEPAGE ROOT WRAPPER
+   ══════════════════════════════════════════════════════════ */
+.emdad-home-root {
+    font-family: var(--font-body);
+    color: var(--emdad-ink);
+    background: #ffffff;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.emdad-home-root * {
+    box-sizing: border-box;
+}
+
+.emdad-home-root a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.emdad-wrap {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+}
+
+/* ══════════════════════════════════════════════════════════
+   1. HERO SECTION (High Transparency on Image Side)
+   ══════════════════════════════════════════════════════════ */
+.emdad-hero {
+    position: relative;
+    min-height: clamp(540px, 76vh, 680px);
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    background: #041a30;
+    overflow: hidden;
+}
+
+.emdad-hero-bg-img {
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/custom/home-images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center right;
+    opacity: 0.92; /* High opacity so picture is bright and clearly visible */
+    z-index: 1;
+}
+
+.emdad-hero-gradient {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    /* Dark navy on text side, drops to transparent on photo side */
+    background: @(isRtl
+        ? "linear-gradient(270deg, rgba(4, 24, 46, 0.98) 0%, rgba(4, 24, 46, 0.92) 36%, rgba(4, 24, 46, 0.55) 54%, rgba(4, 24, 46, 0.10) 78%, rgba(4, 24, 46, 0.0) 100%)"
+        : "linear-gradient(90deg, rgba(4, 24, 46, 0.98) 0%, rgba(4, 24, 46, 0.92) 36%, rgba(4, 24, 46, 0.55) 54%, rgba(4, 24, 46, 0.10) 78%, rgba(4, 24, 46, 0.0) 100%)");
+}
+
+.emdad-hero-content {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    padding: clamp(50px, 8vh, 85px) 0;
+}
+
+.hero-left-column {
+    max-width: 680px;
+}
+
+.hero-eyebrow {
+    display: inline-block;
+    color: var(--emdad-gold-light);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: @(isRtl ? "1px" : "3px");
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.hero-main-title {
+    font-family: var(--font-heading);
+    font-size: clamp(34px, 4.4vw, 56px);
+    font-weight: 700;
+    line-height: 1.12;
+    margin-bottom: 18px;
+    color: #ffffff;
+}
+
+.hero-main-title .gold-accent {
+    color: var(--emdad-gold-light);
+    display: inline;
+}
+
+.hero-sub-text {
+    font-size: clamp(15px, 1.2vw, 18px);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 600px;
+    margin-bottom: 30px;
+}
+
+.hero-actions-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 38px;
+}
+
+.btn-hero-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #f5d47a 0%, #d4af37 100%);
+    color: #061d33 !important;
+    font-size: 14px;
+    font-weight: 800;
+    padding: 13px 26px;
+    border-radius: 5px;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+    transition: all 0.25s ease;
+}
+
+.btn-hero-gold:hover {
+    background: linear-gradient(135deg, #ffffff 0%, #f5d47a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.5);
+}
+
+.btn-hero-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(4, 26, 48, 0.65);
+    color: #ffffff !important;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 5px;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(6px);
+    transition: all 0.25s ease;
+}
+
+.btn-hero-outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #ffffff;
+    color: #ffffff !important;
+}
+
+/* 4 Feature Badges Under Hero Text: Strictly in 1 Row */
+.hero-badges-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 22px;
+}
+
+.hero-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: @(isRtl ? "0" : "1px");
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.92);
+    white-space: nowrap;
+}
+
+.hero-badge-pill i {
+    color: var(--emdad-gold-light);
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════════════
+   1.5 CORPORATE IDENTITY (VISION, MISSION, VALUES, QUALITY)
+   ══════════════════════════════════════════════════════════ */
+.emdad-identity-section {
+    background: #031424;
+    padding: clamp(55px, 6vw, 85px) 0;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.emdad-identity-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 25%, rgba(11, 58, 103, 0.45) 0%, rgba(3, 20, 36, 0.98) 75%);
+    pointer-events: none;
+}
+
+.identity-row-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 24px;
+}
+
+.identity-row-grid:last-child {
+    margin-bottom: 0;
+}
+
+.identity-card {
+    background: linear-gradient(145deg, rgba(6, 35, 63, 0.94) 0%, rgba(3, 20, 36, 0.98) 100%);
+    border: 1.5px solid rgba(212, 175, 55, 0.35);
+    border-radius: 8px;
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.identity-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 175, 55, 0.7);
+    box-shadow: 0 12px 36px rgba(212, 175, 55, 0.16);
+}
+
+.identity-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.identity-card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.12);
+    border: 2px solid var(--emdad-gold);
+    color: var(--emdad-gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.25);
+}
+
+.identity-card-titles {
+    display: flex;
+    flex-direction: column;
+}
+
+.identity-card-title {
+    font-family: var(--font-heading);
+    font-size: clamp(20px, 2.2vw, 25px);
+    font-weight: 800;
+    color: var(--emdad-gold-light);
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: @(isRtl ? "0" : "1px");
+    text-transform: uppercase;
+}
+
+.identity-card-desc {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: rgba(255, 255, 255, 0.92);
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+/* Values Card Specifics */
+.values-badges-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 14px;
+    margin-top: 4px;
+}
+
+.value-badge-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 6px;
+    padding: 11px 15px;
+    transition: all 0.25s ease;
+}
+
+.value-badge-item:hover {
+    background: rgba(212, 175, 55, 0.12);
+    border-color: var(--emdad-gold);
+    transform: translateX(@(isRtl ? "-4px" : "4px"));
+}
+
+.value-badge-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--emdad-gold);
+    color: #041628;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 900;
+    flex-shrink: 0;
+}
+
+.value-badge-text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+/* Quality Card High-Contrast White / Slate Style */
+.identity-card.quality-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f4f7fb 100%);
+    border: 1.5px solid rgba(6, 39, 71, 0.25);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.identity-card.quality-card .identity-card-icon {
+    background: rgba(6, 39, 71, 0.08);
+    border-color: var(--emdad-navy);
+    color: var(--emdad-navy);
+}
+
+.identity-card.quality-card .identity-card-title {
+    color: var(--emdad-navy);
+}
+
+.identity-card.quality-card .identity-card-desc {
+    color: #1e2d3d;
+    font-weight: 600;
+}
+
+/* ══════════════════════════════════════════════════════════
+   2. 4 SECTORS SECTION (Separated Cards with White BG Around)
+   ══════════════════════════════════════════════════════════ */
+.emdad-sectors-section {
+    background: #ffffff;
+    padding: 48px 0 54px;
+}
+
+.sectors-section-header {
+    text-align: center;
+    margin-bottom: 34px;
+}
+
+.sectors-eyebrow {
+    display: inline-block;
+    color: #b89228;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.sectors-main-title {
+    font-family: var(--font-heading);
+    font-size: clamp(26px, 3.2vw, 38px);
+    font-weight: 800;
+    color: var(--emdad-ink);
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.sectors-header-divider {
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--emdad-gold), var(--emdad-gold-light));
+    border-radius: 2px;
+    margin: 0 auto 14px;
+}
+
+.sectors-sub-text {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--emdad-muted);
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.emdad-sectors-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.sector-tile {
+    background: #06233f;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(4, 26, 50, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+.sector-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(4, 26, 50, 0.16);
+}
+
+.sector-tile-img-box {
+    height: 180px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background: #041a30;
+}
+
+.sector-tile-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+}
+
+.sector-tile:hover .sector-tile-img-box img {
+    transform: scale(1.06);
+}
+
+.sector-tile-body {
+    background: #06233f;
+    padding: 20px 18px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.sector-tile-head {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 11px;
+}
+
+.sector-tile-icon {
+    font-size: 24px;
+    color: var(--emdad-gold-light);
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.sector-tile-title {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.sector-tile-desc {
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.76);
+    margin-bottom: 16px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sector-tile-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--emdad-gold-light);
+    transition: gap 0.2s ease;
+}
+
+.sector-tile:hover .sector-tile-link {
+    gap: 9px;
+    color: #ffffff;
+}
+
+/* ══════════════════════════════════════════════════════════
+   3. STATS BAR (Horizontal: Icon & Text on the Same Line)
+   ══════════════════════════════════════════════════════════ */
+.emdad-stats-bar {
+    background: #062747;
+    color: #ffffff;
+    padding: 24px 0;
+}
+
+.stats-bar-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+}
+
+.stat-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 6px 14px;
+    border-inline-end: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.stat-box:last-child {
+    border-inline-end: none;
+}
+
+.stat-box-icon {
+    font-size: 32px;
+    color: var(--emdad-gold-light);
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.stat-box-text {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.stat-box-num {
+    font-size: clamp(22px, 2.2vw, 28px);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 3px;
+}
+
+.stat-box-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.72);
+    letter-spacing: @(isRtl ? "0" : "0.5px");
+    line-height: 1.25;
+}
+
+/* ══════════════════════════════════════════════════════════
+   4. WHY EMDAD SECTION
+   ══════════════════════════════════════════════════════════ */
+.emdad-why-section {
+    background: #ffffff;
+    padding: clamp(65px, 8vw, 95px) 0;
+}
+
+.why-section-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+}
+
+.why-left-content h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(26px, 3.2vw, 38px);
+    font-weight: 800;
+    color: var(--emdad-ink);
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.why-left-content p {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--emdad-body);
+}
+
+.why-features-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.why-feature-item {
+    text-align: center;
+}
+
+.why-feature-icon-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid rgba(212, 175, 55, 0.35);
+    background: #f8fafc;
+    color: var(--emdad-navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 16px;
+    transition: all 0.35s var(--ease-smooth);
+}
+
+.why-feature-item:hover .why-feature-icon-circle {
+    background: var(--emdad-navy);
+    color: var(--emdad-gold-light);
+    border-color: var(--emdad-navy);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(6, 39, 71, 0.2);
+}
+
+.why-feature-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--emdad-ink);
+    margin-bottom: 8px;
+}
+
+.why-feature-desc {
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--emdad-muted);
+}
+
+/* ══════════════════════════════════════════════════════════
+   5. STRATEGIC PARTNERS STRIP
+   ══════════════════════════════════════════════════════════ */
+.emdad-partners-strip {
+    background: #f4f6f9;
+    border-top: 1px solid var(--emdad-border);
+    border-bottom: 1px solid var(--emdad-border);
+    padding: 34px 0;
+}
+
+.partners-strip-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.partners-strip-label {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--emdad-ink);
+    text-transform: uppercase;
+    letter-spacing: @(isRtl ? "0" : "1px");
+    white-space: nowrap;
+    position: relative;
+    padding-inline-end: 18px;
+}
+
+.partners-strip-label::after {
+    content: '—';
+    margin-inline-start: 12px;
+    color: var(--emdad-gold);
+}
+
+.partners-logos-container {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: center;
+}
+
+.partner-wordmark {
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    opacity: 0.65;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    cursor: default;
+    display: inline-flex;
+    align-items: center;
+}
+
+.partner-wordmark:hover {
+    opacity: 1;
+    transform: scale(1.04);
+}
+
+.partner-wordmark.rheinmetall { color: #d00000; font-family: sans-serif; font-weight: 900; }
+.partner-wordmark.baesystems {
+    background: #d00000;
+    color: #ffffff;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+}
+.partner-wordmark.cat {
+    color: #111111;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 17px;
+    letter-spacing: 0.5px;
+}
+.partner-wordmark.cat span { color: #f5b000; }
+.partner-wordmark.safran { color: #003366; font-weight: 800; }
+.partner-wordmark.honeywell { color: #e61c24; font-family: Georgia, serif; font-weight: 800; font-size: 16px; }
+.partner-wordmark.thales { color: #002b66; font-weight: 900; letter-spacing: 2px; }
+
+.btn-view-all-partners {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--emdad-navy) !important;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 9px 18px;
+    border: 1.5px solid var(--emdad-navy);
+    border-radius: 4px;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.btn-view-all-partners:hover {
+    background: var(--emdad-navy);
+    color: #ffffff !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   6. KEY PROJECTS & ACHIEVEMENTS SECTION (Image 3 + Video)
+   ══════════════════════════════════════════════════════════ */
+.emdad-achievements-section {
+    background: #041424;
+    padding: clamp(65px, 8vw, 95px) 0;
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.emdad-achievements-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 85% 15%, rgba(11, 58, 103, 0.45) 0%, transparent 60%),
+                radial-gradient(circle at 15% 85%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.achievements-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    border-radius: 8px;
+    background: linear-gradient(90deg, rgba(6, 35, 63, 0.95) 0%, rgba(3, 20, 36, 0.98) 100%);
+    padding: 18px 26px;
+    margin-bottom: 34px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+.achievements-brand-badge {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.achievements-wings-icon {
+    color: var(--emdad-gold);
+    font-size: 32px;
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+}
+
+.achievements-brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.achievements-brand-main {
+    font-size: 17px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+.achievements-brand-sub {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--emdad-gold-light);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.achievements-title-combo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.achievements-header-title {
+    font-family: var(--font-heading);
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 800;
+    color: var(--emdad-gold-light);
+    letter-spacing: @(isRtl ? "0" : "1.5px");
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.achievements-main-grid {
+    display: grid;
+    grid-template-columns: 430px 1fr;
+    gap: 28px;
+    align-items: stretch;
+}
+
+/* Video Showcase Card */
+.achievements-video-card {
+    background: linear-gradient(145deg, #06233f 0%, #031424 100%);
+    border: 1.5px solid rgba(212, 175, 55, 0.35);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.video-container-inner {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    min-height: 280px;
+    background: #000000;
+    overflow: hidden;
+}
+
+.video-container-inner video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.video-card-body {
+    padding: 22px 20px;
+    background: rgba(3, 20, 36, 0.95);
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.video-card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--emdad-gold-light);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.video-card-badge i {
+    color: #e61c24;
+    font-size: 8px;
+    animation: pulse 1.5s infinite;
+}
+
+.video-card-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.video-card-desc {
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 14px;
+}
+
+.video-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-video-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #f5d47a 0%, #d4af37 100%);
+    color: #061d33 !important;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-video-action:hover {
+    background: linear-gradient(135deg, #ffffff 0%, #f5d47a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
+}
+
+.btn-video-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: #ffffff !important;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.btn-video-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+}
+
+/* 6 Achievement List Rows (Display only) */
+.achievements-rows-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.achievement-row-item {
+    background: linear-gradient(90deg, rgba(6, 35, 63, 0.85) 0%, rgba(3, 20, 36, 0.92) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 6px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+    color: #ffffff;
+    cursor: default;
+}
+
+.achievement-row-item:hover {
+    background: linear-gradient(90deg, rgba(11, 58, 103, 0.95) 0%, rgba(6, 35, 63, 0.98) 100%);
+    border-color: var(--emdad-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 18px rgba(212, 175, 55, 0.2);
+}
+
+.achievement-icon-octa {
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1.5px solid var(--emdad-gold);
+    color: var(--emdad-gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.achievement-row-item:hover .achievement-icon-octa {
+    background: var(--emdad-gold);
+    color: #041628;
+    box-shadow: 0 0 14px rgba(212, 175, 55, 0.5);
+}
+
+.achievement-text-single {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.5;
+    flex: 1;
+}
+
+/* ══════════════════════════════════════════════════════════
+   7. LATEST NEWS SECTION
+   ══════════════════════════════════════════════════════════ */
+.emdad-news-section {
+    background: #f8fafc;
+    padding: clamp(65px, 8vw, 95px) 0;
+}
+
+.news-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.news-item-card {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--emdad-border);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.news-item-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(6, 39, 71, 0.12);
+}
+
+.news-card-thumb {
+    height: 135px;
+    overflow: hidden;
+    position: relative;
+}
+
+.news-card-thumb img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.news-item-card:hover .news-card-thumb img {
+    transform: scale(1.07);
+}
+
+.news-card-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.news-card-date {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #9a7228;
+    letter-spacing: @(isRtl ? "0" : "1.5px");
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.news-card-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--emdad-ink);
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.news-card-snippet {
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--emdad-muted);
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+
+.news-card-readmore {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--emdad-navy);
+    transition: all 0.2s ease;
+}
+
+.news-item-card:hover .news-card-readmore {
+    color: var(--emdad-gold);
+    gap: 9px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   8. CTA BANNER (Exact Design with Sunset Clouds & Glowing Globe)
+   ══════════════════════════════════════════════════════════ */
+.emdad-cta-banner {
+    position: relative;
+        background-image: url('/assets/custom/images/Copilot_20260913_232200.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: clamp(55px, 7vw, 75px) 0;
+    overflow: hidden;
+}
+
+.emdad-cta-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: @(isRtl 
+        ? "linear-gradient(270deg, rgba(4, 26, 50, 0.6) 0%, rgba(4, 26, 50, 0.2) 60%, transparent 100%)"
+        : "linear-gradient(90deg, rgba(4, 26, 50, 0.6) 0%, rgba(4, 26, 50, 0.2) 60%, transparent 100%)");
+    z-index: 1;
+}
+
+.cta-banner-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.cta-banner-text h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.cta-banner-text p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 620px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.btn-cta-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #f5d47a 0%, #d4af37 100%);
+    color: #061d33 !important;
+    font-size: 14px;
+    font-weight: 800;
+    padding: 14px 28px;
+    border-radius: 6px;
+    white-space: nowrap;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    transition: all 0.25s ease;
+}
+
+.btn-cta-contact:hover {
+    background: linear-gradient(135deg, #ffffff 0%, #f5d47a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.5);
+}
+
+/* ══════════════════════════════════════════════════════════
+   9. EGYPTIAN NATIONAL PRIDE STRIP
+   ══════════════════════════════════════════════════════════ */
+.egyptian-pride-strip {
+    background: #03172c;
+    color: #ffffff;
+    padding: 24px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.egyptian-pride-inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.egyptian-pride-graphic {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    opacity: 0.85;
+}
+
+.egyptian-pride-text {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--emdad-gold-light);
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 1.4;
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ══════════════════════════════════════════════════════════ */
+@@media (max-width: 1024px) {
+    .identity-row-grid       { grid-template-columns: 1fr; }
+    .achievements-main-grid  { grid-template-columns: 1fr; }
+    .achievements-header-bar { flex-direction: column; gap: 14px; text-align: center; }
+    .achievements-title-combo { justify-content: center; }
+    .emdad-sectors-grid      { grid-template-columns: repeat(2, 1fr); }
+    .why-section-grid        { grid-template-columns: 1fr; gap: 35px; }
+    .why-features-row        { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .projects-section-layout { grid-template-columns: 1fr; gap: 24px; }
+    .projects-cards-grid     { grid-template-columns: repeat(2, 1fr); }
+    .news-cards-grid         { grid-template-columns: repeat(2, 1fr); }
+    .hero-badges-row         { flex-wrap: wrap; gap: 16px; }
+}
+
+@@media (max-width: 768px) {
+    .stats-bar-grid          { grid-template-columns: repeat(2, 1fr); gap: 18px 0; }
+    .stat-box                { border-inline-end: none; justify-content: flex-start; padding: 6px 10px; }
+    .cta-banner-inner        { flex-direction: column; text-align: center; }
+    .btn-cta-contact         { width: 100%; justify-content: center; }
+    .partners-strip-inner    { flex-direction: column; align-items: center; text-align: center; }
+    .partners-strip-label::after { display: none; }
+    .hero-badges-row         { flex-wrap: wrap; gap: 14px; }
+}
+
+@@media (max-width: 540px) {
+    .identity-card           { padding: 22px 18px; }
+    .values-badges-grid      { grid-template-columns: 1fr; }
+    .emdad-sectors-grid      { grid-template-columns: 1fr; }
+    .stats-bar-grid          { grid-template-columns: 1fr; gap: 14px 0; }
+    .why-features-row        { grid-template-columns: 1fr; }
+    .projects-cards-grid     { grid-template-columns: 1fr; }
+    .news-cards-grid         { grid-template-columns: 1fr; }
+    .hero-actions-row        { flex-direction: column; width: 100%; }
+    .hero-actions-row .btn-hero-gold,
+    .hero-actions-row .btn-hero-outline { width: 100%; justify-content: center; text-align: center; }
+    .hero-badges-row         { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .achievements-header-bar { padding: 14px 16px; }
+    .achievements-title-combo { flex-direction: column; gap: 4px; }
+    .achievements-title-separator { display: none; }
+}
+</style>
+
+<!-- ══════════════════════════════════════════════════════════
+     HOMEPAGE MARKUP
+     ══════════════════════════════════════════════════════════ -->
+<div class="emdad-home-root" dir="@(isRtl ? "rtl" : "ltr")">
+
+    <!-- ──────────────────────────────────────────
+         1. HERO SECTION
+         ────────────────────────────────────────── -->
+    <section class="emdad-hero">
+        <div class="emdad-hero-bg-img"></div>
+        <div class="emdad-hero-gradient"></div>
+
+        <div class="emdad-hero-content">
+            <div class="emdad-wrap">
+                <div class="hero-left-column">
+                    <span class="hero-eyebrow">
+                        @(isRtl ? "نبني القدرات من أجل غدٍ أقوى" : "BUILDING CAPABILITIES FOR A STRONGER TOMORROW")
+                    </span>
+
+                    <h1 class="hero-main-title">
+                        @if (isRtl)
+                        {
+                            <span>حلول صناعية وهندسية</span><br />
+                            <span class="gold-accent">متكاملة</span>
+                        }
+                        else
+                        {
+                            <span>Integrated Industrial &amp;</span><br />
+                            <span class="gold-accent">Engineering Solutions</span>
+                        }
+                    </h1>
+
+                    <p class="hero-sub-text">
+                        @(isRtl
+                            ? "شريك موثوق في صناعات الدفاع والميكانيكا والبترول والطاقة."
+                            : "A trusted partner in Defense, Mechanical, Petroleum and Energy Industries.")
+                    </p>
+
+                    <div class="hero-actions-row">
+                        <a href="@Url.Action("Goals", "Home", new { area = "Customer" })" class="btn-hero-gold">
+                            <span>@(isRtl ? "استكشف قطاعاتنا" : "Explore Our Sectors")</span>
+                            <i class="fas fa-arrow-@(isRtl ? "left" : "right")"></i>
+                        </a>
+                        <a href="@Url.Action("ContactUs", "Home", new { area = "Customer" })" class="btn-hero-outline">
+                            <span>@(isRtl ? "اطلب عرض سعر" : "Request a Quote")</span>
+                        </a>
+                    </div>
+
+                    <!-- 4 Badges Under Text: 4 Badges Side by Side in One Line -->
+                    <div class="hero-badges-row">
+                        <div class="hero-badge-pill">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>@(isRtl ? "قدرات وطنية" : "National Capabilities")</span>
+                        </div>
+                        <div class="hero-badge-pill">
+                            <i class="fas fa-industry"></i>
+                            <span>@(isRtl ? "تميز صناعي" : "Industrial Excellence")</span>
+                        </div>
+                        <div class="hero-badge-pill">
+                            <i class="fas fa-handshake"></i>
+                            <span>@(isRtl ? "شراكات استراتيجية" : "Strategic Partnerships")</span>
+                        </div>
+                        <div class="hero-badge-pill">
+                            <i class="fas fa-leaf"></i>
+                            <span>@(isRtl ? "مستقبل مستدام" : "A Sustainable Future")</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────
+         1.5 CORPORATE IDENTITY (VISION, MISSION, VALUES, QUALITY)
+         ────────────────────────────────────────── -->
+    <section class="emdad-identity-section" id="identity">
+        <div class="emdad-wrap">
+
+            <!-- Row 1: Vision & Mission (Matching Image 1) -->
+            <div class="identity-row-grid">
+
+                <!-- Vision Card -->
+                <div class="identity-card">
+                    <div class="identity-card-header">
+                        <div class="identity-card-icon">
+                            <i class="fas fa-crosshairs"></i>
+                        </div>
+                        <div class="identity-card-titles">
+                            <h3 class="identity-card-title">@localizer["SectionVisionTitle"]</h3>
+                        </div>
+                    </div>
+                    <p class="identity-card-desc">
+                        @localizer["SectionVisionText"]
+                    </p>
+                </div>
+
+                <!-- Mission Card -->
+                <div class="identity-card">
+                    <div class="identity-card-header">
+                        <div class="identity-card-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div class="identity-card-titles">
+                            <h3 class="identity-card-title">@localizer["SectionMissionTitle"]</h3>
+                        </div>
+                    </div>
+                    <p class="identity-card-desc">
+                        @localizer["SectionMissionText"]
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Row 2: Values & Quality Commitment (Matching Image 2) -->
+            <div class="identity-row-grid">
+
+                <!-- Values Card -->
+                <div class="identity-card">
+                    <div class="identity-card-header">
+                        <div class="identity-card-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <div class="identity-card-titles">
+                            <h3 class="identity-card-title">@localizer["SectionValuesTitle"]</h3>
+                        </div>
+                    </div>
+                    <div class="values-badges-grid">
+                        <div class="value-badge-item">
+                            <div class="value-badge-check"><i class="fas fa-check"></i></div>
+                            <span class="value-badge-text">@localizer["ValExcellenceTitle"]</span>
+                        </div>
+                        <div class="value-badge-item">
+                            <div class="value-badge-check"><i class="fas fa-check"></i></div>
+                            <span class="value-badge-text">@localizer["ValIntegrityTitle"]</span>
+                        </div>
+                        <div class="value-badge-item">
+                            <div class="value-badge-check"><i class="fas fa-check"></i></div>
+                            <span class="value-badge-text">@localizer["ValInnovationTitle"]</span>
+                        </div>
+                        <div class="value-badge-item">
+                            <div class="value-badge-check"><i class="fas fa-check"></i></div>
+                            <span class="value-badge-text">@localizer["ValPartnershipTitle"]</span>
+                        </div>
+                        <div class="value-badge-item">
+                            <div class="value-badge-check"><i class="fas fa-check"></i></div>
+                            <span class="value-badge-text">@localizer["ValAccountabilityTitle"]</span>
+                        </div>
+                        <div class="value-badge-item">
+                            <div class="value-badge-check"><i class="fas fa-check"></i></div>
+                            <span class="value-badge-text">@localizer["ValSustainabilityTitle"]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quality Commitment Card -->
+                <div class="identity-card quality-card">
+                    <div class="identity-card-header">
+                        <div class="identity-card-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="identity-card-titles">
+                            <h3 class="identity-card-title">@localizer["SectionQualityTitle"]</h3>
+                        </div>
+                    </div>
+                    <p class="identity-card-desc">
+                        @localizer["SectionQualityText"]
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────
+         2. 4 SECTOR CARDS (Separated with White BG Around)
+         ────────────────────────────────────────── -->
+    <section class="emdad-sectors-section" id="sectors">
+        <div class="emdad-wrap">
+
+            <!-- Centered Header Required for Sectors -->
+            <div class="sectors-section-header">
+                <span class="sectors-eyebrow">@localizer["SectorsEyebrow"]</span>
+                <h2 class="sectors-main-title">@localizer["SectorsMainHeading"]</h2>
+                <div class="sectors-header-divider"></div>
+                <p class="sectors-sub-text">@localizer["SectorsSubHeading"]</p>
+            </div>
+
+            <div class="emdad-sectors-grid">
+
+                <!-- Sector 1: Defense -->
+                <a href="@Url.Action("Goals", "Home", new { area = "Customer" })" class="sector-tile">
+                    <div class="sector-tile-img-box">
+                        <img src="/assets/custom/home-images/sector-defense.jpg" alt="@(isRtl ? "الصناعات الدفاعية" : "Defense Industries")" loading="lazy" />
+                    </div>
+                    <div class="sector-tile-body">
+                        <div class="sector-tile-head">
+                            <i class="fas fa-shield-alt sector-tile-icon"></i>
+                            <h3 class="sector-tile-title">@(isRtl ? "الصناعات الدفاعية" : "Defense Industries")</h3>
+                        </div>
+                        <p class="sector-tile-desc">
+                            @(isRtl ? "حلول متقدمة لدعم الدفاع الوطني وقدرات الأمن." : "Advanced solutions to support national defense and security capabilities.")
+                        </p>
+                        <span class="sector-tile-link">
+                            @(isRtl ? "اعرف المزيد" : "Learn More") <i class="fas fa-arrow-@(isRtl ? "left" : "right")"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Sector 2: Petroleum -->
+                <a href="@Url.Action("Goals", "Home", new { area = "Customer" })" class="sector-tile">
+                    <div class="sector-tile-img-box">
+                        <img src="/assets/custom/home-images/sector-petroleum.jpg" alt="@(isRtl ? "صناعات البترول" : "Petroleum Industries")" loading="lazy" />
+                    </div>
+                    <div class="sector-tile-body">
+                        <div class="sector-tile-head">
+                            <i class="fas fa-gas-pump sector-tile-icon"></i>
+                            <h3 class="sector-tile-title">@(isRtl ? "صناعات البترول" : "Petroleum Industries")</h3>
+                        </div>
+                        <p class="sector-tile-desc">
+                            @(isRtl ? "معدات وأنظمة وخدمات لعمليات النفط الأمامية والخلفية." : "Equipment, systems and services for upstream and downstream petroleum operations.")
+                        </p>
+                        <span class="sector-tile-link">
+                            @(isRtl ? "اعرف المزيد" : "Learn More") <i class="fas fa-arrow-@(isRtl ? "left" : "right")"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Sector 3: Energy -->
+                <a href="@Url.Action("Goals", "Home", new { area = "Customer" })" class="sector-tile">
+                    <div class="sector-tile-img-box">
+                        <img src="/assets/custom/home-images/sector-energy.jpg" alt="@(isRtl ? "حلول الطاقة" : "Energy Solutions")" loading="lazy" />
+                    </div>
+                    <div class="sector-tile-body">
+                        <div class="sector-tile-head">
+                            <i class="fas fa-leaf sector-tile-icon"></i>
+                            <h3 class="sector-tile-title">@(isRtl ? "حلول الطاقة" : "Energy Solutions")</h3>
+                        </div>
+                        <p class="sector-tile-desc">
+                            @(isRtl ? "حلول طاقة مستدامة وفعالة من أجل مستقبل أنظف." : "Sustainable and efficient energy solutions for a cleaner future.")
+                        </p>
+                        <span class="sector-tile-link">
+                            @(isRtl ? "اعرف المزيد" : "Learn More") <i class="fas fa-arrow-@(isRtl ? "left" : "right")"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Sector 4: Heavy Equipment -->
+                <a href="@Url.Action("Goals", "Home", new { area = "Customer" })" class="sector-tile">
+                    <div class="sector-tile-img-box">
+                        <img src="/assets/custom/home-images/sector-heavy.jpg" alt="@(isRtl ? "المعدات الثقيلة والحلول الصناعية" : "Heavy Equipment & Industrial Solutions")" loading="lazy" />
+                    </div>
+                    <div class="sector-tile-body">
+                        <div class="sector-tile-head">
+                            <i class="fas fa-cog sector-tile-icon"></i>
+                            <h3 class="sector-tile-title">@(isRtl ? "المعدات الثقيلة والحلول الصناعية" : "Heavy Equipment & Industrial Solutions")</h3>
+                        </div>
+                        <p class="sector-tile-desc">
+                            @(isRtl ? "معدات ميكانيكية موثوقة وخدمات صناعية متكاملة." : "Reliable mechanical equipment and integrated industrial services.")
+                        </p>
+                        <span class="sector-tile-link">
+                            @(isRtl ? "اعرف المزيد" : "Learn More") <i class="fas fa-arrow-@(isRtl ? "left" : "right")"></i>
+                        </span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────
+         3. STATS BAR (Horizontal: Icon & Text on the Same Line)
+         ────────────────────────────────────────── -->
+    <section class="emdad-stats-bar">
+        <div class="emdad-wrap">
+            <div class="stats-bar-grid">
+
+                <!-- Item 1 -->
+                <div class="stat-box">
+                    <i class="fas fa-users stat-box-icon"></i>
+                    <div class="stat-box-text">
+                        <div class="stat-box-num">+40</div>
+                        <div class="stat-box-label">@(isRtl ? "سنة خبرة" : "Years of Experience")</div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="stat-box">
+                    <i class="fas fa-cog stat-box-icon"></i>
+                    <div class="stat-box-text">
+                        <div class="stat-box-num">+200</div>
+                        <div class="stat-box-label">@(isRtl ? "مشروع منجز" : "Projects Delivered")</div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="stat-box">
+                    <i class="fas fa-handshake stat-box-icon"></i>
+                    <div class="stat-box-text">
+                        <div class="stat-box-num">+50</div>
+                        <div class="stat-box-label">@(isRtl ? "شريك عالمي" : "Global Partners")</div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="stat-box">
+                    <i class="fas fa-globe stat-box-icon"></i>
+                    <div class="stat-box-text">
+                        <div class="stat-box-num">+15</div>
+                        <div class="stat-box-label">@(isRtl ? "دولة" : "Countries")</div>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="stat-box">
+                    <i class="fas fa-star stat-box-icon"></i>
+                    <div class="stat-box-text">
+                        <div class="stat-box-num" style="font-size:clamp(17px, 1.8vw, 22px);">@(isRtl ? "موثوق" : "Trusted")</div>
+                        <div class="stat-box-label">@(isRtl ? "حكومياً وتجارياً" : "by Government & Private Sectors")</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────
+         4. WHY EMDAD? SECTION
+         ────────────────────────────────────────── -->
+    <section class="emdad-why-section" id="about">
+        <div class="emdad-wrap">
+            <div class="why-section-grid">
+
+                <!-- Left Column -->
+                <div class="why-left-content">
+                    <h2>@(isRtl ? "لماذا إمداد؟" : "Why Emdad?")</h2>
+                    <p>
+                        @(isRtl
+                            ? "نقدم حلولاً صناعية وهندسية مبتكرة تُمكّن القدرات الوطنية وتخلق قيمة مضافة مستدامة لشركائنا وعملائنا في كافة القطاعات الحيوية."
+                            : "We deliver innovative industrial and engineering solutions that empower national capabilities and create sustainable value.")
+                    </p>
+                </div>
+
+                <!-- Right Column: 4 Circular Features -->
+                <div class="why-features-row">
+
+                    <!-- Feature 1 -->
+                    <div class="why-feature-item">
+                        <div class="why-feature-icon-circle"><i class="fas fa-industry"></i></div>
+                        <h4 class="why-feature-title">@(isRtl ? "التصنيع المحلي" : "Local Manufacturing")</h4>
+                        <p class="why-feature-desc">@(isRtl ? "دعم الصناعة الوطنية ومبادرات التوطين التكنولوجي." : "Supporting national industry and localization initiatives.")</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="why-feature-item">
+                        <div class="why-feature-icon-circle"><i class="fas fa-gem"></i></div>
+                        <h4 class="why-feature-title">@(isRtl ? "التميز الهندسي" : "Engineering Excellence")</h4>
+                        <p class="why-feature-desc">@(isRtl ? "معايير جودة فائقة وتطبيق أحدث التقنيات العالمية." : "High quality standards and world-class technologies.")</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="why-feature-item">
+                        <div class="why-feature-icon-circle"><i class="fas fa-handshake"></i></div>
+                        <h4 class="why-feature-title">@(isRtl ? "الشراكات الاستراتيجية" : "Strategic Partnerships")</h4>
+                        <p class="why-feature-desc">@(isRtl ? "التعاون الوثيق مع قادة الصناعة العالمية لأثر أكبر." : "Collaborating with global leaders for greater impact.")</p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="why-feature-item">
+                        <div class="why-feature-icon-circle"><i class="fas fa-headset"></i></div>
+                        <h4 class="why-feature-title">@(isRtl ? "دعم ما بعد البيع" : "After-Sales Support")</h4>
+                        <p class="why-feature-desc">@(isRtl ? "التزام طويل الأمد ومستمر بنجاح عملائنا واستدامة تشغيلهم." : "Long-term commitment to our clients' success.")</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────
+         5. OUR STRATEGIC PARTNERS STRIP
+         ────────────────────────────────────────── -->
+    <section class="emdad-partners-strip" id="partners">
+        <div class="emdad-wrap">
+            <div class="partners-strip-inner">
+
+                <div class="partners-strip-label">
+                    @(isRtl ? "شركاؤنا الاستراتيجيون" : "Our Strategic Partners")
+                </div>
+
+                <div class="partners-logos-container">
+                    <span class="partner-wordmark rheinmetall">@localizer["PartnerAOI"]</span>
+                    <span class="partner-wordmark cat">@localizer["PartnerAIO"]</span>
+                    <span class="partner-wordmark safran">@localizer["PartnerEastWest"]</span>
+                    <span class="partner-wordmark honeywell">@localizer["PartnerMilitaryProd"]</span>
+                    <span class="partner-wordmark thales">@localizer["PartnerPetroleum"]</span>
+                </div>
+
+                <a href="@Url.Action("Partners", "Home", new { area = "Customer" })" class="btn-view-all-partners">
+                    <span>@(isRtl ? "كل الشركاء" : "View All Partners")</span>
+                    <i class="fas fa-arrow-@(isRtl ? "left" : "right")"></i>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────
+         6. KEY PROJECTS & ACHIEVEMENTS SECTION (Matching Image 3 + Corporate Video)
+         ────────────────────────────────────────── -->
+    <section class="emdad-achievements-section" id="achievements">
+        <div class="emdad-wrap">
+
+            <!-- Top Header Bar -->
+            <div class="achievements-header-bar">
+                <div class="achievements-brand-badge">
+                    <i class="fas fa-shield-halved achievements-wings-icon"></i>
+                    <div class="achievements-brand-text">
+                        <span class="achievements-brand-main">EMDAD</span>
+                        <span class="achievements-brand-sub">DEFENSE &amp; INDUSTRIAL SOLUTIONS</span>
+                    </div>
+                </div>
+
+                <div class="achievements-title-combo">
+                    <h2 class="achievements-header-title">@localizer["AchievementsHeading"]</h2>
+                </div>
+            </div>
+
+            <!-- Main Layout: Video Showcase + 6 Achievement Rows -->
+            <div class="achievements-main-grid">
+
+                <!-- Left: Corporate Video Showcase -->
+                <div class="achievements-video-card">
+                    <div class="video-container-inner">
+                        <video id="emdadCorpVideo" autoplay muted loop playsinline poster="/assets/custom/home-images/project-defense.jpg">
+                            <source src="/assets/custom/NewsRoom/emdad_final_30s_video.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-card-body">
+                        <div class="video-card-badge">
+                            <i class="fas fa-circle"></i>
+                            <span>@(isRtl ? "عرض القدرات والجاهزية" : "Capabilities & Readiness")</span>
+                        </div>
+                        <h4 class="video-card-title">
+                            @(isRtl ? "صرح صناعي وهندسي رائد" : "Premier Industrial & Defense Enterprise")
+                        </h4>
+                        <p class="video-card-desc">
+                            @(isRtl
+                                ? "استعراض حي لقدرات التصنيع، التوريدات الميكانيكية الثقيلة، والحلول الدفاعية المتكاملة."
+                                : "A live overview of our localized defense capabilities, heavy engineering, and sustainable energy projects.")
+                        </p>
+                        <div class="video-card-actions">
+                            <button type="button" class="btn-video-action" onclick="toggleVideoPlayback()">
+                                <i class="fas fa-pause" id="videoPlayIcon"></i>
+                                <span id="videoPlayText">@(isRtl ? "إيقاف مؤقت" : "Pause Video")</span>
+                            </button>
+                            <button type="button" class="btn-video-outline" onclick="toggleVideoMute()">
+                                <i class="fas fa-volume-mute" id="videoMuteIcon"></i>
+                                <span id="videoMuteText">@(isRtl ? "كتم / تشغيل الصوت" : "Sound")</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: 6 Key Capabilities (Matching Image 3) -->
+                <div class="achievements-rows-list">
+
+                    <!-- Item 1: Mechanical -->
+                    <div class="achievement-row-item">
+                        <div class="achievement-icon-octa">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="achievement-content-text">
+                            <div class="achievement-text-single">@localizer["Achieve1Text"]</div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Defense -->
+                    <div class="achievement-row-item">
+                        <div class="achievement-icon-octa">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="achievement-content-text">
+                            <div class="achievement-text-single">@localizer["Achieve2Text"]</div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: Solar Energy -->
+                    <div class="achievement-row-item">
+                        <div class="achievement-icon-octa">
+                            <i class="fas fa-solar-panel"></i>
+                        </div>
+                        <div class="achievement-content-text">
+                            <div class="achievement-text-single">@localizer["Achieve3Text"]</div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4: Technical Training -->
+                    <div class="achievement-row-item">
+                        <div class="achievement-icon-octa">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="achievement-content-text">
+                            <div class="achievement-text-single">@localizer["Achieve4Text"]</div>
+                        </div>
+                    </div>
+
+                    <!-- Item 5: Partnerships -->
+                    <div class="achievement-row-item">
+                        <div class="achievement-icon-octa">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="achievement-content-text">
+                            <div class="achievement-text-single">@localizer["Achieve5Text"]</div>
+                        </div>
+                    </div>
+
+                    <!-- Item 6: Local Manufacturing -->
+                    <div class="achievement-row-item">
+                        <div class="achievement-icon-octa">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="achievement-content-text">
+                            <div class="achievement-text-single">@localizer["Achieve6Text"]</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────
+         7. LATEST NEWS SECTION
+         ────────────────────────────────────────── -->
+    <section class="emdad-news-section" id="news">
+        <div class="emdad-wrap">
+            <div class="projects-section-layout">
+
+                <!-- Left Column -->
+                <div class="section-head-left">
+                    <h2>@(isRtl ? "آخر الأخبار" : "Latest News")</h2>
+                    <p>@(isRtl ? "ابقَ على اطلاع دائم بآخر المستجدات والإنجازات." : "Stay updated with our latest developments.")</p>
+                   
+                </div>
+
+                <!-- Right Column: 3 News Cards -->
+                <div class="news-cards-grid">
+
+                    <!-- News 1 -->
+                    <a href="@Url.Action("NewsRoom", "Home", new { area = "Customer" })" class="news-item-card">
+                        <div class="news-card-thumb">
+                            <img src="/assets/custom/NewsRoom/IMG-20250930-WA0019.jpg" alt="" loading="lazy" />
+                        </div>
+                        <div class="news-card-body">
+                            <div class="news-card-date">@(isRtl ? "10 سبتمبر 2025" : "10 Sep 2025")</div>
+                            <div class="news-card-title">@(isRtl ? "إمداد تشارك في المعرض الدولي للصناعات الدفاعية" : "EMDAD Participates in International Defense Exhibition")</div>
+                            <p class="news-card-snippet">@(isRtl ? "تعزيز أطر الشراكة الاستراتيجية والتوسع في المشروعات الصناعية المشتركة." : "Strengthening partnerships for a safer future.")</p>
+                            <span class="news-card-readmore">
+                                @(isRtl ? "اقرأ المزيد" : "Read More") <i class="fas fa-arrow-@(isRtl ? "left" : "right")"></i>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- News 2 -->
+                    <a href="@Url.Action("NewsRoom", "Home", new { area = "Customer" })" class="news-item-card">
+                        <div class="news-card-thumb">
+                            <img src="/assets/custom/NewsRoom/IMG-20251204-WA0044.jpg" alt="" loading="lazy" />
+                        </div>
+                        <div class="news-card-body">
+                            <div class="news-card-date">@(isRtl ? "25 أغسطس 2025" : "25 Aug 2025")</div>
+                            <div class="news-card-title">@(isRtl ? "فوز إمداد بمشروع بترولي جديد في قطاع الطاقة" : "New Petroleum Project Awarded")</div>
+                            <p class="news-card-snippet">@(isRtl ? "محطة فارقة أخرى تعزز مسيرة نمونا في تقديم الخدمات الهندسية المتكاملة." : "Another milestone in our journey of growth.")</p>
+                            <span class="news-card-readmore">
+                                @(isRtl ? "اقرأ المزيد" : "Read More") <i class="fas fa-arrow-@(isRtl ? "left" : "right")"></i>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- News 3 -->
+                    <a href="@Url.Action("NewsRoom", "Home", new { area = "Customer" })" class="news-item-card">
+                        <div class="news-card-thumb">
+                            <img src="/assets/custom/NewsRoom/IMG-20251204-WA0002.jpg" alt="" loading="lazy" />
+                        </div>
+                        <div class="news-card-body">
+                            <div class="news-card-date">@(isRtl ? "12 أغسطس 2025" : "12 Aug 2025")</div>
+                            <div class="news-card-title">@(isRtl ? "التقدم والريادة في حلول الطاقة المستدامة والنظيفة" : "Advancing Sustainable Energy Solutions")</div>
+                            <p class="news-card-snippet">@(isRtl ? "توسيع محفظة إمداد في تطبيقات الطاقة المتجددة ومشاريع البنية التحتية الخضراء." : "EMDAD expands its renewable energy portfolio.")</p>
+                            <span class="news-card-readmore">
+                                @(isRtl ? "اقرأ المزيد" : "Read More") <i class="fas fa-arrow-@(isRtl ? "left" : "right")"></i>
+                            </span>
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────
+         8. CTA BANNER (Exact Sunset Clouds + Glowing Globe from User Image)
+         ────────────────────────────────────────── -->
+    <section class="emdad-cta-banner">
+        <div class="emdad-cta-banner-overlay"></div>
+        <div class="emdad-wrap">
+            <div class="cta-banner-inner">
+
+                <div class="cta-banner-text">
+                    <h2>@(isRtl ? "لنبني معاً مستقبلاً أقوى" : "Let's Build a Stronger Future Together")</h2>
+                    <p>@(isRtl ? "شارك إمداد للحلول الصناعية المتكاملة في بناء شراكة موثوقة ومبتكرة ومستدامة تدعم تطلعاتكم." : "Partner with EMDAD for reliable, innovative and sustainable industrial solutions.")</p>
+                </div>
+
+                <a href="@Url.Action("ContactUs", "Home", new { area = "Customer" })" class="btn-cta-contact">
+                    <span>@(isRtl ? "تواصل معنا اليوم" : "Contact Us Today")</span>
+                    <i class="fas fa-arrow-@(isRtl ? "left" : "right")"></i>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────
+         9. EGYPTIAN NATIONAL PRIDE STRIP
+         ────────────────────────────────────────── -->
+    <section class="egyptian-pride-strip">
+        <div class="emdad-wrap">
+            <div class="egyptian-pride-inner">
+                <div class="egyptian-pride-graphic">
+                    <div class="egyptian-pride-text">
+                        PROUD TO SUPPORT<br />A STRONGER EGYPT
+                    </div>
+                    <!-- Minimalist Pyramids + Eagle outline SVG -->
+                    <svg width="60" height="38" viewBox="0 0 70 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 6L4 38H40L22 6Z" stroke="#d4af37" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M22 6V38" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="2 2"/>
+                        <path d="M46 14L32 38H60L46 14Z" stroke="#d4af37" stroke-width="1.8" stroke-linejoin="round"/>
+                        <path d="M60 22L52 38H68L60 22Z" stroke="#d4af37" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    function toggleVideoPlayback() {
+        var vid = document.getElementById('emdadCorpVideo');
+        var icon = document.getElementById('videoPlayIcon');
+        var text = document.getElementById('videoPlayText');
+        if (vid) {
+            if (vid.paused) {
+                vid.play();
+                if (icon) icon.className = 'fas fa-pause';
+                if (text) text.innerText = '@(isRtl ? "إيقاف مؤقت" : "Pause Video")';
+            } else {
+                vid.pause();
+                if (icon) icon.className = 'fas fa-play';
+                if (text) text.innerText = '@(isRtl ? "تشغيل الفيديو" : "Play Video")';
+            }
+        }
+    }
+
+    function toggleVideoMute() {
+        var vid = document.getElementById('emdadCorpVideo');
+        var icon = document.getElementById('videoMuteIcon');
+        if (vid) {
+            vid.muted = !vid.muted;
+            if (icon) {
+                icon.className = vid.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+            }
+        }
+    }
+</script>

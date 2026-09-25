@@ -1,0 +1,674 @@
+@model HomeVM
+
+@{
+    var isRtl = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
+    ViewData["Title"] = localizer["EmdadCompanyName"].Value ?? (isRtl ? "شركة إمداد للصناعات الدفاعية والميكانيكية والبترولية والتقنية" : "Emdad for Defense, Mechanical, Petroleum & Energy Industries");
+    IEnumerable<Category> mainCategories = ViewBag.MainCategories;
+}
+
+<style>
+    :root {
+        /* DARK SECTION PALETTE */
+        --emd-dark-bg: #071524;
+        --emd-dark-surface: #0b1f33;
+        --emd-dark-card: #0f2c4a;
+        --emd-dark-card-hover: #153c64;
+        --emd-dark-border: rgba(197, 160, 89, 0.3);
+        --emd-dark-text-bright: #ffffff;
+        --emd-dark-text-silver: #d1dde8;
+        --emd-dark-text-muted: #8ea8bf;
+
+        /* LIGHT SECTION PALETTE (CRISP & PREMIUM) */
+        --emd-light-bg: #f8fafc;
+        --emd-light-surface: #ffffff;
+        --emd-light-card: #ffffff;
+        --emd-light-card-alt: #f1f5f9;
+        --emd-light-border: rgba(15, 23, 42, 0.1);
+        --emd-light-border-gold: rgba(197, 160, 89, 0.35);
+        --emd-light-text-main: #071524;
+        --emd-light-text-body: #334e68;
+        --emd-light-text-muted: #627d98;
+
+        /* METALLIC BRUSHED GOLD PALETTE */
+        --emd-gold-100: #fef8eb;
+        --emd-gold-200: #fbf0d3;
+        --emd-gold-300: #f0d59a;
+        --emd-gold-400: #dfbe79;
+        --emd-gold-500: #c5a059;
+        --emd-gold-600: #a47f36;
+        --emd-gold-700: #8c6721;
+        --emd-gold-gradient: linear-gradient(135deg, #dfbe79 0%, #c5a059 50%, #8c6721 100%);
+        --emd-gold-glow: 0 0 25px rgba(197, 160, 89, 0.28);
+
+        /* TYPOGRAPHY */
+        --emd-font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+        --emd-font-display: @(isRtl ? "'Cairo', 'Segoe UI', sans-serif" : "'Oswald', 'Segoe UI', sans-serif");
+        --emd-font-sans: @(isRtl ? "'Cairo', 'Segoe UI', sans-serif" : "'IBM Plex Sans', 'Segoe UI', sans-serif");
+
+        --emd-radius-xs: 4px;
+        --emd-radius-sm: 8px;
+        --emd-radius-md: 14px;
+        --emd-radius-lg: 20px;
+        --emd-radius-xl: 28px;
+
+        --emd-trans: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* GLOBAL BASE RESETS */
+    .emdad-page-root {
+        position: relative;
+        width: 100%;
+        background-color: var(--emd-light-bg);
+        font-family: var(--emd-font-sans);
+        overflow-x: hidden;
+        isolation: isolate;
+    }
+
+    .emdad-page-root *,
+    .emdad-page-root *::before,
+    .emdad-page-root *::after {
+        box-sizing: border-box;
+    }
+
+    /* FLUID CONTAINER UP TO 4K / 3840px */
+    .emdad-container {
+        width: 100%;
+        max-width: 1380px;
+        margin-inline: auto;
+        padding-inline: clamp(16px, 3.2vw, 44px);
+    }
+
+    @@media (min-width: 1600px) {
+        .emdad-container { max-width: 1560px; }
+    }
+    @@media (min-width: 2200px) {
+        .emdad-container { max-width: 1980px; }
+    }
+
+    /* SHARED BADGES */
+    .emd-badge-light {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        background: rgba(197, 160, 89, 0.12);
+        border: 1px solid rgba(164, 127, 54, 0.35);
+        border-radius: var(--emd-radius-xs);
+        font-family: var(--emd-font-mono);
+        font-size: clamp(10px, 0.75vw, 12px);
+        font-weight: 700;
+        letter-spacing: @(isRtl ? "0" : "1.2px");
+        color: var(--emd-gold-700);
+        text-transform: uppercase;
+    }
+    .emd-badge-light::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--emd-gold-600);
+    }
+
+    /* HEADINGS */
+    .emd-title-light {
+        font-family: var(--emd-font-display);
+        font-size: clamp(26px, 3.2vw, 52px);
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: @(isRtl ? "0" : "-0.5px");
+        text-transform: uppercase;
+        color: var(--emd-light-text-main);
+        margin: 14px 0 0;
+    }
+    .emd-title-light span {
+        color: var(--emd-gold-600);
+        background: linear-gradient(135deg, var(--emd-gold-700), var(--emd-gold-500));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .emd-subtitle-light {
+        font-size: clamp(14px, 1.05vw, 18px);
+        line-height: 1.8;
+        color: var(--emd-light-text-muted);
+        max-width: 800px;
+        margin: 14px 0 0;
+    }
+
+    /* BUTTONS */
+    .emd-cta-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        min-height: 50px;
+        padding: 12px 26px;
+        font-family: var(--emd-font-mono);
+        font-size: clamp(11px, 0.85vw, 13.5px);
+        font-weight: 700;
+        letter-spacing: @(isRtl ? "0" : "1.2px");
+        text-transform: uppercase;
+        text-decoration: none !important;
+        border-radius: var(--emd-radius-xs);
+        transition: all 0.35s var(--emd-trans);
+        overflow: hidden;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .emd-cta-btn-gold {
+        background: var(--emd-gold-gradient);
+        color: #040e1a !important;
+        border: 1px solid var(--emd-gold-300);
+        box-shadow: 0 8px 24px rgba(197, 160, 89, 0.3);
+    }
+    .emd-cta-btn-gold:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 32px rgba(197, 160, 89, 0.45);
+        color: #040e1a !important;
+        filter: brightness(1.06);
+    }
+
+    /* ==========================================================================
+       SECTION 5: ☀️ LIGHT SECTION — THE 5 CORE INDUSTRY SECTORS (IMAGES 4 & 5)
+       ========================================================================== */
+    .emd-sectors-hub-section {
+        padding: clamp(75px, 9vh, 130px) 0;
+        background: #ffffff;
+        position: relative;
+    }
+
+    .emd-sector-tabs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-top: clamp(28px, 3.5vh, 46px);
+        margin-bottom: clamp(30px, 4vh, 50px);
+        background: var(--emd-light-card-alt);
+        padding: 8px;
+        border-radius: var(--emd-radius-lg);
+        border: 1px solid var(--emd-light-border);
+    }
+
+    .emd-sector-tab-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 14px 10px;
+        border-radius: var(--emd-radius-md);
+        background: transparent;
+        border: 1px solid transparent;
+        color: var(--emd-light-text-body);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+    .emd-sector-tab-btn i {
+        font-size: 20px;
+        color: var(--emd-light-text-muted);
+        transition: color 0.3s ease;
+    }
+    .emd-sector-tab-btn span.tab-title {
+        font-family: var(--emd-font-display);
+        font-size: clamp(12px, 0.85vw, 15px);
+        font-weight: 700;
+        line-height: 1.25;
+    }
+    .emd-sector-tab-btn.active {
+        background: #ffffff;
+        border-color: var(--emd-gold-500);
+        color: var(--emd-gold-700);
+        box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+    }
+    .emd-sector-tab-btn.active i {
+        color: var(--emd-gold-600);
+    }
+
+    .emd-sector-pane {
+        display: none;
+        animation: emdFadeIn 0.5s var(--emd-trans) forwards;
+    }
+    .emd-sector-pane.active {
+        display: block;
+    }
+    @@keyframes emdFadeIn {
+        from { opacity: 0; transform: translateY(14px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .emd-sector-card {
+        background: #ffffff;
+        border: 1.5px solid var(--emd-light-border-gold);
+        border-radius: var(--emd-radius-xl);
+        padding: clamp(28px, 3.5vw, 55px);
+        box-shadow: 0 16px 45px rgba(15, 23, 42, 0.06);
+    }
+
+    .emd-sector-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: clamp(30px, 4vw, 65px);
+        align-items: center;
+    }
+
+    .emd-sector-items-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin: 24px 0 30px;
+    }
+
+    .emd-sector-item-box {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        background: var(--emd-light-card-alt);
+        border: 1px solid var(--emd-light-border);
+        border-radius: var(--emd-radius-sm);
+        transition: all 0.3s ease;
+        text-decoration: none !important;
+    }
+    .emd-sector-item-box:hover {
+        background: var(--emd-gold-100);
+        border-color: var(--emd-gold-500);
+        transform: translateX(@(isRtl ? "-4px" : "4px"));
+    }
+    .emd-sector-item-box i {
+        font-size: 16px;
+        color: var(--emd-gold-600);
+        flex-shrink: 0;
+    }
+    .emd-item-text {
+        font-size: clamp(13px, 0.95vw, 15px);
+        font-weight: 700;
+        color: var(--emd-light-text-main);
+        line-height: 1.35;
+    }
+
+    .emd-sector-visual {
+        position: relative;
+        min-height: clamp(320px, 40vh, 480px);
+        border-radius: var(--emd-radius-lg);
+        overflow: hidden;
+        border: 1px solid var(--emd-light-border-gold);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        background: #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .emd-sector-visual model-viewer {
+        width: 100%;
+        height: 100%;
+        min-height: clamp(320px, 40vh, 480px);
+        --poster-color: transparent;
+    }
+    .emd-sector-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+    .emd-sector-card:hover .emd-sector-visual img {
+        transform: scale(1.05);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN BREAKPOINTS
+       ========================================================================== */
+    @@media (max-width: 1200px) {
+        .emd-sector-tabs {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @@media (max-width: 992px) {
+        .emd-sector-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .emd-sector-card {
+            padding: 20px 16px;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .emd-sector-tabs {
+            grid-template-columns: 1fr 1fr;
+        }
+        .emd-sector-items-list {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .emd-sector-tabs {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="emdad-page-root" dir="@(isRtl ? "rtl" : "ltr")">
+
+    <!-- ======================================================================
+         5. ☀️ LIGHT SECTION — THE 5 CORE INDUSTRY SECTORS (IMAGES 4 & 5)
+         ====================================================================== -->
+    <section class="emd-sectors-hub-section" id="emdadSectorsHub">
+        <div class="emdad-container">
+            
+            <div class="text-center">
+                <div class="emd-badge-light"><span>@localizer["SectorsBadge"]</span></div>
+                <h2 class="emd-title-light">@localizer["SectorsMainTitle"]</h2>
+                <p class="emd-subtitle-light mx-auto">
+                    @localizer["SectorsMainSubtitle"]
+                </p>
+            </div>
+
+            <!-- Sector Tabs -->
+            <div class="emd-sector-tabs" role="tablist">
+                
+                <button type="button" class="emd-sector-tab-btn active" data-target="sector-defense">
+                    <i class="fas fa-shield-halved"></i>
+                    <span class="tab-title">@localizer["MilitaryIndustriesTitle"]</span>
+                </button>
+
+                <button type="button" class="emd-sector-tab-btn" data-target="sector-petroleum">
+                    <i class="fas fa-oil-well"></i>
+                    <span class="tab-title">@localizer["PetroleumIndustriesTitle"]</span>
+                </button>
+
+                <button type="button" class="emd-sector-tab-btn" data-target="sector-energy">
+                    <i class="fas fa-solar-panel"></i>
+                    <span class="tab-title">@localizer["EnergySolutionsTitle"]</span>
+                </button>
+
+                <button type="button" class="emd-sector-tab-btn" data-target="sector-heavy">
+                    <i class="fas fa-tractor"></i>
+                    <span class="tab-title">@localizer["HeavyEquipmentTitle"]</span>
+                </button>
+
+               @*  <button type="button" class="emd-sector-tab-btn" data-target="sector-tech">
+                    <i class="fas fa-microchip"></i>
+                    <span class="tab-title">@localizer["TechInnovationTitle"]</span>
+                </button> *@
+
+            </div>
+
+            <!-- PANE 1: MILITARY INDUSTRIES -->
+            <div class="emd-sector-pane active" id="sector-defense">
+                <div class="emd-sector-card">
+                    <div class="emd-sector-grid">
+                        <div>
+                            <div class="emd-badge-light"><span>@localizer["MilitaryIndustriesTitle"]</span></div>
+                            <h3 class="emd-title-light">@localizer["DefenseHeroTitle"]</h3>
+                            <p class="emd-subtitle-light">
+                                @localizer["Pillar1Desc"]
+                            </p>
+
+                            <div class="emd-sector-items-list">
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-truck-monster"></i>
+                                    <span class="emd-item-text">@localizer["MilItem1"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-crosshairs"></i>
+                                    <span class="emd-item-text">@localizer["MilItem2"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-fighter-jet"></i>
+                                    <span class="emd-item-text">@localizer["MilItem3"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-tower-broadcast"></i>
+                                    <span class="emd-item-text">@localizer["MilItem4"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-microchip"></i>
+                                    <span class="emd-item-text">@localizer["MilItem5"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-wrench"></i>
+                                    <span class="emd-item-text">@localizer["MilItem6"]</span>
+                                </a>
+                            </div>
+
+                            <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-cta-btn emd-cta-btn-gold">
+                                <span>@localizer["ExploreDefense"]</span>
+                                <i class="fas @(isRtl ? "fa-arrow-left" : "fa-arrow-right")"></i>
+                            </a>
+                        </div>
+
+                        <div class="emd-sector-visual">
+                            <img src="~/assets/custom/IMAGE/ChatGPT Image Sep 11, 2026, 10_08_47 PM.png" alt="EMDAD Heavy Mechanical Equipment" loading="lazy" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANE 2: PETROLEUM INDUSTRIES -->
+            <div class="emd-sector-pane" id="sector-petroleum">
+                <div class="emd-sector-card">
+                    <div class="emd-sector-grid">
+                        <div>
+                            <div class="emd-badge-light"><span>@localizer["PetroleumIndustriesTitle"]</span></div>
+                            <h3 class="emd-title-light">@localizer["PetroleumHeroTitle"]</h3>
+                            <p class="emd-subtitle-light">
+                                @localizer["PetroleumHeroDesc"]
+                            </p>
+
+                            <div class="emd-sector-items-list">
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-oil-well"></i>
+                                    <span class="emd-item-text">@localizer["PetItem1"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span class="emd-item-text">@localizer["PetItem2"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-warehouse"></i>
+                                    <span class="emd-item-text">@localizer["PetItem3"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-water"></i>
+                                    <span class="emd-item-text">@localizer["PetItem4"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-tools"></i>
+                                    <span class="emd-item-text">@localizer["PetItem5"]</span>
+                                </a>
+                            </div>
+
+                            <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-cta-btn emd-cta-btn-gold">
+                                <span>@localizer["ExplorePetroleum"]</span>
+                                <i class="fas @(isRtl ? "fa-arrow-left" : "fa-arrow-right")"></i>
+                            </a>
+                        </div>
+
+                        <div class="emd-sector-visual">
+                            <img src="~/assets/custom/IMAGE/Untitled.png" alt="EMDAD Heavy Mechanical Equipment" loading="lazy" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANE 3: ENERGY SOLUTIONS -->
+            <div class="emd-sector-pane" id="sector-energy">
+                <div class="emd-sector-card">
+                    <div class="emd-sector-grid">
+                        <div>
+                            <div class="emd-badge-light"><span>@localizer["EnergySolutionsTitle"]</span></div>
+                            <h3 class="emd-title-light">@localizer["SolarHeroTitle"]</h3>
+                            <p class="emd-subtitle-light">
+                                @localizer["SolarHeroDesc"]
+                            </p>
+
+                            <div class="emd-sector-items-list">
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-solar-panel"></i>
+                                    <span class="emd-item-text">@localizer["EngItem1"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-battery-full"></i>
+                                    <span class="emd-item-text">@localizer["EngItem2"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-bolt"></i>
+                                    <span class="emd-item-text">@localizer["EngItem3"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-leaf"></i>
+                                    <span class="emd-item-text">@localizer["EngItem4"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span class="emd-item-text">@localizer["EngItem5"]</span>
+                                </a>
+                            </div>
+
+                            <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-cta-btn emd-cta-btn-gold">
+                                <span>@localizer["ExploreSolar"]</span>
+                                <i class="fas @(isRtl ? "fa-arrow-left" : "fa-arrow-right")"></i>
+                            </a>
+                        </div>
+
+                        <div class="emd-sector-visual">
+                            <img src="~/assets/custom/images/emdad_solar_energy_hero.jpg" alt="EMDAD Solar Energy" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANE 4: HEAVY EQUIPMENT & INDUSTRIAL SOLUTIONS -->
+            <div class="emd-sector-pane" id="sector-heavy">
+                <div class="emd-sector-card">
+                    <div class="emd-sector-grid">
+                        <div>
+                            <div class="emd-badge-light"><span>@localizer["HeavyEquipmentTitle"]</span></div>
+                            <h3 class="emd-title-light">@localizer["HeavyMechHeroTitle"]</h3>
+                            <p class="emd-subtitle-light">
+                                @localizer["HeavyMechHeroDesc"]
+                            </p>
+
+                            <div class="emd-sector-items-list">
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-tractor"></i>
+                                    <span class="emd-item-text">@localizer["HvyItem1"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-industry"></i>
+                                    <span class="emd-item-text">@localizer["HvyItem2"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-fire"></i>
+                                    <span class="emd-item-text">@localizer["HvyItem3"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-building-circle-check"></i>
+                                    <span class="emd-item-text">@localizer["HvyItem4"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-headset"></i>
+                                    <span class="emd-item-text">@localizer["HvyItem5"]</span>
+                                </a>
+                            </div>
+
+                            <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-cta-btn emd-cta-btn-gold">
+                                <span>@localizer["ExploreHeavyMech"]</span>
+                                <i class="fas @(isRtl ? "fa-arrow-left" : "fa-arrow-right")"></i>
+                            </a>
+                        </div>
+
+                        <div class="emd-sector-visual">
+                            <img src="~/assets/custom/images/emdad_cnc_heavy_mech.jpg" alt="EMDAD Heavy Mechanical Equipment" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANE 5: TECHNOLOGY & INNOVATION (OPTIONAL) -->
+            @* <div class="emd-sector-pane" id="sector-tech">
+                <div class="emd-sector-card">
+                    <div class="emd-sector-grid">
+                        <div>
+                            <div class="emd-badge-light"><span>@localizer["TechInnovationTitle"]</span></div>
+                            <h3 class="emd-title-light">@localizer["TechInnovationTitle"]</h3>
+                            <p class="emd-subtitle-light">
+                                @localizer["LocalMfgPowerDesc"]
+                            </p>
+
+                            <div class="emd-sector-items-list">
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-shield-virus"></i>
+                                    <span class="emd-item-text">@localizer["TechItem1"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-brain"></i>
+                                    <span class="emd-item-text">@localizer["TechItem2"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-lock"></i>
+                                    <span class="emd-item-text">@localizer["TechItem3"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-desktop"></i>
+                                    <span class="emd-item-text">@localizer["TechItem4"]</span>
+                                </a>
+                                <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-sector-item-box">
+                                    <i class="fas fa-microscope"></i>
+                                    <span class="emd-item-text">@localizer["TechItem5"]</span>
+                                </a>
+                            </div>
+
+                            <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="emd-cta-btn emd-cta-btn-gold">
+                                <span>@localizer["OurServices"]</span>
+                                <i class="fas @(isRtl ? "fa-arrow-left" : "fa-arrow-right")"></i>
+                            </a>
+                        </div>
+
+                        <div class="emd-sector-visual">
+                            <img src="~/assets/custom/New Civil image/CNC-milling-machine-on-action-.jpg" alt="EMDAD High-Tech Engineering" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+            </div> *@
+
+        </div>
+    </section>
+
+</div>
+
+<!-- 3D MODEL VIEWER SCRIPT -->
+<script type="module" src="https://unpkg.com/@@google/model-viewer/dist/model-viewer.min.js"></script>
+
+<!-- ======================================================================
+     INTERACTIVE SECTORS TABS SWITCHER LOGIC
+     ====================================================================== -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const tabBtns = document.querySelectorAll(".emd-sector-tab-btn");
+        const panes = document.querySelectorAll(".emd-sector-pane");
+
+        tabBtns.forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                const targetId = this.getAttribute("data-target");
+
+                tabBtns.forEach(function (b) { b.classList.remove("active"); });
+                panes.forEach(function (p) { p.classList.remove("active"); });
+
+                this.classList.add("active");
+                const targetPane = document.getElementById(targetId);
+                if (targetPane) {
+                    targetPane.classList.add("active");
+                }
+            });
+        });
+    });
+</script>

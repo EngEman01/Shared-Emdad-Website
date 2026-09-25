@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BestServices" xml:space="preserve">
+    <value>For You, we strive to provide the best services.</value>
+  </data>
+  <data name="CivilianIndustries" xml:space="preserve">
+    <value>Petroleum Materials and Heavy Mechanical Equipment</value>
+  </data>
+  <data name="CivilianIndustries1" xml:space="preserve">
+    <value>Space Technologies, Energy &amp; Advanced Industries</value>
+  </data>
+  <data name="CivilianIndustriesContent" xml:space="preserve">
+    <value>The "Emdad" team possesses extensive experience in petroleum materials and logistics services, with partnerships with leading global and local companies, enabling us to provide the most advanced and innovative solutions. We are also committed to applying the highest standards of quality and safety in all stages of production and supply.</value>
+  </data>
+  <data name="CivilianIndustriesContentNew" xml:space="preserve">
+    <value>We provide integrated petroleum products, equipment, and services that ensure operational efficiency, safety, and business continuity in the oil, gas, and heavy mechanical equipment sectors.</value>
+  </data>
+  <data name="CivilianIndustriesContentNew1" xml:space="preserve">
+    <value>We deliver specialized equipment and technologies for space programs and agencies, integrated solutions for crude oil and solar energy sectors, as well as heavy mechanical equipment and CNC machinery, supporting industrial advancement, maximizing operational efficiency, and enhancing the sustainability of strategic projects.</value>
+  </data>
+  <data name="DefenseIndustries" xml:space="preserve">
+    <value>Defence Industries</value>
+  </data>
+  <data name="DefenseIndustriesContent" xml:space="preserve">
+    <value>"Emdad" Company is one of the leading companies in providing integrated solutions in the field of military defense industries, military products, military equipment, and military raw materials. The company was established with the aim of meeting the needs of both local and international markets by providing high-quality equipment and products in the fields of defense, and modern technology. We are distinguished by offering exceptional services and products that meet the needs of the Armed Forces.</value>
+  </data>
+  <data name="DefenseIndustriesContentNew" xml:space="preserve">
+    <value>We provide military-grade equipment, materials, and systems that support operational readiness and enhance national defense capabilities.</value>
+  </data>
+  <data name="DefenseIndustriesContentNew1" xml:space="preserve">
+    <value>We provide advanced defense products and systems engineered to the highest standards of quality and reliability, supporting operational readiness, strengthening defense capabilities, and meeting the requirements of military and security sectors.</value>
+  </data>
+  <data name="DoItWithPassion" xml:space="preserve">
+    <value>We love what we do and we do it with passion!</value>
+  </data>
+  <data name="DoItWithPassionContent" xml:space="preserve">
+    <value>At Emdad Company, we recognize the importance of innovation and technology in driving progress. Therefore, we allocate a significant portion of our resources to research and development, working to introduce new and advanced technologies that enhance our performance and provide effective solutions for our clients.
+
+By leveraging modern technologies such as artificial intelligence, 3D printing, and smart systems, we ensure the delivery of high-quality products that meet the needs of all the sectors we serve.
+
+Emdad is considered one of the leading companies in defense technology, providing the latest military devices and equipment characterized by efficiency and reliability. The company also offers comprehensive petroleum logistics solutions, including fuel pumps, occupational safety and health equipment, fire trucks and firefighting tools, water treatment and industrial wastewater treatment units, tanker trucks for petroleum transport, and industrial furnace igniters with various capacities.
+
+Emdad adopts the latest technologies across all its fields — from advanced military technology to petroleum applications and logistics services. We are committed to delivering integrated and distinguished solutions that contribute to achieving safety and security while meeting the growing market demands in defense, industry, and petroleum logistics services.</value>
+  </data>
+  <data name="DoItWithPassionContentNew" xml:space="preserve">
+    <value>A trusted provider of defense industries, petroleum, and heavy mechanical equipment solutions, supporting vital sectors through innovation, manufacturing, and strategic partnerships.</value>
+  </data>
+  <data name="DoItWithPassionContentNew2" xml:space="preserve">
+    <value>Emdad is a leading industrial company specializing in defense solutions, petroleum, and heavy mechanical equipment, supporting national and large-scale projects through the integration of local manufacturing capabilities, advanced technology, and global supply expertise.
+
+Through our strategic cooperation with the Arab Organization for Industrialization (AOI), we contribute to strengthening local industries and meeting the needs of both local and international markets.</value>
+  </data>
+  <data name="DoItWithPassionContentNew3" xml:space="preserve">
+    <value>At Emdad, innovation is a key driver of our growth. We continuously invest in advanced technologies to enhance our solutions and improve performance across all sectors we serve.
+
+By adopting modern systems and engineering practices, we deliver efficient, reliable, and future-ready solutions that meet evolving industry demands and support critical operations.</value>
+  </data>
+  <data name="DoItWithPassionContentNew4" xml:space="preserve">
+    <value>EMDAD is a specialized company providing advanced industrial and technological solutions across defense products, equipment and technologies used in space programs and agencies, crude oil, heavy mechanical equipment, CNC machinery, and solar energy. The company supports strategic and development projects by combining engineering expertise, modern technologies, and global supply networks to deliver reliable products and solutions that meet the needs of local, regional, and international markets while maintaining the highest standards of quality and efficiency.</value>
+  </data>
+  <data name="DoItWithPassionContentNew5" xml:space="preserve">
+    <value>Innovation and continuous development are at the core of EMDAD's growth strategy. We are committed to adopting the latest technologies and advanced engineering solutions to enhance the efficiency of our products and services across the defense, space, energy, and heavy industry sectors. Through continuous investment in modern technologies and the implementation of global best practices, we deliver reliable and sustainable solutions that optimize operational performance, adapt to evolving industry demands, and support both current and future strategic projects.</value>
+  </data>
+  <data name="GetToKnowEmad" xml:space="preserve">
+    <value>Excellence in Defense Industries, Petroleum, and Heavy Mechanical Equipment: Discover Emdad</value>
+  </data>
+  <data name="GetToKnowEmad1" xml:space="preserve">
+    <value>Integrated Expertise in Defense, Space, Energy &amp; Advanced Manufacturing</value>
+  </data>
+  <data name="GetToKnowEmadContent" xml:space="preserve">
+    <value>"Emdad" Company is one of the leading companies providing integrated solutions in the fields of military defense industries, military products, military equipment, military raw materials, as well as petroleum materials, and the requirements and supplies of petroleum companies, in addition to projects related to petroleum companies.</value>
+  </data>
+  <data name="GetToKnowEmadContent1" xml:space="preserve">
+    <value>The company was established with the aim of meeting the needs of the local market, including state institutions, authorities, ministries, governmental bodies, and public sector companies within the Arab Republic of Egypt, in both the military and petroleum sectors, by providing the required supplies with the highest quality standards in the fields of defense and petroleum, and by utilizing the most advanced modern technologies.</value>
+  </data>
+  <data name="GetToKnowEmadContent2" xml:space="preserve">
+    <value>Emdad contributes to the development of the military and petroleum industries, through the supply of safety and occupational health equipment, fire trucks, complete firefighting systems, water purification and industrial wastewater treatment units, tanker trucks for transporting petroleum materials, and industrial furnace igniters with various capacities.</value>
+  </data>
+  <data name="GetToKnowEmadContent3" xml:space="preserve">
+    <value>The Emdad team possesses extensive experience in the defense industries, along with global and local partnerships, enabling the company to deliver advanced, reliable, and high-quality solutions.</value>
+  </data>
+  <data name="MainWork" xml:space="preserve">
+    <value>Our Main Areas of Work</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1" xml:space="preserve">
+    <value>The company was established to operate in military industries, military products, military equipment, and military raw materials.
+</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1.1" xml:space="preserve">
+    <value>First: Military Industries
+</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1.1.1" xml:space="preserve">
+    <value>Emdad operates under official representation from the Arab Organization for Industrialization and official representation from Arab International Optronics (affiliated with the National Service Projects Organization of the Egyptian Ministry of Defense), as they are the only two specialized entities in military industries in the Arab Republic of Egypt.
+</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1.1.2" xml:space="preserve">
+    <value>Emdad owns the largest military production line within the Arab Organization for Industrialization.
+</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1.2" xml:space="preserve">
+    <value>Second: Military Products
+</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1.2.1" xml:space="preserve">
+    <value>Emdad is engaged in marketing military products manufactured in the Arab Republic of Egypt across the globe.
+</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1.2.2" xml:space="preserve">
+    <value>Emdad works on supplying and providing the military products required by the Arab Republic of Egypt.</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1.3" xml:space="preserve">
+    <value>Third: Military Equipment</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1.3.1" xml:space="preserve">
+    <value>Where Emdad works to supply what the Arab Republic of Egypt needs of equipment used in military industries.</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1.3.2" xml:space="preserve">
+    <value>Emdad works in marketing the military equipment that is manufactured in the Arab Republic of Egypt all around the world.</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1.4" xml:space="preserve">
+    <value>Fourth: Military Materials</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1.4.1" xml:space="preserve">
+    <value>Where Emdad works to supply what the Arab Republic of Egypt needs of materials used in military industries.</value>
+  </data>
+  <data name="WhatMakesUsStandOutcontent1.4.2" xml:space="preserve">
+    <value>Emdad works in marketing the military materials that are manufactured in the Arab Republic of Egypt all around the world.</value>
+  </data>
+  <data name="WhatMakesUsStandOutContent2" xml:space="preserve">
+    <value>The company was established to operate in petroleum materials, the needs and supplies of petroleum companies, and projects related to petroleum companies.
+</value>
+  </data>
+  <data name="WhatMakesUsStandOutContent2.1" xml:space="preserve">
+    <value>The company provides petroleum materials required by petroleum companies owned by the Egyptian Ministry of Petroleum, including crude oil, gas, marine diesel, and more........
+</value>
+  </data>
+  <data name="WhatMakesUsStandOutContent2.2" xml:space="preserve">
+    <value>The company operates in supplying and providing all equipment and requirements for petroleum companies, including fuel pumps, occupational health and safety equipment, firefighting vehicles and all firefighting systems required by petroleum companies, water purification and treatment units, industrial wastewater treatment systems, tanker trucks for transporting petroleum products, industrial furnace igniters with different capacities, security surveillance systems and their dedicated cameras, low-current network equipment including computer networks, alarm systems and related systems, all types of machinery spare parts (based on drawings and reverse engineering) through the Digital Manufacturing Center (DMC), as well as overhauls, maintenance, and balancing of mechanical and rotating parts required by petroleum companies, petroleum gas analysis laboratory supplies, various oils, greases, and vehicle filters, metal drilling machines, CNC machines, electric welding wires and welding machines, fans, printer drums and laser toners, and all other requirements of petroleum companies. The company also supplies medical products including biometric fingerprint devices, capillary therapy devices, blood analysis devices, and measuring equipment required by hospitals affiliated with petroleum companies, in addition to providing office and hotel furniture and fittings, computer equipment including desktops, laptops, tablets, and television screens of various sizes required by offices affiliated with petroleum companies.</value>
+  </data>
+  <data name="WhatMakesUsStandOutContent2.3" xml:space="preserve">
+    <value>The company operates in the field of projects carried out by petroleum companies, in alignment and partnership with them.
+</value>
+  </data>
+  <data name="WhatMakesUsStandOutContent3" xml:space="preserve">
+    <value>The company operates in the fields of research and development for civilian/military products in accordance with legal requirements and quality standards for both the local and international markets.</value>
+  </data>
+  <data name="WhatMakesUsStandOutContent4" xml:space="preserve">
+    <value>The company includes a selected group of top professional experts who are well-versed in the latest global developments, while taking into account all economic changes.</value>
+  </data>
+  <data name="WhatMakesUsStandOutContent5" xml:space="preserve">
+    <value>The company has a systematic and developed marketing plan that contributes to enhancing the success of its products and services in both the local and international markets.</value>
+  </data>
+  <data name="WhatMakesUsStandOutContent6" xml:space="preserve">
+    <value>Market study and analysis of current and future trends, customer needs, and competitors.</value>
+  </data>
+  <data name="WhatMakesUsStandOutContent7" xml:space="preserve">
+    <value>Using technological tools and global software for effective communication to ensure the delivery of products with the required technical specifications.</value>
+  </data>
+  <data name="WhatMakesUsStandOutContent8" xml:space="preserve">
+    <value>Utilizing all the company's resources for advertising and marketing to craft a clear message that highlights the advantages of our products, such as quality, advanced technology, and exceptional logistics services.</value>
+  </data>
+  <data name="WhatMakesUsStandOutContent9" xml:space="preserve">
+    <value>Utilizing all the company's resources for advertising and marketing to craft a clear message that highlights the advantages of our products, such as quality, advanced technology, and exceptional logistics services.</value>
+  </data>
+  <data name="WhatMakesUsStandOutContent10" xml:space="preserve">
+    <value>Utilizing all the company's resources for advertising and marketing to craft a clear message that highlights the advantages of our products, such as quality, advanced technology, and exceptional logistics services.</value>
+  </data>
+</root>

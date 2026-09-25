@@ -1,0 +1,846 @@
+@model IEnumerable<Product>
+
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    var isRtl = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
+    var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name.ToLower();
+    ViewData["Title"] = isRtl ? "كتالوج المنتجات والمعدات | شركة إمداد" : "Products & Equipment Catalog | EMDAD";
+
+    var productList = Model?.ToList() ?? new List<Product>();
+    var categoryName = productList.FirstOrDefault()?.Category?.CategoryTranslations?.FirstOrDefault()?.Name;
+}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   EMDAD PRODUCTS CATALOG - LUXURY INDUSTRIAL DARK THEME
+   Scoped to avoid clashes with legacy .product-card CSS
+   ============================================================ */
+
+:root {
+    --cat-gold: #e5ba4e;
+    --cat-gold-bright: #f5d070;
+    --cat-gold-dark: #b88d22;
+    --cat-gold-glow: rgba(229, 186, 78, 0.4);
+    
+    --cat-bg: #050d18;
+    --cat-card-bg: #091728;
+    --cat-card-hover: #0c1f36;
+    --cat-border: rgba(229, 186, 78, 0.25);
+    
+    --cat-text-white: #ffffff;
+    --cat-text-light: #e2eaf4;
+    --cat-text-muted: #8fa5bc;
+    
+    --font-ar: 'Cairo', sans-serif;
+    --font-en: 'Inter', sans-serif;
+}
+
+.emdad-products-page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--cat-bg);
+    color: var(--cat-text-white);
+    font-family: @(isRtl ? "var(--font-ar)" : "var(--font-en)");
+    direction: @(isRtl ? "rtl" : "ltr");
+    overflow-x: hidden;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+/* Side Geometric Golden Accents */
+.cat-side-ribbon-left,
+.cat-side-ribbon-right {
+    position: absolute;
+    top: 35%;
+    transform: translateY(-50%);
+    width: 150px;
+    height: 380px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.cat-side-ribbon-left {
+    left: 0;
+    background: linear-gradient(135deg, rgba(229, 186, 78, 0.22) 0%, transparent 60%);
+    clip-path: polygon(0 0, 100% 50%, 0 100%, 0 85%, 70% 50%, 0 15%);
+}
+
+.cat-side-ribbon-right {
+    right: 0;
+    background: linear-gradient(225deg, rgba(229, 186, 78, 0.22) 0%, transparent 60%);
+    clip-path: polygon(100% 0, 0 50%, 100% 100%, 100% 85%, 30% 50%, 100% 15%);
+}
+
+.cat-main-container {
+    max-width: 1260px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Top Breadcrumb Bar */
+.prod-top-bar {
+    padding: 24px 0 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-bottom: 1px solid rgba(229, 186, 78, 0.15);
+    margin-bottom: 35px;
+}
+
+.prod-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--cat-text-muted);
+}
+
+.prod-breadcrumbs a {
+    color: var(--cat-text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.prod-breadcrumbs a:hover {
+    color: var(--cat-gold);
+}
+
+.prod-breadcrumbs .sep {
+    color: rgba(229, 186, 78, 0.5);
+    font-size: 0.75rem;
+}
+
+.prod-breadcrumbs .current {
+    color: var(--cat-gold);
+    font-weight: 700;
+}
+
+.btn-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 18px;
+    border-radius: 30px;
+    background: rgba(229, 186, 78, 0.08);
+    border: 1px solid rgba(229, 186, 78, 0.3);
+    color: var(--cat-gold);
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.btn-back-link:hover {
+    background: var(--cat-gold);
+    color: #050d18;
+    box-shadow: 0 0 15px rgba(229, 186, 78, 0.4);
+    transform: translateX(@(isRtl ? "4px" : "-4px"));
+}
+
+/* Hero Header */
+.prod-hero-header {
+    background: radial-gradient(circle at center right, rgba(9, 23, 40, 0.9) 0%, rgba(5, 13, 24, 0.98) 100%);
+    border: 1px solid rgba(229, 186, 78, 0.2);
+    border-radius: 20px;
+    padding: 40px 36px;
+    margin-bottom: 40px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.prod-hero-header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    @(isRtl ? "right: 0;" : "left: 0;");
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--cat-gold-bright), var(--cat-gold-dark));
+}
+
+.prod-header-flex {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.prod-header-text {
+    max-width: 680px;
+}
+
+.prod-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.prod-eyebrow-badge {
+    background: rgba(229, 186, 78, 0.15);
+    border: 1px solid rgba(229, 186, 78, 0.4);
+    color: var(--cat-gold);
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.prod-title {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+}
+
+.prod-title .gold-txt {
+    color: var(--cat-gold);
+    background: linear-gradient(135deg, #f5d070 0%, #e5ba4e 60%, #c99c2a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.prod-subtitle {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--cat-text-muted);
+    margin: 0;
+}
+
+/* Search Box */
+.prod-search-box {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 320px;
+}
+
+.search-input-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.search-input-wrap i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    @(isRtl ? "right: 16px;" : "left: 16px;");
+    color: var(--cat-gold);
+    font-size: 0.95rem;
+    pointer-events: none;
+}
+
+.prod-search-input {
+    width: 100%;
+    background: rgba(5, 13, 24, 0.85);
+    border: 1px solid rgba(229, 186, 78, 0.35);
+    border-radius: 30px;
+    padding: 12px 20px;
+    @(isRtl ? "padding-right: 44px;" : "padding-left: 44px;");
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.prod-search-input:focus {
+    border-color: var(--cat-gold);
+    box-shadow: 0 0 15px rgba(229, 186, 78, 0.35);
+    background: rgba(9, 23, 40, 0.95);
+}
+
+.prod-count-pill {
+    background: rgba(229, 186, 78, 0.12);
+    border: 1px solid rgba(229, 186, 78, 0.3);
+    color: var(--cat-gold);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   EMDAD PRODUCTS GRID (FIXED CARD DIMENSIONS)
+   ============================================================ */
+.emdad-prod-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 28px !important;
+    width: 100% !important;
+    margin-bottom: 50px;
+}
+
+.emdad-prod-card {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 490px;
+    background: var(--cat-card-bg) !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    border: 1px solid var(--cat-border) !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45) !important;
+    position: relative !important;
+    text-decoration: none !important;
+    color: inherit !important;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.emdad-prod-card:hover {
+    transform: translateY(-8px) !important;
+    background: var(--cat-card-hover) !important;
+    border-color: rgba(229, 186, 78, 0.7) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), 0 0 22px rgba(229, 186, 78, 0.3) !important;
+}
+
+/* Product Visual Stage */
+.emdad-prod-visual {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    background: radial-gradient(circle at center, #0f2742 0%, #061324 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(229, 186, 78, 0.15);
+}
+
+.emdad-prod-visual img {
+    max-width: 88%;
+    max-height: 190px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
+}
+
+.emdad-prod-card:hover .emdad-prod-visual img {
+    transform: scale(1.08) translateY(-4px);
+}
+
+.emdad-fallback-icon {
+    font-size: 4rem;
+    color: var(--cat-gold);
+    opacity: 0.3;
+}
+
+/* Status Pill in Corner */
+.emdad-prod-badge {
+    position: absolute;
+    top: 14px;
+    @(isRtl ? "right: 14px;" : "left: 14px;");
+    background: rgba(5, 13, 24, 0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(229, 186, 78, 0.4);
+    color: var(--cat-gold);
+    font-size: 0.76rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+}
+
+/* Card Body */
+.emdad-prod-body {
+    padding: 24px 22px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.emdad-prod-tag {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--cat-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.emdad-prod-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+    word-break: break-word;
+}
+
+.emdad-prod-card:hover .emdad-prod-title {
+    color: var(--cat-gold-bright);
+}
+
+.emdad-prod-divider {
+    width: 40px;
+    height: 2.5px;
+    background: linear-gradient(to @(isRtl ? "left" : "right"), var(--cat-gold), transparent);
+    margin-bottom: 14px;
+    transition: width 0.3s ease;
+}
+
+.emdad-prod-card:hover .emdad-prod-divider {
+    width: 65px;
+}
+
+.emdad-prod-snippet {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--cat-text-muted);
+    margin: 0 0 20px 0;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Card Action Footer */
+.emdad-prod-footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.emdad-btn-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--cat-gold);
+    transition: all 0.3s ease;
+}
+
+.emdad-prod-card:hover .emdad-btn-text {
+    color: #ffffff;
+    transform: translateX(@(isRtl ? "-6px" : "6px"));
+}
+
+.emdad-btn-arrow {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(229, 186, 78, 0.12);
+    border: 1px solid rgba(229, 186, 78, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cat-gold);
+    font-size: 0.82rem;
+    transition: all 0.3s ease;
+}
+
+.emdad-prod-card:hover .emdad-btn-arrow {
+    background: var(--cat-gold);
+    color: #050d18;
+    box-shadow: 0 0 14px rgba(229, 186, 78, 0.5);
+}
+
+/* Empty State */
+.emdad-prod-empty {
+    grid-column: 1 / -1;
+    background: var(--cat-card-bg);
+    border: 1px dashed rgba(229, 186, 78, 0.3);
+    border-radius: 20px;
+    padding: 60px 24px;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    color: var(--cat-gold);
+    margin-bottom: 18px;
+    opacity: 0.8;
+}
+
+.empty-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.empty-desc {
+    font-size: 0.95rem;
+    color: var(--cat-text-muted);
+    max-width: 480px;
+    margin: 0 auto 24px auto;
+}
+
+/* Bottom Benefits Bar */
+.prod-benefits-bar {
+    border-top: 1px solid rgba(229, 186, 78, 0.2);
+    padding: 40px 0 20px 0;
+    margin-top: 20px;
+}
+
+.prod-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.prod-benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.prod-benefit-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: rgba(229, 186, 78, 0.12);
+    border: 1px solid rgba(229, 186, 78, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cat-gold);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.prod-benefit-item:hover .prod-benefit-icon {
+    background: var(--cat-gold);
+    color: #050d18;
+    transform: scale(1.08);
+}
+
+.prod-benefit-txt h4 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+}
+
+.prod-benefit-txt p {
+    font-size: 0.8rem;
+    color: var(--cat-text-muted);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Responsive */
+@@media (max-width: 1024px) {
+    .emdad-prod-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 22px !important;
+    }
+    .prod-benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+@@media (max-width: 768px) {
+    .prod-header-flex {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .prod-search-box {
+        min-width: 100%;
+    }
+}
+
+@@media (max-width: 620px) {
+    .emdad-prod-grid {
+        grid-template-columns: 1fr !important;
+        max-width: 440px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .prod-benefits-grid {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .prod-title {
+        font-size: 1.8rem;
+    }
+}
+</style>
+
+<div class="emdad-products-page">
+
+    <div class="cat-side-ribbon-left"></div>
+    <div class="cat-side-ribbon-right"></div>
+
+    <div class="cat-main-container">
+
+        <!-- Breadcrumb & Back Bar -->
+        <div class="prod-top-bar">
+            <div class="prod-breadcrumbs">
+                <a asp-area="Customer" asp-controller="Home" asp-action="Index">
+                    <i class="fa-solid fa-house"></i>
+                    <span>@(isRtl ? "الرئيسية" : "Home")</span>
+                </a>
+                <span class="sep"><i class="fa-solid @(isRtl ? "fa-angle-left" : "fa-angle-right")"></i></span>
+                <a asp-area="Customer" asp-controller="Category" asp-action="Categories">
+                    <span>@(isRtl ? "القطاعات والمنتجات" : "Product Categories")</span>
+                </a>
+                @if (!string.IsNullOrEmpty(categoryName))
+                {
+                    <span class="sep"><i class="fa-solid @(isRtl ? "fa-angle-left" : "fa-angle-right")"></i></span>
+                    <span class="current">@categoryName</span>
+                }
+                else
+                {
+                    <span class="sep"><i class="fa-solid @(isRtl ? "fa-angle-left" : "fa-angle-right")"></i></span>
+                    <span class="current">@(isRtl ? "كتالوج المنتجات والمعدات" : "Equipment Catalog")</span>
+                }
+            </div>
+
+            <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="btn-back-link">
+                <i class="fa-solid @(isRtl ? "fa-arrow-right" : "fa-arrow-left")"></i>
+                <span>@(isRtl ? "العودة للقطاعات" : "All Categories")</span>
+            </a>
+        </div>
+
+        <!-- Hero Header -->
+        <section class="prod-hero-header">
+            <div class="prod-header-flex">
+                <div class="prod-header-text">
+                    <div class="prod-eyebrow">
+                        <span class="prod-eyebrow-badge">
+                            <i class="fa-solid fa-cube"></i>
+                            @(isRtl ? "كتالوج المعدات والمنتجات الهندسية" : "INDUSTRIAL EQUIPMENT & PRODUCTS")
+                        </span>
+                    </div>
+
+                    <h1 class="prod-title">
+                        @(isRtl ? "الآليات والمعدات" : "Machinery & Equipment")
+                        <span class="gold-txt">@(isRtl ? "المعتمدة" : "Catalog")</span>
+                    </h1>
+
+                    <p class="prod-subtitle">
+                        @if (isRtl)
+                        {
+                            <span>نقدم منظومة شاملة من الآليات والمعدات الثقيلة وحلول التوريد الصناعية المطابقة لأعلى المواصفات القياسية الدولية، لدعم استمرارية وكفاءة مشاريعكم الكبرى.</span>
+                        }
+                        else
+                        {
+                            <span>Delivering a comprehensive portfolio of heavy machinery and industrial supply solutions compliant with international quality standards.</span>
+                        }
+                    </p>
+                </div>
+
+                <!-- Live Search Box -->
+                <div class="prod-search-box">
+                    <div class="search-input-wrap">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text"
+                               id="productSearchInput"
+                               class="prod-search-input"
+                               placeholder="@(isRtl ? "ابحث عن منتج أو معدة..." : "Search products...")"
+                               autocomplete="off" />
+                    </div>
+                    <span class="prod-count-pill" id="prodCountPill">
+                        <span id="activeProdCount">@productList.Count</span> @(isRtl ? "منتج" : "Products")
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Grid (Scoped) -->
+        <div class="emdad-prod-grid" id="productGrid">
+            @if (productList.Any())
+            {
+                foreach (var product in productList)
+                {
+                    if (product == null) continue;
+                    var prodName = product.ProductTranslations?.FirstOrDefault()?.Name ?? (isRtl ? "منتج هندسي" : "Industrial Product");
+                    var prodDesc = product.ProductTranslations?.FirstOrDefault()?.Description ?? "";
+                    // Clean HTML tags and entities for snippet
+                    var plainSnippet = System.Text.RegularExpressions.Regex.Replace(prodDesc, "<.*?>", string.Empty)
+                                        .Replace("&nbsp;", " ").Trim();
+                    var firstImg = product.Images?.FirstOrDefault()?.ImageURL;
+                    var imgUrl = !string.IsNullOrEmpty(firstImg) ? Url.Content("~/" + firstImg) : Url.Content("~/images/default_product.png");
+
+                    <a asp-area="Customer"
+                       asp-controller="Product"
+                       asp-action="Show"
+                       asp-route-id="@product.Id"
+                       class="emdad-prod-card js-product-item"
+                       data-title="@prodName.ToLower()">
+
+                        <div class="emdad-prod-visual">
+                            <span class="emdad-prod-badge">
+                                <i class="fa-solid fa-check"></i>
+                                <span>@(isRtl ? "جاهز للتوريد" : "Industrial Ready")</span>
+                            </span>
+                            <img src="@imgUrl"
+                                 alt="@prodName"
+                                 loading="lazy"
+                                 onerror="this.onerror=null; this.src='@Url.Content("~/images/default_product.png")';" />
+                        </div>
+
+                        <div class="emdad-prod-body">
+                            <div class="emdad-prod-tag">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span>@(isRtl ? "مواصفات قياسية دولية" : "Heavy-Duty Standard")</span>
+                            </div>
+
+                            <h3 class="emdad-prod-title">
+                                @prodName
+                            </h3>
+
+                       
+                            <div class="emdad-prod-footer">
+                                <span class="emdad-btn-text">
+                                    <span>@(isRtl ? "عرض المواصفات والتفاصيل" : "View Specifications")</span>
+                                </span>
+                                <div class="emdad-btn-arrow">
+                                    <i class="fa-solid @(isRtl ? "fa-arrow-left" : "fa-arrow-right")"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
+            }
+            else
+            {
+                <div class="emdad-prod-empty">
+                    <div class="empty-icon">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+                    <h3 class="empty-title">@(isRtl ? "لا توجد منتجات متوفرة حالياً في هذا القسم" : "No Products Found in This Category")</h3>
+                    <p class="empty-desc">
+                        @(isRtl ? "يتم تحديث قائمة المنتجات والمعدات بصورة مستمرة. يمكنك استكشاف باقي القطاعات أو التواصل مع فريقنا مباشرة." : "Our product catalog is updated regularly. Explore other categories or contact our engineering team directly.")
+                    </p>
+                    <a asp-area="Customer" asp-controller="Category" asp-action="Categories" class="btn-back-link" style="padding: 10px 24px;">
+                        <span>@(isRtl ? "العودة للقطاعات" : "Explore All Categories")</span>
+                    </a>
+                </div>
+            }
+
+            <!-- Search No Results Box -->
+            <div class="emdad-prod-empty" id="searchNoResults" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h3 class="empty-title">@(isRtl ? "لم يتم العثور على منتجات مطابقة" : "No Matching Products")</h3>
+                <p class="empty-desc">
+                    @(isRtl ? "جرّب البحث بكلمات أخرى أو تصفح كامل الكتالوج." : "Try searching with different terms or view the full list.")
+                </p>
+            </div>
+        </div>
+
+        <!-- Bottom Capabilities Bar -->
+        <section class="prod-benefits-bar">
+            <div class="prod-benefits-grid">
+                <div class="prod-benefit-item">
+                    <div class="prod-benefit-icon">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="prod-benefit-txt">
+                        <h4>@(isRtl ? "شهادات جودة معتمدة" : "ISO Certified Quality")</h4>
+                        <p>@(isRtl ? "مطابقة تامة للمواصفات العالمية ISO 9001 & 45001" : "Compliant with ISO 9001:2015 & ISO 45001:2018")</p>
+                    </div>
+                </div>
+
+                <div class="prod-benefit-item">
+                    <div class="prod-benefit-icon">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <div class="prod-benefit-txt">
+                        <h4>@(isRtl ? "دقة تصنيع وهندسة" : "Precision Engineering")</h4>
+                        <p>@(isRtl ? "أحدث خطوط التشغيل الميكانيكي والتحكم الرقمي" : "Advanced CNC machining and fabrication lines")</p>
+                    </div>
+                </div>
+
+                <div class="prod-benefit-item">
+                    <div class="prod-benefit-icon">
+                        <i class="fa-solid fa-truck-ramp-box"></i>
+                    </div>
+                    <div class="prod-benefit-txt">
+                        <h4>@(isRtl ? "توريد متكامل للمشاريع" : "Turnkey Supply")</h4>
+                        <p>@(isRtl ? "حلول لوجستية وتوريدات سريعة للمجمعات الصناعية" : "Rapid delivery and logistics for major complexes")</p>
+                    </div>
+                </div>
+
+                <div class="prod-benefit-item">
+                    <div class="prod-benefit-icon">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div class="prod-benefit-txt">
+                        <h4>@(isRtl ? "دعم واستشارات فنية" : "Technical Consultation")</h4>
+                        <p>@(isRtl ? "فريق هندسي متخصص للإشراف والدعم المستمر" : "Dedicated engineering team for ongoing support")</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var searchInput = document.getElementById('productSearchInput');
+        var items = document.querySelectorAll('.js-product-item');
+        var noResults = document.getElementById('searchNoResults');
+        var countEl = document.getElementById('activeProdCount');
+
+        if (!searchInput || items.length === 0) return;
+
+        searchInput.addEventListener('input', function () {
+            var query = this.value.trim().toLowerCase();
+            var visibleCount = 0;
+
+            items.forEach(function (card) {
+                var title = card.getAttribute('data-title') || '';
+                if (title.indexOf(query) !== -1 || query === '') {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (countEl) countEl.textContent = visibleCount;
+            if (noResults) noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+        });
+    });
+</script>
+}

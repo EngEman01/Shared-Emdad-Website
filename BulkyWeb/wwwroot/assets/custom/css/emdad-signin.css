@@ -1,0 +1,15 @@
+.emdad-main-page{
+    margin-top:200px;
+}
+.sign-register-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #BFBFBF !important;
+}
+.sign-register-input::-moz-placeholder { /* Firefox 19+ */
+   color: #BFBFBF !important;
+}
+.sign-register-input:-ms-input-placeholder { /* IE 10+ */
+   color: #BFBFBF !important;
+}
+.sign-register-input:-moz-placeholder { /* Firefox 18- */
+   color: #BFBFBF !important;
+}

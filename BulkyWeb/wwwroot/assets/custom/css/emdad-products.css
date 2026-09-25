@@ -1,0 +1,281 @@
+/* Global Colors */
+:root {
+    --primary-color: #2C3E4F;
+    --secondary-color: #ecbd7b;
+    --hover-color: rgba(236, 189, 123, 0.1);
+    --card-border-color: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.15);
+}
+
+/* General page styles */
+body {
+    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h5 {
+    font-family: 'Arial', sans-serif;
+}
+
+/* Filter Section */
+.filter-container {
+    background-color: #ffffffb0;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.filter-container h5 {
+    margin-bottom: 20px;
+}
+
+.filter-section label {
+    font-weight: bold;
+    color: #fff;
+}
+
+.filter-section select,
+.filter-section input {
+    background-color: #34495e;
+    border-color: #34495e;
+    color: white;
+}
+
+.filter-section input:focus,
+.filter-section select:focus {
+    background-color: var(--primary-color);
+    border-color: var(--secondary-color);
+}
+
+#priceRange {
+    background: linear-gradient(to right, #34495e, var(--secondary-color));
+}
+
+/* Product Cards */
+.product-card {
+    margin-bottom: 30px;
+    transition: all 0.3s ease-in-out;
+}
+
+.product-name{
+    color: #34495e;
+}
+
+.product-card:hover {
+    transform: translate(-2 px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-card .card {
+    border: 1px solid var(--card-border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .card {
+    transform: scale(1.02);
+}
+
+.product-card .card-body {
+    padding: 20px;
+    background-color: white;
+    height: 250px;
+}
+
+.product-card .card-title {
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-card .card-text {
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+
+.product-card .card-text strong {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+/* Price Range Label */
+#priceRangeLabel {
+    font-weight: bold;
+}
+
+/* Customize range slider */
+.form-range {
+    padding: 5px;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .product-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 992px) {
+    .product-card {
+        flex: 0 0 48%;
+        max-width: 48%;
+    }
+}
+
+@media (min-width: 993px) {
+    .product-card {
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+}
+
+/* Spacing for content */
+.mt-5 {
+    margin-top: 5rem !important;
+}
+
+.form-range {
+    padding: 5px;
+    width: 100%;
+}
+
+/* Change color of the slider thumb (indicator) */
+.form-range::-webkit-slider-thumb {
+    background-color: var(--primary-color);
+    /* Primary color for thumb */
+    border: 2px solid #fff;
+    /* Optional: Add white border around the thumb */
+    border-radius: 50%;
+    /* Optional: Make thumb round */
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    transition: background-color 0.3s ease;
+}
+
+.form-range::-moz-range-thumb {
+    background-color: var(--primary-color);
+    /* Primary color for thumb */
+    border: 2px solid #fff;
+    /* Optional: Add white border around the thumb */
+    border-radius: 50%;
+    /* Optional: Make thumb round */
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Customize the slider track color */
+.form-range::-webkit-slider-runnable-track {
+    /* background: linear-gradient(to right, #34495e, var(--secondary-color)); */
+    height: 8px;
+}
+
+.form-range::-moz-range-track {
+    /* background: linear-gradient(to right, #34495e, var(--secondary-color)); */
+    height: 8px;
+}
+
+/* Optional: Hover effect on the slider thumb */
+.form-range::-webkit-slider-thumb:hover {
+    background-color: darken(var(--primary-color), 10%);
+}
+
+.form-range::-moz-range-thumb:hover {
+    background-color: darken(var(--primary-color), 10%);
+}
+
+.product-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.product-description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.cta-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.slider {
+    height: 500px;
+    background-color: #ddd;
+}
+
+.slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#productList .col-6,
+#productList .col-sm-4,
+#productList .col-md-3,
+#productList .col-lg-2 {
+    padding: 0 5px; /* Horizontal spacing between columns */
+}
+
+#productList .card {
+    margin-bottom: 10px; /* Adds space between rows of cards */
+}
+
+.card-body {
+    padding: 10px;
+}
+
+@media (min-width: 768px) {
+    #productList .col-md-3 {
+        margin: 0 10px;
+    }
+}
+
+@media (min-width: 992px) {
+    #productList .col-lg-2 {
+        margin: 0 10px;
+    }
+}
+
+.product-card {
+    overflow:hidden;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+
+.image-container-product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.product-image {
+    object-fit: cover;
+    height: 400px; 
+}
+
+.card-body {
+    flex-grow: 1;
+}
+
+.product-name {
+    margin: 0;
+    height: 40px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

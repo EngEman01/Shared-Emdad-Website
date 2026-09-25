@@ -1,0 +1,28 @@
+/****************************** start contact pages *******************************************/
+.emdad-contact-form {
+    margin-bottom: 25px;
+}
+.emdad-contact-social-links{
+    justify-content: center;
+}
+.emdad-contact-block-border { 
+    min-height: 155px; 
+}
+.emdad-rounded{
+    border-radius: 10px;
+}
+.emdad-contact-icon { 
+    margin-top: -25px; 
+}
+.emdad-rounded-btn:hover {
+    color: #fff;
+}
+.emdad-single-gallery-pg{
+    font-size: 14px;
+    line-height: 18px;
+    padding: 11px 25px;
+}
+.emdad-single-gallery-pg:hover{
+    color: #fff;
+}
+/* end contact us pages  */

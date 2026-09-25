@@ -1,0 +1,62 @@
+﻿ @model ProductVM
+
+@{
+	var defaultCulture = localizationOptions.Value.DefaultRequestCulture.Culture.Name;
+}
+
+<!-- Model for Adding/Updating Products -->
+<div class="container allPage mt-5 p-4 wow fadeInRight">
+	<h2 class="text-center">@(Model.Product.Id == 0 ? "Add New" : "Update") Product</h2>
+	<div class="modal-body">
+
+		<form asp-area="Admin" asp-controller="Product" asp-action="Upsert" method="post" enctype="multipart/form-data">
+			@* <div asp-validation-summary="All" class="text-danger"></div> *@
+			<!-- Hiddent Inputs-->
+
+			<input asp-for="Product.Id" hidden />
+            <input asp-for="ProductTranslation.Id" hidden />
+            <input asp-for="ProductTranslation.ProductId" value="@Model.Product.Id" hidden />
+			<input asp-for="ProductTranslation.Language" value="@defaultCulture" hidden />
+
+			<div class="mb-3">
+				<label asp-for="ProductTranslation.Name" class="form-label">Product Name</label>
+				<input asp-for="ProductTranslation.Name" type="text" class="form-control" id="ProductName" required>
+				<span asp-validation-for="@Model.ProductTranslation.Name" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="ProductTranslation.Description" for="ProductDescription" class="form-label">Product Description</label>
+				<textarea asp-for="ProductTranslation.Description" class="form-control" id="ProductDescription" rows="3" required></textarea>
+				<span asp-validation-for="@Model.ProductTranslation.Description" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="Product.Category" for="ProductCategory" class="form-label">Category</label>
+				<select asp-for="Product.CategoryId" class="form-select" id="ProductCategory" required>
+					<option value="" disabled selected>Select a Category</option>
+					@if (Model.Categories != null && Model.Categories.Any())
+					{
+						@foreach (var category in Model.Categories)
+						{
+							<option value="@category.Id">@category.CategoryTranslations?.FirstOrDefault(t => t.Language.ToLower() == defaultCulture.ToLower()).Name</option>
+						}
+					}
+				</select>
+				<span asp-validation-for="@Model.Product.CategoryId" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label for="ProductImages" class="form-label">Product Images</label>
+				<input type="file" name="files" class="form-control" id="ProductImages" accept="image/*" multiple>
+			</div>
+			<button type="submit" class="btn btn-outline-primary">@(Model.Product.Id == 0 ? "Create" : "Update")</button>
+		</form>
+
+	</div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

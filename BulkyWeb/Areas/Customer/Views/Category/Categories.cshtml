@@ -1,0 +1,861 @@
+@model IEnumerable<Category>
+
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    var isRtl = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
+    var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name.ToLower();
+    ViewData["Title"] = isRtl ? "قطاعات المنتجات | شركة إمداد" : "Product Categories | EMDAD";
+
+    // Map categories from Model if available
+    var defCat = Model?.FirstOrDefault(c => c.Id == 1 || (c.CategoryTranslations != null && c.CategoryTranslations.Any(t => t.Name.Contains("Defen") || t.Name.Contains("دفاع"))));
+    var civilCat = Model?.FirstOrDefault(c => c.Id == 2 || (c.CategoryTranslations != null && c.CategoryTranslations.Any(t => t.Name.Contains("Civil") || t.Name.Contains("مدني") || t.Name.Contains("Heavy"))));
+    var energyCat = Model?.FirstOrDefault(c => c.CategoryTranslations != null && c.CategoryTranslations.Any(t => t.Name.Contains("Energy") || t.Name.Contains("طاقة") || t.Name.Contains("بترول")));
+    var miningCat = Model?.FirstOrDefault(c => c.CategoryTranslations != null && c.CategoryTranslations.Any(t => t.Name.Contains("Mining") || t.Name.Contains("تعدين")));
+
+    var energyId = energyCat?.Id ?? (Model?.ElementAtOrDefault(0)?.Id ?? 1);
+    var miningId = miningCat?.Id ?? (Model?.ElementAtOrDefault(1)?.Id ?? 2);
+    var heavyId = civilCat?.Id ?? (Model?.ElementAtOrDefault(2)?.Id ?? 2);
+    var defenseId = defCat?.Id ?? (Model?.ElementAtOrDefault(3)?.Id ?? 1);
+}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   EMDAD CATEGORIES PAGE - 100% MATCH TO REFERENCE DESIGN
+   Bilingual (AR / EN) - Luxury Royal Industrial Theme
+   ============================================================ */
+
+:root {
+    --cat-gold: #e5ba4e;
+    --cat-gold-bright: #f5d070;
+    --cat-gold-dark: #b88d22;
+    --cat-gold-glow: rgba(229, 186, 78, 0.4);
+    
+    --cat-bg: #050d18;
+    --cat-card-bg: #091728;
+    --cat-card-hover: #0c1f36;
+    --cat-border: rgba(229, 186, 78, 0.25);
+    
+    --cat-text-white: #ffffff;
+    --cat-text-light: #e2eaf4;
+    --cat-text-muted: #8fa5bc;
+    
+    --font-ar: 'Cairo', sans-serif;
+    --font-en: 'Inter', sans-serif;
+}
+
+.emdad-categories-page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--cat-bg);
+    color: var(--cat-text-white);
+    font-family: @(isRtl ? "var(--font-ar)" : "var(--font-en)");
+    direction: @(isRtl ? "rtl" : "ltr");
+    overflow-x: hidden;
+    position: relative;
+    padding-bottom: 30px;
+}
+
+/* Side Geometric Golden Accents (< and > ribbons from reference design) */
+.cat-side-ribbon-left,
+.cat-side-ribbon-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 160px;
+    height: 380px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+.cat-side-ribbon-left {
+    left: 0;
+    background: linear-gradient(135deg, rgba(229, 186, 78, 0.25) 0%, transparent 60%);
+    clip-path: polygon(0 0, 100% 50%, 0 100%, 0 85%, 70% 50%, 0 15%);
+}
+
+.cat-side-ribbon-right {
+    right: 0;
+    background: linear-gradient(225deg, rgba(229, 186, 78, 0.25) 0%, transparent 60%);
+    clip-path: polygon(100% 0, 0 50%, 100% 100%, 100% 85%, 30% 50%, 100% 15%);
+}
+
+.cat-main-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================================
+   1. HERO SECTION ("OUR PRODUCTS")
+   ============================================================ */
+.cat-hero-section {
+    padding: 55px 0 45px 0;
+}
+
+.cat-hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1.2fr;
+    gap: 45px;
+    align-items: center;
+}
+
+.cat-hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cat-eyebrow-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.cat-eyebrow-text {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: var(--cat-gold);
+    letter-spacing: @(isRtl ? "0.5px" : "2px");
+    text-transform: uppercase;
+}
+
+.cat-eyebrow-line {
+    width: 48px;
+    height: 1.5px;
+    background: var(--cat-gold);
+}
+
+.cat-hero-title {
+    font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: #ffffff;
+    margin: 0 0 18px 0;
+    letter-spacing: -0.5px;
+}
+
+.cat-hero-title span {
+    display: block;
+    color: #ffffff;
+}
+
+.cat-hero-desc {
+    font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+    line-height: 1.75;
+    color: var(--cat-text-muted);
+    margin: 0 0 32px 0;
+    max-width: 520px;
+}
+
+.btn-cat-explore {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #f5d070 0%, #e5ba4e 100%);
+    color: #060d17;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 13px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(229, 186, 78, 0.35);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    width: fit-content;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cat-explore:hover {
+    background: linear-gradient(135deg, #fae08f 0%, #edc55c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(229, 186, 78, 0.5);
+    color: #000000;
+}
+
+/* Hero Visual & Slider Showcase */
+.cat-hero-showcase {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(229, 186, 78, 0.2);
+    background: #071322;
+}
+
+.cat-hero-slide-track {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9.6;
+    overflow: hidden;
+}
+
+.cat-hero-slide-item {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.cat-hero-slide-item.active {
+    opacity: 1;
+}
+
+.cat-hero-slide-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Slider Controls on bottom-right of image (matches screenshot) */
+.cat-hero-slider-bar {
+    position: absolute;
+    bottom: 18px;
+    @(isRtl ? "left: 20px;" : "right: 20px;")
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    z-index: 5;
+    background: rgba(5, 13, 24, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 6px 14px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.slider-indicators {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.slider-dash {
+    height: 3.5px;
+    width: 18px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dash.active {
+    width: 32px;
+    background: var(--cat-gold);
+}
+
+.slider-nav-arrows {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.slider-arrow-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.slider-arrow-btn:hover {
+    border-color: var(--cat-gold);
+    color: var(--cat-gold);
+    background: rgba(229, 186, 78, 0.15);
+}
+
+/* ============================================================
+   2. "PRODUCT CATEGORIES" SECTION (4 Cards Grid)
+   ============================================================ */
+.cat-grid-section {
+    padding: 40px 0 55px 0;
+}
+
+.cat-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 35px;
+    flex-wrap: wrap;
+}
+
+.cat-section-header-left {
+    max-width: 620px;
+}
+
+.cat-section-title {
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.25;
+}
+
+.cat-section-desc {
+    max-width: 440px;
+    font-size: 0.94rem;
+    line-height: 1.7;
+    color: var(--cat-text-muted);
+    margin: 0;
+    @(isRtl ? "text-align: left;" : "text-align: right;")
+}
+
+@@media (max-width: 860px) {
+    .cat-section-desc {
+        text-align: inherit;
+    }
+}
+
+/* 4 Cards Grid - 100% Match to Reference Image */
+.cat-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.cat-product-card {
+    background: var(--cat-card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(229, 186, 78, 0.22);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+}
+
+.cat-product-card:hover {
+    transform: translateY(-8px);
+    background: var(--cat-card-hover);
+    border-color: rgba(229, 186, 78, 0.7);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65), 0 0 20px rgba(229, 186, 78, 0.3);
+}
+
+/* Card Visual Wrap */
+.cat-card-visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    overflow: hidden;
+}
+
+.cat-card-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.cat-product-card:hover .cat-card-visual img {
+    transform: scale(1.08);
+}
+
+/* Floating Circular Badge on the Image (bottom-left in LTR, bottom-right in RTL) */
+.cat-card-badge {
+    position: absolute;
+    bottom: -20px;
+    @(isRtl ? "right: 18px;" : "left: 18px;")
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #091728;
+    border: 2px solid var(--cat-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cat-gold);
+    font-size: 1.15rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(229, 186, 78, 0.35);
+    z-index: 3;
+    transition: all 0.35s ease;
+}
+
+.cat-product-card:hover .cat-card-badge {
+    background: var(--cat-gold);
+    color: #060d17;
+    transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(229, 186, 78, 0.6);
+}
+
+/* Card Content Area */
+.cat-card-body {
+    padding: 28px 18px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.cat-card-title {
+    font-size: 1.28rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+    transition: color 0.3s ease;
+}
+
+.cat-product-card:hover .cat-card-title {
+    color: var(--cat-gold-bright);
+}
+
+.cat-card-snippet {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--cat-text-muted);
+    margin: 0 0 20px 0;
+    flex-grow: 1;
+}
+
+.cat-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--cat-gold);
+    transition: gap 0.3s ease, color 0.3s ease;
+    margin-top: auto;
+}
+
+.cat-product-card:hover .cat-card-link {
+    color: #ffffff;
+    gap: 12px;
+}
+
+/* ============================================================
+   3. BOTTOM BENEFITS BAR (4 Items in 1 Row)
+   ============================================================ */
+.cat-benefits-bar {
+    border-top: 1px solid rgba(229, 186, 78, 0.2);
+    padding: 40px 0 20px 0;
+    margin-top: 30px;
+}
+
+.cat-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.cat-benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.benefit-icon-wrap {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: rgba(229, 186, 78, 0.12);
+    border: 1px solid rgba(229, 186, 78, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cat-gold);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.cat-benefit-item:hover .benefit-icon-wrap {
+    background: var(--cat-gold);
+    color: #060d17;
+    transform: scale(1.08);
+}
+
+.benefit-text-wrap h4 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+}
+
+.benefit-text-wrap p {
+    font-size: 0.8rem;
+    color: var(--cat-text-muted);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN
+   ============================================================ */
+@@media (max-width: 1024px) {
+    .cat-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .cat-benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+}
+
+@@media (max-width: 860px) {
+    .cat-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+    .cat-hero-content {
+        text-align: center;
+        align-items: center;
+    }
+    .cat-hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@@media (max-width: 580px) {
+    .cat-cards-grid {
+        grid-template-columns: 1fr;
+        max-width: 380px;
+        margin: 0 auto;
+    }
+    .cat-benefits-grid {
+        grid-template-columns: 1fr;
+        max-width: 380px;
+        margin: 0 auto;
+    }
+    .cat-hero-title {
+        font-size: 2.1rem;
+    }
+    .cat-section-title {
+        font-size: 1.6rem;
+    }
+}
+</style>
+
+<div class="emdad-categories-page">
+
+    <!-- Geometric side gold accents matching screenshot -->
+    <div class="cat-side-ribbon-left"></div>
+    <div class="cat-side-ribbon-right"></div>
+
+    <div class="cat-main-container">
+
+        <!-- ============================================================
+             1. HERO SECTION ("OUR PRODUCTS")
+             ============================================================ -->
+        <section class="cat-hero-section">
+            <div class="cat-hero-grid">
+
+                <!-- Left Column: Title, Description & CTA -->
+                <div class="cat-hero-content">
+                    <div class="cat-eyebrow-wrap">
+                        <span class="cat-eyebrow-text">@(isRtl ? "منتجاتنا" : "OUR PRODUCTS")</span>
+                        <span class="cat-eyebrow-line"></span>
+                    </div>
+
+                    <h1 class="cat-hero-title">
+                        @(isRtl ? "معدات موثوقة" : "Reliable Equipment")
+                        <span>@(isRtl ? "لبناء غد أكثر قوة" : "for a Stronger Tomorrow")</span>
+                    </h1>
+
+                    <p class="cat-hero-desc">
+                        @if (isRtl)
+                        {
+                            <span>في إمداد، نقدم معدات ثقيلة متطورة، وآليات صناعية وحلولاً دفاعية فائقة الجودة لدعم مشاريعكم ومواصلة تقدم أعمالكم بأعلى كفاءة.</span>
+                        }
+                        else
+                        {
+                            <span>At EMDAD, we provide high-quality heavy equipment, industrial machinery, and defense solutions to support your projects and keep your operations moving forward.</span>
+                        }
+                    </p>
+
+                    <a href="#categoriesGrid" class="btn-cat-explore">
+                        <span>@(isRtl ? "استكشف منتجاتنا" : "Explore Our Products")</span>
+                        <i class="fa-solid @(isRtl ? "fa-arrow-left" : "fa-arrow-right")"></i>
+                    </a>
+                </div>
+
+                <!-- Right Column: Hero Visual with Dump Truck & Controls -->
+                <div class="cat-hero-showcase">
+                    <div class="cat-hero-slide-track">
+                        <!-- Slide 1: Mining Dump Truck in Quarry (matches screenshot 100%) -->
+                        <div class="cat-hero-slide-item active" id="heroSlide1">
+                            <img src="/assets/custom/categories_2026/hero_mining_truck_clean.jpg" alt="Heavy Mining Equipment & Dump Truck" />
+                        </div>
+                        <!-- Slide 2: Petroleum & Energy -->
+                        <div class="cat-hero-slide-item" id="heroSlide2">
+                            <img src="/assets/custom/home-images/project-petroleum.jpg" alt="Energy & Petroleum Projects" />
+                        </div>
+                        <!-- Slide 3: Defense & Security -->
+                        <div class="cat-hero-slide-item" id="heroSlide3">
+                            <img src="/assets/custom/categories_2026/cat_defense_clean.jpg" alt="Defense Sector Equipment" />
+                        </div>
+                    </div>
+
+                    <!-- Slider Controls (Matches bottom-right in screenshot) -->
+                    <div class="cat-hero-slider-bar">
+                        <div class="slider-indicators">
+                            <span class="slider-dash active" onclick="switchHeroSlide(0)"></span>
+                            <span class="slider-dash" onclick="switchHeroSlide(1)"></span>
+                            <span class="slider-dash" onclick="switchHeroSlide(2)"></span>
+                        </div>
+                        <div class="slider-nav-arrows">
+                            <button type="button" class="slider-arrow-btn" onclick="prevHeroSlide()" aria-label="Previous">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button type="button" class="slider-arrow-btn" onclick="nextHeroSlide()" aria-label="Next">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================================
+             2. "PRODUCT CATEGORIES" SECTION (4 Cards Grid)
+             ============================================================ -->
+        <section class="cat-grid-section" id="categoriesGrid">
+            
+            <!-- Section Header -->
+            <div class="cat-section-header">
+                <div class="cat-section-header-left">
+                    <div class="cat-eyebrow-wrap" style="margin-bottom: 10px;">
+                        <span class="cat-eyebrow-text">@(isRtl ? "قطاعات المنتجات" : "PRODUCT CATEGORIES")</span>
+                        <span class="cat-eyebrow-line"></span>
+                    </div>
+                    <h2 class="cat-section-title">
+                        @(isRtl ? "حلول متخصصة لكل احتياج صناعي" : "Industry-Specific Solutions for Every Need")
+                    </h2>
+                </div>
+
+                <p class="cat-section-desc">
+                    @(isRtl ? "نقدم مجموعة متكاملة من المنتجات عبر قطاعات متعددة تشمل الطاقة، التعدين، المعدات الثقيلة، والأنظمة الدفاعية."
+                            : "We offer a wide range of products across multiple sectors, including energy, mining, heavy equipment, and defense.")
+                </p>
+            </div>
+
+            <!-- 4 Category Cards in 1 Row (100% Match to Reference Image) -->
+            <div class="cat-cards-grid">
+
+                <!-- CARD 1: Energy & Oil -->
+                <a asp-area="Customer" asp-controller="Category" asp-action="SubCategories" asp-route-categoryId="@energyId" class="cat-product-card">
+                    <div class="cat-card-visual">
+                        <img src="/assets/custom/categories_2026/cat_energy_clean.jpg" alt="Energy & Oil" loading="lazy" />
+                        <div class="cat-card-badge">
+                            <i class="fa-solid fa-oil-well"></i>
+                        </div>
+                    </div>
+                    <div class="cat-card-body">
+                        <h3 class="cat-card-title">
+                            @(isRtl ? "الطاقة والبترول" : "Energy & Oil")
+                        </h3>
+                        <p class="cat-card-snippet">
+                            @(isRtl ? "معدات النفط والغاز، خطوط الأنابيب، التكرير وحلول الطاقة المتكاملة."
+                                    : "Oil & Gas equipment, pipelines, refining and energy solutions.")
+                        </p>
+                        <div class="cat-card-link">
+                            <span>@(isRtl ? "عرض التفاصيل" : "View Details")</span>
+                            <i class="fa-solid @(isRtl ? "fa-arrow-left" : "fa-arrow-right")"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- CARD 2: Mining -->
+                <a asp-area="Customer" asp-controller="Category" asp-action="SubCategories" asp-route-categoryId="@miningId" class="cat-product-card">
+                    <div class="cat-card-visual">
+                        <img src="/assets/custom/categories_2026/cat_mining_clean.jpg" alt="Mining" loading="lazy" />
+                        <div class="cat-card-badge">
+                            <i class="fa-solid fa-mountain"></i>
+                        </div>
+                    </div>
+                    <div class="cat-card-body">
+                        <h3 class="cat-card-title">
+                            @(isRtl ? "التعدين والمناجم" : "Mining")
+                        </h3>
+                        <p class="cat-card-snippet">
+                            @(isRtl ? "معدات التعدين، الكسارات، الحفارات ومناولة المواد الخام."
+                                    : "Mining equipment, crushers, excavators and material handling.")
+                        </p>
+                        <div class="cat-card-link">
+                            <span>@(isRtl ? "عرض التفاصيل" : "View Details")</span>
+                            <i class="fa-solid @(isRtl ? "fa-arrow-left" : "fa-arrow-right")"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- CARD 3: Heavy Equipment -->
+                <a asp-area="Customer" asp-controller="Category" asp-action="SubCategories" asp-route-categoryId="@heavyId" class="cat-product-card">
+                    <div class="cat-card-visual">
+                        <img src="/assets/custom/categories_2026/cat_heavy_clean.jpg" alt="Heavy Equipment" loading="lazy" />
+                        <div class="cat-card-badge">
+                            <i class="fa-solid fa-truck-monster"></i>
+                        </div>
+                    </div>
+                    <div class="cat-card-body">
+                        <h3 class="cat-card-title">
+                            @(isRtl ? "المعدات والآليات الثقيلة" : "Heavy Equipment")
+                        </h3>
+                        <p class="cat-card-snippet">
+                            @(isRtl ? "حفارات، لوادر، بلدوزرات، شاحنات نقل ومعدات ثقيلة متنوعة."
+                                    : "Excavators, loaders, bulldozers, trucks and more.")
+                        </p>
+                        <div class="cat-card-link">
+                            <span>@(isRtl ? "عرض التفاصيل" : "View Details")</span>
+                            <i class="fa-solid @(isRtl ? "fa-arrow-left" : "fa-arrow-right")"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- CARD 4: Defense -->
+                <a asp-area="Customer" asp-controller="Category" asp-action="SubCategories" asp-route-categoryId="@defenseId" class="cat-product-card">
+                    <div class="cat-card-visual">
+                        <img src="/assets/custom/categories_2026/cat_defense_clean.jpg" alt="Defense" loading="lazy" />
+                        <div class="cat-card-badge">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                    </div>
+                    <div class="cat-card-body">
+                        <h3 class="cat-card-title">
+                            @(isRtl ? "الصناعات الدفاعية" : "Defense")
+                        </h3>
+                        <p class="cat-card-snippet">
+                            @(isRtl ? "مركبات عسكرية، أنظمة مدرعة، وتجهيزات دفاعية متطورة."
+                                    : "Military vehicles, armored systems, and defense equipment.")
+                        </p>
+                        <div class="cat-card-link">
+                            <span>@(isRtl ? "عرض التفاصيل" : "View Details")</span>
+                            <i class="fa-solid @(isRtl ? "fa-arrow-left" : "fa-arrow-right")"></i>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- ============================================================
+             3. BOTTOM BENEFITS BAR (4 Benefit Items matching screenshot)
+             ============================================================ -->
+        <section class="cat-benefits-bar">
+            <div class="cat-benefits-grid">
+
+                <!-- Benefit 1: High Quality Products -->
+                <div class="cat-benefit-item">
+                    <div class="benefit-icon-wrap">
+                        <i class="fa-solid fa-shield-check"></i>
+                    </div>
+                    <div class="benefit-text-wrap">
+                        <h4>@(isRtl ? "منتجات فائقة الجودة" : "High Quality Products")</h4>
+                        <p>@(isRtl ? "علامات موثوقة وجودة معتمدة" : "Trusted brands & certified quality")</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 2: Reliable Partnership -->
+                <div class="cat-benefit-item">
+                    <div class="benefit-icon-wrap">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <div class="benefit-text-wrap">
+                        <h4>@(isRtl ? "شراكة استراتيجية موثوقة" : "Reliable Partnership")</h4>
+                        <p>@(isRtl ? "علاقات عمل وثيقة ومستدامة" : "Long-term business relationships")</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 3: Expert Support -->
+                <div class="cat-benefit-item">
+                    <div class="benefit-icon-wrap">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div class="benefit-text-wrap">
+                        <h4>@(isRtl ? "دعم فني متخصص" : "Expert Support")</h4>
+                        <p>@(isRtl ? "خدمات هندسية ودعم ما بعد البيع" : "Technical & after-sales service")</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 4: Global Reach -->
+                <div class="cat-benefit-item">
+                    <div class="benefit-icon-wrap">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <div class="benefit-text-wrap">
+                        <h4>@(isRtl ? "امتداد وتواجد دولي" : "Global Reach")</h4>
+                        <p>@(isRtl ? "خدمة العملاء محلياً وإقليمياً" : "Serving clients worldwide")</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    // Hero Slider Functionality
+    var currentSlide = 0;
+    var slides = document.querySelectorAll('.cat-hero-slide-item');
+    var dashes = document.querySelectorAll('.slider-dash');
+    var totalSlides = slides.length;
+    var autoSlideTimer;
+
+    function switchHeroSlide(index) {
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        currentSlide = index;
+
+        slides.forEach(function (slide, i) {
+            if (i === currentSlide) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+
+        dashes.forEach(function (dash, i) {
+            if (i === currentSlide) {
+                dash.classList.add('active');
+            } else {
+                dash.classList.remove('active');
+            }
+        });
+
+        resetAutoSlide();
+    }
+
+    function nextHeroSlide() {
+        switchHeroSlide(currentSlide + 1);
+    }
+
+    function prevHeroSlide() {
+        switchHeroSlide(currentSlide - 1);
+    }
+
+    function resetAutoSlide() {
+        clearInterval(autoSlideTimer);
+        autoSlideTimer = setInterval(function () {
+            nextHeroSlide();
+        }, 5000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        resetAutoSlide();
+    });
+</script>
+}

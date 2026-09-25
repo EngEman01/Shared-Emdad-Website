@@ -1,0 +1,148 @@
+
+
+/***************************** start emdad footer *************************/
+.emdad-footer-social-links a{
+    color: inherit; 
+    display: block;
+    margin-right: 15px;
+    font-size: 22px;
+}
+.emdad-footer-links li{
+    width: 100%;
+}
+.emdad-footer-links li a{
+    color: inherit; 
+    text-decoration: none;
+    font-size: 14px;
+}
+.emdad-footer-links li a:before{
+    content: "- ";
+}
+.copyright {
+    text-align: center; 
+    font-weight: 400;
+    font-size: 14px;
+    padding: 20px 0; 
+}
+.copyright p {
+    color:inherit;
+}
+.emdad-copyright-links{
+    display: inline-block;
+}
+.emdad-copyright-links-item {
+    display: inline-block;
+}
+.emdad-copyright-links-link {
+    color:  inherit;
+    margin: 0 3px;
+}
+.emdad-copyright-links-link:hover {
+    color: inherit;
+}
+.emdad-copyright-links-link:before {
+    content: " . ";
+    margin: 0 10px; 
+}
+.emdad-third-footer-head{
+    font-size: 20px;
+}
+.emdad-footer-image {
+    background-color: #285e8d;
+}
+.emdad-footer-image .container{
+    position: relative;
+    z-index: 1000;
+}
+.emdad-footer-links li a { 
+    font-weight: 400;
+    font-size: 18px;
+    text-decoration: underline;
+    margin-bottom: 25px;
+    display: block;
+    text-decoration: none;
+    transition: 0.5s all;
+}
+
+.emdad-footer-links li a:hover{
+    color: #ecbd7b;
+    margin-right: 15px;
+}
+.emdad-footer-links li:last-child a{
+    margin-bottom: 0;
+}
+.emdad-footer-image .emdad-footer-links li a:before{
+    display: none;
+}
+.emdad-subscribe-input {
+    width: 100% !important;
+    background-color: transparent;
+    padding: 10px 20px;
+    color: #fff !important;
+    transition: all ease-in-out .3s;
+    -o-transition: all ease-in-out .3s;
+    -webkit-transition: all ease-in-out .3s;
+    -moz-transition: all ease-in-out .3s;
+}
+.emdad-subscribe-formgroup {
+    width: 100%;
+}
+.emdad-subscribe-btn{
+    padding: 8px 20px;
+    position: absolute;
+    background-color: #D2B387;
+    color: #012E57;
+    font-size: 19px;
+    left: -1px;
+    top:0;
+}
+.emdad-subscribe-input::placeholder {
+  color: #fff !important; 
+}
+.emdad-subscribe-input:focus::placeholder  {
+  color: #fff ; 
+}
+.emdad-light-background-color .emdad-subscribe-input:focus::placeholder  ,.emdad-light-background-color .emdad-subscribe-input::placeholder , .emdad-light-background-color .emdad-subscribe-input{
+  color: #333 !important; 
+}
+
+.emdad-contact-us{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.emdad-contect-info{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer {
+    padding: 20px 0;
+}
+
+.footer .container {
+    font-size: 16px;
+}
+
+.footer i {
+    color: red;
+}
+
+.footer .bg-dark {
+    background-color: #29567d !important;
+}
+
+.footer .text-muted {
+    color: #fff !important;
+}
+
+.footer .text-center {
+    text-align: center;
+}
+
+.footer a {
+    color: #ecbd7b !important;
+}
+/* end emdad footer 4 */

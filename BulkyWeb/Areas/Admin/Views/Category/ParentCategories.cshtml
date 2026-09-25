@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Category>
+
+@{
+	ViewData["Title"] = "Categories";
+}
+@{
+	var defaultCulture = localizationOptions.Value.DefaultRequestCulture.Culture.Name;
+
+}
+
+@* <div class="container mt-5">
+    <h2 class="text-center">Category Management</h2>
+
+    <!-- Add Category Button -->
+    <a asp-area="admin" asp-controller="Category" asp-action="Create" class="btn btn-primary my-3 d-block d-sm-inline-block">Add New Category</a>
+
+    <!-- Categories Table -->
+    <div class="table-responsive">
+        <table class="table table-striped" id="categoryTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="categoryTableBody">
+                @{
+                    var counter = 1;
+                }
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>@(counter++)</td>
+                        <td>@category.TranslatedName</td>
+                        <td>@Html.Raw(@category.TranslatedDescription)</td>
+                        <td>
+                            <!-- Make Image Responsive with a Flexible Width and Max Width Constraint -->
+                            <img class="category-image img-fluid" style="max-width: 120px; height: auto;" src="~/@category.ImageUrl" alt="Category Image">
+                        </td>
+                        <td>
+                            <a asp-area="Admin" asp-controller="Category" asp-action="Show" asp-route-id="@category.Id" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+                            <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                            <a asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+ *@
+
+@* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// *@
+
+
+<div class="container mt-5 mobile-font" style="width:1200px;">
+	<h2 class="text-center">Main Categories</h2>
+
+	<!-- Add Category Button -->
+	<a asp-area="admin" asp-controller="Category" asp-action="Create" class="btn btn-primary my-3 d-block d-sm-inline-block">Add New Category</a>
+
+	<!-- Categories Table -->
+	<div class="table-responsive">
+		<table class="table table-striped" id="categoryTable">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Image</th>
+					<th class="d-none d-sm-table-cell">Actions</th> <!-- Hide actions on small screens -->
+				</tr>
+			</thead>
+			<tbody id="categoryTableBody">
+				@if (Model != null &&  Model.Count() > 0)
+				{
+					var counter = 1;
+
+					@foreach (var category in Model)
+					{
+						<tr>
+							<td>@(counter++)</td>
+							<td>@category.CategoryTranslations.FirstOrDefault()?.Name</td>
+							<td width="380px">@Html.Raw(category.CategoryTranslations.FirstOrDefault()?.Description)</td>
+							<td>
+								<!-- Make Image Responsive with a Flexible Width and Max Width Constraint -->
+								<img class="category-image img-fluid" style="width: 100px; height: 100px;" src="~/@category.ImageUrl" alt="Category Image">
+							</td>
+							<td class="d-none d-sm-table-cell">
+								<!-- Desktop actions (Visible only on larger screens) -->
+								<a asp-area="Admin" asp-controller="Category" asp-action="Show" asp-route-id="@category.Id" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+								<a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+								<a asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+							</td>
+							<td class="d-sm-none">
+								<!-- Mobile actions (Visible only on small screens) -->
+								<a asp-area="Admin" asp-controller="Category" asp-action="Show" asp-route-id="@category.Id" class="btn btn-info btn-sm my-1"><i class="fas fa-eye"></i></a>
+								<a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-warning btn-sm my-1"><i class="fas fa-edit"></i></a>
+								<a asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger btn-sm my-1"><i class="fas fa-trash"></i></a>
+							</td>
+						</tr>
+					}
+				}
+				else {
+					<h2>No Main Categories yet</h2>
+				}
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+@section scripts {
+	@* <script src="~/js/categories.js"></script> *@
+}

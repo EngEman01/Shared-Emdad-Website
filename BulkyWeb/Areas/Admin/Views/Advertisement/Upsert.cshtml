@@ -1,0 +1,60 @@
+﻿ @model AdVM
+
+@{
+	var defaultCulture = localizationOptions.Value.DefaultRequestCulture.Culture.Name;
+}
+
+<!-- Model for Adding/Updating Advertisements -->
+<div class="container allPage mt-5 p-4 wow fadeInRight">
+	<h2 class="text-center">@(Model.Advertisement.Id == 0 ? "Add New" : "Update") Advertisement</h2>
+	<div class="modal-body">
+
+		<form asp-area="Admin" asp-controller="Advertisement" asp-action="Upsert" method="post" enctype="multipart/form-data">
+			@* <div asp-validation-summary="All" class="text-danger"></div> *@
+			<!-- Hiddent Inputs-->
+
+			<input asp-for="Advertisement.Id" hidden />
+            <input asp-for="AdTranslation.Id" hidden />
+            <input asp-for="AdTranslation.AdvertisementId" value="@Model.Advertisement.Id" hidden />
+			<input asp-for="AdTranslation.Language" value="@defaultCulture" hidden />
+
+			<div class="mb-3">
+				<label asp-for="AdTranslation.Name" class="form-label">Advertisement Name</label>
+				<input asp-for="AdTranslation.Name" type="text" class="form-control" id="AdvertisementName" required>
+				<span asp-validation-for="@Model.AdTranslation.Name" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="Advertisement.StartDateTime" class="form-label">Advertisement Start Date</label>
+				<input asp-for="Advertisement.StartDateTime" type="datetime-local" class="form-control" id="AdvertisementName" required>
+				<span asp-validation-for="@Model.Advertisement.StartDateTime" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="Advertisement.EndDateTime" class="form-label">Advertisement End Date</label>
+				<input asp-for="Advertisement.EndDateTime" type="datetime-local" class="form-control" id="AdvertisementName">
+				<span asp-validation-for="@Model.Advertisement.EndDateTime" class="text-danger"></span>
+			</div>
+
+
+			<div class="mb-3">
+				<label asp-for="AdTranslation.Description" for="AdvertisementDescription" class="form-label">Advertisement Description</label>
+				<textarea asp-for="AdTranslation.Description" class="form-control" id="AdvertisementDescription" rows="3" required></textarea>
+				<span asp-validation-for="@Model.AdTranslation.Description" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label for="AdvertisementImages" class="form-label">Advertisement Images</label>
+				<input type="file" name="files" class="form-control" id="AdvertisementImages" accept="image/*" multiple>
+			</div>
+			<button type="submit" class="btn btn-outline-primary">@(Model.Advertisement.Id == 0 ? "Create" : "Update")</button>
+		</form>
+
+	</div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

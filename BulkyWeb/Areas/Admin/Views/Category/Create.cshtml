@@ -1,0 +1,77 @@
+﻿@model CategoryVM
+
+@{
+	var defaultCulture = localizationOptions.Value.DefaultRequestCulture.Culture.Name;
+	IEnumerable<Category> categories = ViewBag.Categories;
+	Category parentCategory = ViewBag.ParentCategory;
+}
+
+
+<!-- Modal for Add Category -->
+<div class="container allPage mt-5 p-4 wow fadeInRight">
+	<h2 class="text-center">Add New Category</h2>
+	<div class="modal-body">
+		<form asp-area="Admin" asp-controller="Category" asp-action="create" method="post" enctype="multipart/form-data">
+
+			<input hidden asp-for="CategoryTranslation.Language" value="@defaultCulture" />
+
+			<div class="mb-3">
+				<label asp-for="CategoryTranslation.Name" for="categoryName" class="form-label"></label>
+				<input asp-for="CategoryTranslation.Name" type="text" class="form-control" required>
+				<span asp-validation-for="CategoryTranslation.Name" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="CategoryTranslation.Description" for="categoryDescription" class="form-label"></label>
+				<textarea asp-for="CategoryTranslation.Description" class="form-control" rows="3" required></textarea>
+				<span asp-validation-for="CategoryTranslation.Description" class="text-danger"></span>
+
+			</div>
+
+
+
+			<div class="mb-3">
+				<label asp-for="@Model.Category.ParentCategory" for="parentCategory" class="form-label">Parent Category</label>
+				<select required asp-for="@Model.Category.ParentCategoryId" class="form-select">
+					@if (parentCategory != null)
+					{
+						<option selected value="@parentCategory.Id">@parentCategory.CategoryTranslations?.FirstOrDefault(t => t.Language == defaultCulture)?.Name</option>
+					}
+					else {
+						<option value="" disabled selected>Select a Parent Category</option>
+					}
+					
+					<option value="0">None</option>
+					@if (categories != null && categories.Count() > 0)
+					{
+						foreach (var category in categories)
+						{
+							<option value="@category.Id">@(category.CategoryTranslations?.FirstOrDefault(t => t.Language == defaultCulture)?.Name ?? "No Name")</option>
+						}
+					}
+				</select>
+				<span asp-validation-for="@Model.Category.ParentCategoryId" class="text-danger"></span>
+			</div>
+
+
+			<div class="mb-3">
+				<label asp-for="@Model.Category.ImageUrl" for="categoryImage" class="form-label"></label>
+				<input asp-for="@Model.Category.ImageUrl" type="file" name="file" class="form-control" accept="image/*">
+				<span asp-validation-for="@Model.Category.ImageUrl" class="text-danger"></span>
+
+			</div>
+			<button type="submit" class="btn btn-primary">Create</button>
+		</form>
+	</div>
+</div>
+
+
+
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+
+
+}
+

@@ -1,0 +1,54 @@
+﻿ @model EventVM
+
+@{
+	var defaultCulture = localizationOptions.Value.DefaultRequestCulture.Culture.Name;
+}
+
+<!-- Model for Adding/Updating Events -->
+<div class="container allPage mt-5 p-4 wow fadeInRight">
+	<h2 class="text-center">@(Model.Event.Id == 0 ? "Add New" : "Update") Event</h2>
+	<div class="modal-body">
+
+		<form asp-area="Admin" asp-controller="Event" asp-action="Upsert" method="post" enctype="multipart/form-data">
+			@* <div asp-validation-summary="All" class="text-danger"></div> *@
+			<!-- Hiddent Inputs-->
+
+			<input asp-for="Event.Id" hidden />
+            <input asp-for="EventTranslation.Id" hidden />
+            <input asp-for="EventTranslation.EventId" value="@Model.Event.Id" hidden />
+			<input asp-for="EventTranslation.Language" value="@defaultCulture" hidden />
+
+			<div class="mb-3">
+				<label asp-for="EventTranslation.Name" class="form-label">Event Name</label>
+				<input asp-for="EventTranslation.Name" type="text" class="form-control" id="EventName" required>
+				<span asp-validation-for="@Model.EventTranslation.Name" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label asp-for="Event.Date" class="form-label">Event Start Date</label>
+				<input asp-for="Event.Date" type="datetime-local" class="form-control" id="EventName" required>
+				<span asp-validation-for="@Model.Event.Date" class="text-danger"></span>
+			</div>
+
+
+			<div class="mb-3">
+				<label asp-for="EventTranslation.Description" for="EventDescription" class="form-label">Event Description</label>
+				<textarea asp-for="EventTranslation.Description" class="form-control" id="EventDescription" rows="3" required></textarea>
+				<span asp-validation-for="@Model.EventTranslation.Description" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label for="EventImages" class="form-label">Event Images</label>
+				<input type="file" name="files" class="form-control" id="EventImages" accept="image/*" multiple>
+			</div>
+			<button type="submit" class="btn btn-outline-primary">@(Model.Event.Id == 0 ? "Create" : "Update")</button>
+		</form>
+
+	</div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

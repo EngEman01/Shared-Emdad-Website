@@ -1,0 +1,37 @@
+﻿@model CategoryTranslation
+
+<div class="container-fluid centered-container" style="border-radius:20px;">
+	<div class="card card-custom">
+		<div class="card-body p-3">
+
+			<div class="col-12 col-lg-8 wow fadeInRight" data-wow-delay=".001s">
+				@* Name *@
+				<lable asp-for="@Model.Name"></lable>
+				@* <h1 class="d-inline">Title</h1> *@
+				<h2 class="font-23 semi-font my-3" style="border-bottom:1px solid #333;">
+					Title : @Model.Name
+					@* <a class="emdad-main-text-color emdad-second-hover-color">@Model.Name</a> *@
+				</h2>
+
+				@* // Language / Culture *@
+				<lable asp-for="@Model.Language"></lable>
+				<p class="emdad-forth-text-color emdad-single-blog font-14 my-3 wow fadeIn">
+					Language : @Model.Language
+				</p>
+
+				@* // Description *@
+				<div class="emdad-forth-text-color emdad-blog-date">
+				</div>
+				<lable asp-for="@Model.Name"></lable>
+				<p class="emdad-forth-text-color emdad-single-blog font-14 my-3 wow fadeIn">
+					Description : @Html.Raw(@Model.Description)
+				</p>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+}
+
