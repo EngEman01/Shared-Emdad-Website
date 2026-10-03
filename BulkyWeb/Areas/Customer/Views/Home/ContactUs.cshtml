@@ -1,4 +1,4 @@
-﻿ @model Contact
+﻿@*  @model Contact
 
 @{
     Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
@@ -90,4 +90,291 @@
         </div>
     </div>
 
+</div> *@
+
+                    @model Contact
+
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    ViewData["Title"] = "ContactUs Page";
+}
+
+<style>
+    body {
+        background-color: #0b111e !important;
+        color: #e2e8f0;
+    }
+
+    .emdad-page-header {
+        text-align: center;
+        padding-top: 15px !important;
+        padding-bottom: 25px;
+    }
+
+    /* تنسيق العنوان الرئيسي بدون خطوط عمودية */
+    .emdad-page-title {
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 2rem;
+        margin: 0;
+        padding-bottom: 12px;
+        position: relative;
+        display: inline-block;
+    }
+
+    /* الخط الأصفر الذهبي السفلي فقط */
+    .emdad-page-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background-color: #e5b335;
+        border-radius: 2px;
+    }
+
+    /* النص الوصفي تحت العنوان */
+    .emdad-header-desc {
+        color: #94a3b8;
+        font-size: 0.95rem;
+        line-height: 1.8;
+        max-width: 850px;
+        margin: 15px auto 0;
+    }
+
+    /* تنسيق كروت الاتصال */
+    .emdad-info-card {
+        background: rgba(17, 27, 46, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 30px 15px;
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .emdad-info-card:hover {
+        border-color: rgba(229, 179, 53, 0.5);
+        transform: translateY(-3px);
+    }
+
+    .emdad-icon-wrapper {
+        width: 60px;
+        height: 60px;
+        background: transparent;
+        border: 1px solid #e5b335;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: #e5b335;
+        font-size: 1.3rem;
+    }
+
+    .emdad-card-title {
+        color: #ffffff;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .emdad-card-text {
+        color: #cbd5e1;
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+        line-height: 1.6;
+    }
+
+    .emdad-card-text a {
+        color: #cbd5e1;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .emdad-card-text a:hover {
+        color: #e5b335;
+    }
+
+    /* قسم النموذج والخريطة */
+    .emdad-contact-section {
+        background: rgba(17, 27, 46, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        overflow: hidden;
+        margin-top: 30px;
+        margin-bottom: 50px;
+    }
+
+    .emdad-form-wrapper {
+        padding: 35px 30px;
+    }
+
+    .emdad-form-control {
+        background-color: rgba(11, 17, 30, 0.8) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        color: #ffffff !important;
+        border-radius: 8px !important;
+        padding: 12px 15px !important;
+        font-size: 0.95rem;
+    }
+
+    .emdad-form-control:focus {
+        border-color: #e5b335 !important;
+        box-shadow: 0 0 0 0.2rem rgba(229, 179, 53, 0.2) !important;
+    }
+
+    .emdad-form-control::placeholder {
+        color: #64748b !important;
+    }
+
+    .emdad-btn-submit {
+        background: linear-gradient(135deg, #e5b335, #c49520);
+        color: #0b111e;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        padding: 14px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .emdad-btn-submit:hover {
+        background: linear-gradient(135deg, #f3d068, #e5b335);
+        color: #000;
+    }
+</style>
+
+<div class="container my-0 py-0">
+    <!-- هيدر الصفحة بتنسيق أنيق وبسيط -->
+    <div class="emdad-page-header">
+        <h1 class="emdad-page-title">@localizer["ContactUs"]</h1>
+        <p class="emdad-header-desc">
+            @localizer["ContactUsText"]
+        </p>
+    </div>
+
+    <!-- كروت معلومات الاتصال -->
+    <div class="row g-4 my-2 justify-content-center">
+        <!-- العنوان -->
+        <div class="col-12 col-sm-6 col-lg-3 wow fadeInDown" data-wow-delay=".3s">
+            <div class="emdad-info-card text-center">
+                <div class="emdad-icon-wrapper">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <h2 class="emdad-card-title">@localizer["Address"]</h2>
+                <p class="emdad-card-text">
+                    @localizer["SpecificAddressContact"]
+                </p>
+            </div>
+        </div>
+
+        <!-- البريد الإلكتروني -->
+        <div class="col-12 col-sm-6 col-lg-3 wow fadeInDown" data-wow-delay=".5s">
+            <div class="emdad-info-card text-center">
+                <div class="emdad-icon-wrapper">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+                <h2 class="emdad-card-title">@localizer["Email"]</h2>
+                <p class="emdad-card-text">
+                    <a href="mailto:info@eltamawiya-emdad.com">info@eltamawiya-emdad.com</a>
+                </p>
+                <p class="emdad-card-text">
+                    <a href="mailto:petroleum.supply@eltamawiya-emdad.com">petroleum.supply@eltamawiya-emdad.com</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- اتصل بنا -->
+        <div class="col-12 col-sm-6 col-lg-3 wow fadeInDown" data-wow-delay=".7s">
+            <div class="emdad-info-card text-center">
+                <div class="emdad-icon-wrapper">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+                <h2 class="emdad-card-title">@localizer["CallUsContact"]</h2>
+                <p class="emdad-card-text" dir="ltr"><a href="tel:0237611422">02 37611422</a></p>
+                <p class="emdad-card-text" dir="ltr"><a href="tel:0237611466">02 37611466</a></p>
+                <p class="emdad-card-text" dir="ltr"><a href="tel:01012717715">0101 2717715</a></p>
+            </div>
+        </div>
+
+        <!-- الفاكس -->
+        <div class="col-12 col-sm-6 col-lg-3 wow fadeInDown" data-wow-delay=".9s">
+            <div class="emdad-info-card text-center">
+                <div class="emdad-icon-wrapper">
+                    <i class="fa-solid fa-fax"></i>
+                </div>
+                <h2 class="emdad-card-title">@localizer["Fax"]</h2>
+                <p class="emdad-card-text" dir="ltr">02 33351070</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم الخريطة والنموذج -->
+    <div class="emdad-contact-section">
+        <div class="row g-0">
+            <!-- الخريطة -->
+            <div class="col-12 col-lg-6 wow fadeInRight d-flex align-items-stretch">
+                <div class="w-100" style="min-height: 400px; filter: grayscale(20%) contrast(1.1);">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3076.040516120584!2d31.19901657555373!3d30.04259867492452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzDCsDAyJzMzLjQiTiAzMcKwMTInMDUuNyJF!5e1!3m2!1sen!2seg!4v1734253260252!5m2!1sen!2seg" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; min-height: 450px;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- النموذج -->
+            <div class="col-12 col-lg-6 wow fadeInLeft">
+                <div class="emdad-form-wrapper">
+                    <form asp-area="Customer" asp-controller="Home" asp-action="ContactUs" method="post" class="emdad-contact-form">
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6 mb-3">
+                                <input asp-for="FirstName" type="text" class="form-control emdad-form-control" placeholder="@localizer["FirstName"]">
+                                <span asp-validation-for="FirstName" class="text-danger font-12 mt-1 d-block"></span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <input asp-for="LastName" type="text" class="form-control emdad-form-control" placeholder="@localizer["LastName"]">
+                                <span asp-validation-for="LastName" class="text-danger font-12 mt-1 d-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6 mb-3">
+                                <input asp-for="Entity" type="text" class="form-control emdad-form-control" placeholder="@localizer["Entity"]">
+                                <span asp-validation-for="Entity" class="text-danger font-12 mt-1 d-block"></span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <input asp-for="Email" type="email" class="form-control emdad-form-control" placeholder="@localizer["Email"]">
+                                <span asp-validation-for="Email" class="text-danger font-12 mt-1 d-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6 mb-3">
+                                <input asp-for="Phone" type="text" class="form-control emdad-form-control" placeholder="@localizer["Phone"]">
+                                <span asp-validation-for="Phone" class="text-danger font-12 mt-1 d-block"></span>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <input asp-for="Country" type="text" class="form-control emdad-form-control" placeholder="@localizer["Country"]">
+                                <span asp-validation-for="Country" class="text-danger font-12 mt-1 d-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <textarea asp-for="Message" class="form-control emdad-form-control" placeholder="@localizer["Message"]" style="height:140px; resize: none;"></textarea>
+                            <span asp-validation-for="Message" class="text-danger font-12 mt-1 d-block"></span>
+                        </div>
+
+                        <button type="submit" class="btn emdad-btn-submit w-100">
+                            @localizer["Send"]
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

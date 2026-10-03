@@ -271,6 +271,42 @@
         box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
     }
 
+    /* WHATSAPP BUTTON */
+    .emdad-btn-whatsapp {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        color: #ffffff !important;
+        font-size: 18px;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+        transition: all 0.25s ease;
+        flex-shrink: 0;
+        position: relative;
+    }
+    .emdad-btn-whatsapp:hover {
+        transform: translateY(-2px) scale(1.1);
+        box-shadow: 0 6px 22px rgba(37, 211, 102, 0.6);
+        color: #ffffff !important;
+    }
+    .emdad-btn-whatsapp::before {
+        content: '';
+        position: absolute;
+        inset: -3px;
+        border-radius: 50%;
+        border: 2px solid rgba(37, 211, 102, 0.35);
+        animation: waPulse 2s infinite;
+    }
+    @@keyframes waPulse {
+        0%   { transform: scale(1);   opacity: 0.7; }
+        70%  { transform: scale(1.35); opacity: 0; }
+        100% { transform: scale(1.35); opacity: 0; }
+    }
+
     /* DROPDOWN MENU */
     .emdad-navbar .nav-item.dropdown {
         position: relative;
@@ -969,6 +1005,30 @@
         }
     }
 
+    /* ── Language Dropdown 3 Languages ── */
+    .emdad-lang-pill.dropdown-toggle { cursor: pointer; border: none; }
+    .emdad-lang-pill.dropdown-toggle::after { border-color: #f3d078 transparent transparent; }
+    .emdad-lang-menu {
+        background: #061d33;
+        border: 1px solid rgba(212,175,55,0.35);
+        border-radius: 8px;
+        min-width: 145px;
+        padding: 4px 0;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    }
+    .emdad-lang-menu .dropdown-item {
+        color: #ccd6e0;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 9px 16px;
+        transition: background 0.2s, color 0.2s;
+    }
+    .emdad-lang-menu .dropdown-item:hover,
+    .emdad-lang-menu .dropdown-item.active {
+        background: rgba(212,175,55,0.13);
+        color: #f3d078;
+    }
+
 </style>
 
 </head>
@@ -983,6 +1043,8 @@
        var isRtlLayout = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
     var currentUrlLayout = Context.Request.Path.Value + Context.Request.QueryString.Value;
     if (string.IsNullOrEmpty(currentUrlLayout)) { currentUrlLayout = "/"; }
+    var currentCultureLayout = System.Threading.Thread.CurrentThread.CurrentCulture.Name.ToLower();
+    // Legacy variable kept for compatibility
     var nextCultureLayout = isRtlLayout ? "en-us" : "ar-eg";
 
     // المتغيرات لمعرفة اسم الـ Controller والـ Action الحالي
@@ -1051,6 +1113,14 @@
                     </ul>
                 </li>
 
+                 <!-- BoardOfDirectors -->
+                <li class="nav-item">
+                    <a class="nav-link emdad-nav-link @(currentController == "Home" && currentAction == "BoardOfDirectors" ? "active" : "")" 
+                       asp-area="Customer" asp-controller="Home" asp-action="BoardOfDirectors">
+                        @(isRtlLayout ? "مجلس الإدارة" : "Board Of Directors")
+                    </a>
+                </li>
+
                 <!-- SECTORS -->
                 <li class="nav-item">
                     <a class="nav-link emdad-nav-link @(currentController == "Home" && currentAction == "Goals" ? "active" : "")" 
@@ -1094,14 +1164,39 @@
 
             <!-- RIGHT ACTIONS -->
             <div class="nav-extras-wrap d-flex align-items-center gap-3">
-                <a href="/Customer/Language/SetLanguage?culture=@nextCultureLayout&returnUrl=@currentUrlLayout" class="emdad-lang-pill" title="Change Language">
-                    <i class="fas fa-globe"></i>
-                    <span>EN | AR</span>
-                </a>
+                <div class="dropdown emdad-lang-dropdown">
+                    <button class="emdad-lang-pill dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Change Language">
+                        <i class="fas fa-globe"></i>
+                        <span>@(currentCultureLayout.StartsWith("ar") ? "AR" : currentCultureLayout.StartsWith("fr") ? "FR" : "EN")</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end emdad-lang-menu">
+                        <li>
+                            <a class="dropdown-item @(currentCultureLayout.StartsWith("en") ? "active" : "")" 
+                               href="/Customer/Language/SetLanguage?culture=en-us&returnUrl=@currentUrlLayout">
+                                🇬🇧 English
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item @(currentCultureLayout.StartsWith("ar") ? "active" : "")" 
+                               href="/Customer/Language/SetLanguage?culture=ar-eg&returnUrl=@currentUrlLayout">
+                                🇪🇬 العربية
+                            </a>
+                        </li>
 
-                <a href="@Url.Action("ContactUs", "Home", new { area = "Customer" })" class="emdad-btn-quote-header">
-                    <span>@(isRtlLayout ? "اطلب عرض سعر" : "Request a Quote")</span>
-                    <i class="fas fa-arrow-@(isRtlLayout ? "left" : "right")"></i>
+                       
+
+                    </ul>
+                </div>
+
+
+               
+                <!-- WhatsApp Contact Button -->
+                <a href="https://wa.me/201012717715"
+                   class="emdad-btn-whatsapp"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   title="@(isRtlLayout ? "تواصل معنا عبر واتساب" : "Contact us on WhatsApp")">
+                    <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -850,4 +850,65 @@
   <data name="WatchVideoBtn" xml:space="preserve">
     <value>شاهد الفيديو التعريفي</value>
   </data>
+
+  <!-- Hero Section -->
+  <data name="HomeTitle" xml:space="preserve"><value>الرئيسية</value></data>
+  <data name="HeroEyebrow" xml:space="preserve"><value>نبني القدرات من أجل غدٍ أقوى</value></data>
+  <data name="HeroTitle1" xml:space="preserve"><value>حلول صناعية وهندسية</value></data>
+  <data name="HeroTitleGold" xml:space="preserve"><value>متكاملة</value></data>
+  <data name="HeroSubText" xml:space="preserve"><value>شريك موثوق في صناعات الدفاع والميكانيكا والبترول والطاقة.</value></data>
+  <data name="ExploreOurSectors" xml:space="preserve"><value>استكشف قطاعاتنا</value></data>
+  <data name="RequestAQuote" xml:space="preserve"><value>اطلب عرض سعر</value></data>
+  <data name="BadgeNationalCap" xml:space="preserve"><value>قدرات وطنية</value></data>
+  <data name="BadgeIndustrialExc" xml:space="preserve"><value>تميز صناعي</value></data>
+  <data name="BadgeStrategicPart" xml:space="preserve"><value>شراكات استراتيجية</value></data>
+  <data name="BadgeSustainableFut" xml:space="preserve"><value>مستقبل مستدام</value></data>
+  <data name="SectorDefenseTitle" xml:space="preserve"><value>الصناعات الدفاعية</value></data>
+  <data name="SectorDefenseDesc" xml:space="preserve"><value>حلول متقدمة لقطاعات الدفاع والأمن العالمية.</value></data>
+  <data name="SectorPetroleumTitle" xml:space="preserve"><value>الصناعات البترولية</value></data>
+  <data name="SectorPetroleumDesc" xml:space="preserve"><value>معدات ومواد لشركات البترول ومشاريع الطاقة.</value></data>
+  <data name="SectorEnergyTitle" xml:space="preserve"><value>حلول الطاقة</value></data>
+  <data name="SectorEnergyDesc" xml:space="preserve"><value>حلول طاقة مستدامة وفعّالة من أجل مستقبل أفضل.</value></data>
+  <data name="SectorHeavyTitle" xml:space="preserve"><value>المعدات الثقيلة والحلول الصناعية</value></data>
+  <data name="SectorHeavyDesc" xml:space="preserve"><value>معدات ميكانيكية موثوقة وخدمات صناعية متكاملة.</value></data>
+  <data name="StatsYearsExp" xml:space="preserve"><value>سنة خبرة</value></data>
+  <data name="StatsProjects" xml:space="preserve"><value>مشروع منجز</value></data>
+  <data name="StatsPartners" xml:space="preserve"><value>شريك عالمي</value></data>
+  <data name="StatsCountries" xml:space="preserve"><value>دولة</value></data>
+  <data name="StatsTrusted" xml:space="preserve"><value>موثوق</value></data>
+  <data name="StatsTrustedBy" xml:space="preserve"><value>حكومياً وتجارياً</value></data>
+  <data name="WhyEmdadTitle" xml:space="preserve"><value>لماذا إمداد؟</value></data>
+  <data name="WhyEmdadDesc" xml:space="preserve"><value>نقدم حلولاً صناعية وهندسية مبتكرة تُمكّن القدرات الوطنية وتخلق قيمة مضافة مستدامة.</value></data>
+  <data name="Feature1Title" xml:space="preserve"><value>التصنيع المحلي</value></data>
+  <data name="Feature1Desc" xml:space="preserve"><value>دعم الصناعة الوطنية ومبادرات التوطين التكنولوجي.</value></data>
+  <data name="Feature2Title" xml:space="preserve"><value>التميز الهندسي</value></data>
+  <data name="Feature2Desc" xml:space="preserve"><value>معايير جودة فائقة وتطبيق أحدث التقنيات العالمية.</value></data>
+  <data name="Feature3Title" xml:space="preserve"><value>الشراكات الاستراتيجية</value></data>
+  <data name="Feature3Desc" xml:space="preserve"><value>التعاون الوثيق مع قادة الصناعة العالمية لأثر أكبر.</value></data>
+  <data name="Feature4Title" xml:space="preserve"><value>دعم ما بعد البيع</value></data>
+  <data name="Feature4Desc" xml:space="preserve"><value>التزام طويل الأمد ومستمر بنجاح عملائنا.</value></data>
+  <data name="OurStrategicPartners" xml:space="preserve"><value>شركاؤنا الاستراتيجيون</value></data>
+  <data name="ViewAllPartners" xml:space="preserve"><value>كل الشركاء</value></data>
+  <data name="CapabilitiesReadiness" xml:space="preserve"><value>عرض القدرات والجاهزية</value></data>
+  <data name="PremierEnterprise" xml:space="preserve"><value>صرح صناعي وهندسي رائد</value></data>
+  <data name="VideoDesc" xml:space="preserve"><value>استعراض حي لقدرات التصنيع والتوريدات الميكانيكية الثقيلة والحلول الدفاعية المتكاملة.</value></data>
+  <data name="PauseVideo" xml:space="preserve"><value>إيقاف مؤقت</value></data>
+  <data name="PlayVideo" xml:space="preserve"><value>تشغيل الفيديو</value></data>
+  <data name="Sound" xml:space="preserve"><value>كتم / تشغيل الصوت</value></data>
+  <data name="LatestNewsTitle" xml:space="preserve"><value>آخر الأخبار</value></data>
+  <data name="LatestNewsDesc" xml:space="preserve"><value>ابقَ على اطلاع دائم بآخر المستجدات والإنجازات.</value></data>
+  <data name="News1Date" xml:space="preserve"><value>10 سبتمبر 2025</value></data>
+  <data name="News1Title" xml:space="preserve"><value>إمداد تشارك في المعرض الدولي للصناعات الدفاعية</value></data>
+  <data name="News1Snippet" xml:space="preserve"><value>تعزيز أطر الشراكة الاستراتيجية والتوسع في المشروعات الصناعية المشتركة.</value></data>
+  <data name="News2Date" xml:space="preserve"><value>25 أغسطس 2025</value></data>
+  <data name="News2Title" xml:space="preserve"><value>فوز إمداد بمشروع بترولي جديد في قطاع الطاقة</value></data>
+  <data name="News2Snippet" xml:space="preserve"><value>محطة فارقة أخرى تعزز مسيرة نمونا في تقديم الخدمات الهندسية المتكاملة.</value></data>
+  <data name="News3Date" xml:space="preserve"><value>12 أغسطس 2025</value></data>
+  <data name="News3Title" xml:space="preserve"><value>التقدم والريادة في حلول الطاقة المستدامة والنظيفة</value></data>
+  <data name="News3Snippet" xml:space="preserve"><value>توسيع محفظة إمداد في تطبيقات الطاقة المتجددة ومشاريع البنية التحتية الخضراء.</value></data>
+  <data name="ReadMore" xml:space="preserve"><value>اقرأ المزيد</value></data>
+  <data name="CtaTitle" xml:space="preserve"><value>لنبني معاً مستقبلاً أقوى</value></data>
+  <data name="CtaDesc" xml:space="preserve"><value>شارك إمداد للحلول الصناعية المتكاملة في بناء شراكة موثوقة ومبتكرة ومستدامة.</value></data>
+  <data name="ContactUsToday" xml:space="preserve"><value>تواصل معنا اليوم</value></data>
+
 </root>

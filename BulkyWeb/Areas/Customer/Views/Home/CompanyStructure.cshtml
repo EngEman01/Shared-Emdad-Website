@@ -1,1375 +1,4009 @@
 @{
     Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
-    var isRtl = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
-    var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name.ToLower();
-    ViewData["Title"] = isRtl ? "الهيكل التنظيمي لشركة إمداد | EMDAD" : "Company Structure | EMDAD";
+
+    var currentCulture = System.Globalization.CultureInfo.CurrentUICulture.Name;
+    var isRtl = currentCulture.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
+    var lang = isRtl ? "ar" : "en";
 }
 
-<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Montserrat:wght@500;700;800;900&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 
 <style>
-:root {
-    --cs-bg-base: #020611;
-    --cs-bg-panel: rgba(6, 16, 33, 0.94);
-    --cs-bg-card: rgba(10, 24, 48, 0.94);
-    --cs-gold: #d4a359;
-    --cs-gold-bright: #f0c57d;
-    --cs-gold-gradient: linear-gradient(135deg, #f7dfa5 0%, #d4a359 50%, #8a5d16 100%);
-    --cs-border: rgba(212, 163, 89, 0.35);
-    --cs-border-subtle: rgba(255, 255, 255, 0.08);
-    --cs-text: #f8fafc;
-    --cs-text-muted: #94a3b8;
-    --cs-text-slate: #cbd5e1;
-    --cs-red-defense: #ef4444;
-    --cs-green-secure: #10b981;
-    --cs-blue-it: #0ea5e9;
-    --cs-purple-media: #a855f7;
-    --font-ar: 'Cairo', sans-serif;
-    --font-en: 'Inter', 'Montserrat', sans-serif;
-}
 
-.emdad-structure-wrapper {
-    background-color: var(--cs-bg-base);
-    background-image:
-        radial-gradient(circle at 50% 0%, rgba(212, 163, 89, 0.15), transparent 45%),
-        linear-gradient(to bottom, rgba(2, 6, 17, 0.92), rgba(2, 6, 17, 0.98));
-    color: var(--cs-text);
-    font-family: @(isRtl ? "var(--font-ar)" : "var(--font-en)");
-    direction: @(isRtl ? "rtl" : "ltr");
-    line-height: 1.6;
-    overflow-x: hidden;
-    padding-bottom: 70px;
-    min-height: 100vh;
-}
+    /* =========================================================
+       EMDAD ORGANIZATIONAL STRUCTURE
+       ========================================================= */
 
-.emdad-structure-wrapper .container {
-    width: min(1550px, calc(100% - 30px));
-    margin: 0 auto;
-}
-
-/* TOP TOOLBAR & CONTROLS */
-.structure-top-bar {
-    background: rgba(4, 11, 24, 0.95);
-    backdrop-filter: blur(16px);
-    border-bottom: 1.5px solid var(--cs-border);
-    padding: 14px 0;
-    margin-bottom: 10px;
-}
-
-.structure-bar-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.structure-brand-title {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: var(--cs-gold-bright);
-    letter-spacing: @(isRtl ? "0.5px" : "1.5px");
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.structure-tools {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.btn-cs-action {
-    background: var(--cs-gold-gradient);
-    border: none;
-    color: #03070f;
-    padding: 9px 20px;
-    border-radius: 8px;
-    font-weight: 800;
-    font-size: 0.88rem;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    text-decoration: none;
-}
-
-.btn-cs-action:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(212, 163, 89, 0.5);
-    color: #000000;
-}
-
-/* HERO & STATS */
-.hero-panel {
-    padding: 35px 0 25px;
-    border-bottom: 1px solid var(--cs-border-subtle);
-    background: rgba(2, 6, 17, 0.5);
-    text-align: center;
-}
-
-.doc-ref {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--cs-gold);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.hero-title {
-    font-size: clamp(1.8rem, 3.2vw, 2.7rem);
-    font-weight: 900;
-    margin: 12px 0 15px;
-    background: linear-gradient(180deg, #fff3c9 0%, #e6be57 35%, #b88d22 75%, #f6da86 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.7));
-}
-
-.hero-subdesc {
-    font-size: 1rem;
-    color: #cbd5e1;
-    max-width: 820px;
-    margin: 0 auto 20px;
-}
-
-.stats-bar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-    margin-top: 25px;
-}
-
-.stat-card {
-    background: var(--cs-bg-panel);
-    border: 1px solid var(--cs-border-subtle);
-    border-left: @(isRtl ? "1px solid var(--cs-border-subtle)" : "4px solid var(--cs-gold)");
-    border-right: @(isRtl ? "4px solid var(--cs-gold)" : "1px solid var(--cs-border-subtle)");
-    padding: 16px 20px;
-    border-radius: 10px;
-    text-align: @(isRtl ? "right" : "left");
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s ease;
-}
-
-.stat-card:hover {
-    transform: translateY(-3px);
-}
-
-.stat-icon {
-    font-size: 2rem;
-    color: var(--cs-gold-bright);
-    flex-shrink: 0;
-}
-
-.stat-value {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 900;
-    color: var(--cs-gold-bright);
-}
-
-.stat-label {
-    font-size: 0.82rem;
-    color: var(--cs-text-muted);
-    font-weight: 600;
-}
-
-/* ORGANIZATIONAL TREE */
-.chart-section {
-    padding: 35px 0 20px;
-}
-
-.chart-canvas {
-    background: var(--cs-bg-panel);
-    backdrop-filter: blur(14px);
-    border: 1.5px solid var(--cs-border);
-    border-radius: 20px;
-    padding: 45px 25px;
-    overflow-x: auto;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.75), inset 0 0 30px rgba(212, 163, 89, 0.05);
-}
-
-.tree-wrapper {
-    min-width: 1240px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.chart-level {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 28px;
-    position: relative;
-}
-
-.connector-v {
-    width: 2px;
-    height: 28px;
-    background: var(--cs-gold);
-    margin: -18px auto 10px;
-    box-shadow: 0 0 10px var(--cs-gold);
-}
-
-.node-box {
-    background: var(--cs-bg-card);
-    border: 1.5px solid var(--cs-border);
-    border-radius: 14px;
-    padding: 18px 24px;
-    text-align: center;
-    transition: all 0.35s ease;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-}
-
-.node-box:hover {
-    transform: translateY(-5px);
-    border-color: var(--cs-gold-bright);
-    box-shadow: 0 15px 35px rgba(212, 163, 89, 0.28);
-}
-
-.node-chairman {
-    width: min(540px, 100%);
-    background: linear-gradient(180deg, #182e50 0%, #0b1a33 100%);
-    border: 2px solid var(--cs-gold);
-}
-
-.node-chairman-icon {
-    font-size: 2.3rem;
-    color: var(--cs-gold-bright);
-    margin-bottom: 8px;
-}
-
-.advisory-row {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    width: 100%;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
-}
-
-.node-advisor {
-    flex: 1;
-    max-width: 340px;
-    background: rgba(6, 17, 34, 0.96);
-    border: 1.5px dashed var(--cs-border);
-    padding: 14px 20px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-}
-
-.node-advisor:hover {
-    border-style: solid;
-    border-color: var(--cs-gold);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(212, 163, 89, 0.25);
-}
-
-.node-coo {
-    width: min(460px, 100%);
-    background: linear-gradient(180deg, #112a4f 0%, #0a1b33 100%);
-    border: 1.5px solid var(--cs-border);
-}
-
-/* HORIZONTAL SECTORS GRID */
-.executive-horizontal-grid {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    gap: 12px;
-    width: 100%;
-}
-
-.sector-card {
-    background: var(--cs-bg-card);
-    border: 1.5px solid var(--cs-border);
-    border-radius: 12px;
-    padding: 18px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    min-height: 180px;
-}
-
-.sector-card:hover {
-    border-color: var(--cs-gold);
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7), 0 0 15px rgba(212, 163, 89, 0.2);
-}
-
-.sector-icon {
-    font-size: 1.9rem;
-    color: var(--cs-gold);
-    margin-bottom: 12px;
-    transition: transform 0.3s ease;
-}
-
-.sector-card:hover .sector-icon {
-    transform: scale(1.18) rotate(4deg);
-}
-
-.sector-title {
-    font-size: 0.86rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 14px;
-    line-height: 1.35;
-    flex-grow: 1;
-}
-
-.btn-explore {
-    width: 100%;
-    background: rgba(212, 163, 89, 0.12);
-    border: 1px solid var(--cs-gold);
-    color: var(--cs-gold-bright);
-    padding: 7px 10px;
-    border-radius: 6px;
-    font-size: 0.78rem;
-    font-weight: 800;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    transition: all 0.25s ease;
-}
-
-.btn-explore:hover {
-    background: var(--cs-gold);
-    color: #03070f;
-    box-shadow: 0 3px 12px rgba(212, 163, 89, 0.45);
-}
-
-/* DIALOG MODAL */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(2, 6, 17, 0.88);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-box {
-    background: linear-gradient(145deg, #091c36 0%, #040e1b 100%);
-    border: 2px solid var(--cs-gold);
-    border-radius: 18px;
-    width: min(780px, 94%);
-    max-height: 88vh;
-    overflow-y: auto;
-    padding: 28px;
-    position: relative;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 163, 89, 0.25);
-    transform: scale(0.9) translateY(20px);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    direction: @(isRtl ? "rtl" : "ltr");
-    text-align: @(isRtl ? "right" : "left");
-}
-
-.modal-overlay.active .modal-box {
-    transform: scale(1) translateY(0);
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1.5px solid var(--cs-border);
-    padding-bottom: 14px;
-    margin-bottom: 20px;
-}
-
-.modal-title {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--cs-gold-bright);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.btn-close-modal {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #cbd5e1;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-}
-
-.btn-close-modal:hover {
-    background: #ef4444;
-    color: #ffffff;
-    border-color: #ef4444;
-    transform: rotate(90deg);
-}
-
-.modal-body ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.modal-body ul li {
-    position: relative;
-    padding-right: @(isRtl ? "28px" : "0");
-    padding-left: @(isRtl ? "0" : "28px");
-    margin-bottom: 14px;
-    font-size: 0.95rem;
-    color: var(--cs-text-slate);
-    line-height: 1.65;
-}
-
-.modal-body ul li::before {
-    content: "\f058";
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    position: absolute;
-    right: @(isRtl ? "0" : "auto");
-    left: @(isRtl ? "auto" : "0");
-    color: var(--cs-gold);
-}
-
-/* PRINT SECTION & ENGINE SETUP */
-.print-only-container {
-    display: none;
-}
-
-@@page {
-    size: A4 portrait;
-    margin: 0;
-}
-
-@@media print {
-    html, body, .emdad-structure-wrapper {
-        background: #ffffff !important;
-        color: #0d1b2a !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+    :root {
+        --emdad-navy: #07111f;
+        --emdad-navy-2: #0b1b30;
+        --emdad-navy-3: #10243d;
+        --emdad-gold: #d4af37;
+        --emdad-gold-light: #e7c75c;
+        --emdad-gold-dark: #a98218;
+        --emdad-white: #ffffff;
+        --emdad-text: #d8e0ea;
+        --emdad-muted: #8998aa;
+        --emdad-border: rgba(255,255,255,.09);
+        --emdad-gold-border: rgba(212,175,55,.28);
     }
 
-    header, .emdad-navbar, .emdad-footer, .structure-top-bar, .hero-panel, .chart-section, .btn-explore, .modal-overlay {
-        display: none !important;
-    }
 
-    .print-only-container {
-        display: block !important;
-    }
+    /* =========================================================
+       GLOBAL
+       ========================================================= */
 
-    .print-page {
-        page-break-before: always;
-        page-break-after: always;
-        page-break-inside: avoid;
-        box-sizing: border-box;
-        padding: 18mm 20mm 15mm 20mm;
-        height: 297mm;
-        width: 210mm;
+    .emdad-structure-page {
         position: relative;
-        background: #ffffff;
+        min-height: 100vh;
+        overflow: hidden;
+        background: linear-gradient( 135deg, rgba(3,10,20,.97), rgba(7,17,31,.95) );
+        color: var(--emdad-white);
+        font-family: 'Inter', 'Cairo', sans-serif;
     }
 
-    .print-page:first-child {
-        page-break-before: avoid !important;
+        .emdad-structure-page[dir="rtl"] {
+            font-family: 'Cairo', 'Inter', sans-serif;
+        }
+
+
+    /* =========================================================
+       BACKGROUND
+       ========================================================= */
+
+    .emdad-page-background {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background-image: linear-gradient( rgba(3,10,20,.92), rgba(3,10,20,.97) ), url("https://www.emdadglobal.org/assets/custom/Board%20Of%20Directors/ahmed%20el%20tamawy.jpg");
+        background-size: cover;
+        background-position: center;
+        filter: saturate(.7);
+        transform: scale(1.05);
     }
 
-    .print-header-frame {
-        border-bottom: 3px double #112233;
-        padding-bottom: 12px;
-        margin-bottom: 25px;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
+
+    .emdad-page-glow {
+        position: fixed;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: radial-gradient( circle, rgba(212,175,55,.08), transparent 70% );
+        top: 10%;
+        right: -200px;
+        pointer-events: none;
+        z-index: 1;
     }
 
-    .print-brand-group {
-        text-align: @(isRtl ? "right" : "left");
+
+    /* =========================================================
+       CONTAINER
+       ========================================================= */
+
+    .emdad-structure-container {
+        position: relative;
+        z-index: 2;
+        width: min(1400px, 94%);
+        margin: auto;
+        padding: 90px 0 100px;
     }
 
-    .print-company-name {
-        font-size: 1.6rem;
-        font-weight: 900;
-        color: #0b1a30;
-        letter-spacing: 1px;
-        line-height: 1.1;
-    }
 
-    .print-company-sub {
-        font-size: 0.8rem;
-        font-weight: 700;
-        color: #8a5d16;
-        text-transform: uppercase;
-        margin-top: 3px;
-    }
+    /* =========================================================
+       HERO
+       ========================================================= */
 
-    .print-doc-info {
-        text-align: @(isRtl ? "left" : "right");
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.72rem;
-        color: #555;
-        line-height: 1.4;
-    }
-
-    .print-page-title {
-        background: #0b1a33;
-        color: #ffffff !important;
-        padding: 10px 18px;
-        font-size: 1.15rem;
-        font-weight: 800;
-        border-radius: 4px;
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-right: @(isRtl ? "6px solid #d4a359" : "none");
-        border-left: @(isRtl ? "none" : "6px solid #d4a359");
-    }
-
-    .print-grid-layout {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        margin-top: 10px;
-    }
-
-    .print-box-level {
-        border: 1.5px solid #0b1a33;
-        border-radius: 6px;
-        padding: 12px;
-        background: #f8fafc;
-    }
-
-    .print-box-header {
-        font-size: 1rem;
-        font-weight: 900;
-        color: #0b1a33;
-        border-bottom: 1px solid #d4a359;
-        padding-bottom: 5px;
-        margin-bottom: 8px;
-    }
-
-    .print-sectors-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    .print-sector-item {
-        border: 1px solid #cbd5e1;
-        background: #ffffff;
-        padding: 8px 12px;
-        border-radius: 4px;
-        text-align: @(isRtl ? "right" : "left");
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: #1e293b;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .print-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 15px;
-    }
-
-    .print-table th {
-        background: #f1f5f9;
-        color: #0b1a33;
-        font-size: 0.9rem;
-        font-weight: 800;
-        padding: 10px;
-        border: 1px solid #cbd5e1;
-        text-align: @(isRtl ? "right" : "left");
-    }
-
-    .print-table td {
-        padding: 11px 14px;
-        border: 1px solid #e2e8f0;
-        font-size: 0.88rem;
-        color: #1e293b;
-        line-height: 1.6;
-    }
-
-    .print-table tr:nth-child(even) td {
-        background: #f8fafc;
-    }
-
-    .print-num-col {
-        width: 40px;
-        text-align: center !important;
-        font-weight: 800;
-        color: #8a5d16;
-    }
-
-    .print-footer-frame {
-        position: absolute;
-        bottom: 15mm;
-        left: 20mm;
-        right: 20mm;
-        border-top: 1px solid #cbd5e1;
-        padding-top: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.72rem;
-        color: #64748b;
-    }
-
-    .print-signature-space {
-        margin-top: 30px;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 20px;
-    }
-
-    .print-seal-box {
-        border: 1.5px dashed #94a3b8;
-        width: 130px;
-        height: 65px;
-        border-radius: 6px;
+    .emdad-structure-hero {
+        position: relative;
+        min-height: 430px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 0.7rem;
-        color: #94a3b8;
+        text-align: center;
+        overflow: hidden;
+        border-radius: 30px;
+        margin-bottom: 70px;
+        background: linear-gradient( rgba(4,12,23,.60), rgba(4,12,23,.92) ), url("https://thumbs.dreamstime.com/z/volkel-netherlands-jun-armament-royal-netherlands-air-force-ah-apache-attack-helicopter-display-volkel-170729942.jpg");
+        background-size: cover;
+        background-position: center;
+        border: 1px solid rgba(212,175,55,.18);
+        box-shadow: 0 30px 80px rgba(0,0,0,.45);
+        animation: heroReveal 1s ease both;
+    }
+
+
+        .emdad-structure-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient( circle at center, transparent 10%, rgba(3,10,20,.65) 90% );
+        }
+
+
+    .emdad-hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 850px;
+        padding: 40px;
+    }
+
+
+    .emdad-hero-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 24px;
+        background: linear-gradient( 135deg, var(--emdad-gold-light), var(--emdad-gold-dark) );
+        color: var(--emdad-navy);
+        font-size: 32px;
+        box-shadow: 0 15px 40px rgba(212,175,55,.22);
+        animation: shieldPulse 3s infinite;
+    }
+
+
+    .emdad-hero-eyebrow {
+        color: var(--emdad-gold);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 3px;
+        margin-bottom: 15px;
+    }
+
+
+    .emdad-structure-hero h1 {
+        margin: 0;
+        font-size: clamp( 34px, 5vw, 62px );
+        font-weight: 900;
+        line-height: 1.15;
+        background: linear-gradient( 90deg, #ffffff, var(--emdad-gold-light), #ffffff );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        background-size: 200% auto;
+        animation: goldText 5s linear infinite;
+    }
+
+
+    .emdad-hero-description {
+        max-width: 760px;
+        margin: 22px auto 0;
+        color: #b5c1cf;
+        font-size: 15px;
+        line-height: 1.9;
+    }
+
+
+    /* =========================================================
+       STATS
+       ========================================================= */
+
+    .emdad-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-bottom: 70px;
+    }
+
+
+    .emdad-stat-card {
+        padding: 24px;
+        text-align: center;
+        border-radius: 18px;
+        background: linear-gradient( 145deg, rgba(255,255,255,.055), rgba(255,255,255,.018) );
+        border: 1px solid var(--emdad-border);
+        backdrop-filter: blur(10px);
+        transition: transform .3s ease, border-color .3s ease;
+    }
+
+
+        .emdad-stat-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--emdad-gold-border);
+        }
+
+
+    .emdad-stat-icon {
+        color: var(--emdad-gold);
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+
+    .emdad-stat-number {
+        color: white;
+        font-size: 25px;
+        font-weight: 900;
+    }
+
+
+    .emdad-stat-label {
+        color: var(--emdad-muted);
+        font-size: 11px;
+        margin-top: 4px;
+    }
+
+
+    /* =========================================================
+       SECTION TITLE
+       ========================================================= */
+
+    .emdad-section-title {
+        text-align: center;
+        margin-bottom: 45px;
+    }
+
+
+        .emdad-section-title .eyebrow {
+            color: var(--emdad-gold);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+
+        .emdad-section-title h2 {
+            margin: 8px 0 12px;
+            font-size: clamp( 28px, 4vw, 42px );
+            font-weight: 800;
+        }
+
+
+        .emdad-section-title p {
+            max-width: 750px;
+            margin: auto;
+            color: var(--emdad-muted);
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+
+    /* =========================================================
+       ORGANIZATION CHART
+       ========================================================= */
+
+    .emdad-org-chart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 80px;
+    }
+
+
+    /* =========================================================
+       CEO
+       ========================================================= */
+
+    .emdad-ceo-card {
+        position: relative;
+        width: min(480px, 100%);
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        border-radius: 22px;
+        background: linear-gradient( 145deg, rgba(212,175,55,.12), rgba(255,255,255,.04) );
+        border: 1px solid rgba(212,175,55,.42);
+        box-shadow: 0 20px 50px rgba(0,0,0,.35);
+        animation: ceoReveal .8s ease both;
+    }
+
+
+    .emdad-ceo-image {
+        width: 90px;
+        height: 90px;
+        flex-shrink: 0;
+        border-radius: 18px;
+        object-fit: cover;
+        border: 2px solid var(--emdad-gold);
+        box-shadow: 0 0 30px rgba(212,175,55,.15);
+    }
+
+
+    .emdad-ceo-label {
+        color: var(--emdad-gold);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        margin-bottom: 5px;
+    }
+
+
+    .emdad-ceo-card h3 {
+        margin: 0;
+        font-size: 21px;
+    }
+
+
+    .emdad-ceo-card p {
+        margin: 5px 0 0;
+        color: var(--emdad-muted);
+        font-size: 12px;
+    }
+
+
+    /* =========================================================
+       CONNECTOR
+       ========================================================= */
+
+    .emdad-connector {
+        width: 2px;
+        height: 45px;
+        background: linear-gradient( var(--emdad-gold), transparent );
+    }
+
+
+    /* =========================================================
+       EXECUTIVE
+       ========================================================= */
+
+    .emdad-executive-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+        gap: 18px;
+        width: min(800px, 100%);
+        margin-bottom: 20px;
+    }
+
+
+    .emdad-executive-card {
+        padding: 20px;
+        border-radius: 17px;
+        text-align: center;
+        background: rgba(255,255,255,.035);
+        border: 1px solid var(--emdad-border);
+        transition: all .3s ease;
+    }
+
+
+        .emdad-executive-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--emdad-gold-border);
+            background: rgba(212,175,55,.05);
+        }
+
+
+    .emdad-executive-icon {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        color: var(--emdad-gold);
+        background: rgba(212,175,55,.09);
+    }
+
+
+    .emdad-executive-card h4 {
+        margin: 0;
+        font-size: 14px;
+    }
+
+
+    .emdad-executive-card p {
+        margin: 7px 0 0;
+        color: var(--emdad-muted);
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+
+    /* =========================================================
+       COO
+       ========================================================= */
+
+    .emdad-coo-card {
+        width: min(430px, 100%);
+        padding: 22px;
+        text-align: center;
+        border-radius: 19px;
+        background: linear-gradient( 135deg, rgba(212,175,55,.12), rgba(255,255,255,.035) );
+        border: 1px solid rgba(212,175,55,.30);
+    }
+
+
+    .emdad-coo-icon {
+        width: 58px;
+        height: 58px;
+        margin: 0 auto 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        background: var(--emdad-gold);
+        color: var(--emdad-navy);
+        font-size: 21px;
+    }
+
+
+    .emdad-coo-card h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+
+    .emdad-coo-card p {
+        color: var(--emdad-muted);
+        margin: 7px 0 0;
+        font-size: 12px;
+    }
+
+
+    /* =========================================================
+       SECTORS GRID
+       ========================================================= */
+
+    .emdad-sector-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+
+    .emdad-sector-card {
+        position: relative;
+        min-height: 390px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        border-radius: 20px;
+        background: rgba(8,19,34,.88);
+        border: 1px solid rgba(255,255,255,.08);
+        box-shadow: 0 15px 40px rgba(0,0,0,.25);
+        transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+    }
+
+
+        .emdad-sector-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212,175,55,.35);
+            box-shadow: 0 25px 55px rgba(0,0,0,.4), 0 0 25px rgba(212,175,55,.06);
+        }
+
+
+    /* =========================================================
+       SECTOR IMAGE
+       ========================================================= */
+
+    .emdad-sector-image {
+        position: relative;
+        height: 170px;
+        overflow: hidden;
+    }
+
+
+        .emdad-sector-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .6s ease;
+        }
+
+
+    .emdad-sector-card:hover
+    .emdad-sector-image img {
+        transform: scale(1.08);
+    }
+
+
+    .emdad-sector-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient( transparent, rgba(5,14,27,.92) );
+    }
+
+
+    /* =========================================================
+       SECTOR ICON
+       ========================================================= */
+
+    .emdad-sector-icon {
+        position: absolute;
+        left: 18px;
+        bottom: 15px;
+        z-index: 2;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        color: var(--emdad-navy);
+        background: linear-gradient( 135deg, var(--emdad-gold-light), var(--emdad-gold-dark) );
+        box-shadow: 0 8px 20px rgba(0,0,0,.3);
+    }
+
+
+    /* =========================================================
+       SECTOR CONTENT
+       ========================================================= */
+
+    .emdad-sector-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+
+    .emdad-sector-number {
+        color: var(--emdad-gold);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        margin-bottom: 7px;
+    }
+
+
+    .emdad-sector-content h3 {
+        margin: 0;
+        color: white;
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+
+    .emdad-sector-content p {
+        color: var(--emdad-muted);
+        font-size: 11px;
+        line-height: 1.7;
+        margin: 9px 0 18px;
+    }
+
+
+    /* =========================================================
+       EXPLORE BUTTON
+       ========================================================= */
+
+    .emdad-explore-btn {
+        width: 100%;
+        margin-top: auto;
+        min-height: 43px;
+        border-radius: 11px;
+        border: 1px solid rgba(212,175,55,.25);
+        background: rgba(212,175,55,.06);
+        color: var(--emdad-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        font-size: 11px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all .3s ease;
+    }
+
+
+        .emdad-explore-btn:hover {
+            color: var(--emdad-navy);
+            background: linear-gradient( 135deg, var(--emdad-gold-light), var(--emdad-gold-dark) );
+            border-color: var(--emdad-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(212,175,55,.18);
+        }
+
+
+    /* =========================================================
+       MODAL
+       ========================================================= */
+
+    .emdad-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 25px;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity .35s ease, visibility .35s ease;
+    }
+
+
+        .emdad-modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+
+    .emdad-modal-backdrop {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient( circle at center, rgba(212,175,55,.08), transparent 40% ), rgba(2,9,20,.90);
+        backdrop-filter: blur(14px);
+    }
+
+
+    .emdad-modal-container {
+        position: relative;
+        width: min( 1100px, 96vw );
+        max-height: 92vh;
+        overflow: hidden;
+        background: linear-gradient( 145deg, rgba(13,25,45,.99), rgba(5,14,27,.99) );
+        border: 1px solid rgba(212,175,55,.32);
+        border-radius: 26px;
+        box-shadow: 0 40px 100px rgba(0,0,0,.7), 0 0 70px rgba(212,175,55,.08);
+        transform: translateY(30px) scale(.96);
+        transition: transform .4s cubic-bezier(.2,.8,.2,1);
+    }
+
+
+    .emdad-modal.active
+    .emdad-modal-container {
+        transform: translateY(0) scale(1);
+    }
+
+
+    /* =========================================================
+       CLOSE
+       ========================================================= */
+
+    .emdad-modal-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        z-index: 20;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,.15);
+        background: rgba(4,12,23,.80);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 18px;
+        transition: all .3s ease;
+    }
+
+
+        .emdad-modal-close:hover {
+            background: var(--emdad-gold);
+            color: var(--emdad-navy);
+            transform: rotate(90deg);
+            box-shadow: 0 0 25px rgba(212,175,55,.45);
+        }
+
+
+    /* =========================================================
+       MODAL HEADER
+       ========================================================= */
+
+    .emdad-modal-header {
+        display: grid;
+        grid-template-columns: 43% 57%;
+        min-height: 280px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+
+    .emdad-modal-image-wrapper {
+        position: relative;
+        min-height: 280px;
+        overflow: hidden;
+    }
+
+
+    .emdad-modal-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform .7s ease;
+    }
+
+
+    .emdad-modal-container:hover
+    .emdad-modal-image {
+        transform: scale(1.05);
+    }
+
+
+    .emdad-image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient( 90deg, rgba(4,12,23,.05), rgba(4,12,23,.85) );
+    }
+
+
+    .emdad-sector-badge {
+        position: absolute;
+        left: 22px;
+        bottom: 22px;
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 10px 15px;
+        border-radius: 30px;
+        background: rgba(5,14,27,.88);
+        border: 1px solid rgba(212,175,55,.5);
+        backdrop-filter: blur(10px);
+        color: var(--emdad-gold);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1.2px;
+    }
+
+
+    /* =========================================================
+       MODAL TITLE
+       ========================================================= */
+
+    .emdad-modal-title-area {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 45px 55px;
+    }
+
+
+    .emdad-modal-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--emdad-gold);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        margin-bottom: 15px;
+    }
+
+
+    .emdad-modal-title-area h2 {
+        margin: 0;
+        color: white;
+        font-size: clamp( 27px, 3vw, 42px );
+        line-height: 1.15;
+        font-weight: 800;
+    }
+
+
+    .emdad-modal-title-area p {
+        color: #9eacbd;
+        font-size: 14px;
+        margin: 13px 0 0;
+        line-height: 1.7;
+    }
+
+
+    .emdad-header-line {
+        width: 80px;
+        height: 3px;
+        margin-top: 24px;
+        background: linear-gradient( 90deg, var(--emdad-gold), transparent );
+        border-radius: 10px;
+    }
+
+
+    /* =========================================================
+       MODAL BODY
+       ========================================================= */
+
+    .emdad-modal-body {
+        max-height: calc( 92vh - 352px );
+        overflow-y: auto;
+        padding: 35px 45px;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(212,175,55,.6) rgba(255,255,255,.03);
+    }
+
+
+        .emdad-modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+
+        .emdad-modal-body::-webkit-scrollbar-track {
+            background: rgba(255,255,255,.02);
+        }
+
+
+        .emdad-modal-body::-webkit-scrollbar-thumb {
+            background: rgba(212,175,55,.55);
+            border-radius: 10px;
+        }
+
+
+    /* =========================================================
+       MODAL SECTION
+       ========================================================= */
+
+    .emdad-modal-section {
+        margin-bottom: 40px;
+    }
+
+
+    .emdad-section-heading {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+
+    .emdad-heading-icon {
+        width: 45px;
+        height: 45px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        color: var(--emdad-gold);
+        background: linear-gradient( 145deg, rgba(212,175,55,.16), rgba(212,175,55,.04) );
+        border: 1px solid rgba(212,175,55,.22);
+    }
+
+
+    .emdad-section-heading span {
+        display: block;
+        color: var(--emdad-gold);
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        margin-bottom: 3px;
+    }
+
+
+    .emdad-section-heading h3 {
+        margin: 0;
+        color: white;
+        font-size: 19px;
         font-weight: 700;
     }
-}
+
+
+    /* =========================================================
+       OVERVIEW
+       ========================================================= */
+
+    .emdad-overview-card {
+        display: flex;
+        gap: 20px;
+        padding: 22px;
+        border-radius: 16px;
+        background: linear-gradient( 135deg, rgba(255,255,255,.045), rgba(255,255,255,.015) );
+        border: 1px solid rgba(255,255,255,.08);
+        transition: all .3s ease;
+    }
+
+
+        .emdad-overview-card:hover {
+            border-color: rgba(212,175,55,.25);
+            transform: translateY(-2px);
+        }
+
+
+    .overview-icon {
+        width: 52px;
+        height: 52px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        color: var(--emdad-navy);
+        background: linear-gradient( 135deg, var(--emdad-gold-light), var(--emdad-gold-dark) );
+        box-shadow: 0 8px 25px rgba(212,175,55,.18);
+    }
+
+
+    .emdad-overview-card p {
+        margin: 0;
+        color: #b8c3d1;
+        font-size: 13px;
+        line-height: 1.85;
+    }
+
+
+    /* =========================================================
+       RESPONSIBILITIES
+       ========================================================= */
+
+    .emdad-responsibilities-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 13px;
+    }
+
+
+    .responsibility-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 13px;
+        padding: 17px;
+        border-radius: 14px;
+        background: rgba(255,255,255,.035);
+        border: 1px solid rgba(255,255,255,.07);
+        transition: all .3s ease;
+    }
+
+
+        .responsibility-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212,175,55,.35);
+            background: rgba(212,175,55,.055);
+            box-shadow: 0 12px 30px rgba(0,0,0,.2);
+        }
+
+
+    .responsibility-icon {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        color: var(--emdad-gold);
+        background: rgba(212,175,55,.1);
+        border: 1px solid rgba(212,175,55,.16);
+    }
+
+
+    .responsibility-card span {
+        color: #d8e0ea;
+        font-size: 12px;
+        line-height: 1.6;
+        padding-top: 2px;
+    }
+
+
+    /* =========================================================
+       AUTHORITY
+       ========================================================= */
+
+    .emdad-authority-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 14px;
+    }
+
+
+    .authority-card {
+        display: flex;
+        gap: 15px;
+        padding: 20px;
+        border-radius: 15px;
+        background: linear-gradient( 135deg, rgba(255,255,255,.04), rgba(255,255,255,.015) );
+        border: 1px solid rgba(255,255,255,.07);
+        transition: all .3s ease;
+    }
+
+
+        .authority-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(212,175,55,.3);
+        }
+
+
+    .authority-icon {
+        width: 45px;
+        height: 45px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        color: var(--emdad-gold);
+        background: rgba(212,175,55,.09);
+    }
+
+
+    .authority-card strong {
+        display: block;
+        color: white;
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+
+    .authority-card p {
+        margin: 0;
+        color: #8998aa;
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+
+    /* =========================================================
+       COORDINATION
+       ========================================================= */
+
+    .coordination-card {
+        display: flex;
+        gap: 20px;
+        padding: 25px;
+        border-radius: 18px;
+        background: linear-gradient( 135deg, rgba(212,175,55,.07), rgba(255,255,255,.025) );
+        border: 1px solid rgba(212,175,55,.18);
+    }
+
+
+    .coordination-main-icon {
+        width: 58px;
+        height: 58px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+        background: linear-gradient( 135deg, var(--emdad-gold), var(--emdad-gold-dark) );
+        color: var(--emdad-navy);
+        font-size: 22px;
+    }
+
+
+    .coordination-content h4 {
+        margin: 0 0 7px;
+        color: white;
+        font-size: 16px;
+    }
+
+
+    .coordination-content p {
+        margin: 0;
+        color: #9daabd;
+        font-size: 12px;
+        line-height: 1.75;
+    }
+
+
+    .coordination-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+
+        .coordination-tags span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 10px;
+            border-radius: 20px;
+            background: rgba(255,255,255,.05);
+            color: #bdc8d5;
+            font-size: 10px;
+        }
+
+
+        .coordination-tags i {
+            color: var(--emdad-gold);
+        }
+
+
+    /* =========================================================
+       OPERATION FLOW
+       ========================================================= */
+
+    .operation-flow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 25px;
+        border-radius: 18px;
+        background: rgba(255,255,255,.025);
+        border: 1px solid rgba(255,255,255,.06);
+    }
+
+
+    .flow-step {
+        min-width: 130px;
+        text-align: center;
+        position: relative;
+    }
+
+
+    .flow-number {
+        position: absolute;
+        top: -8px;
+        right: 5px;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--emdad-gold);
+        color: var(--emdad-navy);
+        font-size: 9px;
+        font-weight: 900;
+        z-index: 2;
+    }
+
+
+    .flow-icon {
+        width: 55px;
+        height: 55px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+        color: var(--emdad-gold);
+        background: rgba(212,175,55,.09);
+        border: 1px solid rgba(212,175,55,.18);
+        transition: all .3s ease;
+    }
+
+
+    .flow-step:hover .flow-icon {
+        background: var(--emdad-gold);
+        color: var(--emdad-navy);
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(212,175,55,.2);
+    }
+
+
+    .flow-step strong {
+        display: block;
+        margin-top: 10px;
+        color: white;
+        font-size: 13px;
+    }
+
+
+    .flow-step span {
+        display: block;
+        margin-top: 3px;
+        color: #758397;
+        font-size: 10px;
+    }
+
+
+    .flow-line {
+        flex: 1;
+        max-width: 60px;
+        height: 1px;
+        background: linear-gradient( 90deg, rgba(212,175,55,.1), rgba(212,175,55,.6), rgba(212,175,55,.1) );
+    }
+
+
+    /* =========================================================
+       MANAGEMENT NOTE
+       ========================================================= */
+
+    .emdad-management-note {
+        display: flex;
+        align-items: center;
+        gap: 17px;
+        padding: 20px;
+        margin-top: 10px;
+        border-radius: 16px;
+        background: linear-gradient( 90deg, rgba(212,175,55,.08), rgba(212,175,55,.02) );
+        border-left: 3px solid var(--emdad-gold);
+    }
+
+
+    .management-note-icon {
+        width: 46px;
+        height: 46px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: rgba(212,175,55,.1);
+        color: var(--emdad-gold);
+    }
+
+
+    .emdad-management-note span {
+        display: block;
+        color: var(--emdad-gold);
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.3px;
+        margin-bottom: 5px;
+    }
+
+
+    .emdad-management-note p {
+        margin: 0;
+        color: #8e9daf;
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+
+    /* =========================================================
+       MODAL FOOTER
+       ========================================================= */
+
+    .emdad-modal-footer {
+        min-height: 72px;
+        padding: 15px 35px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        border-top: 1px solid rgba(255,255,255,.07);
+        background: rgba(2,9,18,.55);
+    }
+
+
+    .footer-status {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        color: #8291a4;
+        font-size: 10px;
+    }
+
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--emdad-gold);
+        box-shadow: 0 0 10px rgba(212,175,55,.7);
+    }
+
+
+    .modal-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+
+    .modal-print-btn,
+    .modal-close-btn {
+        height: 40px;
+        padding: 0 16px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all .3s ease;
+    }
+
+
+    .modal-print-btn {
+        color: #c4ceda;
+        background: rgba(255,255,255,.04);
+        border: 1px solid rgba(255,255,255,.1);
+    }
+
+
+        .modal-print-btn:hover {
+            color: var(--emdad-gold);
+            border-color: rgba(212,175,55,.4);
+        }
+
+
+    .modal-close-btn {
+        color: var(--emdad-navy);
+        background: linear-gradient( 135deg, var(--emdad-gold-light), var(--emdad-gold-dark) );
+        border: none;
+    }
+
+
+        .modal-close-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212,175,55,.25);
+        }
+
+
+    /* =========================================================
+       RTL
+       ========================================================= */
+
+    .emdad-structure-page[dir="rtl"]
+    .emdad-modal-title-area {
+        text-align: right;
+    }
+
+
+    .emdad-structure-page[dir="rtl"]
+    .emdad-image-overlay {
+        background: linear-gradient( 270deg, rgba(4,12,23,.05), rgba(4,12,23,.85) );
+    }
+
+
+    .emdad-structure-page[dir="rtl"]
+    .emdad-management-note {
+        border-left: none;
+        border-right: 3px solid var(--emdad-gold);
+    }
+
+
+    .emdad-structure-page[dir="rtl"]
+    .emdad-modal-close {
+        right: auto;
+        left: 18px;
+    }
+
+
+    .emdad-structure-page[dir="rtl"]
+    .emdad-sector-icon {
+        left: auto;
+        right: 18px;
+    }
+
+
+    .emdad-structure-page[dir="rtl"]
+    .emdad-sector-badge {
+        left: auto;
+        right: 22px;
+    }
+
+
+    .emdad-structure-page[dir="rtl"]
+    .flow-number {
+        right: auto;
+        left: 5px;
+    }
+
+
+    .emdad-structure-page[dir="rtl"]
+    .emdad-header-line {
+        background: linear-gradient( 270deg, var(--emdad-gold), transparent );
+    }
+
+
+    /* =========================================================
+       ANIMATIONS
+       ========================================================= */
+
+    @@keyframes heroReveal {
+
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(.98);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+
+    @@keyframes ceoReveal {
+
+        from {
+            opacity: 0;
+            transform: translateY(25px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    @@keyframes shieldPulse {
+
+        0%,
+        100% {
+            box-shadow: 0 15px 40px rgba(212,175,55,.22);
+        }
+
+        50% {
+            box-shadow: 0 15px 55px rgba(212,175,55,.42);
+        }
+    }
+
+
+    @@keyframes goldText {
+
+        0% {
+            background-position: 0% center;
+        }
+
+        100% {
+            background-position: 200% center;
+        }
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @@media (max-width: 1200px) {
+
+        .emdad-sector-grid {
+            grid-template-columns: repeat(3, minmax(0,1fr));
+        }
+    }
+
+
+    @@media (max-width: 900px) {
+
+        .emdad-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .emdad-sector-grid {
+            grid-template-columns: repeat(2, minmax(0,1fr));
+        }
+
+        .emdad-modal-header {
+            grid-template-columns: 1fr;
+            min-height: auto;
+        }
+
+        .emdad-modal-image-wrapper {
+            height: 230px;
+            min-height: 230px;
+        }
+
+        .emdad-modal-title-area {
+            padding: 30px;
+        }
+
+        .emdad-modal-body {
+            padding: 30px;
+        }
+
+        .operation-flow {
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .flow-line {
+            display: none;
+        }
+    }
+
+
+    @@media (max-width: 650px) {
+
+        .emdad-structure-container {
+            width: 94%;
+            padding-top: 50px;
+        }
+
+        .emdad-structure-hero {
+            min-height: 390px;
+            border-radius: 22px;
+        }
+
+        .emdad-hero-content {
+            padding: 25px;
+        }
+
+        .emdad-hero-icon {
+            width: 65px;
+            height: 65px;
+            font-size: 25px;
+        }
+
+        .emdad-stats {
+            grid-template-columns: repeat(2,1fr);
+        }
+
+        .emdad-sector-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .emdad-executive-row {
+            grid-template-columns: 1fr;
+        }
+
+        .emdad-ceo-card {
+            flex-direction: column;
+            text-align: center;
+            padding: 22px;
+        }
+
+        .emdad-modal {
+            padding: 10px;
+        }
+
+        .emdad-modal-container {
+            width: 100%;
+            max-height: 96vh;
+            border-radius: 20px;
+        }
+
+        .emdad-modal-body {
+            max-height: calc( 96vh - 440px );
+            padding: 22px 18px;
+        }
+
+        .emdad-responsibilities-grid,
+        .emdad-authority-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .emdad-modal-footer {
+            padding: 12px 18px;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .footer-status {
+            justify-content: center;
+        }
+
+        .modal-actions {
+            width: 100%;
+        }
+
+        .modal-print-btn,
+        .modal-close-btn {
+            flex: 1;
+        }
+
+        .emdad-modal-close {
+            top: 12px;
+            right: 12px;
+        }
+
+        .emdad-structure-page[dir="rtl"]
+        .emdad-modal-close {
+            right: auto;
+            left: 12px;
+        }
+
+        .coordination-card {
+            flex-direction: column;
+        }
+
+        .operation-flow {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+        }
+
+        .emdad-management-note {
+            align-items: flex-start;
+        }
+    }
+
+
+    /* =========================================================
+       PRINT
+       ========================================================= */
+
+    @@media print {
+
+        body * {
+            visibility: hidden !important;
+        }
+
+        .emdad-modal,
+        .emdad-modal * {
+            visibility: visible !important;
+        }
+
+        .emdad-modal {
+            position: absolute;
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            padding: 0;
+        }
+
+        .emdad-modal-backdrop,
+        .emdad-modal-close,
+        .emdad-modal-footer {
+            display: none !important;
+        }
+
+        .emdad-modal-container {
+            width: 100%;
+            max-height: none;
+            border: none;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .emdad-modal-body {
+            max-height: none;
+            overflow: visible;
+        }
+    }
 </style>
 
-<div class="emdad-structure-wrapper">
 
-    <!-- TOP TOOLBAR & CONTROLS -->
-    <div class="structure-top-bar">
-        <div class="container structure-bar-flex">
-            <div class="structure-brand-title">
-                <i class="fa-solid fa-sitemap"></i>
-                <span>@(isRtl ? "الهيكل التنظيمي والحوكمة المؤسسية" : "Corporate Governance & Structure")</span>
+<!-- =========================================================
+     PAGE
+     ========================================================= -->
+
+<div class="emdad-structure-page"
+     dir="@(isRtl ? "rtl" : "ltr")"
+     lang="@(isRtl ? "ar" : "en")">
+
+    <div class="emdad-page-background"></div>
+
+    <div class="emdad-page-glow"></div>
+
+
+    <div class="emdad-structure-container">
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="emdad-structure-hero">
+
+            <div class="emdad-hero-content">
+
+                <div class="emdad-hero-icon">
+
+                    <i class="fa-solid fa-sitemap"></i>
+
+                </div>
+
+
+                <div class="emdad-hero-eyebrow">
+
+                    @(isRtl
+                        ? "الهيكل المؤسسي لشركة إمداد"
+                        : "EMDAD CORPORATE STRUCTURE")
+
+                </div>
+
+
+                <h1>
+
+                    @(isRtl
+                        ? "الهيكل التنظيمي لشركة إمداد"
+                        : "EMDAD Organizational Structure")
+
+                </h1>
+
+
+                <p class="emdad-hero-description">
+
+                    @(isRtl
+                        ? "هيكل مؤسسي متكامل يجمع بين القيادة الاستراتيجية والقطاعات المتخصصة، بما يدعم التكامل بين الأعمال التجارية والتقنية والهندسية واللوجستية والتشغيلية، ويساعد على وضوح المسؤوليات وتعزيز كفاءة العمل."
+                        : "An integrated corporate structure that connects strategic leadership with specialized sectors, supporting collaboration across commercial, technology, engineering, logistics and operational activities while maintaining clear responsibilities and effective coordination.")
+
+                </p>
+
             </div>
-            <div class="structure-tools">
-                <button type="button" class="btn-cs-action" onclick="window.print()">
-                    <i class="fa-solid fa-print"></i>
-                    <span>@(isRtl ? "طباعة الوثيقة الرسمية" : "Print Official Document")</span>
-                </button>
+
+        </section>
+
+
+        <!-- =================================================
+             STATS
+             ================================================= -->
+
+        <section class="emdad-stats">
+
+
+            <div class="emdad-stat-card">
+
+                <div class="emdad-stat-icon">
+                    <i class="fa-solid fa-chess-king"></i>
+                </div>
+
+                <div class="emdad-stat-number">
+                    01
+                </div>
+
+                <div class="emdad-stat-label">
+
+                    @(isRtl
+                        ? "القيادة الاستراتيجية"
+                        : "Strategic Leadership")
+
+                </div>
+
             </div>
-        </div>
+
+
+            <div class="emdad-stat-card">
+
+                <div class="emdad-stat-icon">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+
+                <div class="emdad-stat-number">
+                    08
+                </div>
+
+                <div class="emdad-stat-label">
+
+                    @(isRtl
+                        ? "قطاعات متخصصة"
+                        : "Specialized Sectors")
+
+                </div>
+
+            </div>
+
+
+            <div class="emdad-stat-card">
+
+                <div class="emdad-stat-icon">
+                    <i class="fa-solid fa-arrows-to-circle"></i>
+                </div>
+
+                <div class="emdad-stat-number">
+                    360°
+                </div>
+
+                <div class="emdad-stat-label">
+
+                    @(isRtl
+                        ? "تكامل وظيفي"
+                        : "Functional Integration")
+
+                </div>
+
+            </div>
+
+
+            <div class="emdad-stat-card">
+
+                <div class="emdad-stat-icon">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+
+                <div class="emdad-stat-number">
+                    01
+                </div>
+
+                <div class="emdad-stat-label">
+
+                    @(isRtl
+                        ? "إطار مؤسسي"
+                        : "Corporate Framework")
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             ORGANIZATION CHART
+             ================================================= -->
+
+        <section>
+
+
+            <div class="emdad-section-title">
+
+                <span class="eyebrow">
+
+                    @(isRtl
+                        ? "القيادة والحوكمة"
+                        : "LEADERSHIP & GOVERNANCE")
+
+                </span>
+
+
+                <h2>
+
+                    @(isRtl
+                        ? "الإطار التنظيمي"
+                        : "Organizational Framework")
+
+                </h2>
+
+
+                <p>
+
+                    @(isRtl
+                        ? "قيادة استراتيجية وتنسيق تنفيذي وقطاعات تشغيلية متخصصة تعمل معًا ضمن إطار مؤسسي متكامل."
+                        : "Strategic leadership, executive coordination and specialized operational sectors working together within one integrated corporate framework.")
+
+                </p>
+
+            </div>
+
+
+            <div class="emdad-org-chart">
+
+
+                <!-- =================================================
+                     CHAIRMAN
+                     ================================================= -->
+
+                <div class="emdad-ceo-card">
+
+                    <img class="emdad-ceo-image"
+                         src="https://www.emdadglobal.org/assets/custom/Board%20Of%20Directors/ahmed%20el%20tamawy.jpg"
+                         alt="@(isRtl ? "رئيس مجلس الإدارة" : "Chairman of the Board")">
+
+
+                    <div>
+
+                        <div class="emdad-ceo-label">
+
+                            @(isRtl
+                                ? "رئيس مجلس الإدارة"
+                                : "CHAIRMAN OF THE BOARD")
+
+                        </div>
+
+
+                        <h3>
+                            Ahmed El Tamawy
+                        </h3>
+
+
+                        <p>
+
+                            @(isRtl
+                                ? "القيادة الاستراتيجية والتوجيه المؤسسي"
+                                : "Strategic Leadership & Corporate Direction")
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="emdad-connector"></div>
+
+
+                <!-- =================================================
+                     EXECUTIVE OFFICES
+                     ================================================= -->
+
+                <div class="emdad-executive-row">
+
+
+                    <!-- SECURITY -->
+
+                    <div class="emdad-executive-card">
+
+                        <div class="emdad-executive-icon">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                        </div>
+
+
+                        <h4>
+
+                            @(isRtl
+                                ? "الأمن السيادي والأمن السيبراني"
+                                : "Sovereign & Cyber Security")
+
+                        </h4>
+
+
+                        <p>
+
+                            @(isRtl
+                                ? "نطاق استشاري متعلق بالأمن الاستراتيجي والأمن السيبراني ودعم حماية الأعمال والأنظمة."
+                                : "Strategic security and cyber-related advisory scope supporting business and systems protection.")
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- ADVISOR -->
+
+                    <div class="emdad-executive-card">
+
+                        <div class="emdad-executive-icon">
+
+                            <i class="fa-solid fa-scale-balanced"></i>
+
+                        </div>
+
+
+                        <h4>
+
+                            @(isRtl
+                                ? "مكتب المستشار"
+                                : "Advisor Office")
+
+                        </h4>
+
+
+                        <p>
+
+                            @(isRtl
+                                ? "الدعم الاستشاري والمراجعة والتنسيق مع القيادة التنفيذية."
+                                : "Advisory support, review and executive coordination.")
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="emdad-connector"></div>
+
+
+                <!-- =================================================
+                     COO
+                     ================================================= -->
+
+                <div class="emdad-coo-card">
+
+                    <div class="emdad-coo-icon">
+
+                        <i class="fa-solid fa-user-tie"></i>
+
+                    </div>
+
+
+                    <h3>
+
+                        @(isRtl
+                            ? "الرئيس التنفيذي للعمليات (COO)"
+                            : "Chief Operating Officer (COO)")
+
+                    </h3>
+
+
+                    <p>
+
+                        @(isRtl
+                            ? "الإدارة المباشرة للقطاعات والمشروعات"
+                            : "Direct Management of Sectors & Projects")
+
+                    </p>
+
+                </div>
+
+
+                <div class="emdad-connector"></div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SECTORS
+             ================================================= -->
+
+        <section>
+
+
+            <div class="emdad-section-title">
+
+                <span class="eyebrow">
+
+                    @(isRtl
+                        ? "وظائف وأنشطة شركة إمداد"
+                        : "EMDAD BUSINESS FUNCTIONS")
+
+                </span>
+
+
+                <h2>
+
+                    @(isRtl
+                        ? "القطاعات المتخصصة"
+                        : "Specialized Sectors")
+
+                </h2>
+
+
+                <p>
+
+                    @(isRtl
+                        ? "استكشف نطاق الاختصاص والمسؤوليات والوظائف التشغيلية والتنسيقية لكل قطاع."
+                        : "Explore the scope, responsibilities, functions and coordination areas of each sector.")
+
+                </p>
+
+            </div>
+
+
+            <div class="emdad-sector-grid">
+
+
+                <!-- =================================================
+                     DEFENSE
+                     ================================================= -->
+
+                <article class="emdad-sector-card">
+
+                    <div class="emdad-sector-image">
+
+                        <img src="https://thumbs.dreamstime.com/z/volkel-netherlands-jun-armament-royal-netherlands-air-force-ah-apache-attack-helicopter-display-volkel-170729942.jpg"
+                             alt="@(isRtl ? "قطاع التسليح والدفاع" : "Armament and Defense")">
+
+
+                        <div class="emdad-sector-icon">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="emdad-sector-content">
+
+                        <div class="emdad-sector-number">
+                            @(isRtl ? "القطاع 01" : "SECTOR 01")
+                        </div>
+
+
+                        <h3>
+
+                            @(isRtl
+                                ? "قطاع التسليح والدفاع"
+                                : "Armament & Defense Sector")
+
+                        </h3>
+
+
+                        <p>
+
+                            @(isRtl
+                                ? "أنشطة الدفاع والتسليح والاحتياجات التشغيلية الاستراتيجية والمتخصصة."
+                                : "Defense, armament and strategic operational activities.")
+
+                        </p>
+
+
+                        <button type="button"
+                                class="emdad-explore-btn"
+                                onclick="openSectorModal('defense')">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            <span>
+
+                                @(isRtl ? "استكشف" : "Explore")
+
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     ENGINEERING
+                     ================================================= -->
+
+                <article class="emdad-sector-card">
+
+                    <div class="emdad-sector-image">
+
+                        <img src="https://www.discoverengineering.org/wp-content/uploads/2023/12/mj_11180_2.jpg"
+                             alt="@(isRtl ? "قطاع الهندسة والتقنية" : "Engineering")">
+
+
+                        <div class="emdad-sector-icon">
+
+                            <i class="fa-solid fa-gears"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="emdad-sector-content">
+
+                        <div class="emdad-sector-number">
+                            @(isRtl ? "القطاع 02" : "SECTOR 02")
+                        </div>
+
+
+                        <h3>
+
+                            @(isRtl
+                                ? "القطاع الفني والهندسي"
+                                : "Technical & Engineering")
+
+                        </h3>
+
+
+                        <p>
+
+                            @(isRtl
+                                ? "الحلول الهندسية والاستشارات والدعم الفني للمشروعات والأنشطة."
+                                : "Engineering solutions, consulting and technical support.")
+
+                        </p>
+
+
+                        <button type="button"
+                                class="emdad-explore-btn"
+                                onclick="openSectorModal('engineering')">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            <span>
+
+                                @(isRtl ? "استكشف" : "Explore")
+
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     SUPPLY
+                     ================================================= -->
+
+                <article class="emdad-sector-card">
+
+                    <div class="emdad-sector-image">
+
+                        <img src="https://c8.alamy.com/comp/3BXK9EF/procurement-management-and-supply-chain-concept-procurement-icons-related-to-logistics-supply-chain-and-inventory-management-procurement-3BXK9EF.jpg"
+                             alt="@(isRtl ? "سلاسل الإمداد والمشتريات" : "Supply Chain")">
+
+
+                        <div class="emdad-sector-icon">
+
+                            <i class="fa-solid fa-boxes-stacked"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="emdad-sector-content">
+
+                        <div class="emdad-sector-number">
+                            @(isRtl ? "القطاع 03" : "SECTOR 03")
+                        </div>
+
+
+                        <h3>
+
+                            @(isRtl
+                                ? "سلاسل الإمداد والمشتريات"
+                                : "Supply Chain & Procurement")
+
+                        </h3>
+
+
+                        <p>
+
+                            @(isRtl
+                                ? "المشتريات والتوريد والمصادر واللوجستيات وإدارة الإمداد."
+                                : "Procurement, sourcing, logistics and supply management.")
+
+                        </p>
+
+
+                        <button type="button"
+                                class="emdad-explore-btn"
+                                onclick="openSectorModal('supply')">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            <span>
+
+                                @(isRtl ? "استكشف" : "Explore")
+
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     IT
+                     ================================================= -->
+
+                <article class="emdad-sector-card">
+
+                    <div class="emdad-sector-image">
+
+                        <img src="https://www.jitterbit.com/wp-content/uploads/blog-software-integration-dictionary-featured-1560x740-B.jpg"
+                             alt="@(isRtl ? "قطاع تكنولوجيا المعلومات والبرمجيات" : "IT and Software")">
+
+
+                        <div class="emdad-sector-icon">
+
+                            <i class="fa-solid fa-laptop-code"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="emdad-sector-content">
+
+                        <div class="emdad-sector-number">
+                            @(isRtl ? "القطاع 04" : "SECTOR 04")
+                        </div>
+
+
+                        <h3>
+
+                            @(isRtl
+                                ? "تكنولوجيا المعلومات والبرمجيات"
+                                : "IT & Software")
+
+                        </h3>
+
+
+                        <p>
+
+                            @(isRtl
+                                ? "الحلول التقنية وتطوير البرمجيات والخدمات الرقمية والأنظمة."
+                                : "Technology solutions, software and digital services.")
+
+                        </p>
+
+
+                        <button type="button"
+                                class="emdad-explore-btn"
+                                onclick="openSectorModal('it')">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            <span>
+
+                                @(isRtl ? "استكشف" : "Explore")
+
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     COMMERCIAL
+                     ================================================= -->
+
+                <article class="emdad-sector-card">
+
+                    <div class="emdad-sector-image">
+
+                        <img src="https://www.taxuni.com/wp-content/uploads/2025/07/Difference-Between-Sales-and-Commercial-What-Sets-Them-Apart.jpg"
+                             alt="@(isRtl ? "القطاع التجاري والمبيعات" : "Commercial and Sales")">
+
+
+                        <div class="emdad-sector-icon">
+
+                            <i class="fa-solid fa-chart-line"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="emdad-sector-content">
+
+                        <div class="emdad-sector-number">
+                            @(isRtl ? "القطاع 05" : "SECTOR 05")
+                        </div>
+
+
+                        <h3>
+
+                            @(isRtl
+                                ? "القطاع التجاري والمبيعات"
+                                : "Commercial & Sales")
+
+                        </h3>
+
+
+                        <p>
+
+                            @(isRtl
+                                ? "تطوير الأعمال والمبيعات والأنشطة والعلاقات التجارية."
+                                : "Business development, sales and commercial activities.")
+
+                        </p>
+
+
+                        <button type="button"
+                                class="emdad-explore-btn"
+                                onclick="openSectorModal('commercial')">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            <span>
+
+                                @(isRtl ? "استكشف" : "Explore")
+
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     FINANCE
+                     ================================================= -->
+
+                <article class="emdad-sector-card">
+
+                    <div class="emdad-sector-image">
+
+                        <img src="https://www.studying-in-uk.org/wp-content/uploads/2018/09/accounting-and-finances.jpg"
+                             alt="@(isRtl ? "قطاع المالية والحسابات" : "Finance and Accounts")">
+
+
+                        <div class="emdad-sector-icon">
+
+                            <i class="fa-solid fa-coins"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="emdad-sector-content">
+
+                        <div class="emdad-sector-number">
+                            @(isRtl ? "القطاع 06" : "SECTOR 06")
+                        </div>
+
+
+                        <h3>
+
+                            @(isRtl
+                                ? "قطاع المالية والحسابات"
+                                : "Finance & Accounts")
+
+                        </h3>
+
+
+                        <p>
+
+                            @(isRtl
+                                ? "الإدارة المالية والمحاسبة والتقارير والرقابة المالية."
+                                : "Financial management, accounting and reporting.")
+
+                        </p>
+
+
+                        <button type="button"
+                                class="emdad-explore-btn"
+                                onclick="openSectorModal('finance')">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            <span>
+
+                                @(isRtl ? "استكشف" : "Explore")
+
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     PR
+                     ================================================= -->
+
+                <article class="emdad-sector-card">
+
+                    <div class="emdad-sector-image">
+
+                        <img src="https://img.freepik.com/premium-vector/word-cloud-background-concept-public-relations-business-communication-corporate-campaign-media-marketing-strategy-publicity-promotion-vector-illustration_616200-4693.jpg?w=2000"
+                             alt="@(isRtl ? "العلاقات العامة والإعلام" : "Public Relations")">
+
+
+                        <div class="emdad-sector-icon">
+
+                            <i class="fa-solid fa-bullhorn"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="emdad-sector-content">
+
+                        <div class="emdad-sector-number">
+                            @(isRtl ? "القطاع 07" : "SECTOR 07")
+                        </div>
+
+
+                        <h3>
+
+                            @(isRtl
+                                ? "العلاقات العامة والإعلام"
+                                : "Public Relations & Media")
+
+                        </h3>
+
+
+                        <p>
+
+                            @(isRtl
+                                ? "الاتصالات المؤسسية والعلاقات العامة والتنسيق الإعلامي."
+                                : "Corporate communications, PR and media coordination.")
+
+                        </p>
+
+
+                        <button type="button"
+                                class="emdad-explore-btn"
+                                onclick="openSectorModal('pr')">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            <span>
+
+                                @(isRtl ? "استكشف" : "Explore")
+
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     FLEET
+                     ================================================= -->
+
+                <article class="emdad-sector-card">
+
+                    <div class="emdad-sector-image">
+
+                        <img src="https://img.freepik.com/premium-photo/smart-global-network-fleet-management-logistics_1036975-215474.jpg?w=996"
+                             alt="@(isRtl ? "قطاع الأسطول واللوجستيات" : "Fleet and Logistics")">
+
+
+                        <div class="emdad-sector-icon">
+
+                            <i class="fa-solid fa-truck"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="emdad-sector-content">
+
+                        <div class="emdad-sector-number">
+                            @(isRtl ? "القطاع 08" : "SECTOR 08")
+                        </div>
+
+
+                        <h3>
+
+                            @(isRtl
+                                ? "قطاع الأسطول واللوجستيات"
+                                : "Fleet & Logistics")
+
+                        </h3>
+
+
+                        <p>
+
+                            @(isRtl
+                                ? "تشغيل الأسطول والنقل واللوجستيات ودعم متطلبات المشروعات."
+                                : "Fleet operations, transportation and logistics.")
+
+                        </p>
+
+
+                        <button type="button"
+                                class="emdad-explore-btn"
+                                onclick="openSectorModal('fleet')">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            <span>
+
+                                @(isRtl ? "استكشف" : "Explore")
+
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
     </div>
 
-    <!-- HERO & METRICS -->
-    <section class="hero-panel">
-        <div class="container">
-            <span class="doc-ref">
-                <i class="fa-solid fa-file-contract"></i>
-                <span>EMDAD // ENTERPRISE-GOVERNANCE-2026</span>
-            </span>
-            <h1 class="hero-title">
-                @(isRtl ? "الهيكل التنظيمي العام لشركة إمداد" : "EMDAD General Organizational Structure")
-            </h1>
-            <p class="hero-subdesc">
-                @(isRtl
-                    ? "مخطط الحوكمة المؤسسية وتوزيع الصلاحيات التنفيذية والاستشارية والتشغيلية المعتمدة لشركة إمداد"
-                    : "Corporate governance chart and distribution of executive, advisory, and operational scopes for EMDAD")
-            </p>
 
-            <div class="stats-bar">
-                <div class="stat-card">
-                    <i class="fa-solid fa-sitemap stat-icon"></i>
-                    <div>
-                        <div class="stat-value">@(isRtl ? "8 قطاعات" : "8 Sectors")</div>
-                        <div class="stat-label">@(isRtl ? "القطاعات التنفيذية التخصصية" : "Specialized Executive Sectors")</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <i class="fa-solid fa-bullhorn stat-icon"></i>
-                    <div>
-                        <div class="stat-value">@(isRtl ? "المجلس التنفيذي" : "PR & Media")</div>
-                        <div class="stat-label">@(isRtl ? "منظومة الإعلام والتواصل المؤسسي" : "Media & Corporate Communications")</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <i class="fa-solid fa-user-tie stat-icon"></i>
-                    <div>
-                        <div class="stat-value">@(isRtl ? "العلاقات العامة والإعلام" : "Executive Board")</div>
-                        <div class="stat-label">@(isRtl ? "الإدارة العليا والمكاتب الاستشارية" : "Executive Board & Advisory Offices")</div>
-                    </div>
-                </div>
-            </div>
+    <!-- =========================================================
+         PROFESSIONAL MODAL
+         ========================================================= -->
+
+    <div id="sectorModal"
+         class="emdad-modal"
+         aria-hidden="true">
+
+
+        <div class="emdad-modal-backdrop"
+             onclick="closeSectorModal()">
         </div>
-    </section>
 
-    <!-- MAIN ORGANIZATIONAL CHART (WEB VIEW) -->
-    <main class="container chart-section">
-        <div class="chart-canvas">
-            <div class="tree-wrapper">
 
-                <!-- LEVEL 1: CHAIRMAN & CEO -->
-                <div class="chart-level">
-                    <div class="node-box node-chairman">
-                        <i class="fa-solid fa-user-gear node-chairman-icon"></i>
-                        <h3>@(isRtl ? "رئيس مجلس الإدارة والعضو المنتدب (CEO)" : "Chairman & Chief Executive Officer (CEO)")</h3>
-                        <p style="font-size:0.84rem; color: var(--cs-gold-bright);">
-                            @(isRtl ? "السلطة التنفيذية العليا لاتخاذ القرار" : "Supreme Executive Decision-Making Authority")
-                        </p>
-                        <button type="button" class="btn-explore" style="margin-top:12px;" onclick="openModal('chairman')">
-                            <i class="fa-solid fa-eye"></i>
-                            <span>@(isRtl ? "استعراض الصلاحيات" : "Explore Scope")</span>
-                        </button>
+        <div class="emdad-modal-container">
+
+
+            <!-- CLOSE -->
+
+            <button class="emdad-modal-close"
+                    type="button"
+                    onclick="closeSectorModal()"
+                    aria-label="@(isRtl ? "إغلاق" : "Close")">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+
+            <!-- HEADER -->
+
+            <div class="emdad-modal-header">
+
+
+                <div class="emdad-modal-image-wrapper">
+
+                    <img id="modalSectorImage"
+                         src=""
+                         alt="Sector"
+                         class="emdad-modal-image">
+
+                    <div class="emdad-image-overlay"></div>
+
+
+                    <div class="emdad-sector-badge">
+
+                        <i id="modalSectorIcon"
+                           class="fa-solid fa-building">
+                        </i>
+
+                        <span id="modalSectorCategory">
+                            EMDAD SECTOR
+                        </span>
+
                     </div>
+
                 </div>
 
-                <div class="connector-v"></div>
 
-                <!-- LEVEL 2: ADVISORS & OFFICES -->
-                <div class="advisory-row">
-                    <div class="node-advisor">
-                        <div style="display:flex; align-items:center; gap:12px;">
-                            <i class="fa-solid fa-shield-cat" style="color:var(--cs-red-defense); font-size:1.5rem;"></i>
-                            <b style="color:#ffffff;">@(isRtl ? "الأمن السيادي والسيبراني" : "Sovereign & Cyber Security")</b>
-                        </div>
-                        <button type="button" class="btn-explore" style="padding:4px 10px; width:auto;" onclick="openModal('security')">
+                <div class="emdad-modal-title-area">
+
+
+                    <span class="emdad-modal-eyebrow">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        @(isRtl
+                            ? "الهيكل المؤسسي لشركة إمداد"
+                            : "EMDAD CORPORATE STRUCTURE")
+
+                    </span>
+
+
+                    <h2 id="modalSectorTitle">
+                        Sector Title
+                    </h2>
+
+
+                    <p id="modalSectorSubtitle">
+                        Department scope and responsibilities
+                    </p>
+
+
+                    <div class="emdad-header-line"></div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- BODY -->
+
+            <div class="emdad-modal-body">
+
+
+                <!-- OVERVIEW -->
+
+                <section class="emdad-modal-section">
+
+
+                    <div class="emdad-section-heading">
+
+                        <div class="emdad-heading-icon">
+
                             <i class="fa-solid fa-circle-info"></i>
-                            <span>@(isRtl ? "استعراض" : "Explore")</span>
-                        </button>
-                    </div>
 
-                    <div class="node-advisor">
-                        <div style="display:flex; align-items:center; gap:12px;">
-                            <i class="fa-solid fa-scale-balanced" style="color:var(--cs-gold); font-size:1.5rem;"></i>
-                            <b style="color:#ffffff;">@(isRtl ? "المستشار القانوني" : "Legal Advisor Office")</b>
                         </div>
-                        <button type="button" class="btn-explore" style="padding:4px 10px; width:auto;" onclick="openModal('legal')">
-                            <i class="fa-solid fa-circle-info"></i>
-                            <span>@(isRtl ? "استعراض" : "Explore")</span>
-                        </button>
+
+
+                        <div>
+
+                            <span>01</span>
+
+                            <h3 id="overviewHeading">
+
+                                @(isRtl
+                                    ? "نظرة عامة على القطاع"
+                                    : "Department Overview")
+
+                            </h3>
+
+                        </div>
+
                     </div>
-                </div>
 
-                <div class="connector-v"></div>
 
-                <!-- LEVEL 3: COO -->
-                <div class="chart-level">
-                    <div class="node-box node-coo">
-                        <i class="fa-solid fa-diagram-project" style="font-size:1.6rem; color:var(--cs-gold-bright); margin-bottom:5px;"></i>
-                        <h3 style="color:#ffffff;">@(isRtl ? "الرئيس التنفيذي للعمليات (COO)" : "Chief Operating Officer (COO)")</h3>
-                        <p style="font-size:0.82rem; color: var(--cs-text-muted);">
-                            @(isRtl ? "الإدارة المباشرة للقطاعات والمشروعات" : "Direct Management of Sectors & Projects")
+                    <div class="emdad-overview-card">
+
+
+                        <div class="overview-icon">
+
+                            <i class="fa-solid fa-building-shield"></i>
+
+                        </div>
+
+
+                        <p id="modalSectorDescription">
+                            Department description.
                         </p>
-                        <button type="button" class="btn-explore" style="margin-top:10px;" onclick="openModal('coo')">
-                            <i class="fa-solid fa-eye"></i>
-                            <span>@(isRtl ? "استعراض الصلاحيات" : "Explore Scope")</span>
-                        </button>
-                    </div>
-                </div>
 
-                <div class="connector-v"></div>
 
-                <!-- LEVEL 4: 8 EXECUTIVE SECTORS -->
-                <div class="executive-horizontal-grid">
-
-                    <div class="sector-card">
-                        <i class="fa-solid fa-shield-halved sector-icon" style="color:var(--cs-red-defense);"></i>
-                        <div class="sector-title">@(isRtl ? "قطاع التسليح والدفاع" : "Armament & Defense Sector")</div>
-                        <button type="button" class="btn-explore" onclick="openModal('defense')">
-                            <i class="fa-solid fa-sliders"></i>
-                            <span>@(isRtl ? "الصلاحيات" : "Scope")</span>
-                        </button>
                     </div>
 
-                    <div class="sector-card">
-                        <i class="fa-solid fa-compass-drafting sector-icon"></i>
-                        <div class="sector-title">@(isRtl ? "المكتب الفني والهندسي" : "Technical & Engineering")</div>
-                        <button type="button" class="btn-explore" onclick="openModal('engineering')">
-                            <i class="fa-solid fa-sliders"></i>
-                            <span>@(isRtl ? "الصلاحيات" : "Scope")</span>
-                        </button>
-                    </div>
+                </section>
 
-                    <div class="sector-card">
-                        <i class="fa-solid fa-boxes-packing sector-icon" style="color:var(--cs-gold-bright);"></i>
-                        <div class="sector-title">@(isRtl ? "سلاسل الإمداد والتوريد" : "Supply Chain & Procurement")</div>
-                        <button type="button" class="btn-explore" onclick="openModal('supply')">
-                            <i class="fa-solid fa-sliders"></i>
-                            <span>@(isRtl ? "الصلاحيات" : "Scope")</span>
-                        </button>
-                    </div>
 
-                    <div class="sector-card">
-                        <i class="fa-solid fa-laptop-code sector-icon" style="color:var(--cs-blue-it);"></i>
-                        <div class="sector-title">@(isRtl ? "قطاع البرمجيات والـ IT" : "IT & Software Sector")</div>
-                        <button type="button" class="btn-explore" onclick="openModal('it')">
-                            <i class="fa-solid fa-sliders"></i>
-                            <span>@(isRtl ? "الصلاحيات" : "Scope")</span>
-                        </button>
-                    </div>
+                <!-- RESPONSIBILITIES -->
 
-                    <div class="sector-card">
-                        <i class="fa-solid fa-briefcase sector-icon" style="color:var(--cs-green-secure);"></i>
-                        <div class="sector-title">@(isRtl ? "المكتب التجاري والمبيعات" : "Commercial & Sales")</div>
-                        <button type="button" class="btn-explore" onclick="openModal('commercial')">
-                            <i class="fa-solid fa-sliders"></i>
-                            <span>@(isRtl ? "الصلاحيات" : "Scope")</span>
-                        </button>
-                    </div>
+                <section class="emdad-modal-section">
 
-                    <div class="sector-card">
-                        <i class="fa-solid fa-coins sector-icon"></i>
-                        <div class="sector-title">@(isRtl ? "المكتب المالي والاستثمار" : "Finance & Investment")</div>
-                        <button type="button" class="btn-explore" onclick="openModal('finance')">
-                            <i class="fa-solid fa-sliders"></i>
-                            <span>@(isRtl ? "الصلاحيات" : "Scope")</span>
-                        </button>
-                    </div>
 
-                    <div class="sector-card">
-                        <i class="fa-solid fa-bullhorn sector-icon" style="color:var(--cs-purple-media);"></i>
-                        <div class="sector-title">@(isRtl ? "العلاقات العامة والإعلام" : "Public Relations & Media")</div>
-                        <button type="button" class="btn-explore" onclick="openModal('pr')">
-                            <i class="fa-solid fa-sliders"></i>
-                            <span>@(isRtl ? "الصلاحيات" : "Scope")</span>
-                        </button>
-                    </div>
+                    <div class="emdad-section-heading">
 
-                    <div class="sector-card">
-                        <i class="fa-solid fa-truck-fast sector-icon" style="color:var(--cs-gold);"></i>
-                        <div class="sector-title">@(isRtl ? "إدارة الحركة والأسطول" : "Fleet & Logistics")</div>
-                        <button type="button" class="btn-explore" onclick="openModal('logisticsSector')">
-                            <i class="fa-solid fa-sliders"></i>
-                            <span>@(isRtl ? "الصلاحيات" : "Scope")</span>
-                        </button>
-                    </div>
+                        <div class="emdad-heading-icon">
 
-                </div>
+                            <i class="fa-solid fa-crosshairs"></i>
 
-            </div>
-        </div>
-    </main>
-
-    <!-- FORMAL PRINT STRUCTURE -->
-    <div class="print-only-container">
-
-        <!-- PAGE 1: OVERALL EXECUTIVE STRUCTURE -->
-        <div class="print-page print-chart-page">
-            <div class="print-header-frame">
-                <div class="print-brand-group">
-                    <div class="print-company-name">@(isRtl ? "شركة إمداد للحلول الصناعية والدفاعية" : "EMDAD Industrial & Defense Solutions")</div>
-                    <div class="print-company-sub">EMDAD INDUSTRIAL & DEFENSE SOLUTIONS</div>
-                </div>
-                <div class="print-doc-info">
-                    <b>@(isRtl ? "الوثيقة:" : "Doc Ref:")</b> EMDAD-ORG-2026<br>
-                    <b>@(isRtl ? "التاريخ:" : "Date:")</b> @DateTime.Now.ToString("yyyy/MM/dd")<br>
-                    <b>@(isRtl ? "الحالة:" : "Status:")</b> @(isRtl ? "معتمد رسمياً" : "Officially Approved")
-                </div>
-            </div>
-
-            <div class="print-page-title">
-                <span>@(isRtl ? "الهيكل التنظيمي العام والقطاعات الرئيسية" : "General Organization Chart & Core Sectors")</span>
-                <span style="font-size:0.8rem; font-weight:normal;">Ref: Executive Chart</span>
-            </div>
-
-            <div class="print-grid-layout">
-                <div class="print-box-level">
-                    <div class="print-box-header">@(isRtl ? "رئيس مجلس الإدارة والعضو المنتدب (CEO)" : "Chairman & Chief Executive Officer (CEO)")</div>
-                    <div style="font-size:0.85rem; color:#475569;">
-                        @(isRtl ? "السلطة التنفيذية العليا والاعتماد المباشر للقرارات الاستراتيجية والتوسعية." : "Supreme executive authority and direct ratification of strategic corporate expansion decisions.")
-                    </div>
-                </div>
-
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                    <div class="print-box-level" style="background:#fff;">
-                        <div class="print-box-header" style="font-size:0.9rem;">@(isRtl ? "مكتب الأمن السيادي والسيبراني" : "Sovereign & Cyber Security Office")</div>
-                        <div style="font-size:0.78rem; color:#64748b;">
-                            @(isRtl ? "تأمين المعلومات الميدانية والأنظمة." : "Field data protection and systems security.")
                         </div>
-                    </div>
-                    <div class="print-box-level" style="background:#fff;">
-                        <div class="print-box-header" style="font-size:0.9rem;">@(isRtl ? "مكتب المستشار القانوني" : "Legal Advisor Office")</div>
-                        <div style="font-size:0.78rem; color:#64748b;">
-                            @(isRtl ? "الامتثال وحماية العقود الدولية." : "Statutory compliance and international contracts.")
+
+
+                        <div>
+
+                            <span>02</span>
+
+                            <h3>
+
+                                @(isRtl
+                                    ? "نطاق المسؤوليات"
+                                    : "Scope of Responsibility")
+
+                            </h3>
+
                         </div>
+
                     </div>
+
+
+                    <div id="modalResponsibilities"
+                         class="emdad-responsibilities-grid">
+                    </div>
+
+
+                </section>
+
+
+                <!-- AUTHORITY -->
+
+                <section class="emdad-modal-section">
+
+
+                    <div class="emdad-section-heading">
+
+                        <div class="emdad-heading-icon">
+
+                            <i class="fa-solid fa-user-shield"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>03</span>
+
+                            <h3>
+
+                                @(isRtl
+                                    ? "نطاق الصلاحيات والوظائف"
+                                    : "Authority & Functions")
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="emdad-authority-grid">
+
+
+                        <!-- PLANNING -->
+
+                        <div class="authority-card">
+
+                            <div class="authority-icon">
+
+                                <i class="fa-solid fa-clipboard-check"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+
+                                    @(isRtl
+                                        ? "التخطيط"
+                                        : "Planning")
+
+                                </strong>
+
+
+                                <p>
+
+                                    @(isRtl
+                                        ? "تخطيط وتنظيم الأنشطة الواقعة ضمن نطاق اختصاص القطاع."
+                                        : "Planning and organizing activities within the assigned scope.")
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- OPERATIONS -->
+
+                        <div class="authority-card">
+
+                            <div class="authority-icon">
+
+                                <i class="fa-solid fa-gears"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+
+                                    @(isRtl
+                                        ? "التشغيل"
+                                        : "Operations")
+
+                                </strong>
+
+
+                                <p>
+
+                                    @(isRtl
+                                        ? "إدارة الأنشطة التشغيلية ومتابعة التنفيذ الفعال للمهام."
+                                        : "Managing operational activities and ensuring effective execution.")
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PERFORMANCE -->
+
+                        <div class="authority-card">
+
+                            <div class="authority-icon">
+
+                                <i class="fa-solid fa-chart-line"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+
+                                    @(isRtl
+                                        ? "الأداء"
+                                        : "Performance")
+
+                                </strong>
+
+
+                                <p>
+
+                                    @(isRtl
+                                        ? "متابعة مؤشرات الأداء والنتائج والكفاءة التشغيلية."
+                                        : "Monitoring performance, results and operational efficiency.")
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- REPORTING -->
+
+                        <div class="authority-card">
+
+                            <div class="authority-icon">
+
+                                <i class="fa-solid fa-file-signature"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+
+                                    @(isRtl
+                                        ? "التقارير"
+                                        : "Reporting")
+
+                                </strong>
+
+
+                                <p>
+
+                                    @(isRtl
+                                        ? "إعداد التقارير والتوصيات والتحديثات الإدارية ذات الصلة."
+                                        : "Preparing reports, recommendations and management updates.")
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+                <!-- COORDINATION -->
+
+                <section class="emdad-modal-section">
+
+
+                    <div class="emdad-section-heading">
+
+                        <div class="emdad-heading-icon">
+
+                            <i class="fa-solid fa-diagram-project"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>04</span>
+
+                            <h3>
+
+                                @(isRtl
+                                    ? "التنسيق والتكامل"
+                                    : "Coordination & Integration")
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="coordination-card">
+
+
+                        <div class="coordination-main-icon">
+
+                            <i class="fa-solid fa-network-wired"></i>
+
+                        </div>
+
+
+                        <div class="coordination-content">
+
+
+                            <h4>
+
+                                @(isRtl
+                                    ? "التنسيق بين الوظائف والقطاعات"
+                                    : "Cross-Functional Coordination")
+
+                            </h4>
+
+
+                            <p>
+
+                                @(isRtl
+                                    ? "يتولى القطاع التنسيق مع القطاعات والمكاتب والوظائف الإدارية ذات الصلة لدعم سير العمل وتبادل المعلومات وتنفيذ المشروعات والأنشطة بكفاءة."
+                                    : "The department coordinates with relevant EMDAD sectors, offices and management functions to support workflow, information exchange and effective execution of projects and activities.")
+
+                            </p>
+
+
+                            <div class="coordination-tags">
+
+
+                                <span>
+
+                                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
+
+                                    @(isRtl
+                                        ? "التنسيق الداخلي"
+                                        : "Internal Coordination")
+
+                                </span>
+
+
+                                <span>
+
+                                    <i class="fa-solid fa-users"></i>
+
+                                    @(isRtl
+                                        ? "التعاون الجماعي"
+                                        : "Team Collaboration")
+
+                                </span>
+
+
+                                <span>
+
+                                    <i class="fa-solid fa-file-circle-check"></i>
+
+                                    @(isRtl
+                                        ? "التقارير"
+                                        : "Reporting")
+
+                                </span>
+
+
+                                <span>
+
+                                    <i class="fa-solid fa-chart-pie"></i>
+
+                                    @(isRtl
+                                        ? "متابعة الأداء"
+                                        : "Performance Tracking")
+
+                                </span>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- OPERATIONAL FRAMEWORK -->
+
+                <section class="emdad-modal-section">
+
+
+                    <div class="emdad-section-heading">
+
+                        <div class="emdad-heading-icon">
+
+                            <i class="fa-solid fa-layer-group"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>05</span>
+
+                            <h3>
+
+                                @(isRtl
+                                    ? "الإطار التشغيلي"
+                                    : "Operational Framework")
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="operation-flow">
+
+
+                        <!-- STEP 1 -->
+
+                        <div class="flow-step">
+
+                            <div class="flow-number">
+                                01
+                            </div>
+
+
+                            <div class="flow-icon">
+
+                                <i class="fa-solid fa-magnifying-glass-chart"></i>
+
+                            </div>
+
+
+                            <strong>
+
+                                @(isRtl
+                                    ? "التقييم"
+                                    : "Assess")
+
+                            </strong>
+
+
+                            <span>
+
+                                @(isRtl
+                                    ? "تحديد المتطلبات"
+                                    : "Identify requirements")
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="flow-line"></div>
+
+
+                        <!-- STEP 2 -->
+
+                        <div class="flow-step">
+
+                            <div class="flow-number">
+                                02
+                            </div>
+
+
+                            <div class="flow-icon">
+
+                                <i class="fa-solid fa-list-check"></i>
+
+                            </div>
+
+
+                            <strong>
+
+                                @(isRtl
+                                    ? "التخطيط"
+                                    : "Plan")
+
+                            </strong>
+
+
+                            <span>
+
+                                @(isRtl
+                                    ? "تحديد الإجراءات"
+                                    : "Define actions")
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="flow-line"></div>
+
+
+                        <!-- STEP 3 -->
+
+                        <div class="flow-step">
+
+                            <div class="flow-number">
+                                03
+                            </div>
+
+
+                            <div class="flow-icon">
+
+                                <i class="fa-solid fa-play"></i>
+
+                            </div>
+
+
+                            <strong>
+
+                                @(isRtl
+                                    ? "التنفيذ"
+                                    : "Execute")
+
+                            </strong>
+
+
+                            <span>
+
+                                @(isRtl
+                                    ? "تنفيذ الأنشطة"
+                                    : "Implement activities")
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="flow-line"></div>
+
+
+                        <!-- STEP 4 -->
+
+                        <div class="flow-step">
+
+                            <div class="flow-number">
+                                04
+                            </div>
+
+
+                            <div class="flow-icon">
+
+                                <i class="fa-solid fa-chart-simple"></i>
+
+                            </div>
+
+
+                            <strong>
+
+                                @(isRtl
+                                    ? "التقييم والمتابعة"
+                                    : "Evaluate")
+
+                            </strong>
+
+
+                            <span>
+
+                                @(isRtl
+                                    ? "قياس النتائج"
+                                    : "Measure results")
+
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+                <!-- MANAGEMENT NOTE -->
+
+                <div class="emdad-management-note">
+
+
+                    <div class="management-note-icon">
+
+                        <i class="fa-solid fa-landmark"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+
+                            @(isRtl
+                                ? "إطار الإدارة المؤسسية"
+                                : "EMDAD MANAGEMENT FRAMEWORK")
+
+                        </span>
+
+
+                        <p>
+
+                            @(isRtl
+                                ? "تُمارس المسؤوليات والصلاحيات ضمن الإطار الإداري للشركة وبالتنسيق مع القيادة التنفيذية والجهات ذات الصلة."
+                                : "Responsibilities and authorities are exercised within the company's management framework and in coordination with executive leadership and relevant functions.")
+
+                        </p>
+
+                    </div>
+
+
                 </div>
 
-                <div class="print-box-level">
-                    <div class="print-box-header">@(isRtl ? "الرئيس التنفيذي للعمليات (COO)" : "Chief Operating Officer (COO)")</div>
-                    <div style="font-size:0.85rem; color:#475569;">
-                        @(isRtl ? "الإدارة التشغيلية المباشرة والمتابعة اليومية للقطاعات والمشاريع." : "Direct operational management and daily monitoring of sectors and project workflows.")
-                    </div>
-                </div>
 
-                <div style="margin-top:10px; text-align:@(isRtl ? "right" : "left");">
-                    <b style="font-size:0.95rem; color:#0b1a33;">@(isRtl ? "القطاعات التنفيذية والمكاتب التخصصية (8 قطاعات):" : "Executive Sectors & Specialized Offices (8 Sectors):")</b>
-                    <div class="print-sectors-grid">
-                        <div class="print-sector-item"><i class="fa-solid fa-shield-halved"></i> 1. @(isRtl ? "قطاع التسليح والدفاع" : "Armament & Defense Sector")</div>
-                        <div class="print-sector-item"><i class="fa-solid fa-compass-drafting"></i> 2. @(isRtl ? "المكتب الفني والهندسي" : "Technical & Engineering Office")</div>
-                        <div class="print-sector-item"><i class="fa-solid fa-boxes-packing"></i> 3. @(isRtl ? "قطاع سلاسل الإمداد والتوريد" : "Supply Chain & Procurement")</div>
-                        <div class="print-sector-item"><i class="fa-solid fa-laptop-code"></i> 4. @(isRtl ? "قطاع البرمجيات والـ IT" : "IT & Software Sector")</div>
-                        <div class="print-sector-item"><i class="fa-solid fa-briefcase"></i> 5. @(isRtl ? "المكتب التجاري والمبيعات" : "Commercial & Sales Office")</div>
-                        <div class="print-sector-item"><i class="fa-solid fa-coins"></i> 6. @(isRtl ? "المكتب المالي والاستثمار" : "Finance & Investment Office")</div>
-                        <div class="print-sector-item"><i class="fa-solid fa-bullhorn"></i> 7. @(isRtl ? "العلاقات العامة والإعلام" : "Public Relations & Media")</div>
-                        <div class="print-sector-item"><i class="fa-solid fa-truck-fast"></i> 8. @(isRtl ? "إدارة الحركة والأسطول" : "Fleet Management & Logistics")</div>
-                    </div>
-                </div>
             </div>
 
-            <div class="print-signature-space">
-                <div style="text-align:center; font-size:0.8rem; color:#334155;">
-                    <b>@(isRtl ? "رئيس مجلس الإدارة" : "Chairman & CEO")</b><br><br>__________________
+
+            <!-- =================================================
+                 FOOTER
+                 ================================================= -->
+
+            <div class="emdad-modal-footer">
+
+
+                <div class="footer-status">
+
+                    <span class="status-dot"></span>
+
+                    <span>
+
+                        @(isRtl
+                            ? "وظيفة تنظيمية نشطة"
+                            : "Active Organizational Function")
+
+                    </span>
+
                 </div>
-                <div class="print-seal-box">@(isRtl ? "خاتم الاعتماد الرسمي" : "Official Stamp")</div>
+
+
+                <div class="modal-actions">
+
+
+                    <button type="button"
+                            class="modal-print-btn"
+                            onclick="printSectorDetails()">
+
+                        <i class="fa-solid fa-print"></i>
+
+                        <span>
+
+                            @(isRtl
+                                ? "طباعة التفاصيل"
+                                : "Print Details")
+
+                        </span>
+
+                    </button>
+
+
+                    <button type="button"
+                            class="modal-close-btn"
+                            onclick="closeSectorModal()">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        <span>
+
+                            @(isRtl
+                                ? "إغلاق"
+                                : "Close")
+
+                        </span>
+
+                    </button>
+
+
+                </div>
+
             </div>
 
-            <div class="print-footer-frame">
-                <span>@(isRtl ? "شركة إمداد - اللائحة التنظيمية الرسمية 2026" : "EMDAD - Official Governance Charter 2026")</span>
-                <span>@(isRtl ? "صفحة 1 من 12" : "Page 1 of 12")</span>
-            </div>
+
         </div>
 
-        <!-- DYNAMIC PRINT PAGES FOR EACH SECTOR -->
-        <div id="printSectionsTarget"></div>
-
-    </div>
-
-    <!-- DIALOG MODAL -->
-    <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
-        <div class="modal-box">
-            <div class="modal-header">
-                <div class="modal-title" id="modalTitle">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <span>@(isRtl ? "تفاصيل الصلاحيات والمسؤوليات" : "Scopes & Responsibilities Details")</span>
-                </div>
-                <button type="button" class="btn-close-modal" onclick="closeModal()" aria-label="Close">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="modal-body" id="modalBody"></div>
-        </div>
     </div>
 
 </div>
 
-@section Scripts {
-<script>
-    const currentLang = '@(isRtl ? "ar" : "en")';
 
-    const modalData = {
-      chairman: {
-        title: { ar: "رئيس مجلس الإدارة والعضو المنتدب (CEO)", en: "Chairman & Chief Executive Officer (CEO)" },
-        items: {
-          ar: [
-            "اعتماد الرؤية الاستراتيجية والخطة الخمسية للشركة والتوسعات الإقليمية والدولية.",
-            "التوقيع على العقود السيادية، التوكيلات التجارية الحصرية، والشراكات الاستراتيجية الدولية.",
-            "الموافقة النهائية على الموازنات الاستثمارية والمخططات المالية المعتمدة والمخصصات المباشرة.",
-            "إصدار الهياكل التنظيمية العليا وتعيين رؤساء القطاعات والمستشارين التنفيذيين وتحديد مخصصاتهم.",
-            "متابعة الأداء الاستراتيجي الشامل وتوجيه السياسات العليا للشركة بما يضمن ريادتها في السوق.",
-            "التمثيل الرسمي والسيادي للشركة أمام جميع الهيئات الحكومية والرسمية والمنظمات الدولية.",
-            "إقرار سياسات إدارة المخاطر وتوجيه الاستجابة المباشرة للأزمات الاقتصادية والتشغيلية.",
-            "اعتماد كافة اللوائح الداخلية والمالية والإدارية الحاكمة لجميع قطاعات الشركة."
-          ],
-          en: [
-            "Approval of strategic goals, 5-year corporate plans, and international expansions.",
-            "Signing sovereign contracts, exclusive trade agencies, and strategic joint ventures.",
-            "Final sign-off on investment budgets and high-level financial allocations.",
-            "Issuing executive organization charts and appointing sector heads & advisors.",
-            "Monitoring overall strategic performance and directing high-level company policies.",
-            "Official and sovereign representation before governmental and international bodies.",
-            "Approving risk management policies and managing economic response actions.",
-            "Final adoption of all internal administrative and financial governance codes."
-          ]
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+    /* =========================================================
+       CURRENT LANGUAGE
+       ========================================================= */
+
+    const emdadCurrentLanguage = "@lang";
+
+
+    /* =========================================================
+       SECTOR DATA
+       ========================================================= */
+
+    const emdadSectorData = {
+
+        defense: {
+
+            title: {
+                en: "Armament & Defense Sector",
+                ar: "قطاع التسليح والدفاع"
+            },
+
+            subtitle: {
+                en: "Defense, armament and strategic operational activities",
+                ar: "أنشطة الدفاع والتسليح والاحتياجات التشغيلية الاستراتيجية"
+            },
+
+            category: {
+                en: "DEFENSE & ARMAMENT",
+                ar: "الدفاع والتسليح"
+            },
+
+            icon: "fa-shield-halved",
+
+            image:
+                "https://thumbs.dreamstime.com/z/volkel-netherlands-jun-armament-royal-netherlands-air-force-ah-apache-attack-helicopter-display-volkel-170729942.jpg",
+
+            description: {
+                en: "Responsible for supporting EMDAD activities related to defense, armament, strategic supply and specialized operational requirements, while coordinating with relevant management and technical functions.",
+                ar: "يدعم القطاع أنشطة إمداد المرتبطة بالدفاع والتسليح والإمدادات الاستراتيجية والمتطلبات التشغيلية المتخصصة، مع التنسيق مع الوظائف الإدارية والفنية ذات الصلة."
+            },
+
+            responsibilities: {
+
+                en: [
+                    ["fa-shield-halved", "Defense & armament related activities"],
+                    ["fa-boxes-stacked", "Specialized equipment and material requirements"],
+                    ["fa-handshake", "Coordination with strategic partners"],
+                    ["fa-clipboard-list", "Operational requirements management"],
+                    ["fa-file-contract", "Technical and commercial documentation"],
+                    ["fa-truck-fast", "Specialized supply coordination"]
+                ],
+
+                ar: [
+                    ["fa-shield-halved", "الأنشطة المتعلقة بالدفاع والتسليح"],
+                    ["fa-boxes-stacked", "متطلبات المعدات والمواد المتخصصة"],
+                    ["fa-handshake", "التنسيق مع الشركاء الاستراتيجيين"],
+                    ["fa-clipboard-list", "إدارة المتطلبات التشغيلية"],
+                    ["fa-file-contract", "الوثائق الفنية والتجارية"],
+                    ["fa-truck-fast", "تنسيق الإمدادات المتخصصة"]
+                ]
+
+            }
+
+        },
+
+
+        engineering: {
+
+            title: {
+                en: "Technical & Engineering Sector",
+                ar: "القطاع الفني والهندسي"
+            },
+
+            subtitle: {
+                en: "Engineering solutions, technical consulting and project support",
+                ar: "الحلول الهندسية والاستشارات الفنية ودعم المشروعات"
+            },
+
+            category: {
+                en: "ENGINEERING & TECHNICAL",
+                ar: "الهندسة والدعم الفني"
+            },
+
+            icon: "fa-gears",
+
+            image:
+                "https://www.discoverengineering.org/wp-content/uploads/2023/12/mj_11180_2.jpg",
+
+            description: {
+                en: "Provides technical and engineering capabilities supporting projects, infrastructure, consulting activities and specialized technical requirements.",
+                ar: "يوفر القطاع القدرات الفنية والهندسية اللازمة لدعم المشروعات والبنية التحتية والاستشارات والمتطلبات الفنية المتخصصة."
+            },
+
+            responsibilities: {
+
+                en: [
+                    ["fa-compass-drafting", "Engineering design and technical solutions"],
+                    ["fa-screwdriver-wrench", "Technical support and maintenance"],
+                    ["fa-diagram-project", "Project technical coordination"],
+                    ["fa-magnifying-glass-chart", "Technical assessment and analysis"],
+                    ["fa-file-lines", "Engineering reports and documentation"],
+                    ["fa-hard-hat", "Project implementation support"]
+                ],
+
+                ar: [
+                    ["fa-compass-drafting", "التصميم الهندسي والحلول الفنية"],
+                    ["fa-screwdriver-wrench", "الدعم الفني والصيانة"],
+                    ["fa-diagram-project", "التنسيق الفني للمشروعات"],
+                    ["fa-magnifying-glass-chart", "التقييم والتحليل الفني"],
+                    ["fa-file-lines", "التقارير والوثائق الهندسية"],
+                    ["fa-hard-hat", "دعم تنفيذ المشروعات"]
+                ]
+
+            }
+
+        },
+
+
+        supply: {
+
+            title: {
+                en: "Supply Chain & Procurement",
+                ar: "سلاسل الإمداد والمشتريات"
+            },
+
+            subtitle: {
+                en: "Procurement, sourcing, logistics and supply management",
+                ar: "المشتريات والتوريد والمصادر واللوجستيات وإدارة الإمداد"
+            },
+
+            category: {
+                en: "SUPPLY CHAIN",
+                ar: "سلاسل الإمداد"
+            },
+
+            icon: "fa-boxes-stacked",
+
+            image:
+                "https://c8.alamy.com/comp/3BXK9EF/procurement-management-and-supply-chain-concept-procurement-icons-related-to-logistics-supply-chain-and-inventory-management-procurement-3BXK9EF.jpg",
+
+            description: {
+                en: "Manages procurement, sourcing, supplier coordination and supply activities required to support EMDAD operations and projects.",
+                ar: "يدير القطاع أنشطة المشتريات والتوريد والتعامل مع الموردين والإمداد اللازمة لدعم عمليات ومشروعات إمداد."
+            },
+
+            responsibilities: {
+
+                en: [
+                    ["fa-cart-shopping", "Procurement planning"],
+                    ["fa-magnifying-glass", "Supplier and market sourcing"],
+                    ["fa-handshake", "Supplier relationship coordination"],
+                    ["fa-box-open", "Material and equipment sourcing"],
+                    ["fa-truck", "Supply and delivery coordination"],
+                    ["fa-chart-column", "Procurement performance monitoring"]
+                ],
+
+                ar: [
+                    ["fa-cart-shopping", "تخطيط المشتريات"],
+                    ["fa-magnifying-glass", "البحث عن الموردين ومصادر السوق"],
+                    ["fa-handshake", "تنسيق علاقات الموردين"],
+                    ["fa-box-open", "توفير المواد والمعدات"],
+                    ["fa-truck", "تنسيق الإمداد والتسليم"],
+                    ["fa-chart-column", "متابعة أداء المشتريات"]
+                ]
+
+            }
+
+        },
+
+
+        it: {
+
+            title: {
+                en: "IT & Software Sector",
+                ar: "قطاع تكنولوجيا المعلومات والبرمجيات"
+            },
+
+            subtitle: {
+                en: "Technology solutions, software development and digital services",
+                ar: "الحلول التقنية وتطوير البرمجيات والخدمات الرقمية"
+            },
+
+            category: {
+                en: "IT & SOFTWARE",
+                ar: "تكنولوجيا المعلومات والبرمجيات"
+            },
+
+            icon: "fa-laptop-code",
+
+            image:
+                "https://www.jitterbit.com/wp-content/uploads/blog-software-integration-dictionary-featured-1560x740-B.jpg",
+
+            description: {
+                en: "Responsible for software, information technology, digital transformation and technical systems supporting EMDAD business operations.",
+                ar: "يتولى القطاع البرمجيات وتكنولوجيا المعلومات والتحول الرقمي والأنظمة التقنية الداعمة لعمليات وأعمال إمداد."
+            },
+
+            responsibilities: {
+
+                en: [
+                    ["fa-code", "Software development"],
+                    ["fa-database", "Database and information systems"],
+                    ["fa-network-wired", "IT infrastructure and networking"],
+                    ["fa-mobile-screen-button", "Web and mobile applications"],
+                    ["fa-shield-halved", "Information security coordination"],
+                    ["fa-cloud", "Digital services and cloud solutions"]
+                ],
+
+                ar: [
+                    ["fa-code", "تطوير البرمجيات"],
+                    ["fa-database", "قواعد البيانات ونظم المعلومات"],
+                    ["fa-network-wired", "البنية التحتية والشبكات"],
+                    ["fa-mobile-screen-button", "تطبيقات الويب والهواتف"],
+                    ["fa-shield-halved", "تنسيق أمن المعلومات"],
+                    ["fa-cloud", "الخدمات الرقمية والحلول السحابية"]
+                ]
+
+            }
+
+        },
+
+
+        commercial: {
+
+            title: {
+                en: "Commercial & Sales Sector",
+                ar: "القطاع التجاري والمبيعات"
+            },
+
+            subtitle: {
+                en: "Business development, sales and commercial activities",
+                ar: "تطوير الأعمال والمبيعات والأنشطة التجارية"
+            },
+
+            category: {
+                en: "COMMERCIAL & SALES",
+                ar: "التجارة والمبيعات"
+            },
+
+            icon: "fa-chart-line",
+
+            image:
+                "https://www.taxuni.com/wp-content/uploads/2025/07/Difference-Between-Sales-and-Commercial-What-Sets-Them-Apart.jpg",
+
+            description: {
+                en: "Supports business development, commercial opportunities, customer relations and sales activities aligned with EMDAD's business objectives.",
+                ar: "يدعم القطاع تطوير الأعمال والفرص التجارية وعلاقات العملاء وأنشطة المبيعات بما يتوافق مع أهداف إمداد."
+            },
+
+            responsibilities: {
+
+                en: [
+                    ["fa-bullseye", "Business development"],
+                    ["fa-users", "Customer relationship management"],
+                    ["fa-handshake", "Commercial partnerships"],
+                    ["fa-file-invoice-dollar", "Commercial proposals"],
+                    ["fa-chart-line", "Sales performance monitoring"],
+                    ["fa-magnifying-glass-dollar", "Market opportunity analysis"]
+                ],
+
+                ar: [
+                    ["fa-bullseye", "تطوير الأعمال"],
+                    ["fa-users", "إدارة علاقات العملاء"],
+                    ["fa-handshake", "الشراكات التجارية"],
+                    ["fa-file-invoice-dollar", "العروض التجارية"],
+                    ["fa-chart-line", "متابعة أداء المبيعات"],
+                    ["fa-magnifying-glass-dollar", "تحليل فرص السوق"]
+                ]
+
+            }
+
+        },
+
+
+        finance: {
+
+            title: {
+                en: "Finance & Accounts Sector",
+                ar: "قطاع المالية والحسابات"
+            },
+
+            subtitle: {
+                en: "Financial management, accounting and reporting",
+                ar: "الإدارة المالية والمحاسبة والتقارير"
+            },
+
+            category: {
+                en: "FINANCE & ACCOUNTS",
+                ar: "المالية والحسابات"
+            },
+
+            icon: "fa-coins",
+
+            image:
+                "https://www.studying-in-uk.org/wp-content/uploads/2018/09/accounting-and-finances.jpg",
+
+            description: {
+                en: "Supports financial planning, accounting operations, reporting and financial control across EMDAD activities.",
+                ar: "يدعم القطاع التخطيط المالي والعمليات المحاسبية والتقارير والرقابة المالية عبر أنشطة إمداد."
+            },
+
+            responsibilities: {
+
+                en: [
+                    ["fa-calculator", "Accounting operations"],
+                    ["fa-money-bill-transfer", "Financial transactions"],
+                    ["fa-chart-pie", "Financial analysis"],
+                    ["fa-file-invoice", "Invoices and financial documentation"],
+                    ["fa-chart-line", "Budget monitoring"],
+                    ["fa-file-contract", "Financial reporting"]
+                ],
+
+                ar: [
+                    ["fa-calculator", "العمليات المحاسبية"],
+                    ["fa-money-bill-transfer", "المعاملات المالية"],
+                    ["fa-chart-pie", "التحليل المالي"],
+                    ["fa-file-invoice", "الفواتير والوثائق المالية"],
+                    ["fa-chart-line", "متابعة الميزانية"],
+                    ["fa-file-contract", "التقارير المالية"]
+                ]
+
+            }
+
+        },
+
+
+        pr: {
+
+            title: {
+                en: "Public Relations & Media",
+                ar: "العلاقات العامة والإعلام"
+            },
+
+            subtitle: {
+                en: "Corporate communications, public relations and media",
+                ar: "الاتصالات المؤسسية والعلاقات العامة والإعلام"
+            },
+
+            category: {
+                en: "PUBLIC RELATIONS",
+                ar: "العلاقات العامة"
+            },
+
+            icon: "fa-bullhorn",
+
+            image:
+                "https://img.freepik.com/premium-vector/word-cloud-background-concept-public-relations-business-communication-corporate-campaign-media-marketing-strategy-publicity-promotion-vector-illustration_616200-4693.jpg?w=2000",
+
+            description: {
+                en: "Manages corporate communications, public relations, media coordination and external communication activities that support the company's professional presence.",
+                ar: "يدير القطاع الاتصالات المؤسسية والعلاقات العامة والتنسيق الإعلامي والاتصالات الخارجية التي تدعم الحضور المهني للشركة."
+            },
+
+            responsibilities: {
+
+                en: [
+                    ["fa-bullhorn", "Corporate communications"],
+                    ["fa-newspaper", "Media relations"],
+                    ["fa-camera", "Corporate events and media coverage"],
+                    ["fa-share-nodes", "Social media coordination"],
+                    ["fa-globe", "External communications"],
+                    ["fa-building", "Corporate image and identity"]
+                ],
+
+                ar: [
+                    ["fa-bullhorn", "الاتصالات المؤسسية"],
+                    ["fa-newspaper", "العلاقات الإعلامية"],
+                    ["fa-camera", "الفعاليات والتغطية الإعلامية"],
+                    ["fa-share-nodes", "تنسيق وسائل التواصل الاجتماعي"],
+                    ["fa-globe", "الاتصالات الخارجية"],
+                    ["fa-building", "الصورة والهوية المؤسسية"]
+                ]
+
+            }
+
+        },
+
+
+        fleet: {
+
+            title: {
+                en: "Fleet & Logistics Sector",
+                ar: "قطاع الأسطول واللوجستيات"
+            },
+
+            subtitle: {
+                en: "Fleet operations, transportation and logistics",
+                ar: "تشغيل الأسطول والنقل واللوجستيات"
+            },
+
+            category: {
+                en: "FLEET & LOGISTICS",
+                ar: "الأسطول واللوجستيات"
+            },
+
+            icon: "fa-truck",
+
+            image:
+                "https://img.freepik.com/premium-photo/smart-global-network-fleet-management-logistics_1036975-215474.jpg?w=996",
+
+            description: {
+                en: "Coordinates fleet, transportation and logistics activities supporting EMDAD projects, operations and supply requirements.",
+                ar: "ينسق القطاع أنشطة الأسطول والنقل واللوجستيات لدعم مشروعات وعمليات ومتطلبات الإمداد في إمداد."
+            },
+
+            responsibilities: {
+
+                en: [
+                    ["fa-truck", "Fleet management"],
+                    ["fa-route", "Transportation planning"],
+                    ["fa-location-dot", "Logistics coordination"],
+                    ["fa-gas-pump", "Vehicle operational support"],
+                    ["fa-screwdriver-wrench", "Fleet maintenance coordination"],
+                    ["fa-clock", "Logistics scheduling"]
+                ],
+
+                ar: [
+                    ["fa-truck", "إدارة الأسطول"],
+                    ["fa-route", "تخطيط النقل"],
+                    ["fa-location-dot", "التنسيق اللوجستي"],
+                    ["fa-gas-pump", "الدعم التشغيلي للمركبات"],
+                    ["fa-screwdriver-wrench", "تنسيق صيانة الأسطول"],
+                    ["fa-clock", "جدولة العمليات اللوجستية"]
+                ]
+
+            }
+
         }
-      },
-      security: {
-        title: { ar: "مكتب الأمن السيادي والسيبراني", en: "Sovereign & Cyber Security Office" },
-        items: {
-          ar: [
-            "تأمين السرية التامة للمخططات الصناعية والتصاميم الدفاعية والبيانات المعتمدة بالشركة.",
-            "إدارة حماية الخوادم والشبكات ضد الاختراقات الهجومية والتهديدات البرمجية والسيبرانية.",
-            "إصدار التصاريح الأمنية الشاملة لكوادر الشركة، الزوار، وتأمين المخازن الحساسة.",
-            "الإشراف الكامل على بروتوكولات المرافقة الأمنية للأسطول والمعدات الثمينة والشحنات الخاصة.",
-            "إجراء التدقيق الأمني الدوري لكافة الأنظمة الإلكترونية والبشرية للوقاية من أي تسريب معلوماتي.",
-            "وضع خطط الاستجابة السريعة والطوارئ الأمنية لضمان استمرارية الأعمال تحت أي ظروف.",
-            "متابعة وتأمين كافة الاتصالات التشغيلية والميدانية المجهزة على المركبات والمعدات."
-          ],
-          en: [
-            "Ensuring strict confidentiality of industrial specs and proprietary designs.",
-            "Managing server and network defense against cyber threats and intrusion.",
-            "Issuing security clearances for staff, personnel, and sensitive vaults.",
-            "Oversight of security escort protocols for high-value logistics convoys.",
-            "Conducting periodic security audits for all systems to prevent data leaks.",
-            "Establishing emergency response plans to guarantee business continuity.",
-            "Securing operational communications systems installed across active fleets."
-          ]
-        }
-      },
-      legal: {
-        title: { ar: "مكتب المستشار القانوني", en: "Legal Advisor Office" },
-        items: {
-          ar: [
-            "صياغة والمراجعة القانونية الدقيقة لعقود الوكالات الدولية ومذكرات التفاهم التجاري والصناعي.",
-            "إدارة كافة القضايا والمنازعات التجارية والعمالية أمام الجهات القضائية والمحاكم الدولية.",
-            "ضمان الامتثال الكامل للقوانين والتشريعات الجمركية والصناعية والتجارية المحلية والدولية.",
-            "تقديم الاستشارات القانونية المستمرة لمجلس الإدارة والإدارة التنفيذية في كافة الاتفاقيات.",
-            "حماية الملكية الفكرية والعلامات التجارية وبراءات الاختراع الخاصة بمنتجات الشركة.",
-            "إعداد وصياغة كافة العقود الداخلية الخاصة بالتوظيف والتوريد وشراكات المقاولة."
-          ],
-          en: [
-            "Drafting legal reviews for international agency deals and MoUs.",
-            "Managing commercial disputes and legal representation in court.",
-            "Ensuring 100% compliance with trade, customs, and industrial legislation.",
-            "Providing continuous legal advice to the board regarding complex agreements.",
-            "Protecting intellectual property, trademarks, and patents of company products.",
-            "Drafting employment contracts, procurement agreements, and subcontractors deals."
-          ]
-        }
-      },
-      coo: {
-        title: { ar: "الرئيس التنفيذي للعمليات (COO)", en: "Chief Operating Officer (COO)" },
-        items: {
-          ar: [
-            "المتابعة اليومية المباشرة لكافة القطاعات الميدانية والمكاتب التنفيذية بالشركة.",
-            "ربط خطط الحركة والتشغيل بجداول التوريد والمشروعات الميدانية والتأكد من التكامل والتنسيق.",
-            "ضمان تحقيق معدلات الإنتاج والتسليم طبقاً للجداول الزمنية والمعايير المعتمدة.",
-            "تقييم الأداء التشغيلي المستمر ورفع تقارير دورية لرئيس مجلس الإدارة للتطوير وتجاوز العقبات.",
-            "إدارة الأزمات الميدانية والتشغيلية وتقديم الحلول الفورية لتفادي أي تعطيل للعمليات.",
-            "تنسيق توزيع الموارد البشرية والفنية بين المشروعات المختلفة بمرونة وكفاءة عالية."
-          ],
-          en: [
-            "Daily direct supervision over executive sectors and regional offices.",
-            "Aligning operational schedules with project delivery milestones.",
-            "Ensuring production efficiency and strict adherence to delivery deadlines.",
-            "Evaluating operational performance and presenting periodic progress reports to the CEO.",
-            "Managing operational crises and applying immediate field solutions.",
-            "Coordinating human and technical resource allocation across active projects."
-          ]
-        }
-      },
-      defense: {
-        title: { ar: "قطاع التسليح والدفاع", en: "Armament & Defense Sector" },
-        items: {
-          ar: [
-            "تحديث وتطوير خطوط تدريع وتجميع المركبات التكتيكية والدفاعية وفق أعلى المواصفات العالمية.",
-            "تكامل الأنظمة البصرية والحرارية وأجهزة الاتصال الميدانية المعقدة مع المنصات القتالية.",
-            "إدارة وتأمين المخازن المحصنة المخصصة للمهمات الحساسة والمعدات ذات الطبيعة الخاصة.",
-            "إجراء الفحوصات الميدانية واختبارات التحمل الباليستي الحية قبل التسليم النهائي للعملاء.",
-            "متابعة التطورات التكنولوجية في منظومات الدفاع ونقل التكنولوجيا الحديثة لخطوط الشركة.",
-            "الإشراف على برامج التدريب والصيانة الفنية والتخصصية للأطقم المشغلة للمعدات."
-          ],
-          en: [
-            "Developing assembly lines for tactical and defense armored units.",
-            "Integration of electro-optical, thermal, and tactical comms systems.",
-            "Managing fortified storage units built for specialized gear.",
-            "Performing field ballistics and endurance tests prior to official handover.",
-            "Monitoring defense tech advancements and integrating modern technologies.",
-            "Supervising specialized technical training for client operating crews."
-          ]
-        }
-      },
-      engineering: {
-        title: { ar: "المكتب الفني والهندسي", en: "Technical & Engineering Office" },
-        items: {
-          ar: [
-            "إعداد المخططات الهندسية والهندسة العكسية للمعدات والخطوط الصناعية والأنظمة الميكانيكية.",
-            "برمجة وتشغيل وتوجيه مراكز CNC خماسية المحاور بدقات ميكرونية فائقة للتصنيع الدقيق.",
-            "دراسة المناقصات الفنية وتحديد التكاليف والتطبيقات الميكانيكية والهيكلية المعتمدة.",
-            "معايرة أدوات القياس الدقيقة وتطبيق أعلى معايير الجودة للقطع المصنعة.",
-            "تقديم الدعم الفني الهندسي الشامل لجميع قطاعات الشركة والمشروعات الخارجية.",
-            "تطوير خطط النمذجة وإجراء أبحاث التطوير المستمرة لتحسين جودة المكونات."
-          ],
-          en: [
-            "Engineering design, CAD modeling, and reverse engineering.",
-            "Programming and operating 5-axis CNC high-precision machining.",
-            "Tender evaluations, mechanical costing, and structural design.",
-            "Managing metrology labs and precision calibration gear.",
-            "Providing complete engineering support for internal sectors and projects.",
-            "Developing CAD workflows and leading R&D to boost component specs."
-          ]
-        }
-      },
-      supply: {
-        title: { ar: "قطاع سلاسل الإمداد والتوريد", en: "Supply Chain & Procurement" },
-        items: {
-          ar: [
-            "إدارة المشتريات الدولية والمحلية للقطع والمكونات الميكانيكية والمحركات الثقيلة.",
-            "التنسيق الجمركي الكامل وتخليص شحنات المعدات عبر الموانئ والمنافذ المختلفة بسرعة وكفاءة.",
-            "إدارة وتطوير المخازن المركزية بنظام الأكواد الذكية والربط الشامل بنظام الـ ERP.",
-            "تفاوض أسعار الموردين الدوليين وبناء شبكة موردين معتمدين لضمان أفضل سعر وأعلى جودة.",
-            "متابعة حركة الشحنات والتأكد من سلامة سلاسل التوريد ضد أي تأخير أو مخاطر تشغيلية.",
-            "إدارة المخزون الاستراتيجي وتأمين قطع الغيار الحرج للمشروعات الطارئة."
-          ],
-          en: [
-            "Managing international procurement of heavy components & engines.",
-            "Port customs clearance and international freight coordination.",
-            "Central warehouse management utilizing smart ERP barcode systems.",
-            "Negotiating global supplier pricing and building a qualified supplier network.",
-            "Tracking shipment movements to protect supply chain reliability.",
-            "Managing strategic safety stock and critical spare parts reserves."
-          ]
-        }
-      },
-      it: {
-        title: { ar: "قطاع البرمجيات والـ IT", en: "IT & Software Sector" },
-        items: {
-          ar: [
-            "إدارة البنية التحتية، الخوادم، والشبكات بنظام ERP المؤسسي الشامل للشركة.",
-            "توفير أنظمة التتبع المباشر (GPS/Telemetry) وحماية البيانات الحساسة من الاختراق.",
-            "تطوير منصات الربط الإلكتروني المباشر مع العملاء والشركاء الدوليين والموردين.",
-            "تقديم الدعم التقني البرمجي المستمر وتطوير أدوات العمل الرقمية داخل مختلف القطاعات.",
-            "إجراء النسخ الاحتياطي الدوري وضمان أمان قاعدة البيانات التشغيلية للشركة.",
-            "تأمين شبكات الاتصال الداخلية وتوفير حلول السحابة الآمنة للمشاريع."
-          ],
-          en: [
-            "Managing corporate IT infrastructure and enterprise ERP systems.",
-            "Providing live GPS/Satellite telemetry solutions & cybersecurity.",
-            "Developing client portal software and integration interfaces.",
-            "Continuous technical support and custom software tool development.",
-            "Executing automated data backups and enterprise database security.",
-            "Securing intranet comms and provisioning secure cloud environments."
-          ]
-        }
-      },
-      commercial: {
-        title: { ar: "المكتب التجاري والمبيعات", en: "Commercial & Sales Office" },
-        items: {
-          ar: [
-            "إدارة مبيعات المعدات والحلول الصناعية والتوكيلات الحصرية المعتمدة للشركة.",
-            "التفاوض المباشر مع المؤسسات الكبرى وصياغة العقود التجارية والصفقات الاستراتيجية.",
-            "إعداد دراسات السوق المستمرة واستكشاف الفرص الاستثمارية والتوسعية الجديدة.",
-            "تحقيق المستهدفات البيعية والتسويقية وفتح أسواق جديدة للمنتجات والخدمات.",
-            "إدارة علاقات العملاء وتقديم أفضل خدمة ما بعد البيع لضمان استدامة الشراكات.",
-            "تمثيل الشركة في المعارض التجارية والدولية لبناء علاقات استثمارية جديدة."
-          ],
-          en: [
-            "Managing equipment sales and agency commercialization.",
-            "Negotiating high-value sales & partnership agreements with clients.",
-            "Conducting market intelligence for prospective trade agencies.",
-            "Achieving quarterly sales targets and developing new regional markets.",
-            "Customer Relationship Management (CRM) to ensure long-term partnerships.",
-            "Representing the company in trade expos to secure investment leads."
-          ]
-        }
-      },
-      finance: {
-        title: { ar: "المكتب المالي والاستثمار", en: "Finance & Investment Office" },
-        items: {
-          ar: [
-            "إصدار الاعتمادات المستندية البنكية (LC) وخطابات الضمان المعتمدة للمشروعات.",
-            "إدارة التدفقات النقدية، الميزانيات العمومية، والتحليل المالي المتقدم لكافة العمليات.",
-            "حساب تكاليف التشغيل الدقيقة للمشاريع الميدانية وتحديد هامش الربح والسياسات المالية.",
-            "الإشراف على الرقابة المالية الداخلية وإعداد القوائم المالية والدفاتر الحسابية المعتمدة.",
-            "إدارة الاستثمارات والمحافظ المالية للشركة بما يحقق أعلى عائد استثماري آمن.",
-            "متابعة تحصيل المستحقات وإدارة المعاملات الضريبية والمالية بدقة كاملة."
-          ],
-          en: [
-            "Issuing Bank Letters of Credit (LC) and performance guarantees.",
-            "Managing cash flows, general balance sheets, and audit reports.",
-            "Project operational cost accounting and profitability modeling.",
-            "Supervising internal financial auditing and preparing official reports.",
-            "Managing corporate investments to achieve secure financial returns.",
-            "Managing accounts receivable collections and corporate tax compliance."
-          ]
-        }
-      },
-      pr: {
-        title: { ar: "العلاقات العامة والإعلام", en: "Public Relations & Media" },
-        items: {
-          ar: [
-            "إدارة الهوية المؤسسية والصورة الذهنية للشركة أمام الجهات الرسمية والرأي العام.",
-            "التنسيق الإعلامي الكامل، تنظيم المؤتمرات الصحفية، وإصدار البيانات الرسمية.",
-            "إدارة البرتوكولات والمراسم الرسمية لاستقبال الوفود الشخصية والمؤتمرات الكبرى (VIP).",
-            "الإشراف على المنصات الرقمية والتواصل الاجتماعي وإصدار النشرات والمجلات الدورية.",
-            "تعزيز العلاقة مع الوسائل الإعلامية والجهات الرسمية لبناء شراكات إستراتيجية قوية.",
-            "التنسيق الكامل مع الجهات الرسمية لاستخراج التصاريح وتنظيم الفعاليات."
-          ],
-          en: [
-            "Managing corporate identity, brand reputation, and public affairs.",
-            "Media coordination, press conferences, and official statement releases.",
-            "Overseeing VIP protocols, delegation receptions, and official ceremonies.",
-            "Managing digital channels, social media presence, and corporate newsletters.",
-            "Strengthening relations with media organizations and government entities.",
-            "Coordinating government permits for events and official announcements."
-          ]
-        }
-      },
-      logisticsSector: {
-        title: { ar: "إدارة الحركة والأسطول", en: "Fleet Management & Logistics" },
-        items: {
-          ar: [
-            "التشغيل والتخطيط اليومي لجميع الشاحنات والمعدات والمجموعات الميدانية بالحركة.",
-            "متابعة معدلات استهلاك الوقود، خطط الصيانة الوقائية، وتأمين المسارات والأسطول.",
-            "إصدار أذون الحركة، تصاريح المرور للطرق السريعة، وتراخيص التشغيل الرسمية.",
-            "توجيه السائقين ومتابعة تتبع الأسطول المباشر عبر الأقمار الصناعية لضمان الالتزام.",
-            "توفير حلول النقل السريع والآمن لكافة الشحنات والمعدات الثقيلة التابعة للشركة.",
-            "إدارة عقود صيانة المركبات والمشونات والتأمين على الأسطول بالكامل."
-          ],
-          en: [
-            "Daily routing and operational management for all transport fleets.",
-            "Monitoring fuel metrics, preventive servicing, and route safety.",
-            "Issuing transit permits for highway transport and official licensing.",
-            "Fleet tracking management via satellite systems for real-time compliance.",
-            "Providing secure and fast transportation solutions for heavy equipment.",
-            "Managing fleet maintenance contracts and overall transport insurance."
-          ]
-        }
-      }
+
     };
 
-    function openModal(key) {
-      const data = modalData[key];
-      if (!data) return;
 
-      const title = data.title[currentLang] || data.title['ar'];
-      const items = data.items[currentLang] || data.items['ar'];
+    /* =========================================================
+       OPEN MODAL
+       ========================================================= */
 
-      document.getElementById('modalTitle').querySelector('span').innerText = title;
+    function openSectorModal(sectorKey) {
 
-      const bodyHtml = `
-        <ul style="padding:10px 0;">
-          ${items.map(item => `<li>${item}</li>`).join('')}
-        </ul>
-      `;
-      document.getElementById('modalBody').innerHTML = bodyHtml;
+        const sector =
+            emdadSectorData[sectorKey];
 
-      document.getElementById('modalOverlay').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
+        if (!sector) {
 
-    function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('active');
-      document.body.style.overflow = '';
-    }
+            console.warn(
+                "EMDAD: Sector not found:",
+                sectorKey
+            );
 
-    function buildPrintLayout() {
-      const target = document.getElementById('printSectionsTarget');
-      if (!target) return;
-      target.innerHTML = '';
-
-      const isArabic = currentLang === 'ar';
-      const keys = Object.keys(modalData);
-
-      keys.forEach((key, index) => {
-        const item = modalData[key];
-        const title = item.title[currentLang] || item.title['ar'];
-        const items = item.items[currentLang] || item.items['ar'];
-
-        const pageDiv = document.createElement('div');
-        pageDiv.className = 'print-page';
-
-        pageDiv.innerHTML = `
-          <div class="print-header-frame">
-            <div class="print-brand-group">
-              <div class="print-company-name">${isArabic ? 'شركة إمداد للحلول الصناعية والدفاعية' : 'EMDAD Industrial & Defense Solutions'}</div>
-              <div class="print-company-sub">EMDAD INDUSTRIAL & DEFENSE SOLUTIONS</div>
-            </div>
-            <div class="print-doc-info">
-              <b>${isArabic ? 'كود القطاع:' : 'Sector Code:'}</b> SEC-${(index + 1).toString().padStart(2, '0')}<br>
-              <b>${isArabic ? 'التاريخ:' : 'Date:'}</b> @DateTime.Now.ToString("yyyy/MM/dd")<br>
-              <b>${isArabic ? 'الدرجة:' : 'Status:'}</b> ${isArabic ? 'رسمي / معتمد' : 'Official / Approved'}
-            </div>
-          </div>
-
-          <div class="print-page-title">
-            <span>${isArabic ? 'صلاحيات ومسؤوليات:' : 'Scopes & Responsibilities:'} ${title}</span>
-            <span style="font-size:0.8rem; font-weight:normal;">Page ${index + 2} of 12</span>
-          </div>
-
-          <table class="print-table">
-            <thead>
-              <tr>
-                <th class="print-num-col">#</th>
-                <th>${isArabic ? 'الصلاحية والمهام المعتمدة رسمياً للقطاع' : 'Officially Approved Scope & Responsibilities'}</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${items.map((resp, idx) => `
-                <tr>
-                  <td class="print-num-col">${idx + 1}</td>
-                  <td>${resp}</td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-
-          <div class="print-signature-space">
-            <div style="text-align:center; font-size:0.8rem; color:#334155;">
-              <b>${isArabic ? 'اعتماد رئيس القطاع' : 'Sector Head Ratification'}</b><br><br>__________________
-            </div>
-            <div style="text-align:center; font-size:0.8rem; color:#334155;">
-              <b>${isArabic ? 'اعتماد الرئيس التنفيذي (COO)' : 'COO Ratification'}</b><br><br>__________________
-            </div>
-            <div class="print-seal-box">${isArabic ? 'خاتم الاعتماد الرسمي' : 'Official Stamp'}</div>
-          </div>
-
-          <div class="print-footer-frame">
-            <span>${isArabic ? 'شركة إمداد - وثيقة الصلاحيات والمسؤوليات المعتمدة' : 'EMDAD - Approved Governance Charter'}</span>
-            <span>${isArabic ? `صفحة ${index + 2} من 12` : `Page ${index + 2} of 12`}</span>
-          </div>
-        `;
-
-        target.appendChild(pageDiv);
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        // Build print layout
-        buildPrintLayout();
-        window.onbeforeprint = buildPrintLayout;
-
-        // Close modal on overlay click
-        const modal = document.getElementById('modalOverlay');
-        if (modal) {
-            modal.addEventListener('click', function (e) {
-                if (e.target === this) closeModal();
-            });
+            return;
         }
 
-        // Close on ESC
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') closeModal();
-        });
-    });
+
+        const modal =
+            document.getElementById(
+                "sectorModal"
+            );
+
+
+        const language =
+            emdadCurrentLanguage === "ar"
+                ? "ar"
+                : "en";
+
+
+        /* IMAGE */
+
+        document.getElementById(
+            "modalSectorImage"
+        ).src =
+            sector.image;
+
+
+        /* ICON */
+
+        const icon =
+            document.getElementById(
+                "modalSectorIcon"
+            );
+
+        icon.className =
+            "fa-solid " +
+            sector.icon;
+
+
+        /* CATEGORY */
+
+        document.getElementById(
+            "modalSectorCategory"
+        ).textContent =
+            sector.category[language];
+
+
+        /* TITLE */
+
+        document.getElementById(
+            "modalSectorTitle"
+        ).textContent =
+            sector.title[language];
+
+
+        /* SUBTITLE */
+
+        document.getElementById(
+            "modalSectorSubtitle"
+        ).textContent =
+            sector.subtitle[language];
+
+
+        /* DESCRIPTION */
+
+        document.getElementById(
+            "modalSectorDescription"
+        ).textContent =
+            sector.description[language];
+
+
+        /* RESPONSIBILITIES */
+
+        const responsibilities =
+            document.getElementById(
+                "modalResponsibilities"
+            );
+
+
+        responsibilities.innerHTML = "";
+
+
+        sector.responsibilities[language]
+            .forEach(item => {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "responsibility-card";
+
+
+                const iconWrapper =
+                    document.createElement(
+                        "div"
+                    );
+
+                iconWrapper.className =
+                    "responsibility-icon";
+
+
+                const iconElement =
+                    document.createElement(
+                        "i"
+                    );
+
+                iconElement.className =
+                    "fa-solid " +
+                    item[0];
+
+
+                iconWrapper.appendChild(
+                    iconElement
+                );
+
+
+                const textElement =
+                    document.createElement(
+                        "span"
+                    );
+
+                textElement.textContent =
+                    item[1];
+
+
+                card.appendChild(
+                    iconWrapper
+                );
+
+
+                card.appendChild(
+                    textElement
+                );
+
+
+                responsibilities.appendChild(
+                    card
+                );
+
+            });
+
+
+        /* SHOW MODAL */
+
+        modal.classList.add(
+            "active"
+        );
+
+
+        modal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        /* LOCK PAGE */
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    /* =========================================================
+       CLOSE MODAL
+       ========================================================= */
+
+    function closeSectorModal() {
+
+        const modal =
+            document.getElementById(
+                "sectorModal"
+            );
+
+
+        modal.classList.remove(
+            "active"
+        );
+
+
+        modal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    /* =========================================================
+       ESCAPE KEY
+       ========================================================= */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeSectorModal();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       PRINT
+       ========================================================= */
+
+    function printSectorDetails() {
+
+        window.print();
+
+    }
+
 </script>
-}

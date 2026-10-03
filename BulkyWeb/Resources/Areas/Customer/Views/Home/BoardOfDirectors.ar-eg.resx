@@ -126,7 +126,7 @@
   <data name="Board Member &amp; CEO" xml:space="preserve">
     <value>عضو مجلس الإدارة و الرئيس التنفيذي</value>
   </data>
-  <data name="BoardOfDirectors" xml:space="preserve">
+  <data name="BoardOfDirectorsTitle" xml:space="preserve">
     <value>مجلس الادارة</value>
   </data>
   <data name="BoardOfDirectorsContent" xml:space="preserve">
@@ -407,6 +407,9 @@
   <data name="EyadHussein" xml:space="preserve">
     <value>السيد / إياد حسين حسني</value>
   </data>
+  <data name="Ms.Nouran" xml:space="preserve">
+    <value>الأستاذة / نوران أشرف سعد</value>
+  </data>
   <data name="GamalMohamed" xml:space="preserve">
     <value>جمال محمد محمد محمود</value>
   </data>
@@ -415,8 +418,5 @@
   </data>
   <data name="SecretaryTechnicalOffice" xml:space="preserve">
     <value>سكرتير رئيس المكتب الفني</value>
-  </data>
-  <data name="Ms.Nouran" xml:space="preserve">
-    <value>الأستاذة / نوران أشرف سعد</value>
   </data>
 </root>

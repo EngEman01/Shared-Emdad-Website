@@ -319,6 +319,9 @@
     letter-spacing: 0.3px;
 }
 
+a {
+    text-decoration: none ;
+}
 /* ============================================================
    RESPONSIVE DESIGN
    ============================================================ */
@@ -395,57 +398,61 @@
         <div class="partners-grid">
 
             <!-- CARD 1: National Authority for Military Production (Eagle Logo) -->
-            <div class="partner-card">
-                <div class="partner-logo-wrap">
-                    <img src="/assets/custom/partners_2026/logo_military_official.webp?v=2026" alt="National Authority for Military Production" loading="lazy" />
+            <a href="https://www.momp.gov.eg/">
+                <div class="partner-card">
+                    <div class="partner-logo-wrap">
+                        <img src="/assets/custom/partners_2026/logo_military_official.webp?v=2026" alt="National Authority for Military Production" loading="lazy" />
+                    </div>
+                    <h3 class="partner-card-title">
+                        @(isRtl ? "الهيئة القومية للإنتاج الحربي" : "National Authority for Military Production")
+                    </h3>
+                    <p class="partner-card-sub">
+                        @(isRtl ? "وزارة الإنتاج الحربي - جمهورية مصر العربية" : "National Authority for Military Production")
+                    </p>
                 </div>
-                <h3 class="partner-card-title">
-                    @(isRtl ? "الهيئة القومية للإنتاج الحربي" : "National Authority for Military Production")
-                </h3>
-                <p class="partner-card-sub">
-                    @(isRtl ? "وزارة الإنتاج الحربي - جمهورية مصر العربية" : "National Authority for Military Production")
-                </p>
-            </div>
-
+            </a>
             <!-- CARD 2: Arab Organization for Industrialization (AOI Logo) -->
-            <div class="partner-card">
-                <div class="partner-logo-wrap">
-                    <img src="/assets/custom/partners_2026/logo_aoi_official.png?v=2026" alt="Arab Organization for Industrialization" loading="lazy" />
+            <a href="https://www.aoi.org.eg/">
+                <div class="partner-card">
+                    <div class="partner-logo-wrap">
+                        <img src="/assets/custom/partners_2026/logo_aoi_official.png?v=2026" alt="Arab Organization for Industrialization" loading="lazy" />
+                    </div>
+                    <h3 class="partner-card-title">
+                        @(isRtl ? "الهيئة العربية للتصنيع" : "Arab Organization for Industrialization")
+                    </h3>
+                    <p class="partner-card-sub">
+                        @(isRtl ? "الصرح الصناعي العربي الأكبر للتقنيات المتقدمة" : "Arab Organization for Industrialization (AOI)")
+                    </p>
                 </div>
-                <h3 class="partner-card-title">
-                    @(isRtl ? "الهيئة العربية للتصنيع" : "Arab Organization for Industrialization")
-                </h3>
-                <p class="partner-card-sub">
-                    @(isRtl ? "الصرح الصناعي العربي الأكبر للتقنيات المتقدمة" : "Arab Organization for Industrialization (AOI)")
-                </p>
-            </div>
-
+            </a>
             <!-- CARD 3: Arab International Optronics (AIO Logo) -->
-            <div class="partner-card">
-                <div class="partner-logo-wrap">
-                    <img src="/assets/custom/partners_2026/logo_aio_official.png?v=2026" alt="Arab International Optronics" loading="lazy" />
+            <a href="https://www.aioegy.com/en">
+                <div class="partner-card">
+                    <div class="partner-logo-wrap">
+                        <img src="/assets/custom/partners_2026/logo_aio_official.png?v=2026" alt="Arab International Optronics" loading="lazy" />
+                    </div>
+                    <h3 class="partner-card-title">
+                        @(isRtl ? "الشركة العربية العالمية للبصريات" : "Arab International Optronics (AIO)")
+                    </h3>
+                    <p class="partner-card-sub">
+                        @(isRtl ? "ريادة الأنظمة البصرية والإلكترونية المتقدمة" : "Projects Organization & Electro-Optics")
+                    </p>
                 </div>
-                <h3 class="partner-card-title">
-                    @(isRtl ? "الشركة العربية العالمية للبصريات" : "Arab International Optronics (AIO)")
-                </h3>
-                <p class="partner-card-sub">
-                    @(isRtl ? "ريادة الأنظمة البصرية والإلكترونية المتقدمة" : "Projects Organization & Electro-Optics")
-                </p>
-            </div>
-
+            </a>
             <!-- CARD 4: East & West International Trade (ewt Logo) -->
-            <div class="partner-card">
-                <div class="partner-logo-wrap">
-                    <img src="/assets/custom/partners_2026/logo_ewt_official.webp?v=2026" alt="East & West International Trade" loading="lazy" />
+            <a href="https://eastwest-eg.com/">
+                <div class="partner-card">
+                    <div class="partner-logo-wrap">
+                        <img src="/assets/custom/partners_2026/logo_ewt_official.webp?v=2026" alt="East & West International Trade" loading="lazy" />
+                    </div>
+                    <h3 class="partner-card-title">
+                        @(isRtl ? "شركة الشرق والغرب للتجارة الدولية" : "East & West International Trade")
+                    </h3>
+                    <p class="partner-card-sub">
+                        @(isRtl ? "حلول التوريدات التجارية والتوكيلات الدولية المتخصصة" : "East & West International Trade Co.")
+                    </p>
                 </div>
-                <h3 class="partner-card-title">
-                    @(isRtl ? "شركة الشرق والغرب للتجارة الدولية" : "East & West International Trade")
-                </h3>
-                <p class="partner-card-sub">
-                    @(isRtl ? "حلول التوريدات التجارية والتوكيلات الدولية المتخصصة" : "East & West International Trade Co.")
-                </p>
-            </div>
-
+            </a>
         </div>
 
         <!-- ============================================================

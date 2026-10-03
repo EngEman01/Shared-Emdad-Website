@@ -138,6 +138,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\Areas\Customer\Views\Home\BoardOfDirectors.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BoardOfDirectors.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="Areas\Admin\Views\Product\Delete.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -154,6 +162,13 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Areas\Customer\Views\Home\BoardOfDirectors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BoardOfDirectors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

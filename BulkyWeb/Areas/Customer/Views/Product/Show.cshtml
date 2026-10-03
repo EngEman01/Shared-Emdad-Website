@@ -1,62 +1,22 @@
-@* @model Product
-
-<div class="container py-5">
-    <div class="row">
-        <div class="col-lg-6 col-md-12">
-
-            <div class="owl-carousel owl-theme default-carousel nav-0 single-blog" dir="ltr">
-                @if (Model.Images != null &&  Model.Images.Any())
-
-                {
-                    @foreach (var image in Model.Images)
-                    {
-                        <div>
-                            <img src="@(Url.Content($"~/{image.ImageURL ?? "images/default_image.jpg"}"))" class="d-block w-100 slider" alt="Product Image">
-                        </div>
-                    }
-                }
-              
-            </div>
-
-            <!-- Image Gallery (bottom images) -->
-            <div class="mt-3">
-                <div class="row">
-                    @if (Model.Images != null && Model.Images.Any())
-                    {
-                        @foreach (var image in Model.Images)
-                        {
-                            <div class="col-3 mb-2">
-                                <img src="@(Url.Content($"~/{image.ImageURL ?? "images/default_image.jpg"}"))" class="img-fluid rounded" alt="Product Image 4" style="cursor: pointer; height: 100px; object-fit: cover;">
-                            </div>
-                        }
-                    }
-                    
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Side -->
-        <div class="col-lg-6 col-md-12">
-            <div class="product-title"><h1>@(Model.ProductTranslations?.FirstOrDefault()?.Name ?? "No Translated Product Name")</h1></div>
-            <div class="product-description">
-
-                @Html.Raw(Model.ProductTranslations?.FirstOrDefault()?.Description ?? "No Translated Product Description")
-            </div>
-
-        </div>
-    </div>
-</div>
-
-@section Scripts {
-    <script>
-    </script>
-
-}
- *@
-
+@* 
 
 @model Product
+
+
+@{
+   
+
+       var isRtlLayout = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
+    var currentUrlLayout = Context.Request.Path.Value + Context.Request.QueryString.Value;
+    if (string.IsNullOrEmpty(currentUrlLayout)) { currentUrlLayout = "/"; }
+    var currentCultureLayout = System.Threading.Thread.CurrentThread.CurrentCulture.Name.ToLower();
+    // Legacy variable kept for compatibility
+    var nextCultureLayout = isRtlLayout ? "en-us" : "ar-eg";
+
+    // المتغيرات لمعرفة اسم الـ Controller والـ Action الحالي
+    var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+}
 
 <style>
     .product-details-section {
@@ -177,7 +137,13 @@
                         </div>
                     </div>
 
+                     <a href="@Url.Action("ContactUs", "Home", new { area = "Customer" })" class="emdad-btn-quote-header">
+                    <span>@(isRtlLayout ? "اطلب عرض سعر" : "Request a Quote")</span>
+                </a>
+                
+
                 </div>
+
 
             </div>
 
@@ -196,11 +162,7 @@
                         @Html.Raw(Model.ProductTranslations?.FirstOrDefault()?.Description ?? "")
                     </div>
 
-                  @*   <div class="mt-4">
-                        <button class="primary-btn">
-                            Request Now
-                        </button>
-                    </div> *@
+                  
 
                 </div>
 
@@ -215,5 +177,558 @@
         function changeMainImage(element) {
             document.getElementById("mainProductImage").src = element.src;
         }
+    </script>
+}
+ *@
+
+                    @model Product
+
+@{
+    var isRtlLayout = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
+    var currentUrlLayout = Context.Request.Path.Value + Context.Request.QueryString.Value;
+    if (string.IsNullOrEmpty(currentUrlLayout)) { currentUrlLayout = "/"; }
+    var currentCultureLayout = System.Threading.Thread.CurrentThread.CurrentCulture.Name.ToLower();
+
+    ViewData["Title"] = Model.ProductTranslations?.FirstOrDefault()?.Name ?? (isRtlLayout ? "تفاصيل المنتج" : "Product Details");
+}
+
+<!-- مكتبة Swiper CSS للسلايدر -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+<style>
+    body {
+        background-color: #0b111e !important;
+        color: #e2e8f0;
+    }
+
+    .product-details-section {
+        background-color: #0b111e;
+        min-height: 80vh;
+        padding-top: 20px;
+        padding-bottom: 60px;
+    }
+
+    /* Gallery - السلايدر والمعرض */
+    .product-gallery {
+        position: sticky;
+        top: 100px;
+    }
+
+    .product-swiper {
+        width: 100%;
+        border-radius: 16px;
+        background: rgba(17, 27, 46, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+    }
+
+    .product-swiper .swiper-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 380px;
+        padding: 25px;
+    }
+
+    .product-swiper .swiper-slide img {
+        max-height: 350px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+    }
+
+    /* تخصيص أزرار تنقل السلايدر باللون الذهبي */
+    .swiper-button-next, .swiper-button-prev {
+        color: #e5b335 !important;
+        background: rgba(11, 17, 30, 0.7);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid rgba(229, 179, 53, 0.4);
+    }
+
+    .swiper-button-next::after, .swiper-button-prev::after {
+        font-size: 16px !important;
+        font-weight: bold;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: #e5b335 !important;
+    }
+
+    /* Info Card - كارت المعلومات */
+    .product-info-card {
+        background: rgba(17, 27, 46, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 40px;
+        backdrop-filter: blur(10px);
+        height: 100%;
+    }
+
+    .product-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0;
+        line-height: 1.4;
+    }
+
+    /* Divider - الفاصل الذهبي */
+    .divider {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #e5b335, #f3d068);
+        border-radius: 2px;
+    }
+
+    .product-description {
+        font-size: 0.98rem;
+        line-height: 1.9;
+        color: #cbd5e1;
+    }
+
+    /* إصلاح خلفية ونصوص الجداول داخل الوصف لتظهر بوضوح باللون الداكن والذهبي */
+    .product-description table {
+        width: 100% !important;
+        background-color: rgba(17, 27, 46, 0.8) !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(229, 179, 53, 0.2) !important;
+        border-radius: 12px !important;
+        overflow: hidden;
+        margin: 20px 0 !important;
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+    }
+
+    .product-description th, 
+    .product-description td {
+        background-color: transparent !important;
+        color: #f1f5f9 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+        padding: 12px 16px !important;
+        font-size: 0.92rem;
+    }
+
+    .product-description tr:last-child td {
+        border-bottom: none !important;
+    }
+
+    .product-description th {
+        background-color: rgba(229, 179, 53, 0.15) !important;
+        color: #e5b335 !important;
+        font-weight: 700;
+    }
+
+    .product-description p, 
+    .product-description span, 
+    .product-description div, 
+    .product-description li {
+        color: #cbd5e1 !important;
+        background-color: transparent !important;
+    }
+
+    .product-description h1, 
+    .product-description h2, 
+    .product-description h3, 
+    .product-description h4 {
+        color: #ffffff !important;
+        margin-top: 20px;
+    }
+
+    /* Buttons - الأزرار */
+    .emdad-btn-quote {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: linear-gradient(135deg, #e5b335, #c49520);
+        color: #0b111e;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 35px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(229, 179, 53, 0.2);
+    }
+
+    .emdad-btn-quote:hover {
+        background: linear-gradient(135deg, #f3d068, #e5b335);
+        color: #000;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(229, 179, 53, 0.35);
+    }
+
+    /* Modal Quote Styles */
+    .quote-modal-content {
+        background: #0f172a;
+        border: 1px solid rgba(229, 179, 53, 0.3);
+        border-radius: 20px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+        color: #f1f5f9;
+        overflow: hidden;
+    }
+    .quote-modal-header {
+        padding: 24px 28px 10px;
+    }
+    .quote-modal-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, rgba(229, 179, 53, 0.2), rgba(196, 149, 32, 0.1));
+        border: 1px solid #e5b335;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #e5b335;
+        font-size: 20px;
+    }
+    .text-gold {
+        color: #e5b335 !important;
+    }
+    .quote-modal-body {
+        padding: 16px 28px;
+    }
+    .quote-label {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: #cbd5e1;
+        margin-bottom: 6px;
+    }
+    .quote-input {
+        background-color: rgba(2, 12, 27, 0.7) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        color: #ffffff !important;
+        border-radius: 10px;
+        padding: 11px 16px;
+        font-size: 0.95rem;
+        transition: all 0.25s ease;
+    }
+    .quote-input:focus {
+        background-color: rgba(2, 12, 27, 0.95) !important;
+        border-color: #e5b335 !important;
+        box-shadow: 0 0 0 3px rgba(229, 179, 53, 0.2) !important;
+        color: #ffffff !important;
+    }
+    .quote-input::placeholder {
+        color: rgba(255, 255, 255, 0.35);
+    }
+    .quote-modal-footer {
+        padding: 10px 28px 24px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+    .btn-quote-cancel {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #94a3b8;
+        padding: 10px 22px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+    .btn-quote-cancel:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: #ffffff;
+    }
+    .btn-quote-submit {
+        background: linear-gradient(135deg, #e5b335, #c49520);
+        color: #0b111e;
+        border: none;
+        padding: 10px 28px;
+        border-radius: 8px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 14px rgba(229, 179, 53, 0.25);
+    }
+    .btn-quote-submit:hover:not(:disabled) {
+        background: linear-gradient(135deg, #f3d068, #e5b335);
+        color: #000;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(229, 179, 53, 0.4);
+    }
+    .btn-quote-submit:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+</style>
+
+<section class="product-details-section">
+    <div class="container py-4">
+
+        <div class="row g-4">
+
+            <!-- الجانب الأيسر: الصور والسلايدر -->
+            <div class="col-lg-6">
+                <div class="product-gallery">
+
+                    <!-- Swiper Carousel Slider -->
+                    <div class="swiper product-swiper">
+                        <div class="swiper-wrapper">
+                            @if (Model.Images != null && Model.Images.Any())
+                            {
+                                foreach (var image in Model.Images)
+                                {
+                                    <div class="swiper-slide">
+                                        <img src="@(Url.Content($"~/{image.ImageURL ?? "images/default_product.png"}"))"
+                                             alt="@(Model.ProductTranslations?.FirstOrDefault()?.Name ?? "Product Image")">
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="swiper-slide">
+                                    <img src="@Url.Content("~/images/default_product.png")" alt="Default Product Image">
+                                </div>
+                            }
+                        </div>
+
+                        <!-- أدوات التحكم بالسلايدر -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+
+                    <!-- زر طلب عرض سعر تحت السلايدر -->
+                    <div class="mt-4">
+                        <button type="button" class="emdad-btn-quote w-100" data-bs-toggle="modal" data-bs-target="#quoteModal">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>@(isRtlLayout ? "اطلب عرض سعر" : "Request a Quote")</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- الجانب الأيمن: تفاصيل ومعلومات المنتج -->
+            <div class="col-lg-6">
+                <div class="product-info-card">
+
+                    <!-- اسم المنتج -->
+                    <h1 class="product-title">
+                        @(Model.ProductTranslations?.FirstOrDefault()?.Name ?? (isRtlLayout ? "اسم المنتج" : "Product Name"))
+                    </h1>
+
+                    <!-- الفاصل الذهبي -->
+                    <div class="divider my-4"></div>
+
+                    <!-- وصف المنتج والجدول المنسق -->
+                    <div class="product-description">
+                        @Html.Raw(Model.ProductTranslations?.FirstOrDefault()?.Description ?? (isRtlLayout ? "لا يوجد وصف متاح لهذا المنتج حالياً." : "No description available for this product."))
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Modal طلب عرض سعر -->
+<div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true" dir="@(isRtlLayout ? "rtl" : "ltr")">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content quote-modal-content">
+            <div class="modal-header quote-modal-header border-0 pb-0">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="quote-modal-icon">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title fw-bold text-white mb-1" id="quoteModalLabel">
+                            @(isRtlLayout ? "طلب عرض سعر" : "Request a Quote")
+                        </h5>
+                        <p class="text-gold mb-0 small font-weight-bold">
+                            <i class="fa-solid fa-box-open me-1"></i>
+                            @(Model.ProductTranslations?.FirstOrDefault()?.Name ?? (isRtlLayout ? "المنتج" : "Product"))
+                        </p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <form id="quoteRequestForm" class="p-0">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="ProductId" value="@Model.Id" />
+                <input type="hidden" name="ProductName" value="@(Model.ProductTranslations?.FirstOrDefault()?.Name ?? "Product")" />
+
+                <div class="modal-body quote-modal-body pt-3 pb-2">
+                    <div id="quoteAlertBox" class="alert d-none mb-3" role="alert"></div>
+
+                    <div class="row g-3">
+                        <!-- الاسم الكامل -->
+                        <div class="col-md-6">
+                            <label class="form-label quote-label">
+                                <i class="fa-solid fa-user me-1 text-gold"></i>
+                                @(isRtlLayout ? "الاسم بالكامل *" : "Full Name *")
+                            </label>
+                            <input type="text" name="FullName" required class="form-control quote-input" 
+                                   placeholder="@(isRtlLayout ? "مثال: م. أحمد محمد" : "e.g. John Doe")" />
+                        </div>
+
+                        <!-- رقم الهاتف -->
+                        <div class="col-md-6">
+                            <label class="form-label quote-label">
+                                <i class="fa-solid fa-phone me-1 text-gold"></i>
+                                @(isRtlLayout ? "رقم الهاتف / الواتساب *" : "Phone / WhatsApp *")
+                            </label>
+                            <input type="tel" name="PhoneNumber" required class="form-control quote-input" 
+                                   placeholder="@(isRtlLayout ? "مثال: 01012345678" : "+20 101 234 5678")" dir="ltr" />
+                        </div>
+
+                        <!-- البريد الإلكتروني -->
+                        <div class="col-md-6">
+                            <label class="form-label quote-label">
+                                <i class="fa-solid fa-envelope me-1 text-gold"></i>
+                                @(isRtlLayout ? "البريد الإلكتروني *" : "Email Address *")
+                            </label>
+                            <input type="email" name="Email" required class="form-control quote-input" 
+                                   placeholder="name@company.com" dir="ltr" />
+                        </div>
+
+                        <!-- اسم الشركة أو الجهة -->
+                        <div class="col-md-6">
+                            <label class="form-label quote-label">
+                                <i class="fa-solid fa-building me-1 text-gold"></i>
+                                @(isRtlLayout ? "الجهة / الشركة" : "Company / Entity")
+                            </label>
+                            <input type="text" name="Company" class="form-control quote-input" 
+                                   placeholder="@(isRtlLayout ? "اسم المؤسسة أو الشركة" : "Company / Organization")" />
+                        </div>
+
+                        <!-- الكمية المطلوبة -->
+                        <div class="col-md-12">
+                            <label class="form-label quote-label">
+                                <i class="fa-solid fa-cubes me-1 text-gold"></i>
+                                @(isRtlLayout ? "الكمية التقديرية المطلوبة" : "Estimated Quantity")
+                            </label>
+                            <input type="text" name="Quantity" class="form-control quote-input" 
+                                   placeholder="@(isRtlLayout ? "مثال: 50 قطعة / 10 طن / غير محدد" : "e.g. 50 units / 10 tons")" />
+                        </div>
+
+                        <!-- ملاحظات أو متطلبات خاصة -->
+                        <div class="col-12">
+                            <label class="form-label quote-label">
+                                <i class="fa-solid fa-comment-dots me-1 text-gold"></i>
+                                @(isRtlLayout ? "ملاحظات أو مواصفات إضافية" : "Additional Notes / Specifications")
+                            </label>
+                            <textarea name="Notes" rows="3" class="form-control quote-input" 
+                                      placeholder="@(isRtlLayout ? "اكتب أي استفسارات أو مواصفات خاصة ترغب بتضمينها في عرض السعر..." : "Write any specific requirements or questions...")"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer quote-modal-footer border-0 pt-2 pb-4">
+                    <button type="button" class="btn btn-quote-cancel" data-bs-dismiss="modal">
+                        @(isRtlLayout ? "إلغاء" : "Cancel")
+                    </button>
+                    <button type="submit" id="btnSubmitQuote" class="btn btn-quote-submit">
+                        <span class="btn-spinner spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+                        <i class="fa-solid fa-paper-plane me-2 btn-icon"></i>
+                        <span class="btn-text">@(isRtlLayout ? "إرسال طلب عرض السعر" : "Send Quote Request")</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- مكتبة Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var swiper = new Swiper(".product-swiper", {
+                loop: true,
+                spaceBetween: 10,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
+
+            // Quote Request Form Handling
+            const quoteForm = document.getElementById("quoteRequestForm");
+            if (quoteForm) {
+                quoteForm.addEventListener("submit", async function (e) {
+                    e.preventDefault();
+                    
+                    const btnSubmit = document.getElementById("btnSubmitQuote");
+                    const spinner = btnSubmit ? btnSubmit.querySelector(".btn-spinner") : null;
+                    const icon = btnSubmit ? btnSubmit.querySelector(".btn-icon") : null;
+                    const alertBox = document.getElementById("quoteAlertBox");
+
+                    // Disable button and show spinner
+                    if (btnSubmit) btnSubmit.disabled = true;
+                    if (spinner) spinner.classList.remove("d-none");
+                    if (icon) icon.classList.add("d-none");
+                    if (alertBox) alertBox.className = "alert d-none mb-3";
+
+                    const formData = new FormData(quoteForm);
+
+                    try {
+                        const response = await fetch('@Url.Action("RequestQuote", "Product", new { area = "Customer" })', {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        const data = await response.json();
+
+                        if (data.success) {
+                            if (alertBox) {
+                                alertBox.className = "alert alert-success mb-3";
+                                alertBox.innerHTML = '<i class="fa-solid fa-circle-check me-2"></i>' + data.message;
+                                alertBox.classList.remove("d-none");
+                            }
+                            quoteForm.reset();
+
+                            setTimeout(() => {
+                                const modalEl = document.getElementById('quoteModal');
+                                if (modalEl && typeof bootstrap !== 'undefined') {
+                                    const modal = bootstrap.Modal.getInstance(modalEl);
+                                    if (modal) {
+                                        modal.hide();
+                                    }
+                                }
+                                if (alertBox) {
+                                    alertBox.classList.add("d-none");
+                                }
+                            }, 3500);
+                        } else {
+                            if (alertBox) {
+                                alertBox.className = "alert alert-danger mb-3";
+                                alertBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation me-2"></i>' + (data.message || 'حدث خطأ أثناء الإرسال');
+                                alertBox.classList.remove("d-none");
+                            }
+                        }
+                    } catch (err) {
+                        if (alertBox) {
+                            alertBox.className = "alert alert-danger mb-3";
+                            alertBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation me-2"></i>' + (err.message || 'فشل الاتصال بالخادم');
+                            alertBox.classList.remove("d-none");
+                        }
+                    } finally {
+                        if (btnSubmit) btnSubmit.disabled = false;
+                        if (spinner) spinner.classList.add("d-none");
+                        if (icon) icon.classList.remove("d-none");
+                    }
+                });
+            }
+        });
     </script>
 }

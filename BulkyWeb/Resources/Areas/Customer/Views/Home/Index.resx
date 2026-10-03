@@ -876,4 +876,79 @@
   <data name="WatchVideoBtn" xml:space="preserve">
     <value>Watch Corporate Video</value>
   </data>
+
+  <!-- Hero Section -->
+  <data name="HomeTitle" xml:space="preserve"><value>Home</value></data>
+  <data name="HeroEyebrow" xml:space="preserve"><value>BUILDING CAPABILITIES FOR A STRONGER TOMORROW</value></data>
+  <data name="HeroTitle1" xml:space="preserve"><value>Integrated Industrial &amp;</value></data>
+  <data name="HeroTitleGold" xml:space="preserve"><value>Engineering Solutions</value></data>
+  <data name="HeroSubText" xml:space="preserve"><value>A trusted partner in Defense, Mechanical, Petroleum and Energy Industries.</value></data>
+  <data name="ExploreOurSectors" xml:space="preserve"><value>Explore Our Sectors</value></data>
+  <data name="RequestAQuote" xml:space="preserve"><value>Request a Quote</value></data>
+  <data name="BadgeNationalCap" xml:space="preserve"><value>National Capabilities</value></data>
+  <data name="BadgeIndustrialExc" xml:space="preserve"><value>Industrial Excellence</value></data>
+  <data name="BadgeStrategicPart" xml:space="preserve"><value>Strategic Partnerships</value></data>
+  <data name="BadgeSustainableFut" xml:space="preserve"><value>A Sustainable Future</value></data>
+
+  <!-- Sector Tiles -->
+  <data name="SectorDefenseTitle" xml:space="preserve"><value>Defense Industries</value></data>
+  <data name="SectorDefenseDesc" xml:space="preserve"><value>Advanced solutions for military and defense sectors worldwide.</value></data>
+  <data name="SectorPetroleumTitle" xml:space="preserve"><value>Petroleum Industries</value></data>
+  <data name="SectorPetroleumDesc" xml:space="preserve"><value>Equipment and materials for petroleum companies and energy projects.</value></data>
+  <data name="SectorEnergyTitle" xml:space="preserve"><value>Energy Solutions</value></data>
+  <data name="SectorEnergyDesc" xml:space="preserve"><value>Sustainable and efficient energy solutions for a better future.</value></data>
+  <data name="SectorHeavyTitle" xml:space="preserve"><value>Heavy Equipment &amp; Industrial Solutions</value></data>
+  <data name="SectorHeavyDesc" xml:space="preserve"><value>Reliable mechanical equipment and integrated industrial services.</value></data>
+
+  <!-- Stats Bar -->
+  <data name="StatsYearsExp" xml:space="preserve"><value>Years of Experience</value></data>
+  <data name="StatsProjects" xml:space="preserve"><value>Projects Delivered</value></data>
+  <data name="StatsPartners" xml:space="preserve"><value>Global Partners</value></data>
+  <data name="StatsCountries" xml:space="preserve"><value>Countries</value></data>
+  <data name="StatsTrusted" xml:space="preserve"><value>Trusted</value></data>
+  <data name="StatsTrustedBy" xml:space="preserve"><value>by Government &amp; Private Sectors</value></data>
+
+  <!-- Why Emdad -->
+  <data name="WhyEmdadTitle" xml:space="preserve"><value>Why Emdad?</value></data>
+  <data name="WhyEmdadDesc" xml:space="preserve"><value>We deliver innovative industrial and engineering solutions that empower national capabilities and create sustainable value.</value></data>
+  <data name="Feature1Title" xml:space="preserve"><value>Local Manufacturing</value></data>
+  <data name="Feature1Desc" xml:space="preserve"><value>Supporting national industry and localization initiatives.</value></data>
+  <data name="Feature2Title" xml:space="preserve"><value>Engineering Excellence</value></data>
+  <data name="Feature2Desc" xml:space="preserve"><value>High quality standards and world-class technologies.</value></data>
+  <data name="Feature3Title" xml:space="preserve"><value>Strategic Partnerships</value></data>
+  <data name="Feature3Desc" xml:space="preserve"><value>Collaborating with global leaders for greater impact.</value></data>
+  <data name="Feature4Title" xml:space="preserve"><value>After-Sales Support</value></data>
+  <data name="Feature4Desc" xml:space="preserve"><value>Long-term commitment to our clients' success.</value></data>
+
+  <!-- Partners Strip -->
+  <data name="OurStrategicPartners" xml:space="preserve"><value>Our Strategic Partners</value></data>
+  <data name="ViewAllPartners" xml:space="preserve"><value>View All Partners</value></data>
+
+  <!-- Video / Achievements -->
+  <data name="CapabilitiesReadiness" xml:space="preserve"><value>Capabilities &amp; Readiness</value></data>
+  <data name="PremierEnterprise" xml:space="preserve"><value>Premier Industrial &amp; Defense Enterprise</value></data>
+  <data name="VideoDesc" xml:space="preserve"><value>A live overview of our localized defense capabilities, heavy engineering, and sustainable energy projects.</value></data>
+  <data name="PauseVideo" xml:space="preserve"><value>Pause Video</value></data>
+  <data name="PlayVideo" xml:space="preserve"><value>Play Video</value></data>
+  <data name="Sound" xml:space="preserve"><value>Sound</value></data>
+
+  <!-- Latest News -->
+  <data name="LatestNewsTitle" xml:space="preserve"><value>Latest News</value></data>
+  <data name="LatestNewsDesc" xml:space="preserve"><value>Stay updated with our latest developments.</value></data>
+  <data name="News1Date" xml:space="preserve"><value>10 Sep 2025</value></data>
+  <data name="News1Title" xml:space="preserve"><value>EMDAD Participates in International Defense Exhibition</value></data>
+  <data name="News1Snippet" xml:space="preserve"><value>Strengthening partnerships for a safer future.</value></data>
+  <data name="News2Date" xml:space="preserve"><value>25 Aug 2025</value></data>
+  <data name="News2Title" xml:space="preserve"><value>New Petroleum Project Awarded</value></data>
+  <data name="News2Snippet" xml:space="preserve"><value>Another milestone in our journey of growth.</value></data>
+  <data name="News3Date" xml:space="preserve"><value>12 Aug 2025</value></data>
+  <data name="News3Title" xml:space="preserve"><value>Advancing Sustainable Energy Solutions</value></data>
+  <data name="News3Snippet" xml:space="preserve"><value>EMDAD expands its renewable energy portfolio.</value></data>
+  <data name="ReadMore" xml:space="preserve"><value>Read More</value></data>
+
+  <!-- CTA -->
+  <data name="CtaTitle" xml:space="preserve"><value>Let's Build a Stronger Future Together</value></data>
+  <data name="CtaDesc" xml:space="preserve"><value>Partner with EMDAD for reliable, innovative and sustainable industrial solutions.</value></data>
+  <data name="ContactUsToday" xml:space="preserve"><value>Contact Us Today</value></data>
+
 </root>
